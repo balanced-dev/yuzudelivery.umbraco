@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>YuzuDelivery.Umbraco.Members</id>
+    <version>1.0.0</version>
+    <authors>Phil Whittaker</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Yuzu Framework - members setup</description>
+    <license type="expression">MIT</license>
+    <iconUrl>https://balanced.dev/media/1102/yuzu-package-icon.png</iconUrl>
+    <copyright>Copyright 2019-2020 HiFi Ltd</copyright>
+	<dependencies>
+    <dependency id="YuzuDelivery.Core" version="$core_version$" />
+    <dependency id="YuzuDelivery.Umbraco.Core" version="$version$" />
+    <dependency id="YuzuDelivery.Umbraco.Forms" version="$version$" />
+	</dependencies>
+  </metadata>
+  <files>
+     <file src="bin\Release\YuzuDelivery.Umbraco.Members.dll" target="lib\net472" />
+  </files>
+</package>

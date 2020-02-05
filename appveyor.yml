@@ -1,0 +1,46 @@
+version: 1.2.{build}
+environment:
+  core_version: 1.0.29
+  import_version: 1.0.63
+  umbraco_version: 8.5.2
+  umbraco_forms_version: 8.2.0
+image: Visual Studio 2017
+configuration: Release
+cache: src/packages/
+nuget:
+  project_feed: true
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+before_build:
+- cmd: nuget restore src/YuzuDelivery.Umbraco.sln
+build:
+  verbosity: minimal
+on_finish:
+- cmd: >-
+    nuget pack src/Core/YuzuDelivery.Umbraco.Core.nuspec -Version %APPVEYOR_BUILD_VERSION% -Properties core_version="%core_version%"
+
+    appveyor PushArtifact YuzuDelivery.Umbraco.Core.%APPVEYOR_BUILD_VERSION%.nupkg
+
+    nuget pack src/Forms/YuzuDelivery.Umbraco.Forms.nuspec -Version %APPVEYOR_BUILD_VERSION% -Properties core_version="%core_version%"
+
+    appveyor PushArtifact YuzuDelivery.Umbraco.Forms.%APPVEYOR_BUILD_VERSION%.nupkg
+    
+    nuget pack src/Grid/YuzuDelivery.Umbraco.Grid.nuspec -Version %APPVEYOR_BUILD_VERSION% -Properties core_version="%core_version%"
+
+    appveyor PushArtifact YuzuDelivery.Umbraco.Grid.%APPVEYOR_BUILD_VERSION%.nupkg
+    
+    nuget pack src/Members/YuzuDelivery.Umbraco.Members.nuspec -Version %APPVEYOR_BUILD_VERSION% -Properties core_version="%core_version%";version="%APPVEYOR_BUILD_VERSION%"
+
+    appveyor PushArtifact YuzuDelivery.Umbraco.Members.%APPVEYOR_BUILD_VERSION%.nupkg
+    
+    nuget pack src/Quickstart/YuzuDelivery.Umbraco.Quickstart.Web.nuspec -Version %APPVEYOR_BUILD_VERSION%-beta -Properties core_version="%core_version%";import_version="%import_version%";umbraco_version="%umbraco_version%";umbraco_forms_version="%umbraco_forms_version%";y_umb_version="%APPVEYOR_BUILD_VERSION%"
+
+    appveyor PushArtifact YuzuDelivery.Umbraco.Quickstart.Web.%APPVEYOR_BUILD_VERSION%-beta.nupkg
+
+    nuget pack src/Quickstart/YuzuDelivery.Umbraco.Quickstart.Core.nuspec -Version %APPVEYOR_BUILD_VERSION%-beta -Properties core_version="%core_version%";import_version="%import_version%";umbraco_version="%umbraco_version%";umbraco_forms_version="%umbraco_forms_version%";y_umb_version="%APPVEYOR_BUILD_VERSION%"
+
+    appveyor PushArtifact YuzuDelivery.Umbraco.Quickstart.Core.%APPVEYOR_BUILD_VERSION%-beta.nupkg

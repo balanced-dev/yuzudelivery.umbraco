@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>YuzuDelivery.Umbraco.QuickStart.Core</id>
+    <version>1.0.0-beta</version>
+    <authors>Phil Whittaker</authors>
+    <owners>Phil Whittaker</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://balanced.dev/media/1102/yuzu-package-icon.png</iconUrl>
+    <description>Yuzu Delivery For Umbracos</description>
+    <copyright>Copyright 2018-2020 HiFi Ltd</copyright>
+    <tags>umbraco cms</tags>
+    <dependencies>
+      <dependency id="UmbracoCms.Core" version="$umbraco_version$" />
+      <dependency id="UmbracoCms.Web" version="$umbraco_version$" />
+      <dependency id="UmbracoForms.Core" version="$umbraco_forms_version$" />
+      <dependency id="Umbraco.ModelsBuilder" version="8.1.0" />
+      <dependency id="YuzuDelivery.Core" version="$core_version$" />
+      <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
+      <dependency id="YuzuDelivery.Umbraco.Forms" version="$y_umb_version$" />
+      <dependency id="YuzuDelivery.Umbraco.Grid" version="$y_umb_version$" /> 
+      <dependency id="YuzuDelivery.Umbraco.Members" version="$y_umb_version$" />
+      <dependency id="YuzuDelivery.Umbraco.Import.Core" version="$import_version$" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="CoreContent\Startup\MappingComposer.cs.pp" target="Content\Startup\MappingComposer.cs.pp" />
+    <file src="CoreContent\Startup\YuzuComposer.cs.pp" target="Content\Startup\YuzuComposer.cs.pp" />
+    <file src="CoreContent\Startup\YuzuFormComposer.cs.pp" target="Content\Startup\YuzuFormComposer.cs.pp" />
+    <file src="CoreContent\Startup\YuzuImportComposer.cs.pp" target="Content\Startup\YuzuImportComposer.cs.pp" />
+    <file src="CoreContent\UmbracoModels\zGeneratedModels.cs.pp" target="Content\UmbracoModels\zGeneratedModels.cs.pp"/>
+    <file src="CoreContent\ViewModels\zGeneratedModels.cs.pp" target="Content\ViewModels\zGeneratedModels.cs.pp"/>
+    <file src="CoreContent\tools\install.ps1" target="tools\install.ps1" />
+  </files>
+</package>

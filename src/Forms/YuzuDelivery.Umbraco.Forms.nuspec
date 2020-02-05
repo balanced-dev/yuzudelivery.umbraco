@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>YuzuDelivery.Umbraco.Forms</id>
+    <version>1.1.0</version>
+    <authors>Phil Whittaker</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Yuzu Framework - forms setup</description>
+    <license type="expression">MIT</license>
+    <iconUrl>https://balanced.dev/media/1102/yuzu-package-icon.png</iconUrl>
+    <copyright>Copyright 2019-2020 HiFi Ltd</copyright>
+	<dependencies>
+    <dependency id="YuzuDelivery.Core" version="$core_version$" />
+	</dependencies>
+  </metadata>
+  <files>
+     <file src="bin\Release\YuzuDelivery.Umbraco.Forms.dll" target="lib\net472" />
+     <file src="Web\UI\Views\Partials\Forms\YuzuForms.cshtml" target="Content\Views\Partials\Forms\YuzuForms.cshtml" />
+  </files>
+</package>

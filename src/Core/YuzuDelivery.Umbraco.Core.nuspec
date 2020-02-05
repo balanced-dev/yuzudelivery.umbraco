@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>YuzuDelivery.Umbraco.Core</id>
+    <version>1.0.0</version>
+    <authors>Phil Whittaker</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Yuzu Delivery For Umbraco- setup and basic blocks</description>
+    <license type="expression">MIT</license>
+    <iconUrl>https://balanced.dev/media/1102/yuzu-package-icon.png</iconUrl>
+    <copyright>Copyright 2019-2020 HiFi Ltd</copyright>
+    <tags>umbraco cms</tags>
+	<dependencies>
+    <group targetFramework="net472">
+      <dependency id="YuzuDelivery.Core" version="$core_version$" />
+    </group>
+	</dependencies>
+  </metadata>
+  <files>
+     <file src="bin\Release\YuzuDelivery.Umbraco.Core.dll" target="lib\net472" />
+  </files>
+</package>

@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Skybrud.Umbraco.GridData;
+using AutoMapper;
+using AutoMapper.Configuration;
+using System.Linq.Expressions;
+
+namespace YuzuDelivery.Umbraco.Grid
+{
+    public static class GridMappingsService
+    {
+
+        public static void AddGridWithRows<TSource, TDest>(this MapperConfigurationExpression cfg, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRows>> destMember)
+        {
+            cfg.CreateMap<TSource, TDest>()
+                .ForMember(destMember, opt => opt.MapFrom<GridRowConvertor<TSource, TDest>, GridDataModel>(sourceMember));
+        }
+
+        public static void AddGridWithRows<TSource, TDest, TConfig>(this MapperConfigurationExpression cfg, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRows>> destMember)
+        {
+            cfg.CreateMap<TSource, TDest>()
+                .ForMember(destMember, opt => opt.MapFrom<GridRowConvertor<TSource, TDest, TConfig>, GridDataModel>(sourceMember));
+
+            AddConfig<TConfig>(cfg);
+        }
+
+        public static void AddGridWithRowsColumns<TSource, TDest>(this MapperConfigurationExpression cfg, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRowsColumns>> destMember)
+        {
+            cfg.CreateMap<TSource, TDest>()
+                .ForMember(destMember, opt => opt.MapFrom<GridRowColumnConvertor<TSource, TDest>, GridDataModel>(sourceMember));
+        }
+
+        public static void AddGridWithRowsColumns<TSource, TDest, TConfig>(this MapperConfigurationExpression cfg, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRowsColumns>> destMember)
+        {
+            cfg.CreateMap<TSource, TDest>()
+                .ForMember(destMember, opt => opt.MapFrom<GridRowColumnConvertor<TSource, TDest, TConfig>, GridDataModel>(sourceMember));
+
+            AddConfig<TConfig>(cfg);
+        }
+
+        public static void AddGridRowsWithColumns<TSource, TDest, TConfigRow, TConfigCol>(this MapperConfigurationExpression cfg, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRowsColumns>> destMember)
+        {
+            cfg.CreateMap<TSource, TDest>()
+                .ForMember(destMember, opt => opt.MapFrom<GridRowColumnConvertor<TSource, TDest, TConfigRow, TConfigCol>, GridDataModel>(sourceMember));
+
+            AddConfig<TConfigRow>(cfg);
+            AddConfig<TConfigCol>(cfg);
+        }
+
+        private static void AddConfig<TConfig>(MapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<Dictionary<string, object>, TConfig>()
+                .ConvertUsing<GridConfigConverter<TConfig>>();
+        }
+    }
+
+}

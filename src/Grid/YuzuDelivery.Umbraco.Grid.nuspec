@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>YuzuDelivery.Umbraco.Grid</id>
+    <version>1.0.0</version>
+    <authors>Phil Whittaker</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Yuzu grid setup and helpers</description>
+    <license type="expression">MIT</license>
+    <iconUrl>https://balanced.dev/media/1102/yuzu-package-icon.png</iconUrl>
+    <copyright>Copyright 2018-2020 HiFi Ltd</copyright>
+	<dependencies>
+    <dependency id="YuzuDelivery.Core" version="$core_version$" />
+		<dependency id="Skybrud.Umbraco.GridData" version="3.0.0-beta003" />
+    <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.0.0" />
+	</dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\YuzuDelivery.Umbraco.Grid.dll" target="lib\net472" />
+    <file src="Web\UI\App_Plugins\YuzuBackofficeCss\DocTypeGridEditorPreviewer.cshtml" target="Content\App_Plugins\YuzuBackofficeCss\DocTypeGridEditorPreviewer.cshtml"/>
+    <file src="Web\UI\App_Plugins\YuzuBackofficeCss\package.manifest" target="Content\App_Plugins\YuzuBackofficeCss\package.manifest"/>
+    <file src="tools\install.ps1" target="tools\install.ps1" />
+  </files>
+</package>

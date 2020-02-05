@@ -1,0 +1,70 @@
+﻿@using Umbraco.Web
+@using YuzuDelivery.Umbraco.Forms;
+
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Umbraco.Forms.Web.Models.FormViewModel>
+
+@{ 
+    var formTemplate = this.ViewContext.RouteData.Values["template"].ToString();
+}
+
+@if (Model.SubmitHandled)
+{
+    Func<object> form = () =>
+    {
+        return new vmBlock_DataFormBuilder()
+        {
+            IsSuccess = true,
+            SuccessMessage = Model.MessageOnSubmit
+        };
+    };
+
+    using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "data-app", "Forms" }, { "novalidate", "novalidate" } }))
+    {
+        @Html.RenderFETemplate(new RenderSettings() { Template = formTemplate, Data = form, ShowJson = false })
+    }
+}
+else
+{
+    var validationSummary = Html.ValidationSummary(false);
+    vmSub_DataFormBuilderValidation validation = null;
+    if (validationSummary != null && Model.ShowValidationSummary)
+    {
+        validation = new vmSub_DataFormBuilderValidation()
+        {
+            Title = "Sorry, something went wrong....",
+            Message = validationSummary.ToHtmlString()
+        };
+    }
+
+    Func<object> form = () =>
+    {
+        var mapper = DependencyResolver.Current.GetService<AutoMapper.IMapper>();
+        var output = mapper.Map<vmBlock_DataFormBuilder>(Model, opt => { opt.Items.Add("HtmlHelper", Html); });
+        output.IsSuccess = false;
+        output.SubmitButtonText = Model.SubmitCaption;
+        output.Validation = validation;
+        return output;
+    };
+
+
+
+    using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
+    {
+        @Html.RenderFETemplate(new RenderSettings() { Template = formTemplate, Data = form, ShowJson = false })
+
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="FormId" value="@Model.FormId" />
+        @Html.HiddenFor(x => Model.FormName)
+        @Html.HiddenFor(x => Model.RecordId)
+
+        <input type="hidden" name="FormStep" value="@Model.FormStep" />
+        <input type="hidden" name="RecordState" value="@Model.RecordState" />
+
+
+        <div style="display: none">
+            <input type="text" name="@Model.FormId.ToString().Replace("-", "")" />
+        </div>
+    }
+
+}

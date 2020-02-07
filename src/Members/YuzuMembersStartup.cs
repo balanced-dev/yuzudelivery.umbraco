@@ -13,7 +13,7 @@ namespace YuzuDelivery.Umbraco.Members
     {
         public void Compose(Composition composition)
         {
-            Yuzu.Configuration.ExcludeViewmodelsAtGeneration.Add<vmBlock_AccountForm>();
+
         }
     }
 }

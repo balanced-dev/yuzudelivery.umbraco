@@ -25,17 +25,23 @@ namespace YuzuDelivery.Umbraco.Members
 
         public ActionResult Login()
         {
-            vmBlock_AccountForm model = null;
+            vmBlock_DataFormBuilder model = null;
 
             if (!Umbraco.MemberIsLoggedOn())
             {
-                model = new vmBlock_AccountForm()
+                model = new vmBlock_DataFormBuilder()
                 {
                     Title = "Login",
-                    Fields = new List<object>()
+                    Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
                     {
-                        new vmBlock_FormTextInput() { Name = "loginModel.Username", Type = "text", Placeholder = "Email Address", IsRequired = true },
-                        new vmBlock_FormTextInput() { Name = "loginModel.Password", Type = "password", Placeholder = "Password", IsRequired = true },
+                        new vmSub_DataFormBuilderFieldset()
+                        {
+                            Fields = new List<object>()
+                            {
+                                new vmBlock_FormTextInput() { Name = "loginModel.Username", Type = "text", Placeholder = "Email Address", IsRequired = true },
+                                new vmBlock_FormTextInput() { Name = "loginModel.Password", Type = "password", Placeholder = "Password", IsRequired = true },
+                            }
+                        }
                     },
                     SubmitButtonText = "Login",
                     ActionLinks = new List<vmBlock_DataLink>()
@@ -53,16 +59,16 @@ namespace YuzuDelivery.Umbraco.Members
 
         public ActionResult ForgottenPassword()
         {
-            vmBlock_AccountForm model = null;
+            vmBlock_DataFormBuilder model = null;
 
             if (!Umbraco.MemberIsLoggedOn())
             {
                 if (TempData["FormSuccess"] != null && TempData["FormSuccess"].ToString() == "True")
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Forgotten Password",
-                        IsSubmitted = true,
+                        IsSuccess = true,
                         SuccessMessage = "We have emailed a link to change your password",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
@@ -72,12 +78,18 @@ namespace YuzuDelivery.Umbraco.Members
                 }
                 else
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Forgotten Password",
-                        Fields = new List<object>()
+                        Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
                         {
-                            new vmBlock_FormTextInput() { Name = "forgottenPasswordVm.Email", Type = "text", Placeholder = "Email Address", IsRequired = true },
+                            new vmSub_DataFormBuilderFieldset()
+                            {
+                                Fields = new List<object>()
+                                {
+                                    new vmBlock_FormTextInput() { Name = "forgottenPasswordVm.Email", Type = "text", Placeholder = "Email Address", IsRequired = true },
+                                },
+                            }
                         },
                         SubmitButtonText = "Submit",
                         ActionLinks = new List<vmBlock_DataLink>()
@@ -95,16 +107,16 @@ namespace YuzuDelivery.Umbraco.Members
 
         public ActionResult Register()
         {
-            vmBlock_AccountForm model = null;
+            vmBlock_DataFormBuilder model = null;
 
             if (!Umbraco.MemberIsLoggedOn())
             {
                 if (TempData["FormSuccess"] != null && TempData["FormSuccess"].ToString() == "True")
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Register",
-                        IsSubmitted = true,
+                        IsSuccess = true,
                         SuccessMessage = "Account created successfully.",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
@@ -114,14 +126,20 @@ namespace YuzuDelivery.Umbraco.Members
                 }
                 else
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Register",
-                        Fields = new List<object>()
+                        Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
                         {
-                            new vmBlock_FormTextInput() { Name = "registerModel.Name", Type = "text", Placeholder = "Name", IsRequired = true },
-                            new vmBlock_FormTextInput() { Name = "registerModel.Email", Type = "text", Placeholder = "Email Address", IsRequired = true },
-                            new vmBlock_FormTextInput() { Name = "registerModel.Password", Type = "password", Placeholder = "Password", IsRequired = true }
+                            new vmSub_DataFormBuilderFieldset()
+                            {
+                                Fields = new List<object>()
+                                {
+                                    new vmBlock_FormTextInput() { Name = "registerModel.Name", Type = "text", Placeholder = "Name", IsRequired = true },
+                                    new vmBlock_FormTextInput() { Name = "registerModel.Email", Type = "text", Placeholder = "Email Address", IsRequired = true },
+                                    new vmBlock_FormTextInput() { Name = "registerModel.Password", Type = "password", Placeholder = "Password", IsRequired = true }
+                                },
+                            }
                         },
                         SubmitButtonText = "Submit",
                         ActionLinks = new List<vmBlock_DataLink>()
@@ -139,16 +157,16 @@ namespace YuzuDelivery.Umbraco.Members
 
         public ActionResult ChangeMember()
         {
-            vmBlock_AccountForm model = null;
+            vmBlock_DataFormBuilder model = null;
 
             if (Umbraco.MemberIsLoggedOn())
             {
                 if (TempData["FormSuccess"] != null && TempData["FormSuccess"].ToString() == "True")
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Change Member",
-                        IsSubmitted = true,
+                        IsSuccess = true,
                         SuccessMessage = "User details have been updated",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
@@ -158,13 +176,19 @@ namespace YuzuDelivery.Umbraco.Members
                 }
                 else
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Change Member",
-                        Fields = new List<object>()
+                        Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
                         {
-                            new vmBlock_FormTextInput() { Name = "changeMemberVm.Name", Type = "text", Placeholder = "Name", IsRequired = true },
-                            new vmBlock_FormTextInput() { Name = "changeMemberVm.Email", Type = "text", Placeholder = "Email Address", IsRequired = true }
+                            new vmSub_DataFormBuilderFieldset()
+                            {
+                                Fields = new List<object>()
+                                {
+                                    new vmBlock_FormTextInput() { Name = "changeMemberVm.Name", Type = "text", Placeholder = "Name", IsRequired = true },
+                                    new vmBlock_FormTextInput() { Name = "changeMemberVm.Email", Type = "text", Placeholder = "Email Address", IsRequired = true }
+                                },
+                            }
                         },
                         SubmitButtonText = "Change",
                         ActionLinks = new List<vmBlock_DataLink>()
@@ -182,7 +206,7 @@ namespace YuzuDelivery.Umbraco.Members
 
         public ActionResult ChangePassword()
         {
-            vmBlock_AccountForm model = null;
+            vmBlock_DataFormBuilder model = null;
             IMember member = null;
             IPublishedContent memberModel = null;
 
@@ -196,10 +220,10 @@ namespace YuzuDelivery.Umbraco.Members
             {
                 if (TempData["FormSuccess"] != null && TempData["FormSuccess"].ToString() == "True")
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Change Password",
-                        IsSubmitted = true,
+                        IsSuccess = true,
                         SuccessMessage = "Password has been changed",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
@@ -209,10 +233,10 @@ namespace YuzuDelivery.Umbraco.Members
                 }
                 else if (member != null && memberModel.Value<DateTime>("ForgottenPasswordExpiry") < DateTime.Now)
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Change Password",
-                        IsSubmitted = true,
+                        IsSuccess = true,
                         SuccessMessage = "Password change link has timed out, please try again",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
@@ -222,13 +246,19 @@ namespace YuzuDelivery.Umbraco.Members
                 }
                 else
                 {
-                    model = new vmBlock_AccountForm()
+                    model = new vmBlock_DataFormBuilder()
                     {
                         Title = "Change Password",
-                        Fields = new List<object>()
+                        Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
                         {
-                            new vmBlock_FormTextInput() { Name = "changePasswordVm.Password", Type = "password", Placeholder = "Password", IsRequired = true },
-                            new vmBlock_FormTextInput() { Name = "changePasswordVm.ConfirmPassword", Type = "password", Placeholder = "Confirm Password", IsRequired = true }
+                            new vmSub_DataFormBuilderFieldset()
+                            {
+                                Fields = new List<object>()
+                                {
+                                    new vmBlock_FormTextInput() { Name = "changePasswordVm.Password", Type = "password", Placeholder = "Password", IsRequired = true },
+                                    new vmBlock_FormTextInput() { Name = "changePasswordVm.ConfirmPassword", Type = "password", Placeholder = "Confirm Password", IsRequired = true }
+                                },
+                            }
                         },
                         SubmitButtonText = "Change",
                         ActionLinks = new List<vmBlock_DataLink>()

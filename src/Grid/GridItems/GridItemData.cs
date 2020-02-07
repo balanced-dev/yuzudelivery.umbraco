@@ -11,7 +11,7 @@ namespace YuzuDelivery.Umbraco.Grid
     public class GridItemData
     {
         public GridControl Control { get; set; }
-        public HtmlHelper Html { get; set; }
+        public IDictionary<string, object> ContextItems { get; set; }
         public Dictionary<string, object> RowConfig { get; set; }
         public Dictionary<string, object> AreaSettings { get; set; }
     }

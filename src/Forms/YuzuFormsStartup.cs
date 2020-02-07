@@ -14,26 +14,7 @@ namespace YuzuDelivery.Umbraco.Forms
     {
         public void Compose(Composition composition)
         {
-            foreach(var assembly in YuzuDeliveryForms.Configuration.FormElementAssemblies)
-            {
-                var formElementMappings = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IFormFieldMappings)));
-                foreach (var f in formElementMappings)
-                {
-                    composition.Register(typeof(IFormFieldMappings), f);
-                }
-
-                var formElementPostProcessors = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IFormFieldPostProcessor)));
-                foreach (var f in formElementPostProcessors)
-                {
-                    composition.Register(typeof(IFormFieldPostProcessor), f);
-                }
-            }
-
-            var types = typeof(YuzuFormsStartup).Assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IFormFieldMappingsInternal)));
-            foreach (var f in types)
-            {
-                composition.Register(typeof(IFormFieldMappingsInternal), f);
-            }
+            AddFormStrategies(composition);
 
             composition.Register<IFormElementMapGetter, FormElementMapGetter>(Lifetime.Singleton);
 
@@ -70,6 +51,39 @@ namespace YuzuDelivery.Umbraco.Forms
             YuzuDeliveryImport.Configuration.IgnoreViewmodels.Add<vmBlock_Recaptcha>();
             YuzuDeliveryImport.Configuration.IgnoreViewmodels.Add<vmBlock_TitleAndDescription>();
 
+        }
+
+        private void AddFormStrategies(Composition composition)
+        {
+            var formElementAssemblies = Yuzu.Configuration.ViewModelAssemblies;
+
+            try
+            {
+                if (YuzuDeliveryForms.Configuration.FormElementAssemblies.Any())
+                    formElementAssemblies = YuzuDeliveryForms.Configuration.FormElementAssemblies;
+            }
+            catch { }
+
+            foreach (var assembly in formElementAssemblies)
+            {
+                var formElementMappings = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IFormFieldMappings)));
+                foreach (var f in formElementMappings)
+                {
+                    composition.Register(typeof(IFormFieldMappings), f);
+                }
+
+                var formElementPostProcessors = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IFormFieldPostProcessor)));
+                foreach (var f in formElementPostProcessors)
+                {
+                    composition.Register(typeof(IFormFieldPostProcessor), f);
+                }
+            }
+
+            var types = typeof(YuzuFormsStartup).Assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IFormFieldMappingsInternal)));
+            foreach (var f in types)
+            {
+                composition.Register(typeof(IFormFieldMappingsInternal), f);
+            }
         }
     }
 

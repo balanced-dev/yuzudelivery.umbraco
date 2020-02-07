@@ -40,23 +40,31 @@ namespace YuzuDelivery.Umbraco.Grid
             dynamic config = new ExpandoObject();
             config.gridSize = data.Control.Area.Grid;
 
-            return CreateVm(model.Content, data.Html, config);
+            return CreateVm(model.Content, data.ContextItems, config);
         }
 
-        public virtual dynamic AddToConfig(GridItemData data,  dynamic config)
-        {
-            return config;
-        }
-
-        public virtual object CreateVm(IPublishedElement model, HtmlHelper html, dynamic config = null)
+        public virtual object CreateVm(IPublishedElement model, IDictionary<string, object> contextItems, dynamic config = null)
         {
             var item = model.ToElement<M>();
 
             var mapper = DependencyResolver.Current.GetService<IMapper>();
-            var output = mapper.Map<V>(item, opts => opts.Items.Add("HtmlHelper", html));
-            if(config != null && typeof(V).GetProperty("Config") != null)
+            var output = mapper.Map<V>(item, opts => AddItemContext(opts.Items, contextItems));
+
+            if (config != null && typeof(V).GetProperty("Config") != null)
                 typeof(V).GetProperty("Config").SetValue(output, config);
             return output;
         }
+
+        private void AddItemContext(IDictionary<string, object> items, IDictionary<string, object> parentItems)
+        {
+            if(parentItems != null)
+            {
+                foreach (var i in parentItems)
+                {
+                    items.Add(i.Key, i.Value);
+                }
+            }
+        }
+
     }
 }

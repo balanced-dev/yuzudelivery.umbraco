@@ -55,11 +55,11 @@ namespace YuzuDelivery.Umbraco.Grid
             return output;
         }
 
-        private void AddItemContext(IDictionary<string, object> items, IDictionary<string, object> parentItems)
+        private void AddItemContext(IDictionary<string, object> items, IDictionary<string, object> contextItems)
         {
-            if(parentItems != null)
+            if(contextItems != null)
             {
-                foreach (var i in parentItems)
+                foreach (var i in contextItems)
                 {
                     items.Add(i.Key, i.Value);
                 }

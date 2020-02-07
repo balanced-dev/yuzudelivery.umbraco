@@ -45,7 +45,7 @@ namespace YuzuDelivery.Umbraco.Core
                 foreach (var i in defaultItems)
                 {
                     if (i.IsValid(element))
-                        output.Add(i.Apply(element, html));
+                        output.Add(i.Apply(element, context.Items));
                 }
             }
 
@@ -74,7 +74,7 @@ namespace YuzuDelivery.Umbraco.Core
                 foreach (var i in defaultItems)
                 {
                     if (i.IsValid(element))
-                        return i.Apply(element, html);
+                        return i.Apply(element, context.Items);
                 }
                 return null;
             }

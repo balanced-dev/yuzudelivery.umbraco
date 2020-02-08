@@ -44,3 +44,20 @@ on_finish:
     nuget pack src/Quickstart/YuzuDelivery.Umbraco.Quickstart.Core.nuspec -Version %APPVEYOR_BUILD_VERSION%-beta -Properties core_version="%core_version%";import_version="%import_version%";umbraco_version="%umbraco_version%";umbraco_forms_version="%umbraco_forms_version%";y_umb_version="%APPVEYOR_BUILD_VERSION%"
 
     appveyor PushArtifact YuzuDelivery.Umbraco.Quickstart.Core.%APPVEYOR_BUILD_VERSION%-beta.nupkg
+
+
+for:
+
+-
+  branches:
+    only:
+      - master
+
+  version: 1.2.7
+
+-
+  branches:
+    only:
+      - dev
+
+  version: 1.2.7.{build}

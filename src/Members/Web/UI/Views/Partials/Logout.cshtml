@@ -1,0 +1,16 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+
+@using Umbraco.Web
+@using Umbraco.Web.Controllers
+
+@{
+    if (Umbraco.MemberIsLoggedOn())
+    {
+        using (Html.BeginUmbracoForm<UmbLoginStatusController>("HandleLogout", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "" } }))
+        {
+            <input type="hidden" name="logoutModel.RedirectUrl" value="/" />
+            <input type="submit" value="Logout"/>
+        }
+    }
+}
+

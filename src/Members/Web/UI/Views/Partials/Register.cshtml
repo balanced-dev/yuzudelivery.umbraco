@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<vmBlock_DataFormBuilder>
+
+@using System.Web.Mvc.Html
+@using Umbraco.Web
+@using Umbraco.Web.Controllers  
+@{
+    if (!Umbraco.MemberIsLoggedOn())
+    {
+        Func<object> vm = () =>
+        {
+            if (Html.ValidationSummary() != null)
+            {
+                Model.Validation = new vmSub_DataFormBuilderValidation() { Message = Html.ValidationSummary().ToString() };
+            }
+
+            if (Model.IsSuccess)
+            {
+                Model.SuccessMessage = "Account created successfully. Your request will be reviewed by MRC staff.";
+            }
+
+            return Model;
+        };
+
+        using (Html.BeginUmbracoForm<UmbRegisterController>("HandleRegisterMember", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "" } }))
+        {
+            @Html.RenderFETemplate(new RenderSettings() { Template = "parAccountForm", Data = vm, ShowJson = false })
+
+            <input type="hidden" name="registerModel.UsernameIsEmail" value="true" />
+            <input type="hidden" name="registerModel.LoginOnSuccess" value="false" />
+        }
+    }
+}
+

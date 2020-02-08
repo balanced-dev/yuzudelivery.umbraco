@@ -17,5 +17,12 @@
   </metadata>
   <files>
      <file src="bin\Release\YuzuDelivery.Umbraco.Members.dll" target="lib\net472" />
+     <file src="tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
+     <file src="Web\UI\Views\Partials\ChangeMember.cshtml" target="Content\Views\Partials\ChangeMember.cshtml" />
+     <file src="Web\UI\Views\Partials\ChangePassword.cshtml" target="Content\Views\Partials\ChangePassword.cshtml" />
+     <file src="Web\UI\Views\Partials\ForgottenPassword.cshtml" target="Content\Views\Partials\ForgottenPassword.cshtml" />
+     <file src="Web\UI\Views\Partials\Login.cshtml" target="Content\Views\Partials\Login.cshtml" />
+     <file src="Web\UI\Views\Partials\Logout.cshtml" target="Content\Views\Partials\Logout.cshtml" />
+     <file src="Web\UI\Views\Partials\Register.cshtml" target="Content\Views\Partials\Register.cshtml" />
   </files>
 </package>

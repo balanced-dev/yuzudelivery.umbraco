@@ -12,11 +12,16 @@ namespace YuzuDelivery.Umbraco.Grid
     public class GridService : IGridService
     {
         private IMapper mapper;
+        private readonly IGridItem[] gridItems;
+        private readonly IGridItemInternal[] gridItemsInternal;
 
-        public GridService(IMapper mapper)
+        public GridService(IMapper mapper, IGridItem[] gridItems, IGridItemInternal[] gridItemsInternal)
         {
             this.mapper = mapper;
+            this.gridItems = gridItems;
+            this.gridItemsInternal = gridItemsInternal;
         }
+
 
         public vmBlock_DataGridRows CreateRows<TConfig>(GridDataModel grid, ResolutionContext context)
         {
@@ -189,17 +194,13 @@ namespace YuzuDelivery.Umbraco.Grid
 
         public object Content(GridItemData data)
         {
-            var overrideGridItems = DependencyResolver.Current.GetServices<IGridItem>();
-
-            foreach (var i in overrideGridItems)
+            foreach (var i in gridItems)
             {
                 if (i.IsValid(data.Control.Editor.Alias, data.Control))
                     return i.Apply(data);
             }
 
-            var defaultGridItems = DependencyResolver.Current.GetService<IGridItem[]>();
-
-            foreach (var i in defaultGridItems)
+            foreach (var i in gridItemsInternal)
             {
                 if (i.IsValid(data.Control.Editor.Alias, data.Control))
                     return i.Apply(data);

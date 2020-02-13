@@ -8,6 +8,7 @@ using Umbraco.Core.Composing;
 using Skybrud.Umbraco.GridData;
 using Skybrud.Umbraco.GridData.Dtge;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.ViewModelBuilder;
 
 namespace YuzuDelivery.Umbraco.Grid 
 {
@@ -17,50 +18,83 @@ namespace YuzuDelivery.Umbraco.Grid
     {
         public void Compose(Composition composition)
         {
-            var baseGridType = typeof(DefaultGridItem<,>);
-            var gridItems = new List<IGridItem>();
-            var viewmodelTypes = Yuzu.Configuration.ViewModels.Where(x => x.Name.StartsWith(Yuzu.Configuration.BlockPrefix));
 
-            foreach (var viewModelType in viewmodelTypes)
+            composition.Register<IAutomaticGridConfig[]>((factory) =>
             {
-                var umbracoModelTypeName = viewModelType.Name.Replace(Yuzu.Configuration.BlockPrefix, "");
-                var alias = umbracoModelTypeName.FirstCharacterToLower();
-                var umbracoModelType = Yuzu.Configuration.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
+                var config = factory.GetInstance<IYuzuConfiguration>();
+                var assemblies = config.ViewModelAssemblies;
+                var items = new List<IAutomaticGridConfig>();
 
-                if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
+                foreach (var assembly in assemblies)
                 {
-                    var makeme = baseGridType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                    var o = Activator.CreateInstance(makeme, new object[] { alias }) as IGridItem;
-
-                    gridItems.Add(o);
+                    var formElementMappings = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IAutomaticGridConfig)));
+                    foreach (var f in formElementMappings)
+                    {
+                        var o = Activator.CreateInstance(f) as IAutomaticGridConfig;
+                        items.Add(o);
+                    }
                 }
-            }
 
-            var types = Yuzu.Configuration.ViewModelAssemblies.SelectMany(x => x.GetTypes()).Where(x => x.GetInterfaces().Any(y => y == typeof(IAutomaticGridConfig)));
-            foreach (var f in types)
+                return items.ToArray();
+            });
+
+            composition.Register<IGridItem[]>((factory) =>
             {
-                composition.Register(typeof(IAutomaticGridConfig), f);
-            }
+                var config = factory.GetInstance<IYuzuConfiguration>();
+                var assemblies = config.ViewModelAssemblies;
+                var items = new List<IGridItem>();
 
-            types = Yuzu.Configuration.ViewModelAssemblies.SelectMany(x => x.GetTypes()).Where(x => x != baseGridType && x.GetInterfaces().Any(y => y == typeof(IGridItem)));
-            foreach (var f in types)
-            {
-                composition.Register(typeof(IGridItem), f);
-            }
+                foreach (var assembly in assemblies)
+                {
+                    var formElementMappings = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IGridItem)));
+                    foreach (var f in formElementMappings)
+                    {
+                        var o = Activator.CreateInstance(f) as IGridItem;
+                        items.Add(o);
+                    }
+                }
 
-            composition.Register(typeof(IGridItem[]), gridItems.ToArray());
+                return items.ToArray();
+            });
+
+            AddGridItems(composition);
+
             composition.Register<IGridService, GridService>(Lifetime.Singleton);
 
-            Yuzu.Configuration.ExcludeViewmodelsAtGeneration.Add<vmBlock_DataGridRows>();
-            Yuzu.Configuration.ExcludeViewmodelsAtGeneration.Add<vmBlock_DataGridRowsColumns>();
-            Yuzu.Configuration.ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsRow>();
-            Yuzu.Configuration.ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsColumnsRow>();
-            Yuzu.Configuration.ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsColumnsColumn>();
-
-            Yuzu.Configuration.AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.Grid;");
-
+            //MUST be tranient lifetime
+            composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(GridVmBuilderConfig), Lifetime.Transient);
 
             GridContext.Current.Converters.Add(new DtgeGridConverter());
+        }
+
+
+        public void AddGridItems(Composition composition)
+        {
+            composition.Register<IGridItemInternal[]>((factory) =>
+            {
+                var config = factory.GetInstance<IYuzuConfiguration>();
+
+                var baseGridType = typeof(DefaultGridItem<,>);
+                var gridItems = new List<IGridItemInternal>();
+                var viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
+
+                foreach (var viewModelType in viewmodelTypes)
+                {
+                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var alias = umbracoModelTypeName.FirstCharacterToLower();
+                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
+
+                    if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
+                    {
+                        var makeme = baseGridType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
+                        var o = Activator.CreateInstance(makeme, new object[] { alias }) as IGridItemInternal;
+
+                        gridItems.Add(o);
+                    }
+                }
+
+                return gridItems.ToArray();
+            }, Lifetime.Singleton);
         }
     }
 
@@ -73,6 +107,21 @@ namespace YuzuDelivery.Umbraco.Grid
                 return str;
 
             return Char.ToLowerInvariant(str[0]) + str.Substring(1);
+        }
+    }
+
+    public class GridVmBuilderConfig : UpdateableVmBuilderConfig
+    {
+        public GridVmBuilderConfig()
+            : base()
+        {
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataGridRows>();
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataGridRowsColumns>();
+            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsRow>();
+            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsColumnsRow>();
+            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsColumnsColumn>();
+
+            AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.Grid;");
         }
     }
 }

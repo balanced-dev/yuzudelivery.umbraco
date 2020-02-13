@@ -4,11 +4,13 @@ using System.Configuration;
 using System.Linq;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
-using YuzuDelivery.Core;
 using Umbraco.Core.Models.PublishedContent;
+using YuzuDelivery.Core;
+using YuzuDelivery.Core.ViewModelBuilder;
 
 namespace YuzuDelivery.Umbraco.Core
 {
+
     [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
     public class YuzuStartup : IUserComposer
     {
@@ -17,10 +19,24 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register<IHandlebarsProvider, HandlebarsProvider>(Lifetime.Singleton);
             composition.Register<IYuzuDefinitionTemplates, YuzuDefinitionTemplates>(Lifetime.Singleton);
             composition.Register<IYuzuDefinitionTemplateSetup, YuzuDefinitionTemplateSetup>(Lifetime.Singleton);
-            composition.Register<IAuthoriseApi, AuthenticateUmbraco>();
             composition.Register<ISchemaMetaService, SchemaMetaService>();
             composition.Register<ISchemaMetaPropertyService, SchemaMetaPropertyService>();
 
+            //Viewmodel Builder
+            composition.Register<BuildViewModelsService>(Lifetime.Singleton);
+            composition.Register<ReferencesService>(Lifetime.Singleton);
+            composition.Register<GenerateViewmodelService>(Lifetime.Singleton);
+            composition.Register(typeof(IViewmodelPostProcessor), typeof(FileRefViewmodelPostProcessor));
+
+            //MUST be tranient lifetime
+            composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig), Lifetime.Transient);
+
+            AddDefaultItems(composition);
+            SetupHbsHelpers();
+        }
+
+        public void SetupHbsHelpers()
+        {
             new IfCond();
             new YuzuDelivery.Core.Array();
             new YuzuDelivery.Core.Enum();
@@ -28,41 +44,53 @@ namespace YuzuDelivery.Umbraco.Core
             new ModPartial();
             new ToString();
             new PictureSource();
-
-            Yuzu.Configuration.ExcludeViewmodelsAtGeneration.Add<vmBlock_DataImage>();
-            Yuzu.Configuration.ExcludeViewmodelsAtGeneration.Add<vmBlock_DataLink>();
-
-            Yuzu.Configuration.AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.Core;");
-
-            AddDefaultItems(composition);
         }
 
         public void AddDefaultItems(Composition composition)
         {
-            var viewmodelAssemblies = Yuzu.Configuration.ViewModelAssemblies;
-
-            var baseItemType = typeof(DefaultItem<,>);
-            var items = new List<IDefaultItem>();
-
-            var viewmodelTypes = viewmodelAssemblies.SelectMany(x => x.GetTypes()).Where(x => x.Name.StartsWith(Yuzu.Configuration.BlockPrefix));
-
-            foreach (var viewModelType in viewmodelTypes)
+            composition.Register<IDefaultItem[]>((factory) =>
             {
-                var umbracoModelTypeName = viewModelType.Name.Replace(Yuzu.Configuration.BlockPrefix, "");
-                var umbracoModelType = Yuzu.Configuration.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
+                var config = factory.GetInstance<IYuzuConfiguration>();
 
-                var alias = umbracoModelTypeName.FirstCharacterToLower();
+                var viewmodelAssemblies = config.ViewModelAssemblies;
 
-                if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
+                var baseItemType = typeof(DefaultItem<,>);
+                var items = new List<IDefaultItem>();
+
+                var viewmodelTypes = viewmodelAssemblies.SelectMany(x => x.GetTypes()).Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
+
+                foreach (var viewModelType in viewmodelTypes)
                 {
-                    var makeme = baseItemType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                    var o = Activator.CreateInstance(makeme, new object[] { alias }) as IDefaultItem;
+                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 
-                    items.Add(o);
+                    var alias = umbracoModelTypeName.FirstCharacterToLower();
+
+                    if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
+                    {
+                        var makeme = baseItemType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
+                        var o = Activator.CreateInstance(makeme, new object[] { alias }) as IDefaultItem;
+
+                        items.Add(o);
+                    }
                 }
-            }
 
-            composition.Register(typeof(IDefaultItem[]), items.ToArray());
+                return items.ToArray();
+            }, Lifetime.Singleton);
+        }
+
+    }
+
+    public class CoreVmBuilderConfig : UpdateableVmBuilderConfig
+    {
+        public CoreVmBuilderConfig()
+            : base()
+        {
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataImage>();
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataLink>();
+
+            AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.Core;");
         }
     }
+
 }

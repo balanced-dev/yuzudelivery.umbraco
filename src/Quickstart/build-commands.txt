@@ -1,5 +1,7 @@
-nuget pack YuzuDelivery.Umbraco.QuickStart.Web.nuspec -Properties core_version="1.0.29";import_version="1.0.63";umbraco_version="8.5.2";umbraco_forms_version="8.2.0"
-nuget pack YuzuDelivery.Umbraco.QuickStart.Core.nuspec -Properties core_version="1.0.29";import_version="1.0.63";umbraco_version="8.5.2";umbraco_forms_version="8.2.0"
+nuget pack YuzuDelivery.Umbraco.QuickStart.nuspec -Properties core_version="1.0.30";import_version="1.0.64";umbraco_version="8.5.2";umbraco_forms_version="8.2.0";y_umb_version="1.2.6"
+nuget pack YuzuDelivery.Umbraco.QuickStart.Web.nuspec -Properties core_version="1.0.30";import_version="1.0.64";umbraco_version="8.5.2";umbraco_forms_version="8.2.0";y_umb_version="1.2.6"
+nuget pack YuzuDelivery.Umbraco.QuickStart.Core.nuspec -Properties core_version="1.0.30";import_version="1.0.64";umbraco_version="8.5.2";umbraco_forms_version="8.2.0";y_umb_version="1.2.6"
 
+Install-Package YuzuDelivery.Umbraco.QuickStart -source c:/nuget -IncludePrerelease
 Install-Package YuzuDelivery.Umbraco.QuickStart.Web -source c:/nuget -IncludePrerelease
 Install-Package YuzuDelivery.Umbraco.QuickStart.Core -source c:/nuget -IncludePrerelease

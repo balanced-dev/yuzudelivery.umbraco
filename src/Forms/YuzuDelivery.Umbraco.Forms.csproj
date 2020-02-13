@@ -186,11 +186,11 @@
     <Reference Include="Umbraco.Licensing, Version=2.0.33.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoForms.Core.8.1.1\lib\net472\Umbraco.Licensing.dll</HintPath>
     </Reference>
-    <Reference Include="YuzuDelivery.Core, Version=1.0.28.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Core.1.0.28\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    <Reference Include="YuzuDelivery.Core, Version=1.0.33.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Core.1.0.33\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.62\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.65\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +231,6 @@
     <Compile Include="Mapping\FormBuilderTypeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Config\YuzuDeliveryFormsConfiguration.cs" />
-    <Compile Include="YuzuDeliveryForms.cs" />
     <Compile Include="YuzuFormsStartup.cs" />
   </ItemGroup>
   <ItemGroup>

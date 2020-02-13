@@ -1,0 +1,46 @@
+﻿<div ng-controller="YuzuSettingsDashboardController as vm">
+    <umb-editor-view footer="false">
+        <umb-editor-header name="vm.page.title"
+                           name-locked="true"
+                           hide-alias="true"
+                           hide-description="true"
+                           hide-icon="true">
+
+        </umb-editor-header>
+        <umb-editor-container class="form-horizontal">
+
+            <umb-box>
+                <umb-box-content>
+
+                    <div ng-show="!vm.loading" class="pull-right">
+                        <button type="button" class="btn" ng-click="vm.reload()"><span>Reload</span></button>
+                    </div>
+
+                    <h3 class="bold">View Models Builder</h3>
+
+                    <umb-load-indicator ng-show="vm.loading"></umb-load-indicator>
+
+                    <div ng-show="!vm.loading">
+                        <div ng-bind-html="vm.dashboard.text"></div>
+
+                        <div ng-show="vm.enabled && !vm.generating">
+                            <button type="button" ng-click="vm.generate()" class="btn btn-danger">
+                                <span>Generate models</span>
+                            </button>
+                        </div>
+                        <div class="umb-loader-wrapper" ng-show="vm.generating">
+                            <div class="umb-loader"></div>
+                        </div>
+
+                        <div ng-if="vm.dashboard.lastError" style="margin-top: 32px;" ng-show="!vm.generating">
+                            <span style="color: red; font-weight: bold;">Last generation failed with the following error:</span>
+                            <pre style="width: 80%; white-space: pre-line; background: #f8f8f8; padding: 4px; font-size: small;">{{vm.dashboard.lastError}}</pre>
+                        </div>
+                    </div>
+
+                </umb-box-content>
+            </umb-box>
+
+        </umb-editor-container>
+    </umb-editor-view>
+</div>

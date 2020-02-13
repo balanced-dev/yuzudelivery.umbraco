@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace YuzuDelivery.Umbraco.Grid
 {
-    public class DefaultGridItem<M, V> : IGridItem
+    public class DefaultGridItem<M, V> : IGridItemInternal
         where M : PublishedElementModel
     {
         private string docTypeAlias;

@@ -18,46 +18,7 @@ namespace YuzuDelivery.Umbraco.Grid
     {
         public void Compose(Composition composition)
         {
-
-            composition.Register<IAutomaticGridConfig[]>((factory) =>
-            {
-                var config = factory.GetInstance<IYuzuConfiguration>();
-                var assemblies = config.ViewModelAssemblies;
-                var items = new List<IAutomaticGridConfig>();
-
-                foreach (var assembly in assemblies)
-                {
-                    var formElementMappings = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IAutomaticGridConfig)));
-                    foreach (var f in formElementMappings)
-                    {
-                        var o = Activator.CreateInstance(f) as IAutomaticGridConfig;
-                        items.Add(o);
-                    }
-                }
-
-                return items.ToArray();
-            });
-
-            composition.Register<IGridItem[]>((factory) =>
-            {
-                var config = factory.GetInstance<IYuzuConfiguration>();
-                var assemblies = config.ViewModelAssemblies;
-                var items = new List<IGridItem>();
-
-                foreach (var assembly in assemblies)
-                {
-                    var formElementMappings = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IGridItem)));
-                    foreach (var f in formElementMappings)
-                    {
-                        var o = Activator.CreateInstance(f) as IGridItem;
-                        items.Add(o);
-                    }
-                }
-
-                return items.ToArray();
-            });
-
-            AddGridItems(composition);
+            AddDefaultGridItems(composition);
 
             composition.Register<IGridService, GridService>(Lifetime.Singleton);
 
@@ -68,7 +29,7 @@ namespace YuzuDelivery.Umbraco.Grid
         }
 
 
-        public void AddGridItems(Composition composition)
+        public void AddDefaultGridItems(Composition composition)
         {
             composition.Register<IGridItemInternal[]>((factory) =>
             {

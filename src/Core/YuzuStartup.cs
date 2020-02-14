@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using AutoMapper;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 using Umbraco.Core.Models.PublishedContent;
@@ -10,12 +11,13 @@ using YuzuDelivery.Core.ViewModelBuilder;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-
     [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
     public class YuzuStartup : IUserComposer
     {
         public void Compose(Composition composition)
         {
+            YuzuConstants.Initialize(new YuzuConstantsConfig());
+
             composition.Register<IHandlebarsProvider, HandlebarsProvider>(Lifetime.Singleton);
             composition.Register<IYuzuDefinitionTemplates, YuzuDefinitionTemplates>(Lifetime.Singleton);
             composition.Register<IYuzuDefinitionTemplateSetup, YuzuDefinitionTemplateSetup>(Lifetime.Singleton);
@@ -28,8 +30,12 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register<GenerateViewmodelService>(Lifetime.Singleton);
             composition.Register(typeof(IViewmodelPostProcessor), typeof(FileRefViewmodelPostProcessor));
 
-            //MUST be tranient lifetime
+            //MUST be transient lifetime
+            composition.Register(typeof(IUpdateableConfig), typeof(CoreUmbracoConfig), Lifetime.Transient);
             composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig), Lifetime.Transient);
+
+            composition.Register<DefaultUmbracoMappingFactory>();
+            composition.RegisterAuto<Profile>();
 
             AddDefaultItems(composition);
             SetupHbsHelpers();
@@ -79,6 +85,15 @@ namespace YuzuDelivery.Umbraco.Core
             }, Lifetime.Singleton);
         }
 
+    }
+
+    public class CoreUmbracoConfig : UpdateableConfig
+    {
+        public CoreUmbracoConfig()
+            : base()
+        {
+            MappingAssemblies.Add(typeof(YuzuStartup).Assembly);
+        }
     }
 
     public class CoreVmBuilderConfig : UpdateableVmBuilderConfig

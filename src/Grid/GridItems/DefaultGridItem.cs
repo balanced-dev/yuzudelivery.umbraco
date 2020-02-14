@@ -8,6 +8,7 @@ using Umbraco.Core.Models.PublishedContent;
 using AutoMapper;
 using System.Dynamic;
 using System.Web.Mvc;
+using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Grid
 {

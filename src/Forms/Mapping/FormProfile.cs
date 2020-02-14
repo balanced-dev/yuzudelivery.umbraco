@@ -8,10 +8,10 @@ using Umbraco.Forms.Web.Models;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
-    public class CommentsProfile : Profile
+    public class FormProfile : Profile
     {
 
-        public CommentsProfile()
+        public FormProfile()
         {
             CreateMap<string, vmBlock_DataForm>()
                 .ConvertUsing<FormTypeConvertor>();

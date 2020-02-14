@@ -16,10 +16,12 @@ namespace YuzuDelivery.Umbraco.Grid
         where M : PublishedElementModel
     {
         private string docTypeAlias;
+        private readonly IMapper mapper;
 
-        public DefaultGridItem(string docTypeAlias)
+        public DefaultGridItem(string docTypeAlias, IMapper mapper)
         {
             this.docTypeAlias = docTypeAlias;
+            this.mapper = mapper;
         }
 
         public Type ElementType { get { return typeof(M); } }
@@ -48,7 +50,6 @@ namespace YuzuDelivery.Umbraco.Grid
         {
             var item = model.ToElement<M>();
 
-            var mapper = DependencyResolver.Current.GetService<IMapper>();
             var output = mapper.Map<V>(item, opts => AddItemContext(opts.Items, contextItems));
 
             if (config != null && typeof(V).GetProperty("Config") != null)

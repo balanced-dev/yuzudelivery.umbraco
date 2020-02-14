@@ -12,6 +12,13 @@ namespace YuzuDelivery.Umbraco.Forms
 {
     public class FormTypeConvertor : ITypeConverter<string, vmBlock_DataForm>
     {
+        private ISchemaMetaService schemaMetaService;
+
+        public FormTypeConvertor(ISchemaMetaService schemaMetaService)
+        {
+            this.schemaMetaService = schemaMetaService;
+        }
+
         public vmBlock_DataForm Convert(string formValue, vmBlock_DataForm destination, ResolutionContext context)
         {
             if (formValue != null)
@@ -22,7 +29,6 @@ namespace YuzuDelivery.Umbraco.Forms
                 if (!context.Options.Items.ContainsKey("FormBuilderTemplate"))
                     throw new Exception("Form Type Convertor requires FormBuilderTemplate in mapper options items to define which Yuzu template is used.");
 
-                var schemaMetaService = DependencyResolver.Current.GetService<ISchemaMetaService>();
                 var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
                 var formFieldTemplate = context.Options.Items["FormBuilderTemplate"].ToString();
 

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Skybrud.Umbraco.GridData;
 using AutoMapper;
-using System.Web.Mvc;
 using Newtonsoft.Json;
 
 namespace YuzuDelivery.Umbraco.Grid
@@ -24,48 +23,76 @@ namespace YuzuDelivery.Umbraco.Grid
 
     public class GridRowConvertor<TSource, TDest> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataGridRows>
     {
+        private readonly IGridService gridService;
+
+        public GridRowConvertor(IGridService gridService)
+        {
+            this.gridService = gridService;
+        }
+
         public vmBlock_DataGridRows Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataGridRows destMember, ResolutionContext context)
         {
-            var grids = DependencyResolver.Current.GetService<IGridService>();
-
-            return grids.CreateRows(sourceMember, context);
+            return gridService.CreateRows(sourceMember, context);
         }
     }
 
     public class GridRowConvertor<TSource, TDest, TConfig> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataGridRows>
     {
+        private readonly IGridService gridService;
+
+        public GridRowConvertor(IGridService gridService)
+        {
+            this.gridService = gridService;
+        }
+
         public vmBlock_DataGridRows Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataGridRows destMember, ResolutionContext context)
         {
-            var grids = DependencyResolver.Current.GetService<IGridService>();
-
-            return grids.CreateRows<TConfig>(sourceMember, context);
+            return gridService.CreateRows<TConfig>(sourceMember, context);
         }
     }
 
     public class GridRowColumnConvertor<TSource, TDest> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataGridRowsColumns>
     {
+        private readonly IGridService gridService;
+
+        public GridRowColumnConvertor(IGridService gridService)
+        {
+            this.gridService = gridService;
+        }
+
         public vmBlock_DataGridRowsColumns Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataGridRowsColumns destMember, ResolutionContext context)
         {
-            var grids = DependencyResolver.Current.GetService<IGridService>();
-            return grids.CreateRowsColumns(sourceMember, context);
+            return gridService.CreateRowsColumns(sourceMember, context);
         }
     }
 
     public class GridRowColumnConvertor<TSource, TDest, TConfig> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataGridRowsColumns>
     {
+        private readonly IGridService gridService;
+
+        public GridRowColumnConvertor(IGridService gridService)
+        {
+            this.gridService = gridService;
+        }
+
         public vmBlock_DataGridRowsColumns Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataGridRowsColumns destMember, ResolutionContext context)
         {
-            var grids = DependencyResolver.Current.GetService<IGridService>();
-            return grids.CreateRowsColumns<TConfig>(sourceMember, context);
+            return gridService.CreateRowsColumns<TConfig>(sourceMember, context);
         }
     }
 
     public class GridRowColumnConvertor<TSource, TDest, TConfigRow, TConfigCol> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataGridRowsColumns>
     {
+        private readonly IGridService gridService;
+
+        public GridRowColumnConvertor(IGridService gridService)
+        {
+            this.gridService = gridService;
+        }
+
         public vmBlock_DataGridRowsColumns Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataGridRowsColumns destMember, ResolutionContext context)
         {
-            var grids = DependencyResolver.Current.GetService<IGridService>();
-            return grids.CreateRowsColumns<TConfigRow, TConfigCol>(sourceMember, context);
+            return gridService.CreateRowsColumns<TConfigRow, TConfigCol>(sourceMember, context);
         }
     }
 

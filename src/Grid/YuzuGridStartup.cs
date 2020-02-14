@@ -9,6 +9,7 @@ using Skybrud.Umbraco.GridData;
 using Skybrud.Umbraco.GridData.Dtge;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.ViewModelBuilder;
+using AutoMapper;
 
 namespace YuzuDelivery.Umbraco.Grid 
 {
@@ -22,6 +23,11 @@ namespace YuzuDelivery.Umbraco.Grid
 
             composition.Register<IGridService, GridService>(Lifetime.Singleton);
 
+            composition.Register(typeof(GridRowConvertor<,>));
+            composition.Register(typeof(GridRowConvertor<,,>));
+            composition.Register(typeof(GridRowColumnConvertor<,,>));
+            composition.Register(typeof(GridRowColumnConvertor<,,,>));
+
             //MUST be tranient lifetime
             composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(GridVmBuilderConfig), Lifetime.Transient);
 
@@ -34,6 +40,7 @@ namespace YuzuDelivery.Umbraco.Grid
             composition.Register<IGridItemInternal[]>((factory) =>
             {
                 var config = factory.GetInstance<IYuzuConfiguration>();
+                var mapper = factory.GetInstance<IMapper>();
 
                 var baseGridType = typeof(DefaultGridItem<,>);
                 var gridItems = new List<IGridItemInternal>();
@@ -48,7 +55,7 @@ namespace YuzuDelivery.Umbraco.Grid
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {
                         var makeme = baseGridType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias }) as IGridItemInternal;
+                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper }) as IGridItemInternal;
 
                         gridItems.Add(o);
                     }

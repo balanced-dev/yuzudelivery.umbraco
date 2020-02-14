@@ -11,10 +11,12 @@ namespace YuzuDelivery.Umbraco.Core
     where M : PublishedElementModel
     {
         private string docTypeAlias;
+        private readonly IMapper mapper;
 
-        public DefaultItem(string docTypeAlias)
+        public DefaultItem(string docTypeAlias, IMapper mapper)
         {
             this.docTypeAlias = docTypeAlias;
+            this.mapper = mapper;
         }
 
         public virtual bool IsValid(IPublishedElement element)
@@ -26,7 +28,6 @@ namespace YuzuDelivery.Umbraco.Core
         {
             var item = element.ToElement<M>();
 
-            var mapper = DependencyResolver.Current.GetService<IMapper>();
             var output = mapper.Map<V>(item, opts => AddItemContext(opts.Items, contextItems));
             return output;
         }

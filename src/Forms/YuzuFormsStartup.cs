@@ -19,6 +19,10 @@ namespace YuzuDelivery.Umbraco.Forms
             composition.Register<IFormElementMapGetter, FormElementMapGetter>(Lifetime.Singleton);
             composition.RegisterAll<IFormFieldMappingsInternal>(typeof(YuzuFormsStartup).Assembly);
 
+            composition.Register<FormBuilderTypeConverter>();
+            composition.Register<FormTypeConvertor>();
+            composition.Register(typeof(FormMemberValueResolver<,>));
+
             //MUST be transient lifetimes
             composition.Register(typeof(IUpdateableConfig), typeof(FormUmbracoConfig), Lifetime.Transient);
             composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(FormVmBuilderConfig), Lifetime.Transient);

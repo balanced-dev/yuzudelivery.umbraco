@@ -10,7 +10,6 @@ namespace YuzuDelivery.Umbraco.Grid
 {
     public static class GridExtensions
     {
-
         public static IGridItem GridPartial(this HtmlHelper helper, IPublishedElement publishedElement)
         {
             var overrideGridItems = DependencyResolver.Current.GetServices<IGridItem>();

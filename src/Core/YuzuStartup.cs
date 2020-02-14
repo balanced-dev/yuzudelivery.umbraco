@@ -37,6 +37,10 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register<DefaultUmbracoMappingFactory>();
             composition.RegisterAuto<Profile>();
 
+            composition.Register<LinkIPublishedContentConvertor>();
+            composition.Register<LinkConvertor>();
+            composition.Register<ImageConvertor>();
+
             AddDefaultItems(composition);
             SetupHbsHelpers();
         }
@@ -57,6 +61,7 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register<IDefaultItem[]>((factory) =>
             {
                 var config = factory.GetInstance<IYuzuConfiguration>();
+                var mapper = factory.GetInstance<IMapper>();
 
                 var viewmodelAssemblies = config.ViewModelAssemblies;
 
@@ -75,7 +80,7 @@ namespace YuzuDelivery.Umbraco.Core
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {
                         var makeme = baseItemType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias }) as IDefaultItem;
+                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper }) as IDefaultItem;
 
                         items.Add(o);
                     }

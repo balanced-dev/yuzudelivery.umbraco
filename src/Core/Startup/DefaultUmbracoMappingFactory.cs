@@ -21,9 +21,10 @@ namespace YuzuDelivery.Umbraco.Core
             this.config = config;
         }
 
-        public IMapper Create(Assembly localAssembly, IFactory factory)
+        public IMapper Create(Assembly profilesAssembly, IFactory factory)
         {
-            config.MappingAssemblies.Add(localAssembly);
+            config.MappingAssemblies.Add(profilesAssembly);
+
             var loadedProfiles = GetProfiles(config.MappingAssemblies);
 
             var cfg = new MapperConfigurationExpression();
@@ -33,6 +34,8 @@ namespace YuzuDelivery.Umbraco.Core
                 var resolvedProfile = factory.GetInstance(profile) as Profile;
                 cfg.AddProfile(resolvedProfile);
             }
+
+            cfg.AddMaps(config.ViewModels);
 
             cfg.ConstructServicesUsing(DependencyResolver.Current.GetService);
 

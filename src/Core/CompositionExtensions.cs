@@ -21,10 +21,10 @@ namespace YuzuDelivery.Umbraco.Core
             }
         }
 
-        public static void RegisterYuzuMapping(this Composition composition, Assembly assembly)
+        public static void RegisterYuzuMapping(this Composition composition, Assembly profileAssembly)
             => composition.Register<IMapper>((factory) =>
             {
-                return factory.GetInstance<DefaultUmbracoMappingFactory>().Create(assembly, factory);
-            });
+                return factory.GetInstance<DefaultUmbracoMappingFactory>().Create(profileAssembly, factory);
+            }, Lifetime.Singleton);
     }
 }

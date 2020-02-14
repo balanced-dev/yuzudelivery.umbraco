@@ -22,10 +22,8 @@
 	</dependencies>
   </metadata>
   <files>
-    <file src="WebContent\tools\web.config.install.xdt" target="Content\web.config.install.xdt" />
-    <file src="WebContent\tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
-    <file src="CoreContent\Startup\MappingComposer.cs.pp" target="Content\App_Code\MappingComposer.cs.pp" />
-    <file src="CoreContent\Startup\YuzuComposer.cs.pp" target="Content\App_Code\YuzuComposer.cs.pp" />
-    <file src="CoreContent\Startup\YuzuImportComposer.cs.pp" target="Content\App_Code\YuzuImportComposer.cs.pp" />
+    <file src="StandaloneContent\tools\web.config.install.xdt" target="Content\web.config.install.xdt" />
+    <file src="StandaloneContent\tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
+    <file src="StandaloneContent\Startup\YuzuStartup.cs.pp" target="Content\App_Code\YuzuStartup.cs.pp" />
   </files>
 </package>

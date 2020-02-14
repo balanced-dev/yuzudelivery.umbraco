@@ -27,10 +27,10 @@ namespace YuzuDelivery.Umbraco.Core
         private readonly IMapper mapper;
         private readonly IDefaultItem[] defaultItems;
 
-        public DefaultItemsConvertor()
+        public DefaultItemsConvertor(IMapper mapper, IDefaultItem[] defaultItems)
         {
-            mapper = DependencyResolver.Current.GetService<IMapper>();
-            defaultItems = DependencyResolver.Current.GetService<IDefaultItem[]>();
+            this.mapper = mapper;
+            this.defaultItems = defaultItems;
         }
 
         public IEnumerable<object> Convert(IEnumerable<IPublishedElement> elements, IEnumerable<object> destination, ResolutionContext context)
@@ -58,10 +58,10 @@ namespace YuzuDelivery.Umbraco.Core
         private readonly IMapper mapper;
         private readonly IDefaultItem[] defaultItems;
 
-        public DefaultItemConvertor()
+        public DefaultItemConvertor(IMapper mapper, IDefaultItem[] defaultItems)
         {
-            mapper = DependencyResolver.Current.GetService<IMapper>();
-            defaultItems = DependencyResolver.Current.GetService<IDefaultItem[]>();
+            this.mapper = mapper;
+            this.defaultItems = defaultItems;
         }
 
         public object Convert(IEnumerable<IPublishedElement> elements, object destination, ResolutionContext context)

@@ -182,8 +182,8 @@
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.8.1.1\lib\net472\Umbraco.Core.dll</HintPath>
     </Reference>
-    <Reference Include="YuzuDelivery.Core, Version=1.0.33.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Core.1.0.33\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    <Reference Include="YuzuDelivery.Core, Version=1.0.34.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Core.1.0.34\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

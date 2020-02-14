@@ -17,10 +17,12 @@ namespace YuzuDelivery.Umbraco.Members
     public class MemberController : SurfaceController
     {
         protected IMemberService memberService;
+        protected IYuzuDeliveryMembersConfiguration config;
 
-        public MemberController(IMemberService memberService)
+        public MemberController(IMemberService memberService, IYuzuDeliveryMembersConfiguration config)
         {
             this.memberService = memberService;
+            this.config = config;
         }
 
         public ActionResult Login()
@@ -46,13 +48,13 @@ namespace YuzuDelivery.Umbraco.Members
                     SubmitButtonText = "Login",
                     ActionLinks = new List<vmBlock_DataLink>()
                     {
-                        new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.ForgottenPasswordLabel, Href = YuzuDeliveryMembers.Configuration.ForgottenPasswordUrl },
-                        new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.RegisterLabel, Href = YuzuDeliveryMembers.Configuration.RegisterUrl },
+                        new vmBlock_DataLink() { Label = config.ForgottenPasswordLabel, Href = config.ForgottenPasswordUrl },
+                        new vmBlock_DataLink() { Label = config.RegisterLabel, Href = config.RegisterUrl },
                     }
                 };
             }
             else
-                Response.Redirect(YuzuDeliveryMembers.Configuration.HomeUrl);
+                Response.Redirect(config.HomeUrl);
 
             return PartialView("login", model);
         }
@@ -72,7 +74,7 @@ namespace YuzuDelivery.Umbraco.Members
                         SuccessMessage = "We have emailed a link to change your password",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.BackLabel, Href = YuzuDeliveryMembers.Configuration.HomeUrl }
+                            new vmBlock_DataLink() { Label = config.BackLabel, Href = config.HomeUrl }
                         }
                     };
                 }
@@ -94,13 +96,13 @@ namespace YuzuDelivery.Umbraco.Members
                         SubmitButtonText = "Submit",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.CancelLabel, Href = YuzuDeliveryMembers.Configuration.HomeUrl }
+                            new vmBlock_DataLink() { Label = config.CancelLabel, Href = config.HomeUrl }
                         }
                     };
                 }
             }
             else
-                Response.Redirect(YuzuDeliveryMembers.Configuration.HomeUrl);
+                Response.Redirect(config.HomeUrl);
 
             return PartialView("ForgottenPassword", model);
         }
@@ -120,7 +122,7 @@ namespace YuzuDelivery.Umbraco.Members
                         SuccessMessage = "Account created successfully.",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.BackLabel, Href = YuzuDeliveryMembers.Configuration.HomeUrl }
+                            new vmBlock_DataLink() { Label = config.BackLabel, Href = config.HomeUrl }
                         }
                     };
                 }
@@ -144,13 +146,13 @@ namespace YuzuDelivery.Umbraco.Members
                         SubmitButtonText = "Submit",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.CancelLabel, Href = YuzuDeliveryMembers.Configuration.HomeUrl }
+                            new vmBlock_DataLink() { Label = config.CancelLabel, Href = config.HomeUrl }
                         }
                     };
                 }
             }
             else
-                Response.Redirect(YuzuDeliveryMembers.Configuration.HomeUrl);
+                Response.Redirect(config.HomeUrl);
 
             return PartialView("Register", model);
         }
@@ -170,7 +172,7 @@ namespace YuzuDelivery.Umbraco.Members
                         SuccessMessage = "User details have been updated",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.BackLabel, Href = YuzuDeliveryMembers.Configuration.HomeUrl }
+                            new vmBlock_DataLink() { Label = config.BackLabel, Href = config.HomeUrl }
                         }
                     };
                 }
@@ -193,13 +195,13 @@ namespace YuzuDelivery.Umbraco.Members
                         SubmitButtonText = "Change",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.CancelLabel, Href = YuzuDeliveryMembers.Configuration.HomeUrl }
+                            new vmBlock_DataLink() { Label = config.CancelLabel, Href = config.HomeUrl }
                         }
                     };
                 }
             }
             else
-                Response.Redirect(YuzuDeliveryMembers.Configuration.HomeUrl);
+                Response.Redirect(config.HomeUrl);
 
             return PartialView("ChangeMember", model);
         }
@@ -227,7 +229,7 @@ namespace YuzuDelivery.Umbraco.Members
                         SuccessMessage = "Password has been changed",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.BackLabel, Href = YuzuDeliveryMembers.Configuration.HomeUrl }
+                            new vmBlock_DataLink() { Label = config.BackLabel, Href = config.HomeUrl }
                         }
                     };
                 }
@@ -240,7 +242,7 @@ namespace YuzuDelivery.Umbraco.Members
                         SuccessMessage = "Password change link has timed out, please try again",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.ForgottenPasswordLabel, Href = YuzuDeliveryMembers.Configuration.ForgottenPasswordUrl }
+                            new vmBlock_DataLink() { Label = config.ForgottenPasswordLabel, Href = config.ForgottenPasswordUrl }
                         }
                     };
                 }
@@ -263,13 +265,13 @@ namespace YuzuDelivery.Umbraco.Members
                         SubmitButtonText = "Change",
                         ActionLinks = new List<vmBlock_DataLink>()
                         {
-                            new vmBlock_DataLink() { Label = YuzuDeliveryMembers.Configuration.CancelLabel, Href = YuzuDeliveryMembers.Configuration.HomeUrl }
+                            new vmBlock_DataLink() { Label = config.CancelLabel, Href = config.HomeUrl }
                         }
                     };
                 }
             }
             else
-                Response.Redirect(YuzuDeliveryMembers.Configuration.HomeUrl);
+                Response.Redirect(config.HomeUrl);
 
             return PartialView("ChangePassword", model);
         }
@@ -287,16 +289,16 @@ namespace YuzuDelivery.Umbraco.Members
                     member.SetValue("forgottenPasswordExpiry", DateTime.Now.AddHours(3));
                     memberService.Save(member);
 
-                    var changePasswordLink = string.Format("http://{0}{1}?id={2}", Request.ServerVariables["Server_Name"], YuzuDeliveryMembers.Configuration.ChangePasswordUrl, member.Key);
+                    var changePasswordLink = string.Format("http://{0}{1}?id={2}", Request.ServerVariables["Server_Name"], config.ChangePasswordUrl, member.Key);
 
-                    YuzuDeliveryMembers.Configuration.ForgottenPasswordEmailAction(model.Email, member.Name, changePasswordLink);
+                    config.ForgottenPasswordEmailAction(model.Email, member.Name, changePasswordLink);
 
                     TempData["FormSuccess"] = true;
                     return CurrentUmbracoPage();
                 }
                 else
                 {
-                    ModelState.AddModelError("passwordReminderVm", YuzuDeliveryMembers.Configuration.EmailNotFoundErrorMessage);
+                    ModelState.AddModelError("passwordReminderVm", config.EmailNotFoundErrorMessage);
                 }
             }
             return CurrentUmbracoPage();
@@ -337,7 +339,7 @@ namespace YuzuDelivery.Umbraco.Members
             else
             {
                 if (member == null)
-                    ModelState.AddModelError("changePasswordVm", YuzuDeliveryMembers.Configuration.MemberNotFoundErrorMessage);
+                    ModelState.AddModelError("changePasswordVm", config.MemberNotFoundErrorMessage);
                 return CurrentUmbracoPage();
             }
         }
@@ -354,7 +356,7 @@ namespace YuzuDelivery.Umbraco.Members
 
                 if (member == null)
                 {
-                    ModelState.AddModelError("changeMemberVm", YuzuDeliveryMembers.Configuration.MemberNotFoundErrorMessage);
+                    ModelState.AddModelError("changeMemberVm", config.MemberNotFoundErrorMessage);
                     return CurrentUmbracoPage();
                 }
                 else

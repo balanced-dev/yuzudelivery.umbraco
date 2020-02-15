@@ -24,6 +24,6 @@
   <files>
     <file src="StandaloneContent\tools\web.config.install.xdt" target="Content\web.config.install.xdt" />
     <file src="StandaloneContent\tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
-    <file src="StandaloneContent\Startup\YuzuStartup.cs.pp" target="Content\App_Code\YuzuStartup.cs.pp" />
+    <file src="StandaloneContent\Yuzu\Startup.cs.pp" target="Content\Yuzu\_Startup.cs.pp" />
   </files>
 </package>

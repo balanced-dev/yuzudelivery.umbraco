@@ -249,6 +249,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\AutoMapperExtensions.cs" />
     <Compile Include="CompositionExtensions.cs" />
     <Compile Include="PublishedModelExtensions.cs" />
     <Compile Include="DefaultItem\DefaultItem.cs" />

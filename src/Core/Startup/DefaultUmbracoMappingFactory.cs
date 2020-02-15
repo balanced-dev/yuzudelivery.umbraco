@@ -25,34 +25,20 @@ namespace YuzuDelivery.Umbraco.Core
         {
             config.MappingAssemblies.Add(profilesAssembly);
 
-            var loadedProfiles = GetProfiles(config.MappingAssemblies);
-
             var cfg = new MapperConfigurationExpression();
 
-            foreach (var profile in loadedProfiles)
-            {
-                var resolvedProfile = factory.GetInstance(profile) as Profile;
-                cfg.AddProfile(resolvedProfile);
-            }
-
-            cfg.AddMaps(config.ViewModels);
-
-            cfg.ConstructServicesUsing(DependencyResolver.Current.GetService);
+            cfg.AddProfilesFromContainer(config.MappingAssemblies, factory);
+            cfg.AddProfilesForAttributes(config.MappingAssemblies);
+            cfg.ConstructServicesUsing(factory.GetInstance);
 
             var mapperConfig = new MapperConfiguration(cfg);
 
             return new Mapper(mapperConfig);
         }
 
-        private static List<Type> GetProfiles(IEnumerable<Assembly> assemblies)
-        {
-            var profiles = new List<Type>();
-            foreach (var assembly in assemblies)
-            {
-                var assemblyProfiles = assembly.ExportedTypes.Where(type => type.IsSubclassOf(typeof(Profile)));
-                profiles.AddRange(assemblyProfiles);
-            }
-            return profiles;
-        }
+
     }
+
+    
+
 }

@@ -265,7 +265,7 @@
     <Compile Include="Startup\DefaultUmbracoConfig.cs" />
     <Compile Include="Startup\DefaultUmbracoVmBuilderConfig.cs" />
     <Compile Include="ViewmodelGeneration\GenerateController.cs" />
-    <Compile Include="ViewmodelGeneration\YuzuTreeController.cs" />
+    <Compile Include="Web\Backend\YuzuTreeController.cs" />
     <Compile Include="YuzuStartup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -273,7 +273,13 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web\UI\App_Plugins\YuzuDeliveryViewModelsBuilder\package.manifest" />
     <None Include="YuzuDelivery.Umbraco.Core.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web\UI\App_Plugins\YuzuDeliveryViewModelsBuilder\backoffice\YuzuDeliveryViewModelsBuilder\dashboard.html" />
+    <Content Include="Web\UI\App_Plugins\YuzuDeliveryViewModelsBuilder\backoffice\YuzuDeliveryViewModelsBuilder\yuzuDashboardController.js" />
+    <Content Include="Web\UI\App_Plugins\YuzuDeliveryViewModelsBuilder\lang\en-US.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets" Condition="Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" />

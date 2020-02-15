@@ -14,7 +14,7 @@ using Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    [Tree(Constants.Applications.Settings, "YuzuDeliveryViewModelsBuilder", TreeTitle = "Yuzu Viewmodels Builder", TreeGroup = "ui", SortOrder = 35)]
+    [Tree(Constants.Applications.Settings, "YuzuDeliveryViewModelsBuilder", TreeTitle = "Yuzu Viewmodels Builder", TreeGroup = "ui", SortOrder = 15)]
     [PluginController("YuzuDeliveryViewModelsBuilder")]
     public class YuzuTreeController : TreeController
     {
@@ -23,7 +23,7 @@ namespace YuzuDelivery.Umbraco.Core
             var root = base.CreateRootNode(queryStrings);
 
             root.RoutePath = $"{Constants.Applications.Settings}/YuzuDeliveryViewModelsBuilder/dashboard";
-            root.Icon = "icon-hearts";
+            root.Icon = "icon-code";
             root.HasChildren = false;
             root.MenuUrl = null;
 

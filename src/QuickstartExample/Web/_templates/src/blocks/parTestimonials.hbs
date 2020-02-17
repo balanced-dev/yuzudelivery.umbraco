@@ -1,0 +1,32 @@
+<section class="py-7 bg-light" id="reviews">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-8 mx-auto text-center">
+                <span class="text-muted small-xl text-uppercase">{{subtitle}}</span>
+                <h2 class="display-4">{{title}}</h2>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-8 mx-auto review-wrapper slick-reviews">
+                {{#each items}}
+                <div class="card border-0 review p-5 raised-box">
+                    <div class="card-body">
+                        <img src="{{image.src}}" class="img-review rounded-circle d-block mx-auto" alt="Client 1" />
+                        <p class="quote">{{quote}}</p>
+                        <div class="mt-4 small-xl">
+                            {{name}} &mdash; <span class="text-muted">{{company}}</span>
+                        </div>
+                        <div class="rating-stars text-primary mt-4">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star-half-empty"></span>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,65 @@
+{
+    "id": "/parPricing",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "subtitle": {
+            "type": "string"
+        },
+        "text": {
+            "type": "string"
+        },
+        "items": {
+            "type": "array",
+            "items": {
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string"
+                    },
+                    "period": {
+                        "type": "string"
+                    },
+                    "text": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "link": {
+                        "$ref": "/parDataLink"
+                    },
+                    "primary": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        "reasons": {
+            "type": "array",
+            "items": {
+                "properties": {
+                    "icon": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "text": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

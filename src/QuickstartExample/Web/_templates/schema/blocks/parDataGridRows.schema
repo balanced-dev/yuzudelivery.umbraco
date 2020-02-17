@@ -1,0 +1,24 @@
+{
+    "id": "/parDataGridRows",
+    "type": "object",
+    "anyOfTypes": [
+        "parGrid"
+    ],
+    "properties": {
+        "rows": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "anyOf": []
+                    }
+                }
+            }
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,19 @@
+{
+    "id": "/parDataLink",
+    "type": "object",
+    "properties": {
+        "label": {
+            "type": "string"
+        },
+        "href": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

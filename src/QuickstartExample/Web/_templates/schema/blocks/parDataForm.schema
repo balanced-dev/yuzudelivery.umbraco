@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "testForm": {
+            "$ref": "/parDataFormBuilder"
+        },
+        "liveForm": {
+            "type": "string"
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "id": "/parDataForm"
+}

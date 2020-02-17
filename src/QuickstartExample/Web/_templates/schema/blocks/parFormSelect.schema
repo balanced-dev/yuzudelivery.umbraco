@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "formSelectLabel": {
+            "type": "string"
+        },
+        "formSelectName": {
+            "type": "string"
+        },
+        "formSelectID": {
+            "type": "string"
+        },
+        "isFormSelectRequired": {
+            "type": "boolean"
+        },
+        "isFormSelectDisabled": {
+            "type": "boolean"
+        },
+        "isFormSelectInvalid": {
+            "type": "boolean"
+        },
+        "isFormSelectReadonly": {
+            "type": "boolean"
+        },
+        "formSelectOptions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "option": {
+                        "type": "object",
+                        "properties": {
+                            "optionIsSelected": {
+                                "type": "boolean"
+                            },
+                            "optionValue": {
+                                "type": "string"
+                            },
+                            "optionLabel": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "modifier": {
+            "type": "string"
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "id": "/parFormSelect"
+}

@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/form": [
+            "/parDataForm^parFormBuilder"
+        ],
+        "/backgroundImage": [
+            "/parDataImage"
+        ]
+    }
+}

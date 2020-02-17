@@ -1,0 +1,40 @@
+{
+    "id": "/parTestimonials",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "subtitle": {
+            "type": "string"
+        },
+        "items": {
+            "type": "array",
+            "items": {
+                "properties": {
+                    "image": {
+                        "$ref": "/parDataImage"
+                    },
+                    "quote": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "company": {
+                        "type": "string"
+                    },
+                    "stars": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

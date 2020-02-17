@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/siteHeader": [
+            "/parSiteHeader"
+        ],
+        "/siteFooter": [
+            "/parSiteFooter"
+        ]
+    }
+}

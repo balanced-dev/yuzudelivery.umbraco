@@ -1,0 +1,378 @@
+{
+    "grid": {
+        "rows": [
+            {
+                "items": [
+                    {
+                        "title": "Promote your startup with Lambda",
+                        "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                        "link": {
+                            "label": "Get started now"
+                        },
+                        "backgroundImage": {
+                            "src": "/_client/img/parallex.jpg"
+                        },
+                        "_ref": "/parPageHero",
+                        "yuzu-path": "/grid/rows[0]/items[0]"
+                    }
+                ]
+            },
+            {
+                "items": [
+                    {
+                        "subtitle": "Everything you need for PR",
+                        "title": "A complete PR solution for startups",
+                        "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                        "items": [
+                            {
+                                "title": "Publish",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "icon": "edit-3"
+                            },
+                            {
+                                "title": "Outreach",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "icon": "thumbs-up"
+                            },
+                            {
+                                "title": "Collaborate",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "icon": "users"
+                            },
+                            {
+                                "title": "Global",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "icon": "globe"
+                            },
+                            {
+                                "title": "Premium support",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "icon": "heart"
+                            },
+                            {
+                                "title": "Money-back gaurantee",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "icon": "rotate-ccw"
+                            }
+                        ],
+                        "expTitle": "We have got our clients covered in",
+                        "expItems": [
+                            {
+                                "image": {
+                                    "src": "/_client/img/press/press-1.png"
+                                }
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/img/press/press-2.png"
+                                }
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/img/press/press-3.png"
+                                }
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/img/press/press-4.png"
+                                }
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/img/press/press-5.png"
+                                }
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/img/press/press-6.png"
+                                }
+                            }
+                        ],
+                        "_ref": "/parServices",
+                        "yuzu-path": "/grid/rows[1]/items[0]"
+                    }
+                ]
+            },
+            {
+                "items": [
+                    {
+                        "items": [
+                            {
+                                "title": "Get published in top brands",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "features": [
+                                    "Lorem ipsum dolor sit amet.",
+                                    "Aenean commodo ligula eget dolor.",
+                                    "Aenean massa.",
+                                    "Cum sociis natoque penatibus mus."
+                                ],
+                                "link": {
+                                    "label": "See our partners"
+                                },
+                                "image": {
+                                    "src": "/_client/img/feature1.png"
+                                },
+                                "isRightAligned": false
+                            },
+                            {
+                                "title": "Reach millions of people",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "features": [
+                                    "Lorem ipsum dolor sit amet.",
+                                    "Aenean commodo ligula eget dolor.",
+                                    "Aenean massa.",
+                                    "Cum sociis natoque penatibus mus."
+                                ],
+                                "link": {
+                                    "label": "Sign up now"
+                                },
+                                "image": {
+                                    "src": "/_client/img/feature2.png"
+                                },
+                                "isRightAligned": true
+                            },
+                            {
+                                "title": "Get published in top brands",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "features": [
+                                    "Lorem ipsum dolor sit amet.",
+                                    "Aenean commodo ligula eget dolor.",
+                                    "Aenean massa.",
+                                    "Cum sociis natoque penatibus mus."
+                                ],
+                                "link": {
+                                    "label": "Contact Us"
+                                },
+                                "image": {
+                                    "src": "/_client/img/feature3.png"
+                                },
+                                "isRightAligned": false
+                            }
+                        ],
+                        "_ref": "/parFeature",
+                        "yuzu-path": "/grid/rows[2]/items[0]"
+                    }
+                ]
+            },
+            {
+                "items": [
+                    {
+                        "subtitle": "Loved by thousands of people",
+                        "title": "What our customers say",
+                        "items": [
+                            {
+                                "image": {
+                                    "src": "/_client/img/client-1.jpg"
+                                },
+                                "quote": "Praesent vulputate dolor velit, in condimentum odio pellentesin condimentum odio pellentesque libero.",
+                                "name": "Ryan Siddle",
+                                "company": "Google Design",
+                                "stars": 4.5
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/img/client-2.jpg"
+                                },
+                                "quote": "Praesent vulputate dolor velit, in condimentum odio pellentesin condimentum odio pellentesque libero.",
+                                "name": "Ameli Mao",
+                                "company": "Developer",
+                                "stars": 4.5
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/img/client-3.jpg"
+                                },
+                                "quote": "Praesent vulputate dolor velit, in condimentum odio pellentesin condimentum odio pellentesque libero.",
+                                "name": "Kathrine Jones",
+                                "company": "DropBox",
+                                "stars": 4.5
+                            }
+                        ],
+                        "_ref": "/parTestimonials",
+                        "yuzu-path": "/grid/rows[3]/items[0]"
+                    }
+                ]
+            },
+            {
+                "items": [
+                    {
+                        "title": "Pay only when you need",
+                        "subtitle": "Simple pricing",
+                        "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                        "items": [
+                            {
+                                "title": "Basic",
+                                "price": "$99",
+                                "period": "per month",
+                                "text": [
+                                    "1 campaign",
+                                    "20 media submissions",
+                                    "Pitch templates",
+                                    "Basic support"
+                                ],
+                                "link": {
+                                    "label": "Get Started"
+                                }
+                            },
+                            {
+                                "title": "Startup",
+                                "price": "$159",
+                                "period": "monthly",
+                                "text": [
+                                    "5 campaigns",
+                                    "50 media submissions",
+                                    "Pitch templates",
+                                    "Priority support"
+                                ],
+                                "link": {
+                                    "label": "Get Started"
+                                },
+                                "primary": true
+                            },
+                            {
+                                "title": "Growth",
+                                "price": "$499",
+                                "period": "per month",
+                                "text": [
+                                    "1 campaign",
+                                    "20 media submissions",
+                                    "Pitch templates",
+                                    "Basic support"
+                                ],
+                                "link": {
+                                    "label": "Get Started"
+                                }
+                            }
+                        ],
+                        "reasons": [
+                            {
+                                "icon": "umbrella",
+                                "title": "Money-back guarantee",
+                                "text": "100% money back guarantee within 14 days. No worries."
+                            },
+                            {
+                                "icon": "shield",
+                                "title": "Secure payment",
+                                "text": "Money transfers are protected with a 256-bit SSL Protocol."
+                            },
+                            {
+                                "icon": "credit-card",
+                                "title": "Payment methods",
+                                "text": "Pay with multiple payment methods — credit card, bank transfer or PayPal."
+                            }
+                        ],
+                        "_ref": "/parPricing",
+                        "yuzu-path": "/grid/rows[4]/items[0]"
+                    }
+                ]
+            }
+        ]
+    },
+    "header": {
+        "companyName": "Lambda",
+        "nav": {
+            "navLinks": [
+                {
+                    "label": "Services",
+                    "href": "#services"
+                },
+                {
+                    "label": "Features",
+                    "href": "#features"
+                },
+                {
+                    "label": "Reviews",
+                    "href": "#reviews"
+                },
+                {
+                    "label": "Pricing",
+                    "href": "#pricing"
+                },
+                {
+                    "label": "FAQ",
+                    "href": "#faq"
+                }
+            ],
+            "_ref": "/parSiteNav",
+            "yuzu-path": "/header/nav"
+        },
+        "signUp": {
+            "label": "Sign up"
+        },
+        "_ref": "/parSiteHeader",
+        "yuzu-path": "/header"
+    },
+    "footer": {
+        "title": "About Lambda",
+        "text": ">Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore.Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo.",
+        "navAreas": [
+            {
+                "title": "Lambda",
+                "navLinks": [
+                    {
+                        "label": "About"
+                    },
+                    {
+                        "label": "Privacy"
+                    },
+                    {
+                        "label": "Terms"
+                    },
+                    {
+                        "label": "Blog"
+                    }
+                ]
+            },
+            {
+                "title": "Products",
+                "navLinks": [
+                    {
+                        "label": "Publish"
+                    },
+                    {
+                        "label": "Outreach"
+                    },
+                    {
+                        "label": "Collaborate"
+                    },
+                    {
+                        "label": "Global"
+                    }
+                ]
+            },
+            {
+                "title": "Community",
+                "navLinks": [
+                    {
+                        "label": "Help forum"
+                    },
+                    {
+                        "label": "Slack channel"
+                    },
+                    {
+                        "label": "Support"
+                    },
+                    {
+                        "label": "Policies"
+                    }
+                ]
+            }
+        ],
+        "socialLinks": [
+            {
+                "label": "facebook"
+            },
+            {
+                "label": "twitter"
+            },
+            {
+                "label": "google-plus"
+            },
+            {
+                "label": "dribbble"
+            }
+        ],
+        "_ref": "/parSiteFooter",
+        "yuzu-path": "/footer"
+    }
+}

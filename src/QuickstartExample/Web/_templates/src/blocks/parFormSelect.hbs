@@ -1,0 +1,21 @@
+<label class="
+		{{modifier}}
+		{{#if isFormSelectDisabled}}is-disabled{{/if}}
+		{{#if isFormSelectInvalid}}is-invalid{{/if}}
+	"
+	title="{{formSelectLabel}}">
+	<span class="{{modifier}}__label">{{formSelectLabel}}</span>
+	<div class="{{modifier}}__select">
+		<select class="{{modifier}}__control" 
+			{{#if formSelectID}}id="{{formSelectID}}"{{/if}} 
+			{{#if formSelectName}}name="{{formSelectName}}"{{/if}} 
+			{{#if isFormSelectRequired}}required="required"{{/if}}
+			{{#if isFormSelectDisabled}}disabled="disabled"{{/if}}
+		>
+			{{#each formSelectOptions}}
+				<option {{#if ../isFormSelectReadonly}} disabled="disabled"{{/if}}{{#if option.optionIsSelected}} selected="selected"{{/if}} value="{{option.optionValue}}">{{option.optionLabel}}</option>
+			{{/each}}
+		</select>
+		<span class="{{modifier}}__faux"></span>
+	</div>
+</label>

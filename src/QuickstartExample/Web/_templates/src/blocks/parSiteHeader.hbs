@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
+    <a class="navbar-brand" href="index.html">
+        {{companyName}}
+    </a>
+    <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+        data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span data-feather="menu"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        {{> parSiteNav nav}}
+        <form class="form-inline">
+            <a href="#signup" class="btn btn-outline-secondary btn-navbar page-scroll">{{signUp.label}}</a>
+        </form>
+    </div>
+</nav>

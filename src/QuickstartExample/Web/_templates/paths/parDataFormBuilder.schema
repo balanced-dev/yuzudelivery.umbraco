@@ -1,0 +1,13 @@
+{
+    "parFormBuilder": {
+        "refs": {
+            "/fields": [
+                "/parFormTextInput",
+                "/parFormTextArea"
+            ]
+        }
+    },
+    "anyOfTypes": [
+        "parFormBuilder"
+    ]
+}

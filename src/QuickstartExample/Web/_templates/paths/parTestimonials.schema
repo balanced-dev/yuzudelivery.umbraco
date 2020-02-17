@@ -1,0 +1,12 @@
+{
+    "numbers": {
+        "/items/stars": {
+            "type": "number"
+        }
+    },
+    "refs": {
+        "/items/image": [
+            "/parDataImage"
+        ]
+    }
+}

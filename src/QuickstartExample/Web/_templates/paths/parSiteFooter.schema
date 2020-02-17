@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/navAreas/navLinks/link": [
+            "/parDataLink"
+        ],
+        "/socialLinks/link": [
+            "/parDataLink"
+        ]
+    }
+}

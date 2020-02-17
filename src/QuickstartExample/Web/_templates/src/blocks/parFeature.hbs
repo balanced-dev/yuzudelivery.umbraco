@@ -1,0 +1,25 @@
+<section class="py-7" id="features">
+    <div class="container">
+        {{#each items}}
+        <div class="row {{#unless @first}}mt-7{{/unless}}">
+            <div class="col-md-6 my-auto{{#if isRightAligned}} order-1 order-md-2{{/if}}">
+                <img src="{{image.src}}" class="img-fluid d-block mx-auto" alt="Feature 1" />
+            </div>
+            <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0">
+                <h2 class="display-4">{{title}}</h2>
+                <p class="lead text-muted">{{text}}</p>
+                <ul class="features-list">
+                    {{#each features}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                <p class="lead mt-3">
+                    <a href="#" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
+                        {{link.label}} <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</section>

@@ -1,0 +1,21 @@
+{
+    "id": "/parSiteHeader",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "companyName": {
+            "type": "string"
+        },
+        "nav": {
+            "$ref": "/parSiteNav"
+        },
+        "signUp": {
+            "$ref": "/parDataLink"
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "anyOfTypes": [
+        "parFormBuilder"
+    ],
+    "properties": {
+        "isSubmitted": {
+            "type": "boolean"
+        },
+        "submittedMessage": {
+            "type": "string"
+        },
+        "validation": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "texthtml": {
+                    "type": "string"
+                }
+            }
+        },
+        "fields": {
+            "anyOf": []
+        },
+        "submitButtonLabel": {
+            "type": "string"
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "id": "/parDataFormBuilder"
+}

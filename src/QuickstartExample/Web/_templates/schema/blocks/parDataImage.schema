@@ -1,0 +1,16 @@
+{
+    "id": "/parDataImage",
+    "type": "object",
+    "properties": {
+        "src": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string"
+        },
+        "_ref": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

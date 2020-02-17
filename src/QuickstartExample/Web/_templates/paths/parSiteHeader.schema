@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/nav": [
+            "/parSiteNav"
+        ],
+        "/signUp": [
+            "/parDataLink"
+        ]
+    }
+}

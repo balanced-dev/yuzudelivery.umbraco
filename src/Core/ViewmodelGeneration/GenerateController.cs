@@ -94,6 +94,10 @@ namespace YuzuDelivery.Umbraco.Core
             {
                 sb.Append(string.Format("Details : {0}", e.InnerException.InnerException.Message));
             }
+            else if (e.InnerException != null)
+            {
+                sb.Append(string.Format("Details : {0}", e.InnerException.Message));
+            }
             sb.Append("\r\n\r\n");
             sb.Append(e.StackTrace);
 

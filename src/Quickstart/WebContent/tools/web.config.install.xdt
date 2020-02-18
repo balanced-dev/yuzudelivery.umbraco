@@ -4,8 +4,10 @@
     <appSettings>
         <!-- ModelsBuilder set to API -->
         <add key="Umbraco.ModelsBuilder.Enable" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/>
-        <add key="Umbraco.ModelsBuilder.EnableApi" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/>
-        <add key="Umbraco.ModelsBuilder.ModelsMode" value="Nothing" xdt:Locator="Match(key)" xdt:Transform="SetAttributes"/>
+        <add key="Umbraco.ModelsBuilder.ModelsMode" value="AppData" xdt:Locator="Match(key)" xdt:Transform="SetAttributes"/>
+        <add key="Umbraco.ModelsBuilder.ModelsNamespace" value="YuzuDelivery.UmbracoModels" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/> 
+        <add key="Umbraco.ModelsBuilder.AcceptUnsafeModelsDirectory" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/> 
+        <add key="Umbraco.ModelsBuilder.ModelsDirectory" value="Must set this value" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/> 
         <!-- Yuzu app settings -->
         
         <add key="YuzuPages" value="/_templates/src/pages" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/>

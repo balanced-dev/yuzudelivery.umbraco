@@ -19,18 +19,6 @@ function RecursiveProjectItem($items)
         else {
             RecursiveProjectItem $i.ProjectItems
         }
-
-        If($fullPath.EndsWith('UmbracoModels\zGeneratedModels.cs')) {
-            Write-Host "Adding Umbraco models builder tool:" "$fullPath"
-            $i.Properties.Item("CustomTool").Value = 'UmbracoModelsBuilder'
-            $i.Properties.Item("CustomToolNamespace").Value = 'YuzuDelivery.UmbracoModels'
-        }
-
-        If($fullPath.EndsWith('ViewModels\zGeneratedModels.cs')) {
-            Write-Host "Adding Yuzu view models builder tool:" "$fullPath"            
-            $i.Properties.Item("CustomTool").Value = 'YuzuViewModelGenerator'
-            $i.Properties.Item("CustomToolNamespace").Value = 'YuzuDelivery.ViewModels'
-        }
     }
 }
 

@@ -21,7 +21,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
             if (gridItem == null)
             {
-                var gridItems = DependencyResolver.Current.GetService<IGridItem[]>();
+                var gridItems = DependencyResolver.Current.GetService<IGridItemInternal[]>();
 
                 return gridItems
                     .Where(x => x.ElementType == publishedElement.GetType())
@@ -44,9 +44,10 @@ namespace YuzuDelivery.Umbraco.Grid
 
             if (gridItem == null)
             {
-                var gridItems = DependencyResolver.Current.GetService<IGridItem[]>();
+                var gridItems = DependencyResolver.Current.GetServices<IGridItemInternal[]>();
 
                 return gridItems
+                    .Cast<IGridItem>()
                     .Where(x => x.ElementType == typeof(R))
                     .Cast<R>()
                     .FirstOrDefault();

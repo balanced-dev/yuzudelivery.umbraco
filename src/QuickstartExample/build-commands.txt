@@ -1,4 +1,4 @@
-nuget pack YuzuDelivery.Umbraco.QuickStart.Example.nuspec -Properties y_umb_version="1.0.0-beta"
+nuget pack YuzuDelivery.Umbraco.QuickStart.Example.nuspec -Properties y_umb_version="1.2.7.24-beta"
 
 copy YuzuDelivery.Umbraco.QuickStart.Example.1.0.0-beta.nupkg c:\nuget\ /Y
 

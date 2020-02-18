@@ -12,7 +12,7 @@ using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Grid
 {
-    public class DefaultGridItem<M, V> : IGridItemInternal
+    public class DefaultGridItem<M, V> : IGridItem, IGridItemInternal
         where M : PublishedElementModel
     {
         private string docTypeAlias;

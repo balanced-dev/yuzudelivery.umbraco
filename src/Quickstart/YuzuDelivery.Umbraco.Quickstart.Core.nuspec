@@ -25,11 +25,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="CoreContent\Startup\MappingComposer.cs.pp" target="Content\Startup\MappingComposer.cs.pp" />
-    <file src="CoreContent\Startup\YuzuComposer.cs.pp" target="Content\Startup\YuzuComposer.cs.pp" />
-    <file src="CoreContent\Startup\YuzuImportComposer.cs.pp" target="Content\Startup\YuzuImportComposer.cs.pp" />
-    <file src="CoreContent\UmbracoModels\zGeneratedModels.cs.pp" target="Content\UmbracoModels\zGeneratedModels.cs.pp"/>
-    <file src="CoreContent\ViewModels\zGeneratedModels.cs.pp" target="Content\ViewModels\zGeneratedModels.cs.pp"/>
+    <file src="StandaloneContent\Yuzu\Startup.cs.pp" target="Content\Yuzu\Startup.cs.pp" />
     <file src="CoreContent\tools\install.ps1" target="tools\install.ps1" />
   </files>
 </package>

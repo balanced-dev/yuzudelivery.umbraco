@@ -24,6 +24,6 @@
   </metadata>
   <files>
     <file src="WebContent\tools\web.config.install.xdt" target="Content\web.config.install.xdt" />
-    <file src="WebContent\tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
+    <file src="StandaloneContent\tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
   </files>
 </package>

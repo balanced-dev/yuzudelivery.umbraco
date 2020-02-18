@@ -7,7 +7,7 @@
         <add key="Umbraco.ModelsBuilder.ModelsMode" value="AppData" xdt:Locator="Match(key)" xdt:Transform="SetAttributes"/>
         <add key="Umbraco.ModelsBuilder.ModelsNamespace" value="YuzuDelivery.UmbracoModels" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/> 
         <add key="Umbraco.ModelsBuilder.AcceptUnsafeModelsDirectory" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/> 
-        <add key="Umbraco.ModelsBuilder.ModelsDirectory" value="Must set this value" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/> 
+        <add key="Umbraco.ModelsBuilder.ModelsDirectory" value="~/../$rootnamespace$.Core/UmbracoModels" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/> 
         <!-- Yuzu app settings -->
         
         <add key="YuzuPages" value="/_templates/src/pages" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/>
@@ -15,6 +15,8 @@
         <add key="YuzuSchemaMeta" value="/_templates/paths" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuData" value="/_templates/data" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuImages" value="/_client/images" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+        <add key="YuzuViewmodelBuilderActive" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+        <add key="YuzuViewmodelBuilderDirectory" value="~/../$rootnamespace$.Core/ViewModels" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuImportActive" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuImportCustomConfig" value="/YuzuConfig.json" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
     </appSettings>

@@ -11,7 +11,6 @@
     <copyright>Copyright 2018-2020 HiFi Ltd</copyright>
     <tags>umbraco cms</tags>
 	<dependencies>
-    <dependency id="Umbraco.ModelsBuilder.Api" version="8.1.0" />
     <dependency id="UmbracoCms" version="$umbraco_version$" />
     <dependency id="UmbracoForms" version="$umbraco_forms_version$" />
     <dependency id="YuzuDelivery.Core" version="$core_version$" />
@@ -23,7 +22,7 @@
 	</dependencies>
   </metadata>
   <files>
-    <file src="WebContent\tools\web.config.install.xdt" target="Content\web.config.install.xdt" />
+    <file src="WebContent\tools\web.config.install.xdt.pp" target="Content\web.config.install.xdt.pp" />
     <file src="StandaloneContent\tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
   </files>
 </package>

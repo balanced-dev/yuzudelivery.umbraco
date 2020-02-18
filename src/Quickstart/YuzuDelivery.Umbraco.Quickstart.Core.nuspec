@@ -28,6 +28,6 @@
     <file src="StandaloneContent\Yuzu\Startup.cs.pp" target="Content\Yuzu\Startup.cs.pp" />
     <file src="CoreContent\tools\install.ps1" target="tools\install.ps1" />
     <file src="CoreContent\UmbracoModels\blank.txt" target="Content\UmbracoModels\blank.txt" />
-    <file src="CoreContent\ViewModels\blank.txt" target="Core\ViewModels\blank.txt" />
+    <file src="CoreContent\ViewModels\blank.txt" target="Content\ViewModels\blank.txt" />
   </files>
 </package>

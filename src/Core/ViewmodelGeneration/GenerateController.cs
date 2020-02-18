@@ -10,6 +10,7 @@ using YuzuDelivery.Core;
 using Umbraco.Web.Mvc;
 using System.Web.Mvc;
 using System.Reflection;
+using AutoMapper;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -19,12 +20,16 @@ namespace YuzuDelivery.Umbraco.Core
         private readonly BuildViewModelsService buildViewModelsSvc;
         private readonly ReferencesService referencesService;
         private readonly IYuzuViewmodelsBuilderConfig builderConfig;
+        private readonly IMapper mapper;
 
         public GenerateController()
         {
             this.referencesService = DependencyResolver.Current.GetService<ReferencesService>();
             this.buildViewModelsSvc = DependencyResolver.Current.GetService<BuildViewModelsService>();
             this.builderConfig = DependencyResolver.Current.GetService<IYuzuViewmodelsBuilderConfig>();
+
+            //must be resolved here so that all profiles are created before viewmodel generation
+            this.mapper = DependencyResolver.Current.GetService<IMapper>();
         }
 
         [System.Web.Http.HttpGet]
@@ -49,6 +54,9 @@ namespace YuzuDelivery.Umbraco.Core
 
             if (!Directory.Exists(generatedFolder))
                 Directory.CreateDirectory(generatedFolder);
+
+            foreach (var file in Directory.GetFiles(generatedFolder, "*.generated.cs"))
+                File.Delete(file);
 
             foreach (var file in genFiles)
             {

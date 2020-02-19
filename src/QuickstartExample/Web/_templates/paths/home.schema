@@ -1,7 +1,7 @@
 {
     "refs": {
-        "/grid": [
-            "/parDataGridRows^parGrid"
+        "/body": [
+            "/dataRows^parRowBuilder"
         ],
         "/header": [
             "/parSiteHeader"

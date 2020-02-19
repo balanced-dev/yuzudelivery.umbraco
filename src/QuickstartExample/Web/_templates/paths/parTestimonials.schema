@@ -6,7 +6,7 @@
     },
     "refs": {
         "/items/image": [
-            "/parDataImage"
+            "/dataImage"
         ]
     }
 }

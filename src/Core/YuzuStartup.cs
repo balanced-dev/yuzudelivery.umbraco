@@ -8,6 +8,7 @@ using Umbraco.Core.Composing;
 using Umbraco.Core.Models.PublishedContent;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.ViewModelBuilder;
+using YuzuDelivery.Umbraco.Import;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -33,6 +34,7 @@ namespace YuzuDelivery.Umbraco.Core
             //MUST be transient lifetime
             composition.Register(typeof(IUpdateableConfig), typeof(CoreUmbracoConfig), Lifetime.Transient);
             composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig), Lifetime.Transient);
+            composition.Register(typeof(IUpdateableImportConfiguration), typeof(CoreImportConfig), Lifetime.Transient);
 
             composition.Register<DefaultUmbracoMappingFactory>();
             composition.RegisterAuto<Profile>();
@@ -113,4 +115,13 @@ namespace YuzuDelivery.Umbraco.Core
         }
     }
 
+    public class CoreImportConfig : UpdateableImportConfiguration
+    {
+        public CoreImportConfig()
+            : base()
+        {
+            IgnoreViewmodels.Add<vmBlock_DataImage>();
+            IgnoreViewmodels.Add<vmBlock_DataLink>();
+        }
+    }
 }

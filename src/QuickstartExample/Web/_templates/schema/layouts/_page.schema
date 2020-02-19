@@ -1,0 +1,15 @@
+{
+    "id": "/page",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "siteHeader": {
+            "$ref": "/parSiteHeader"
+        },
+        "siteFooter": {
+            "$ref": "/parSiteFooter"
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,30 +1,32 @@
 {{!-- If there are validation messages to be displayed --}}
-{{#if validation.textHtml}}
+{{#if validation.message}}
     <div class="text-danger border border-danger rounded py-3 px-3 mb-4">
         {{#if validation.title}}
             <h3 class="h5 mb-2"><span class="icon-close"></span> {{validation.title}}</h3>
         {{/if}}
         <div class="">
-            {{{validation.textHtml}}}
+            {{{validation.message}}}
         </div>
     </div>
 {{/if}}
 
 {{!-- If user has submitted form, display message --}}
-{{#if isSubmitted}}
-    <p class="text-success border border-success rounded h5 py-3 px-3 mb-4"><span class="icon-check"></span> {{{submittedMessage}}}</p>
+{{#if isSuccess}}
+    <p class="text-success border border-success rounded h5 py-3 px-3 mb-4"><span class="icon-check"></span> {{{successMessage}}}</p>
 {{/if}}
 
-{{#each fields}}
-    <div class="form-group">
-        {{{ dynPartial _ref this }}}
-    </div>
+{{#each fieldsets}}
+    {{#each fields}}
+        <div class="form-group">
+            {{{ dynPartial _ref this }}}
+        </div>
+    {{/each}}
 {{/each}}
 
-{{#unless isSubmitted}}
+{{#unless isSuccess}}
 <div class="form-group">
     <button class="btn btn-primary btn-block" type="submit" >
-        {{submitButtonLabel}}
+        {{submitButtonText}}
     </button>
 </div>
 {{/unless}}

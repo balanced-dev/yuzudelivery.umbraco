@@ -37,13 +37,19 @@
             "items": {
                 "properties": {
                     "image": {
-                        "$ref": "/parDataImage"
+                        "$ref": "/dataImage"
                     }
                 }
             }
         },
         "_ref": {
             "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "additionalProperties": false

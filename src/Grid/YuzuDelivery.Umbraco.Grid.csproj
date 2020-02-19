@@ -182,8 +182,11 @@
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.8.1.1\lib\net472\Umbraco.Core.dll</HintPath>
     </Reference>
-    <Reference Include="YuzuDelivery.Core, Version=1.0.34.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Core.1.0.34\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    <Reference Include="YuzuDelivery.Core, Version=1.0.38.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Core.1.0.38\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.72\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -192,8 +195,8 @@
     <Compile Include="DTGE\DtgeGridConverter.cs" />
     <Compile Include="DTGE\GridControlDtgeValue.cs" />
     <Compile Include="GridItems\IGridItemInternal.cs" />
-    <Compile Include="Mapping\DefaultViewModels\vmBlock_DataGridRows.cs" />
-    <Compile Include="Mapping\DefaultViewModels\vmBlock_DataGridRowsColumns.cs" />
+    <Compile Include="Mapping\DefaultViewModels\vmBlock_DataRows.cs" />
+    <Compile Include="Mapping\DefaultViewModels\vmBlock_DataGrid.cs" />
     <Compile Include="Mapping\GridService.cs" />
     <Compile Include="Mapping\IGridService.cs" />
     <Compile Include="Mapping\CreateGridMappingsService.cs" />

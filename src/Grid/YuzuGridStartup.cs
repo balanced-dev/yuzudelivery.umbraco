@@ -9,6 +9,7 @@ using Skybrud.Umbraco.GridData;
 using Skybrud.Umbraco.GridData.Dtge;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.ViewModelBuilder;
+using YuzuDelivery.Umbraco.Import;
 using AutoMapper;
 
 namespace YuzuDelivery.Umbraco.Grid 
@@ -30,6 +31,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
             //MUST be tranient lifetime
             composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(GridVmBuilderConfig), Lifetime.Transient);
+            composition.Register(typeof(IUpdateableImportConfiguration), typeof(GridImportConfig), Lifetime.Transient);
 
             GridContext.Current.Converters.Add(new DtgeGridConverter());
         }
@@ -83,13 +85,23 @@ namespace YuzuDelivery.Umbraco.Grid
         public GridVmBuilderConfig()
             : base()
         {
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataGridRows>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataGridRowsColumns>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsRow>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsColumnsRow>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRowsColumnsColumn>();
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataGrid>();
+            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRow>();
+            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridColumn>();
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataRows>();
+            ExcludeViewmodelsAtGeneration.Add<vmSub_DataRowsRow>();
 
             AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.Grid;");
+        }
+    }
+
+    public class GridImportConfig : UpdateableImportConfiguration
+    {
+        public GridImportConfig()
+            : base()
+        {
+            IgnoreViewmodels.Add<vmBlock_DataRows>();
+            IgnoreViewmodels.Add<vmBlock_DataGrid>();
         }
     }
 }

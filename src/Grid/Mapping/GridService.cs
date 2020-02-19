@@ -23,20 +23,20 @@ namespace YuzuDelivery.Umbraco.Grid
         }
 
 
-        public vmBlock_DataGridRows CreateRows<TConfig>(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataRows CreateRows<TConfig>(GridDataModel grid, ResolutionContext context)
         {
             var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
 
             if (grid != null)
             {
-                return new vmBlock_DataGridRows()
+                return new vmBlock_DataRows()
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(y =>
                     {
                         var rowConfig = y.Config.ToDictionary(y.HasConfig).AddCalculatedRowConfig(y);
                         var area = y.Areas.FirstOrDefault();
 
-                        return new vmSub_DataGridRowsRow()
+                        return new vmSub_DataRowsRow()
                         {
                             Config = mapper.Map<TConfig>(rowConfig),
                             Items = area.Controls.Select(control =>
@@ -45,27 +45,27 @@ namespace YuzuDelivery.Umbraco.Grid
                                 return Content(new GridItemData() { Control = control, ContextItems = context.Items });
                             }).Where(x => x != null).ToList()
                         };
-                    }).ToList() : new List<vmSub_DataGridRowsRow>()
+                    }).ToList() : new List<vmSub_DataRowsRow>()
                 };
             }
             else
                 return null;
         }
 
-        public vmBlock_DataGridRows CreateRows(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataRows CreateRows(GridDataModel grid, ResolutionContext context)
         {
             var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
 
             if (grid != null)
             {
-                return new vmBlock_DataGridRows()
+                return new vmBlock_DataRows()
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(y =>
                     {
                         var rowConfig = y.Config.ToDictionary(y.HasConfig).AddCalculatedRowConfig(y);
                         var area = y.Areas.FirstOrDefault();
 
-                        return new vmSub_DataGridRowsRow()
+                        return new vmSub_DataRowsRow()
                         {
                             Items = area.Controls.Select(control =>
                             {
@@ -73,32 +73,32 @@ namespace YuzuDelivery.Umbraco.Grid
                                 return Content(new GridItemData() { Control = control, ContextItems = context.Items });
                             }).Where(x => x != null).ToList()
                         };
-                    }).ToList() : new List<vmSub_DataGridRowsRow>()
+                    }).ToList() : new List<vmSub_DataRowsRow>()
                 };
             }
             else
                 return null;
         }
 
-        public vmBlock_DataGridRowsColumns CreateRowsColumns<TConfig>(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataGrid CreateRowsColumns<TConfig>(GridDataModel grid, ResolutionContext context)
         {
             var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
 
             if (grid != null)
             {
-                return new vmBlock_DataGridRowsColumns()
+                return new vmBlock_DataGrid()
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(row =>
                     {
                         var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row);
 
-                        return new vmSub_DataGridRowsColumnsRow()
+                        return new vmSub_DataGridRow()
                         {
                             Config = mapper.Map<TConfig>(rowConfig),
                             Columns = row.Areas.Select(area => {
                                 var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area);
 
-                                return new vmSub_DataGridRowsColumnsColumn()
+                                return new vmSub_DataGridColumn()
                                 {
                                     GridSize = area.Grid,
                                     Config = mapper.Map<TConfig>(columnConfig),
@@ -111,32 +111,32 @@ namespace YuzuDelivery.Umbraco.Grid
 
                             }).ToList()
                         };
-                    }).ToList() : new List<vmSub_DataGridRowsColumnsRow>()
+                    }).ToList() : new List<vmSub_DataGridRow>()
                 };
             }
             else
                 return null;
         }
 
-        public vmBlock_DataGridRowsColumns CreateRowsColumns<TConfigRow, TConfigCol>(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataGrid CreateRowsColumns<TConfigRow, TConfigCol>(GridDataModel grid, ResolutionContext context)
         {
             var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
 
             if (grid != null)
             {
-                return new vmBlock_DataGridRowsColumns()
+                return new vmBlock_DataGrid()
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(row =>
                     {
                         var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row);
 
-                        return new vmSub_DataGridRowsColumnsRow()
+                        return new vmSub_DataGridRow()
                         {
                             Config = mapper.Map<TConfigRow>(rowConfig),
                             Columns = row.Areas.Select(area => {
                                 var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area);
 
-                                return new vmSub_DataGridRowsColumnsColumn()
+                                return new vmSub_DataGridColumn()
                                 {
                                     GridSize = area.Grid,
                                     Config = mapper.Map<TConfigCol>(columnConfig),
@@ -149,31 +149,31 @@ namespace YuzuDelivery.Umbraco.Grid
 
                             }).ToList()
                         };
-                    }).ToList() : new List<vmSub_DataGridRowsColumnsRow>()
+                    }).ToList() : new List<vmSub_DataGridRow>()
                 };
             }
             else
                 return null;
         }
 
-        public vmBlock_DataGridRowsColumns CreateRowsColumns(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataGrid CreateRowsColumns(GridDataModel grid, ResolutionContext context)
         {
             var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
 
             if (grid != null)
             {
-                return new vmBlock_DataGridRowsColumns()
+                return new vmBlock_DataGrid()
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(row =>
                     {
                         var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row);
 
-                        return new vmSub_DataGridRowsColumnsRow()
+                        return new vmSub_DataGridRow()
                         {
                             Columns = row.Areas.Select(area => {
                                 var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area);
 
-                                return new vmSub_DataGridRowsColumnsColumn()
+                                return new vmSub_DataGridColumn()
                                 {
                                     GridSize = area.Grid,
                                     Items = area.Controls.Select(control =>
@@ -185,7 +185,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
                             }).ToList()
                         };
-                    }).ToList() : new List<vmSub_DataGridRowsColumnsRow>()
+                    }).ToList() : new List<vmSub_DataGridRow>()
                 };
             }
             else

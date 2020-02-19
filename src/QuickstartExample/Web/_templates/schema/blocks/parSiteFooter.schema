@@ -20,11 +20,7 @@
                     "navLinks": {
                         "type": "array",
                         "items": {
-                            "properties": {
-                                "link": {
-                                    "$ref": "/parDataLink"
-                                }
-                            }
+                            "$ref": "/dataLink"
                         }
                     }
                 }
@@ -33,15 +29,17 @@
         "socialLinks": {
             "type": "array",
             "items": {
-                "properties": {
-                    "link": {
-                        "$ref": "/parDataLink"
-                    }
-                }
+                "$ref": "/dataLink"
             }
         },
         "_ref": {
             "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "additionalProperties": false

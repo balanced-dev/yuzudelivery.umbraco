@@ -1,0 +1,16 @@
+{
+    "parFormBuilder": {
+        "refs": {
+            "/fieldsets/fields": [
+                "/parFormTextInput",
+                "/parFormTextArea"
+            ],
+            "/actionLinks": [
+                "/dataLink"
+            ]
+        }
+    },
+    "anyOfTypes": [
+        "parFormBuilder"
+    ]
+}

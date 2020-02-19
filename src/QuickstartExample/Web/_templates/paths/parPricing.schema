@@ -1,7 +1,7 @@
 {
     "refs": {
         "/items/link": [
-            "/parDataLink"
+            "/dataLink"
         ]
     }
 }

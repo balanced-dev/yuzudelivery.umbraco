@@ -1,7 +1,0 @@
-{
-    "refs": {
-        "/testForm": [
-            "/parDataFormBuilder"
-        ]
-    }
-}

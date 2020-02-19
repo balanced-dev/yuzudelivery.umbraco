@@ -1,0 +1,22 @@
+{
+    "id": "/dataImage",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "src": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string"
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

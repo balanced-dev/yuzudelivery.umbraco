@@ -186,11 +186,11 @@
     <Reference Include="Umbraco.Licensing, Version=2.0.33.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoForms.Core.8.1.1\lib\net472\Umbraco.Licensing.dll</HintPath>
     </Reference>
-    <Reference Include="YuzuDelivery.Core, Version=1.0.34.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Core.1.0.34\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    <Reference Include="YuzuDelivery.Core, Version=1.0.38.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Core.1.0.38\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.66\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.72\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

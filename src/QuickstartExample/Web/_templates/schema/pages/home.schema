@@ -4,9 +4,9 @@
     "description": "",
     "type": "object",
     "properties": {
-        "grid": {
-            "$ref": "/parDataGridRows",
-            "anyOfType": "parGrid"
+        "body": {
+            "$ref": "/dataRows",
+            "anyOfType": "parRowBuilder"
         },
         "header": {
             "$ref": "/parSiteHeader"

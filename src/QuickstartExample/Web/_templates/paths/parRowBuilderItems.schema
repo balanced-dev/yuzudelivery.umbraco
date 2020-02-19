@@ -1,0 +1,13 @@
+{
+    "refs": {
+        "": [
+            "/parCta",
+            "/parFeature",
+            "/parPageHero",
+            "/parPricing",
+            "/parServices",
+            "/parTestimonials",
+            "/parFaq"
+        ]
+    }
+}

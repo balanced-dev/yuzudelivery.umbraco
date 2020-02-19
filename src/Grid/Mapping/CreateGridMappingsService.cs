@@ -11,13 +11,13 @@ namespace YuzuDelivery.Umbraco.Grid
 {
     public static class GridMappingsService
     {
-        public static void AddGridWithRows<TSource, TDest>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRows>> destMember)
+        public static void AddGridWithRows<TSource, TDest>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataRows>> destMember)
         {
             profile.CreateMap<TSource, TDest>()
                 .ForMember(destMember, opt => opt.MapFrom<GridRowConvertor<TSource, TDest>, GridDataModel>(sourceMember));
         }
 
-        public static void AddGridWithRows<TSource, TDest, TConfig>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRows>> destMember)
+        public static void AddGridWithRows<TSource, TDest, TConfig>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataRows>> destMember)
         {
             profile.CreateMap<TSource, TDest>()
                 .ForMember(destMember, opt => opt.MapFrom<GridRowConvertor<TSource, TDest, TConfig>, GridDataModel>(sourceMember));
@@ -25,13 +25,13 @@ namespace YuzuDelivery.Umbraco.Grid
             AddConfig<TConfig>(profile);
         }
 
-        public static void AddGridWithRowsColumns<TSource, TDest>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRowsColumns>> destMember)
+        public static void AddGridRowsWithColumns<TSource, TDest>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember)
         {
             profile.CreateMap<TSource, TDest>()
                 .ForMember(destMember, opt => opt.MapFrom<GridRowColumnConvertor<TSource, TDest>, GridDataModel>(sourceMember));
         }
 
-        public static void AddGridWithRowsColumns<TSource, TDest, TConfig>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRowsColumns>> destMember)
+        public static void AddGridRowsWithColumns<TSource, TDest, TConfig>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember)
         {
             profile.CreateMap<TSource, TDest>()
                 .ForMember(destMember, opt => opt.MapFrom<GridRowColumnConvertor<TSource, TDest, TConfig>, GridDataModel>(sourceMember));
@@ -39,7 +39,7 @@ namespace YuzuDelivery.Umbraco.Grid
             AddConfig<TConfig>(profile);
         }
 
-        public static void AddGridRowsWithColumns<TSource, TDest, TConfigRow, TConfigCol>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGridRowsColumns>> destMember)
+        public static void AddGridRowsWithColumns<TSource, TDest, TConfigRow, TConfigCol>(this Profile profile, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember)
         {
             profile.CreateMap<TSource, TDest>()
                 .ForMember(destMember, opt => opt.MapFrom<GridRowColumnConvertor<TSource, TDest, TConfigRow, TConfigCol>, GridDataModel>(sourceMember));

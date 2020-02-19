@@ -1,7 +1,7 @@
 {
     "refs": {
         "/expItems/image": [
-            "/parDataImage"
+            "/dataImage"
         ]
     }
 }

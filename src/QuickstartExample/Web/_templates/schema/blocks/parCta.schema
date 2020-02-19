@@ -11,14 +11,20 @@
             "type": "string"
         },
         "form": {
-            "$ref": "/parDataForm",
+            "$ref": "/dataForm",
             "anyOfType": "parFormBuilder"
         },
         "backgroundImage": {
-            "$ref": "/parDataImage"
+            "$ref": "/dataImage"
         },
         "_ref": {
             "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "additionalProperties": false

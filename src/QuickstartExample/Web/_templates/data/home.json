@@ -1,5 +1,5 @@
 {
-    "grid": {
+    "body": {
         "rows": [
             {
                 "items": [
@@ -13,7 +13,7 @@
                             "src": "/_client/img/parallex.jpg"
                         },
                         "_ref": "/parPageHero",
-                        "yuzu-path": "/grid/rows[0]/items[0]"
+                        "yuzu-path": "/body/rows[0]/items[0]"
                     }
                 ]
             },
@@ -50,8 +50,8 @@
                                 "icon": "heart"
                             },
                             {
-                                "title": "Money-back gaurantee",
-                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.",
+                                "title": "Money back guarantee",
+                                "text": "Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis",
                                 "icon": "rotate-ccw"
                             }
                         ],
@@ -89,7 +89,7 @@
                             }
                         ],
                         "_ref": "/parServices",
-                        "yuzu-path": "/grid/rows[1]/items[0]"
+                        "yuzu-path": "/body/rows[1]/items[0]"
                     }
                 ]
             },
@@ -150,7 +150,7 @@
                             }
                         ],
                         "_ref": "/parFeature",
-                        "yuzu-path": "/grid/rows[2]/items[0]"
+                        "yuzu-path": "/body/rows[2]/items[0]"
                     }
                 ]
             },
@@ -189,7 +189,7 @@
                             }
                         ],
                         "_ref": "/parTestimonials",
-                        "yuzu-path": "/grid/rows[3]/items[0]"
+                        "yuzu-path": "/body/rows[3]/items[0]"
                     }
                 ]
             },
@@ -262,7 +262,106 @@
                             }
                         ],
                         "_ref": "/parPricing",
-                        "yuzu-path": "/grid/rows[4]/items[0]"
+                        "yuzu-path": "/body/rows[4]/items[0]"
+                    }
+                ]
+            },
+            {
+                "items": [
+                    {
+                        "title": "ANSWERS TO COMMON QUESTIONS",
+                        "subtitle": "Frequently asked questions",
+                        "items": [
+                            {
+                                "title": "Lorem ipsum dolor sit amet?",
+                                "text": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo."
+                            },
+                            {
+                                "title": "Lorem sit andigen daepeditem amet?",
+                                "text": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo."
+                            },
+                            {
+                                "title": "Lorem ipsum dolor sit andigen daepeditem amet?",
+                                "text": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo."
+                            },
+                            {
+                                "title": "Lorem sit andigen daepeditem amet dem tumquam explabo?",
+                                "text": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo."
+                            },
+                            {
+                                "title": "Lorem sit andigen daepeditem amet?",
+                                "text": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo."
+                            },
+                            {
+                                "title": "Lorem sit daepeditem amet?",
+                                "text": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo."
+                            }
+                        ],
+                        "moreTitle": "Still have more questions?",
+                        "moreText": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore.",
+                        "moreLink": {
+                            "label": "Get in touch"
+                        },
+                        "_ref": "/parFaq",
+                        "yuzu-path": "/body/rows[5]/items[0]"
+                    }
+                ]
+            },
+            {
+                "items": [
+                    {
+                        "title": "Grow your business with Lambda",
+                        "text": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo.",
+                        "backgroundImage": {
+                            "src": "/_client/img/parallex.jpg"
+                        },
+                        "form": {
+                            "testForm": {
+                                "isSuccess": false,
+                                "successMessage": "Your submitted message here",
+                                "validation": {
+                                    "title": "Form Builder Validation",
+                                    "message": ""
+                                },
+                                "fieldsets": [
+                                    {
+                                        "fields": [
+                                            {
+                                                "placeholder": "Full name",
+                                                "_ref": "/parFormTextInput"
+                                            },
+                                            {
+                                                "placeholder": "Website",
+                                                "_ref": "/parFormTextInput"
+                                            },
+                                            {
+                                                "type": "email",
+                                                "placeholder": "Email address",
+                                                "_ref": "/parFormTextInput"
+                                            },
+                                            {
+                                                "name": "message",
+                                                "label": "Message",
+                                                "value": "",
+                                                "id": "",
+                                                "placeholder": "Write your message here",
+                                                "isRequired": true,
+                                                "isDisabled": false,
+                                                "isReadonly": false,
+                                                "_ref": "/parFormTextArea",
+                                                "yuzu-path": "/body/rows[6]/items[0]/form/testForm/fieldsets[0]/fields[3]"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "submitButtonText": "Create your account",
+                                "_ref": "/parFormBuilder"
+                            },
+                            "_ref": "/parForm",
+                            "yuzu-path": "/body/rows[6]/items[0]/form"
+                        },
+                        "_ref": "/parCta",
+                        "yuzu-path": "/body/rows[6]/items[0]"
                     }
                 ]
             }

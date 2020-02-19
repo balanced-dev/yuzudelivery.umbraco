@@ -33,7 +33,7 @@
                         }
                     },
                     "link": {
-                        "$ref": "/parDataLink"
+                        "$ref": "/dataLink"
                     },
                     "primary": {
                         "type": "boolean"
@@ -59,6 +59,12 @@
         },
         "_ref": {
             "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "additionalProperties": false

@@ -1,0 +1,66 @@
+{
+    "id": "/dataFormBuilder",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "additionalProperties": false,
+    "anyOfTypes": [
+        "parFormBuilder"
+    ],
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "isSuccess": {
+            "type": "boolean"
+        },
+        "successMessage": {
+            "type": "string"
+        },
+        "validation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "fieldsets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "legend": {
+                        "type": "string"
+                    },
+                    "fields": {
+                        "anyOf": []
+                    }
+                }
+            }
+        },
+        "submitButtonText": {
+            "type": "string"
+        },
+        "actionLinks": {
+            "type": "array",
+            "items": {
+                "$ref": "/dataLink"
+            }
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

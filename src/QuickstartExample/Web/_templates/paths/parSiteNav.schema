@@ -1,7 +1,7 @@
 {
     "refs": {
         "/navLinks": [
-            "/parDataLink"
+            "/dataLink"
         ]
     }
 }

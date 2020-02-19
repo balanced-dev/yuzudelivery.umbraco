@@ -11,10 +11,16 @@
             "$ref": "/parSiteNav"
         },
         "signUp": {
-            "$ref": "/parDataLink"
+            "$ref": "/dataLink"
         },
         "_ref": {
             "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "additionalProperties": false

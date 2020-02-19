@@ -10,7 +10,7 @@
                             "label": "Get started now"
                         },
                         "backgroundImage": {
-                            "src": "/_client/img/parallex.jpg"
+                            "src": "/_client/images/parallex.jpg"
                         },
                         "_ref": "/parPageHero",
                         "yuzu-path": "/body/rows[0]/items[0]"
@@ -59,32 +59,32 @@
                         "expItems": [
                             {
                                 "image": {
-                                    "src": "/_client/img/press/press-1.png"
+                                    "src": "/_client/images/press/press-1.png"
                                 }
                             },
                             {
                                 "image": {
-                                    "src": "/_client/img/press/press-2.png"
+                                    "src": "/_client/images/press/press-2.png"
                                 }
                             },
                             {
                                 "image": {
-                                    "src": "/_client/img/press/press-3.png"
+                                    "src": "/_client/images/press/press-3.png"
                                 }
                             },
                             {
                                 "image": {
-                                    "src": "/_client/img/press/press-4.png"
+                                    "src": "/_client/images/press/press-4.png"
                                 }
                             },
                             {
                                 "image": {
-                                    "src": "/_client/img/press/press-5.png"
+                                    "src": "/_client/images/press/press-5.png"
                                 }
                             },
                             {
                                 "image": {
-                                    "src": "/_client/img/press/press-6.png"
+                                    "src": "/_client/images/press/press-6.png"
                                 }
                             }
                         ],
@@ -110,7 +110,7 @@
                                     "label": "See our partners"
                                 },
                                 "image": {
-                                    "src": "/_client/img/feature1.png"
+                                    "src": "/_client/images/feature1.png"
                                 },
                                 "isRightAligned": false
                             },
@@ -127,7 +127,7 @@
                                     "label": "Sign up now"
                                 },
                                 "image": {
-                                    "src": "/_client/img/feature2.png"
+                                    "src": "/_client/images/feature2.png"
                                 },
                                 "isRightAligned": true
                             },
@@ -144,7 +144,7 @@
                                     "label": "Contact Us"
                                 },
                                 "image": {
-                                    "src": "/_client/img/feature3.png"
+                                    "src": "/_client/images/feature3.png"
                                 },
                                 "isRightAligned": false
                             }
@@ -162,7 +162,7 @@
                         "items": [
                             {
                                 "image": {
-                                    "src": "/_client/img/client-1.jpg"
+                                    "src": "/_client/images/client-1.jpg"
                                 },
                                 "quote": "Praesent vulputate dolor velit, in condimentum odio pellentesin condimentum odio pellentesque libero.",
                                 "name": "Ryan Siddle",
@@ -171,7 +171,7 @@
                             },
                             {
                                 "image": {
-                                    "src": "/_client/img/client-2.jpg"
+                                    "src": "/_client/images/client-2.jpg"
                                 },
                                 "quote": "Praesent vulputate dolor velit, in condimentum odio pellentesin condimentum odio pellentesque libero.",
                                 "name": "Ameli Mao",
@@ -180,7 +180,7 @@
                             },
                             {
                                 "image": {
-                                    "src": "/_client/img/client-3.jpg"
+                                    "src": "/_client/images/client-3.jpg"
                                 },
                                 "quote": "Praesent vulputate dolor velit, in condimentum odio pellentesin condimentum odio pellentesque libero.",
                                 "name": "Kathrine Jones",
@@ -313,7 +313,7 @@
                         "title": "Grow your business with Lambda",
                         "text": "Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo.",
                         "backgroundImage": {
-                            "src": "/_client/img/parallex.jpg"
+                            "src": "/_client/images/parallex.jpg"
                         },
                         "form": {
                             "testForm": {

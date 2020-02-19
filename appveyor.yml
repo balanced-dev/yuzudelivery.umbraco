@@ -1,4 +1,4 @@
-version: 1.2.7.{build}
+version: 1.2.8.{build}
 environment:
   core_version: 1.0.38
   import_version: 1.0.72
@@ -49,6 +49,9 @@ on_finish:
 
     appveyor PushArtifact YuzuDelivery.Umbraco.Quickstart.%APPVEYOR_BUILD_VERSION%-beta.nupkg
 
+    nuget pack src/QuickstartExample/YuzuDelivery.Umbraco.Quickstart.Example.nuspec -Version %APPVEYOR_BUILD_VERSION%-beta -Properties y_umb_version="%APPVEYOR_BUILD_VERSION%"
+
+    appveyor PushArtifact YuzuDelivery.Umbraco.Quickstart.%APPVEYOR_BUILD_VERSION%-beta.nupkg
 for:
 
 -
@@ -56,11 +59,11 @@ for:
     only:
       - master
 
-  version: 1.2.7
+  version: 1.2.8
 
 -
   branches:
     only:
       - dev
 
-  version: 1.2.7.{build}
+  version: 1.2.8.{build}

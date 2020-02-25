@@ -28,8 +28,9 @@ namespace YuzuDelivery.Umbraco.Grid
             composition.Register(typeof(GridRowConvertor<,,>));
             composition.Register(typeof(GridRowColumnConvertor<,,>));
             composition.Register(typeof(GridRowColumnConvertor<,,,>));
+            composition.Register(typeof(GridConfigConverter<>));
 
-            //MUST be tranient lifetime
+            //MUST be transient lifetime
             composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(GridVmBuilderConfig), Lifetime.Transient);
             composition.Register(typeof(IUpdateableImportConfiguration), typeof(GridImportConfig), Lifetime.Transient);
 

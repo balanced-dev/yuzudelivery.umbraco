@@ -1,4 +1,4 @@
-version: 1.2.10.{build}
+version: 1.2.11.{build}
 environment:
   core_version: 1.0.38
   import_version: 1.0.75
@@ -59,11 +59,11 @@ for:
     only:
       - master
 
-  version: 1.2.10
+  version: 1.2.11
 
 -
   branches:
     only:
       - dev
 
-  version: 1.2.10.{build}
+  version: 1.2.11.{build}

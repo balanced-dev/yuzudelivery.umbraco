@@ -15,6 +15,7 @@
   </metadata>
   <files>
      <file src="bin\Release\YuzuDelivery.Umbraco.Forms.dll" target="lib\net472" />
-     <file src="Web\UI\Views\Partials\Forms\YuzuForms.cshtml" target="Content\Views\Partials\Forms\YuzuForms.cshtml" />
+     <file src="Web\UI\Views\Partials\Forms\YuzuUmbracoForms.cshtml" target="Content\Views\Partials\Forms\YuzuUmbracoForms.cshtml" />
+     <file src="Web\UI\Views\Partials\YuzuForms.cshtml" target="Content\Views\Partials\YuzuForms.cshtml" />
   </files>
 </package>

@@ -56,7 +56,7 @@ namespace YuzuDelivery.Umbraco.Members
             else
                 Response.Redirect(config.HomeUrl);
 
-            return PartialView("login", model);
+            return PartialView("YuzuForms", model);
         }
 
         public ActionResult ForgottenPassword()
@@ -104,7 +104,7 @@ namespace YuzuDelivery.Umbraco.Members
             else
                 Response.Redirect(config.HomeUrl);
 
-            return PartialView("ForgottenPassword", model);
+            return PartialView("YuzuForms", model);
         }
 
         public ActionResult Register()
@@ -154,7 +154,7 @@ namespace YuzuDelivery.Umbraco.Members
             else
                 Response.Redirect(config.HomeUrl);
 
-            return PartialView("Register", model);
+            return PartialView("YuzuForms", model);
         }
 
         public ActionResult ChangeMember()
@@ -203,7 +203,7 @@ namespace YuzuDelivery.Umbraco.Members
             else
                 Response.Redirect(config.HomeUrl);
 
-            return PartialView("ChangeMember", model);
+            return PartialView("YuzuForms", model);
         }
 
         public ActionResult ChangePassword()
@@ -273,7 +273,7 @@ namespace YuzuDelivery.Umbraco.Members
             else
                 Response.Redirect(config.HomeUrl);
 
-            return PartialView("ChangePassword", model);
+            return PartialView("YuzuForms", model);
         }
 
     }

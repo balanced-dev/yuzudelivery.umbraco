@@ -313,7 +313,8 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Web\UI\Views\Partials\Forms\YuzuForms.cshtml" />
+    <None Include="Web\UI\Views\Partials\Forms\YuzuUmbracoForms.cshtml" />
+    <None Include="Web\UI\Views\Partials\YuzuForms.cshtml" />
     <None Include="YuzuDelivery.Umbraco.Forms.nuspec">
       <SubType>Designer</SubType>
     </None>

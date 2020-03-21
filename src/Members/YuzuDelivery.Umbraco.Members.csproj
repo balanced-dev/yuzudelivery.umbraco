@@ -270,12 +270,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Web\UI\Views\Partials\ChangeMember.cshtml" />
-    <None Include="Web\UI\Views\Partials\ChangePassword.cshtml" />
-    <None Include="Web\UI\Views\Partials\ForgottenPassword.cshtml" />
-    <None Include="Web\UI\Views\Partials\Login.cshtml" />
     <None Include="Web\UI\Views\Partials\Logout.cshtml" />
-    <None Include="Web\UI\Views\Partials\Register.cshtml" />
     <None Include="YuzuDelivery.Umbraco.Members.nuspec" />
   </ItemGroup>
   <ItemGroup>

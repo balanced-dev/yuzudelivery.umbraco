@@ -15,7 +15,6 @@
       <dependency id="UmbracoCms.Core" version="$umbraco_version$" />
       <dependency id="UmbracoCms.Web" version="$umbraco_version$" />
       <dependency id="UmbracoForms.Core" version="$umbraco_forms_version$" />
-      <dependency id="Umbraco.ModelsBuilder" version="8.1.0" />
       <dependency id="YuzuDelivery.Core" version="$core_version$" />
       <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
       <dependency id="YuzuDelivery.Umbraco.Forms" version="$y_umb_version$" />

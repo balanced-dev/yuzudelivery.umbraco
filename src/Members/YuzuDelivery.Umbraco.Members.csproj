@@ -259,7 +259,8 @@
   <ItemGroup>
     <Compile Include="Config\IYuzuDeliveryMembersConfiguration.cs" />
     <Compile Include="Config\YuzuDeliveryMembersConfiguration.cs" />
-    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\MemberFormController.cs" />
+    <Compile Include="Controllers\MemberHandlerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\ChangeMemberVm.cs" />
     <Compile Include="Dto\ChangePasswordVm.cs" />

@@ -7,7 +7,7 @@ using Umbraco.Core.Models;
 
 namespace YuzuDelivery.Umbraco.Members
 {
-    public class YuzuDeliveryMembersConfiguration : IYuzuDeliveryMembersConfiguration
+    public class YuzuDeliveryMembersConfiguration : IYuzuDeliveryMembersConfig
     {
         public YuzuDeliveryMembersConfiguration()
         {
@@ -23,6 +23,7 @@ namespace YuzuDelivery.Umbraco.Members
         }
 
         public string HomeUrl { get; set; }
+        public string MembersHomeUrl { get; set; }
         public string ForgottenPasswordUrl { get; set; }
         public string LoginUrl { get; set; }
         public string RegisterUrl { get; set; }

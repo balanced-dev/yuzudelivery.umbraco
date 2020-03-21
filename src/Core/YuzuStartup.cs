@@ -42,6 +42,7 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register<LinkIPublishedContentConvertor>();
             composition.Register<LinkConvertor>();
             composition.Register<ImageConvertor>();
+            composition.Register<DefaultItemConvertor>();
 
             AddDefaultItems(composition);
             SetupHbsHelpers();

@@ -14,7 +14,7 @@ namespace $rootnamespace$
 {
     public class LocalMapping : YuzuMappingConfig
     {
-        public UmbLeedsYuzuMapping(IYuzuDeliveryImportConfiguration config)
+        public LocalMapping(IYuzuDeliveryImportConfiguration config)
         {
             //write your manual maps and global ignores here
         }

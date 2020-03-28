@@ -2,10 +2,11 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using AutoMapper;
 using Skybrud.Umbraco.GridData;
 using Skybrud.Umbraco.GridData.Dtge;
 using Newtonsoft.Json;
+using YuzuDelivery.Core;
+using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Grid
 {
@@ -23,10 +24,8 @@ namespace YuzuDelivery.Umbraco.Grid
         }
 
 
-        public vmBlock_DataRows CreateRows<TConfig>(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataRows CreateRows<TConfig>(GridDataModel grid, UmbracoMappingContext context)
         {
-            var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
-
             if (grid != null)
             {
                 return new vmBlock_DataRows()
@@ -52,10 +51,8 @@ namespace YuzuDelivery.Umbraco.Grid
                 return null;
         }
 
-        public vmBlock_DataRows CreateRows(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataRows CreateRows(GridDataModel grid, UmbracoMappingContext context)
         {
-            var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
-
             if (grid != null)
             {
                 return new vmBlock_DataRows()
@@ -80,10 +77,8 @@ namespace YuzuDelivery.Umbraco.Grid
                 return null;
         }
 
-        public vmBlock_DataGrid CreateRowsColumns<TConfig>(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataGrid CreateRowsColumns<TConfig>(GridDataModel grid, UmbracoMappingContext context)
         {
-            var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
-
             if (grid != null)
             {
                 return new vmBlock_DataGrid()
@@ -118,10 +113,8 @@ namespace YuzuDelivery.Umbraco.Grid
                 return null;
         }
 
-        public vmBlock_DataGrid CreateRowsColumns<TConfigRow, TConfigCol>(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataGrid CreateRowsColumns<TConfigRow, TConfigCol>(GridDataModel grid, UmbracoMappingContext context)
         {
-            var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
-
             if (grid != null)
             {
                 return new vmBlock_DataGrid()
@@ -156,10 +149,8 @@ namespace YuzuDelivery.Umbraco.Grid
                 return null;
         }
 
-        public vmBlock_DataGrid CreateRowsColumns(GridDataModel grid, ResolutionContext context)
+        public vmBlock_DataGrid CreateRowsColumns(GridDataModel grid,UmbracoMappingContext context)
         {
-            var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
-
             if (grid != null)
             {
                 return new vmBlock_DataGrid()

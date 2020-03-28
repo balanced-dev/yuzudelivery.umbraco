@@ -6,7 +6,7 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public interface IDefaultItem
     {
-        object Apply(IPublishedElement element, IDictionary<string, object> contextItems);
+        object Apply(IPublishedElement element, UmbracoMappingContext context);
         bool IsValid(IPublishedElement element);
     }
 }

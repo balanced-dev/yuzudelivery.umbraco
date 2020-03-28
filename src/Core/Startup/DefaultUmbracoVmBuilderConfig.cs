@@ -29,8 +29,6 @@ namespace YuzuDelivery.Umbraco.Core
                 GeneratedViewmodelsOutputFolder = Server.MapPath("/App_Data/ViewModels");
             else
                 GeneratedViewmodelsOutputFolder = GetModelsDirectory(root, GeneratedViewmodelsOutputFolder, acceptUnsafe);
-
-            AddNamespacesAtGeneration.Add("using YuzuDelivery.UmbracoModels;");
         }
 
         private string GetModelsDirectory(string root, string config, bool acceptUnsafe)

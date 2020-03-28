@@ -5,9 +5,9 @@ using System.Text;
 using Skybrud.Umbraco.GridData;
 using Skybrud.Umbraco.GridData.Dtge;
 using Umbraco.Core.Models.PublishedContent;
-using AutoMapper;
 using System.Dynamic;
 using System.Web.Mvc;
+using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Grid
@@ -50,7 +50,7 @@ namespace YuzuDelivery.Umbraco.Grid
         {
             var item = model.ToElement<M>();
 
-            var output = mapper.Map<V>(item, opts => AddItemContext(opts.Items, contextItems));
+            var output = mapper.Map<V>(item, contextItems);
 
             if (config != null && typeof(V).GetProperty("Config") != null)
                 typeof(V).GetProperty("Config").SetValue(output, config);

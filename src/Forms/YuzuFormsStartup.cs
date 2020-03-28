@@ -21,12 +21,14 @@ namespace YuzuDelivery.Umbraco.Forms
 
             composition.Register<FormBuilderTypeConverter>();
             composition.Register<FormTypeConvertor>();
-            composition.Register(typeof(FormMemberValueResolver<,>));
+            composition.Register(typeof(FormValueResolver<,>));
 
             //MUST be transient lifetimes
             composition.Register(typeof(IUpdateableConfig), typeof(FormUmbracoConfig), Lifetime.Transient);
             composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(FormVmBuilderConfig), Lifetime.Transient);
             composition.Register(typeof(IUpdateableImportConfiguration), typeof(FormImportConfig), Lifetime.Transient);
+
+            composition.Register<YuzuMappingConfig, FormMappingConfig>();
         }
     }
 

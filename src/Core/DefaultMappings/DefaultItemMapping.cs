@@ -2,27 +2,22 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using AutoMapper;
 using Umbraco.Core.Models.PublishedContent;
+using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
 
-    public class DefaultItemMappings : Profile
+    public class DefaultItemMappings : YuzuMappingConfig
     {
         public DefaultItemMappings()
         {
-
-            CreateMap<IEnumerable<IPublishedElement>, object>()
-                .ConvertUsing<DefaultItemConvertor>();
-
-            CreateMap<IEnumerable<IPublishedElement>, IEnumerable<object>>()
-                .ConvertUsing<DefaultItemsConvertor>();
-
+            ManualMaps.AddType<DefaultItemsConvertor>(false);
+            ManualMaps.AddType<DefaultItemConvertor>(false);
         }
     }
 
-    public class DefaultItemsConvertor : ITypeConverter<IEnumerable<IPublishedElement>, IEnumerable<object>>
+    public class DefaultItemsConvertor : IYuzuTypeConvertor<IEnumerable<IPublishedElement>, IEnumerable<object>>
     {
         private readonly IMapper mapper;
         private readonly IDefaultItem[] defaultItems;
@@ -33,19 +28,18 @@ namespace YuzuDelivery.Umbraco.Core
             this.defaultItems = defaultItems;
         }
 
-        public IEnumerable<object> Convert(IEnumerable<IPublishedElement> elements, IEnumerable<object> destination, ResolutionContext context)
+        public IEnumerable<object> Convert(IEnumerable<IPublishedElement> elements, UmbracoMappingContext context)
         {
             var output = new List<object>();
 
             if (elements.Any())
             {
                 var element = elements.FirstOrDefault();
-                var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
 
                 foreach (var i in defaultItems)
                 {
                     if (i.IsValid(element))
-                        output.Add(i.Apply(element, context.Items));
+                        output.Add(i.Apply(element, context));
                 }
             }
 
@@ -53,7 +47,7 @@ namespace YuzuDelivery.Umbraco.Core
         }
     }
 
-    public class DefaultItemConvertor : ITypeConverter<IEnumerable<IPublishedElement>, object>
+    public class DefaultItemConvertor : IYuzuTypeConvertor<IEnumerable<IPublishedElement>, object>
     {
         private readonly IMapper mapper;
         private readonly IDefaultItem[] defaultItems;
@@ -64,17 +58,16 @@ namespace YuzuDelivery.Umbraco.Core
             this.defaultItems = defaultItems;
         }
 
-        public object Convert(IEnumerable<IPublishedElement> elements, object destination, ResolutionContext context)
+        public object Convert(IEnumerable<IPublishedElement> elements, UmbracoMappingContext context)
         {
             if (elements.Any())
             {
                 var element = elements.FirstOrDefault();
-                var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
 
                 foreach (var i in defaultItems)
                 {
                     if (i.IsValid(element))
-                        return i.Apply(element, context.Items);
+                        return i.Apply(element, context);
                 }
                 return null;
             }

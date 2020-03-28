@@ -261,11 +261,11 @@
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Web.8.1.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="YuzuDelivery.Core, Version=1.0.38.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Core.1.0.38\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    <Reference Include="YuzuDelivery.Core, Version=1.0.40.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Core.1.0.40\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.72\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.76\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -299,7 +299,7 @@
     <Compile Include="FormElements\FieldTypes\parLongAnswerFieldMapping.cs" />
     <Compile Include="FormElements\FieldTypes\parPasswordFieldMapping.cs" />
     <Compile Include="FormElements\FieldTypes\parShortAnswerFieldMapping.cs" />
-    <Compile Include="Mapping\FormProfile.cs" />
+    <Compile Include="Mapping\FormMappingConfig.cs" />
     <Compile Include="Mapping\FormHelpers.cs" />
     <Compile Include="Mapping\FormTypeConvertor.cs" />
     <Compile Include="Mapping\FormValueResolver.cs" />

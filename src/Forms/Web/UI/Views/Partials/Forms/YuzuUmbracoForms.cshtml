@@ -1,12 +1,9 @@
 ﻿@using Umbraco.Web
 @using YuzuDelivery.Umbraco.Forms;
-
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<Umbraco.Forms.Web.Models.FormViewModel>
-
-@{ 
+@{
     var formTemplate = this.ViewContext.RouteData.Values["template"].ToString();
 }
-
 @if (Model.SubmitHandled)
 {
     Func<object> form = () =>
@@ -20,7 +17,7 @@
 
     using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "data-app", "Forms" }, { "novalidate", "novalidate" } }))
     {
-        @Html.RenderFETemplate(new RenderSettings() { Template = formTemplate, Data = form, ShowJson = false })
+        @Html.RenderYuzu(new RenderSettings() { Template = formTemplate, Data = form, ShowJson = false })
     }
 }
 else
@@ -38,8 +35,10 @@ else
 
     Func<object> form = () =>
     {
-        var mapper = DependencyResolver.Current.GetService<AutoMapper.IMapper>();
-        var output = mapper.Map<vmBlock_DataFormBuilder>(Model, opt => { opt.Items.Add("HtmlHelper", Html); });
+        var mapper = DependencyResolver.Current.GetService<IMapper>();
+        var items = new Dictionary<string, object>();
+        items.Add("HtmlHelper", Html);
+        var output = mapper.Map<vmBlock_DataFormBuilder>(Model, items);
         output.IsSuccess = false;
         output.SubmitButtonText = Model.SubmitCaption;
         output.Validation = validation;
@@ -50,7 +49,7 @@ else
 
     using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
     {
-        @Html.RenderFETemplate(new RenderSettings() { Template = formTemplate, Data = form, ShowJson = false })
+        @Html.RenderYuzu(new RenderSettings() { Template = formTemplate, Data = form, ShowJson = false })
 
         @Html.AntiForgeryToken()
 

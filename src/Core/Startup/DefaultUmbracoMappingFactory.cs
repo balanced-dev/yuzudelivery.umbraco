@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Umbraco.Core.Composing;
 using YuzuDelivery.Core;
-using System.Web.Mvc;
-using AutoMapper;
 using AutoMapper.Configuration;
 
 namespace YuzuDelivery.Umbraco.Core
@@ -27,18 +25,17 @@ namespace YuzuDelivery.Umbraco.Core
 
             var cfg = new MapperConfigurationExpression();
 
+            var mapContext = cfg.AddYuzuMappersFromContainer(factory);
             cfg.AddProfilesFromContainer(config.MappingAssemblies, factory);
-            cfg.AddProfilesForAttributes(config.MappingAssemblies);
+            cfg.AddProfilesForAttributes(config.MappingAssemblies, mapContext, factory);
             cfg.ConstructServicesUsing(factory.GetInstance);
 
-            var mapperConfig = new MapperConfiguration(cfg);
+            var mapperConfig = new AutoMapper.MapperConfiguration(cfg);
 
-            return new Mapper(mapperConfig);
+            var autoMapper = new AutoMapper.Mapper(mapperConfig);
+
+            return new AutoMapperIntegration(autoMapper);
         }
-
-
     }
-
-    
 
 }

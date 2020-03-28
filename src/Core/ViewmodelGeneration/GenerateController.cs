@@ -10,7 +10,6 @@ using YuzuDelivery.Core;
 using Umbraco.Web.Mvc;
 using System.Web.Mvc;
 using System.Reflection;
-using AutoMapper;
 
 namespace YuzuDelivery.Umbraco.Core
 {

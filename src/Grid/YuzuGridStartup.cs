@@ -10,7 +10,6 @@ using Skybrud.Umbraco.GridData.Dtge;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Import;
-using AutoMapper;
 
 namespace YuzuDelivery.Umbraco.Grid 
 {

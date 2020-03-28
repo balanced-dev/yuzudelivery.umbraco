@@ -244,25 +244,48 @@
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Web.8.1.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="YuzuDelivery.Core, Version=1.0.38.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Core.1.0.38\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    <Reference Include="YuzuDelivery.Core, Version=1.0.40.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Core.1.0.40\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.72\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.76\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapper\AutoMapperExtensions.cs" />
+    <Compile Include="AutoMapper\Mappers\DefaultAfterMapper.cs" />
+    <Compile Include="AutoMapper\Mappers\Interfaces\IYuzuFullPropertyMapper.cs" />
+    <Compile Include="AutoMapper\Mappers\Interfaces\IYuzuAfterMapper.cs" />
+    <Compile Include="AutoMapper\Mappers\Interfaces\IYuzuTypeMapper.cs" />
+    <Compile Include="AutoMapper\Mappers\DefaultFullPropertyMapper.cs" />
+    <Compile Include="AutoMapper\Mappers\DefaultTypeMapper.cs" />
+    <Compile Include="Mapping\MapperSettings\YuzuAfterMapperSettings.cs" />
+    <Compile Include="Mapping\ResolverInterfaces\IYuzuAfterMapResolver.cs" />
+    <Compile Include="Mapping\UmbracoMappingContextFactory.cs" />
+    <Compile Include="AutoMapper\Mappers\DefaultPropertyMapper.cs" />
+    <Compile Include="AutoMapper\Mappers\DefaultGroupMapper.cs" />
     <Compile Include="LinqExpressionExtensions.cs" />
     <Compile Include="CompositionExtensions.cs" />
+    <Compile Include="AutoMapper\Mappers\Interfaces\IYuzuPropertyMapper.cs" />
+    <Compile Include="AutoMapper\Mappers\Interfaces\IYuzuGroupMapper.cs" />
+    <Compile Include="Mapping\MapperSettings\YuzuGroupMapperSettings.cs" />
+    <Compile Include="Mapping\MapperSettings\YuzuPropertyMapperSettings.cs" />
+    <Compile Include="Mapping\MapperSettings\YuzuTypeMapperSettings.cs" />
+    <Compile Include="Mapping\MapperSettings\YuzuFullPropertyMapperSettings.cs" />
+    <Compile Include="Mapping\ResolverInterfaces\IYuzuFullPropertyResolver.cs" />
+    <Compile Include="Mapping\ResolverInterfaces\IYuzuTypeConvertor.cs" />
+    <Compile Include="Mapping\ResolverInterfaces\IYuzuPropertyResolver.cs" />
+    <Compile Include="Mapping\MappingsExtensions.cs" />
+    <Compile Include="Mapping\UmbracoAddItems.cs" />
+    <Compile Include="Mapping\UmbracoMappingContext.cs" />
     <Compile Include="PublishedModelExtensions.cs" />
     <Compile Include="DefaultItem\DefaultItem.cs" />
     <Compile Include="DefaultItem\IDefaultItem.cs" />
-    <Compile Include="Mapping\DefaultViewModels\vmBlock_DataImage.cs" />
-    <Compile Include="Mapping\DefaultViewModels\vmBlock_DataLink.cs" />
-    <Compile Include="Mapping\DefaultItemMapping.cs" />
-    <Compile Include="Mapping\ImageMappings.cs" />
-    <Compile Include="Mapping\LinkMappings.cs" />
+    <Compile Include="DefaultMappings\Default\vmBlock_DataImage.cs" />
+    <Compile Include="DefaultMappings\Default\vmBlock_DataLink.cs" />
+    <Compile Include="DefaultMappings\DefaultItemMapping.cs" />
+    <Compile Include="DefaultMappings\ImageMappings.cs" />
+    <Compile Include="DefaultMappings\LinkMappings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup\DefaultUmbracoMappingFactory.cs" />
     <Compile Include="Startup\ModelsNamespaceBlank.cs" />

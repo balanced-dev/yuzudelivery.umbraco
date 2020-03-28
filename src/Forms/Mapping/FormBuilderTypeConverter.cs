@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
-using System.Web.Mvc;
 using Umbraco.Forms.Web.Models;
+using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
-    public class FormBuilderTypeConverter : ITypeConverter<FormViewModel, vmBlock_DataFormBuilder>
+    public class FormBuilderTypeConverter : IYuzuTypeConvertor<FormViewModel, vmBlock_DataFormBuilder>
     {
         private readonly IFormElementMapGetter formElementMapGetter;
 
@@ -18,7 +17,7 @@ namespace YuzuDelivery.Umbraco.Forms
             this.formElementMapGetter = formElementMapGetter;
         }
 
-        public vmBlock_DataFormBuilder Convert(FormViewModel source, vmBlock_DataFormBuilder destination, ResolutionContext context)
+        public vmBlock_DataFormBuilder Convert(FormViewModel source, UmbracoMappingContext context)
         {
             if (source != null)
             {

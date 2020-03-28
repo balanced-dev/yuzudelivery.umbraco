@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Skybrud.Umbraco.GridData;
-using AutoMapper;
 using Newtonsoft.Json;
+using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Grid
 {
-    public class GridConfigConverter<T> : ITypeConverter<Dictionary<string, object>, T>
+    public class GridConfigConverter<T> : IYuzuTypeConvertor<Dictionary<string, object>, T>
     {
-        public T Convert(Dictionary<string, object> source, T destination, ResolutionContext context)
+        public T Convert(Dictionary<string, object> source, UmbracoMappingContext context)
         {
             if (source == null)
                 return default(T);
@@ -21,7 +21,7 @@ namespace YuzuDelivery.Umbraco.Grid
         }
     }
 
-    public class GridRowConvertor<TSource, TDest> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataRows>
+    public class GridRowConvertor<TSource, TDest> : IYuzuFullPropertyResolver<TSource, TDest, GridDataModel, vmBlock_DataRows>
     {
         private readonly IGridService gridService;
 
@@ -30,13 +30,13 @@ namespace YuzuDelivery.Umbraco.Grid
             this.gridService = gridService;
         }
 
-        public vmBlock_DataRows Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataRows destMember, ResolutionContext context)
+        public vmBlock_DataRows Resolve(TSource source, TDest destination, GridDataModel sourceMember, string memberName, UmbracoMappingContext context)
         {
             return gridService.CreateRows(sourceMember, context);
         }
     }
 
-    public class GridRowConvertor<TSource, TDest, TConfig> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataRows>
+    public class GridRowConvertor<TSource, TDest, TConfig> : IYuzuFullPropertyResolver<TSource, TDest, GridDataModel, vmBlock_DataRows>
     {
         private readonly IGridService gridService;
 
@@ -45,13 +45,13 @@ namespace YuzuDelivery.Umbraco.Grid
             this.gridService = gridService;
         }
 
-        public vmBlock_DataRows Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataRows destMember, ResolutionContext context)
+        public vmBlock_DataRows Resolve(TSource source, TDest destination, GridDataModel sourceMember, string memberName, UmbracoMappingContext context)
         {
             return gridService.CreateRows<TConfig>(sourceMember, context);
         }
     }
 
-    public class GridRowColumnConvertor<TSource, TDest> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataGrid>
+    public class GridRowColumnConvertor<TSource, TDest> : IYuzuFullPropertyResolver<TSource, TDest, GridDataModel, vmBlock_DataGrid>
     {
         private readonly IGridService gridService;
 
@@ -60,13 +60,13 @@ namespace YuzuDelivery.Umbraco.Grid
             this.gridService = gridService;
         }
 
-        public vmBlock_DataGrid Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataGrid destMember, ResolutionContext context)
+        public vmBlock_DataGrid Resolve(TSource source, TDest destination, GridDataModel sourceMember, string memberName, UmbracoMappingContext context)
         {
             return gridService.CreateRowsColumns(sourceMember, context);
         }
     }
 
-    public class GridRowColumnConvertor<TSource, TDest, TConfig> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataGrid>
+    public class GridRowColumnConvertor<TSource, TDest, TConfig> : IYuzuFullPropertyResolver<TSource, TDest, GridDataModel, vmBlock_DataGrid>
     {
         private readonly IGridService gridService;
 
@@ -75,13 +75,13 @@ namespace YuzuDelivery.Umbraco.Grid
             this.gridService = gridService;
         }
 
-        public vmBlock_DataGrid Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataGrid destMember, ResolutionContext context)
+        public vmBlock_DataGrid Resolve(TSource source, TDest destination, GridDataModel sourceMember, string memberName, UmbracoMappingContext context)
         {
             return gridService.CreateRowsColumns<TConfig>(sourceMember, context);
         }
     }
 
-    public class GridRowColumnConvertor<TSource, TDest, TConfigRow, TConfigCol> : IMemberValueResolver<TSource, TDest, GridDataModel, vmBlock_DataGrid>
+    public class GridRowColumnConvertor<TSource, TDest, TConfigRow, TConfigCol> : IYuzuFullPropertyResolver<TSource, TDest, GridDataModel, vmBlock_DataGrid>
     {
         private readonly IGridService gridService;
 
@@ -90,7 +90,7 @@ namespace YuzuDelivery.Umbraco.Grid
             this.gridService = gridService;
         }
 
-        public vmBlock_DataGrid Resolve(TSource source, TDest destination, GridDataModel sourceMember, vmBlock_DataGrid destMember, ResolutionContext context)
+        public vmBlock_DataGrid Resolve(TSource source, TDest destination, GridDataModel sourceMember, string memberName, UmbracoMappingContext context)
         {
             return gridService.CreateRowsColumns<TConfigRow, TConfigCol>(sourceMember, context);
         }

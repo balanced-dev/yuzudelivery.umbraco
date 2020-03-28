@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using AutoMapper;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 using Umbraco.Core.Models.PublishedContent;
@@ -37,12 +36,27 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register(typeof(IUpdateableImportConfiguration), typeof(CoreImportConfig), Lifetime.Transient);
 
             composition.Register<DefaultUmbracoMappingFactory>();
-            composition.RegisterAuto<Profile>();
+            composition.RegisterAuto<AutoMapper.Profile>();
 
             composition.Register<LinkIPublishedContentConvertor>();
             composition.Register<LinkConvertor>();
             composition.Register<ImageConvertor>();
+
             composition.Register<DefaultItemConvertor>();
+
+            composition.Register<IMappingContextFactory, UmbracoMappingContextFactory>(Lifetime.Request);
+
+            composition.Register(typeof(YuzuMappingConfig), typeof(DefaultItemMappings));
+            composition.Register(typeof(YuzuMappingConfig), typeof(ImageMappings));
+            composition.Register(typeof(YuzuMappingConfig), typeof(LinkMappings));
+
+            composition.RegisterUnique<IYuzuAfterMapper, DefaultAfterMapper>();
+            composition.RegisterUnique<IYuzuGroupMapper, DefaultGroupMapper>();
+            composition.RegisterUnique<IYuzuFullPropertyMapper, DefaultFullPropertyMapper>();
+            composition.RegisterUnique<IYuzuPropertyMapper, DefaultPropertyMapper>();
+            composition.RegisterUnique<IYuzuTypeMapper, DefaultTypeMapper>();
+
+            composition.Register(typeof(IMapperAddItem), typeof(UmbracoMapperAddItems));
 
             AddDefaultItems(composition);
             SetupHbsHelpers();

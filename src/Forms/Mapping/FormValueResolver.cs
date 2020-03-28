@@ -3,31 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using YuzuDelivery.Core;
+using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
-    public class FormMemberValueResolver<Source, Destination> : IMemberValueResolver<Source, Destination, object, vmBlock_DataForm>
+    public class FormValueResolver<Source, Destination> : IYuzuFullPropertyResolver<Source, Destination, object, vmBlock_DataForm>
     {
         private ISchemaMetaService schemaMetaService;
 
-        public FormMemberValueResolver(ISchemaMetaService schemaMetaService)
+        public FormValueResolver(ISchemaMetaService schemaMetaService)
         {
             this.schemaMetaService = schemaMetaService;
         }
 
-        public vmBlock_DataForm Resolve(Source source, Destination destination, object formValue, vmBlock_DataForm destMember, ResolutionContext context)
+        public vmBlock_DataForm Resolve(Source source, Destination destination, object formValue, string propertyName, UmbracoMappingContext context)
         {
             if (source != null)
             {
-                if (!context.Options.Items.ContainsKey("HtmlHelper"))
-                    throw new Exception("Form Type Convertor requires HtmlHelper in mapper options items. Using a property resolver? Make sure it's passed in the chain");
-
-                var html = context.Options.Items["HtmlHelper"] as HtmlHelper;
-
                 var property = destination.GetType().GetProperties().Where(x => x.PropertyType == typeof(vmBlock_DataForm)).FirstOrDefault();
 
                 var ofType = schemaMetaService.GetOfType(property, "refs");
@@ -37,7 +32,7 @@ namespace YuzuDelivery.Umbraco.Forms
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
-                        LiveForm = html.Action("Render", "UmbracoForms",
+                        LiveForm = context.Html.Action("Render", "UmbracoForms",
                         new
                         {
                             formId = formValue,

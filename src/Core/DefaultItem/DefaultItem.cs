@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using AutoMapper;
 using Umbraco.Core.Models.PublishedContent;
+using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -24,23 +24,12 @@ namespace YuzuDelivery.Umbraco.Core
             return element.ContentType.Alias == docTypeAlias;
         }
 
-        public virtual object Apply(IPublishedElement element, IDictionary<string, object> contextItems)
+        public virtual object Apply(IPublishedElement element, UmbracoMappingContext context)
         {
             var item = element.ToElement<M>();
 
-            var output = mapper.Map<V>(item, opts => AddItemContext(opts.Items, contextItems));
+            var output = mapper.Map<V>(item, context.Items);
             return output;
-        }
-
-        private void AddItemContext(IDictionary<string, object> items, IDictionary<string, object> contextItems)
-        {
-            if (contextItems != null)
-            {
-                foreach (var i in contextItems)
-                {
-                    items.Add(i.Key, i.Value);
-                }
-            }
         }
     }
 

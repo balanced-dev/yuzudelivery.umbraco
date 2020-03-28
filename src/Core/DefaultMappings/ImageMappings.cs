@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using AutoMapper;
 using Umbraco.Core.Models.PublishedContent;
+using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
 
-    public class ImageMappings : Profile
+    public class ImageMappings : YuzuMappingConfig
     {
         public ImageMappings()
         {
-
-            CreateMap<IPublishedContent, vmBlock_DataImage>()
-                .ConvertUsing<ImageConvertor>();
+            ManualMaps.AddType<ImageConvertor>(false);
         }
     }
 
-    public class ImageConvertor : ITypeConverter<IPublishedContent, vmBlock_DataImage>
+    public class ImageConvertor : IYuzuTypeConvertor<IPublishedContent, vmBlock_DataImage>
     {
-        public vmBlock_DataImage Convert(IPublishedContent source, vmBlock_DataImage destination, ResolutionContext context)
+        public vmBlock_DataImage Convert(IPublishedContent source, UmbracoMappingContext context)
         {
             if(source != null && source.ContentType != null)
             {

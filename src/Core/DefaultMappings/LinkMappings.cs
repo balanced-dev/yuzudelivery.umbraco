@@ -1,30 +1,27 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using AutoMapper;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web.Models;
 using Umbraco.Web.Composing;
 using Umbraco.Core;
+using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {    
 
-    public class LinkMappings : Profile
+    public class LinkMappings : YuzuMappingConfig
     {
         public LinkMappings()
         {
-            CreateMap<Link, vmBlock_DataLink>()
-                .ConvertUsing<LinkConvertor>();
-
-            CreateMap<IPublishedContent, vmBlock_DataLink>()
-                    .ConvertUsing<LinkIPublishedContentConvertor>();
+            ManualMaps.AddType<LinkIPublishedContentConvertor>(false);
+            ManualMaps.AddType<LinkConvertor>(false);
         }
     }
 
-    public class LinkIPublishedContentConvertor : ITypeConverter<IPublishedContent, vmBlock_DataLink>
+    public class LinkIPublishedContentConvertor : IYuzuTypeConvertor<IPublishedContent, vmBlock_DataLink>
     {
-        public vmBlock_DataLink Convert(IPublishedContent link, vmBlock_DataLink destination, ResolutionContext context)
+        public vmBlock_DataLink Convert(IPublishedContent link, UmbracoMappingContext context)
         {
             if (link != null)
             {
@@ -40,9 +37,9 @@ namespace YuzuDelivery.Umbraco.Core
         }
     }
 
-    public class LinkConvertor : ITypeConverter<Link, vmBlock_DataLink>
+    public class LinkConvertor : IYuzuTypeConvertor<Link, vmBlock_DataLink>
     {
-        public vmBlock_DataLink Convert(Link link, vmBlock_DataLink destination, ResolutionContext context)
+        public vmBlock_DataLink Convert(Link link, UmbracoMappingContext context)
         {
             if (link != null)
             {

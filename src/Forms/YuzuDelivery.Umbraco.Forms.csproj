@@ -320,6 +320,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj">
+      <Project>{a9b8f2ac-90f9-4219-bcda-7ff6e8266c19}</Project>
+      <Name>YuzuDelivery.Umbraco.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Grid\YuzuDelivery.Umbraco.Grid.csproj">
       <Project>{ec27df56-5a85-4cca-9720-cf000269be1f}</Project>
       <Name>YuzuDelivery.Umbraco.Grid</Name>

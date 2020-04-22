@@ -12,7 +12,7 @@ using YuzuDelivery.Umbraco.Import;
 
 namespace YuzuDelivery.Umbraco.Grid
 {
-    public static class GridMappingsService
+    public static class GridMappingsExtensions
     {
         public static void AddGridWithRows<TSource, TDest>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataRows>> destMember)
         {
@@ -59,9 +59,9 @@ namespace YuzuDelivery.Umbraco.Grid
             var config = DependencyResolver.Current.GetService<IYuzuDeliveryImportConfiguration>();
             config.IgnoreViewmodels.Add<TConfig>();
 
-            resolvers.Add(new YuzuTypeMapperSettings()
+            resolvers.Add(new YuzuTypeConvertorMapperSettings()
             {
-                Mapper = typeof(IYuzuTypeMapper),
+                Mapper = typeof(IYuzuTypeConvertorMapper),
                 Convertor = typeof(GridConfigConverter<TConfig>)
             });
         }

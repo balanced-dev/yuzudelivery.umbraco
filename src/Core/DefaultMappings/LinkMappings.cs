@@ -14,8 +14,8 @@ namespace YuzuDelivery.Umbraco.Core
     {
         public LinkMappings()
         {
-            ManualMaps.AddType<LinkIPublishedContentConvertor>(false);
-            ManualMaps.AddType<LinkConvertor>(false);
+            ManualMaps.AddTypeReplace<LinkIPublishedContentConvertor>(false);
+            ManualMaps.AddTypeReplace<LinkConvertor>(false);
         }
     }
 

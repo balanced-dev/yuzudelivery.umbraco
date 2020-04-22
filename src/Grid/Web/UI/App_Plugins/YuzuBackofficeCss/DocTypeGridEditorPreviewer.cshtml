@@ -5,7 +5,7 @@
 @using YuzuDelivery.Umbraco.Grid;
 @{ var gridItem = Html.GridPartial(Model.Item); }
 <span class="yuzu-back-office" style="all: initial; pointer-events: none;">
-    @Html.RenderFETemplate(new RenderSettings()
+    @Html.RenderYuzu(new RenderSettings()
 {
         Template = string.Format("par{0}", Model.Item.GetType().Name),
         Data = () => { return gridItem.CreateVm(Model.Item, new Dictionary<string, object>() { { "HtmlHelper", Html } }); },

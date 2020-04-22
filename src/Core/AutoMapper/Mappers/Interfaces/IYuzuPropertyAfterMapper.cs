@@ -7,9 +7,9 @@ using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public interface IYuzuPropertyReplaceMapper : IYuzuBaseMapper
+    public interface IYuzuPropertyAfterMapper : IYuzuBaseMapper
     {
         AddedMapContext CreateMap<M, PropertyType, V, TService>(MapperConfigurationExpression cfg, YuzuMapperSettings settings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
-            where TService : class, IYuzuPropertyReplaceResolver<M, PropertyType>;
+            where TService : class, IYuzuPropertyAfterResolver<M, PropertyType>;
     }
 }

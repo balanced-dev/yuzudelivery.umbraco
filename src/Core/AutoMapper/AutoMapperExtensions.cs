@@ -50,15 +50,16 @@ namespace YuzuDelivery.Umbraco.Core
         public static AddedMapContext AddYuzuMappersFromContainer(this MapperConfigurationExpression cfg, IFactory factory)
         {
             var mappingConfigs = factory.GetAllInstances<YuzuMappingConfig>();
+            var config = factory.GetInstance<IYuzuConfiguration>();
             var mapContext = new AddedMapContext();
 
-            foreach (var config in mappingConfigs)
+            foreach (var mappingConfig in mappingConfigs)
             {
-                foreach (var item in config.ManualMaps)
+                foreach (var item in mappingConfig.ManualMaps)
                 {
-                    var propertyOverride = factory.GetInstance(item.Mapper) as IYuzuBaseMapper;
-                    var generic = propertyOverride.MakeGenericMethod(item);
-                    mapContext = generic.Invoke(propertyOverride, new object[] { cfg, item, factory, mapContext }) as AddedMapContext;
+                    var mapper = factory.GetInstance(item.Mapper) as IYuzuBaseMapper;
+                    var generic = mapper.MakeGenericMethod(item);
+                    mapContext = generic.Invoke(mapper, new object[] { cfg, item, factory, mapContext, config }) as AddedMapContext;
                 }
             }
 

@@ -3,7 +3,7 @@ using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public class YuzuAfterMapperSettings : YuzuMapperSettings
+    public class YuzuTypeAfterMapperSettings : YuzuMapperSettings
     {
         public Type Action { get; set; }
     }

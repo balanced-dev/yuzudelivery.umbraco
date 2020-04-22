@@ -26,7 +26,7 @@ namespace YuzuDelivery.Umbraco.Core
             {
                 var types = profileAssembly.GetTypes();
                 var allowedTypes = new Type[] { typeof(YuzuMappingConfig) };
-                var allowedInterfaces = new Type[] { typeof(IYuzuAfterMapResolver), typeof(IYuzuTypeConvertor), typeof(IYuzuPropertyResolver), typeof(IYuzuFullPropertyResolver) };
+                var allowedInterfaces = new Type[] { typeof(IYuzuTypeAfterConvertor), typeof(IYuzuTypeConvertor), typeof(IYuzuTypeFactory), typeof(IYuzuPropertyAfterResolver), typeof(IYuzuPropertyReplaceResolver), typeof(IYuzuFullPropertyResolver) };
 
                 foreach (var i in types.Where(x => allowedTypes.Contains(x.BaseType) || allowedInterfaces.Intersect(x.GetInterfaces()).Any()))
                 {
@@ -36,9 +36,11 @@ namespace YuzuDelivery.Umbraco.Core
                     }
                     else
                     {
+                        if (i.GetInterfaces().Any(x => x == typeof(IYuzuTypeFactory)))
+                            composition.Register(typeof(IYuzuTypeFactory), i);
+
                         composition.Register(i);
                     }
-
                 }
 
                 return factory.GetInstance<DefaultUmbracoMappingFactory>().Create(profileAssembly, factory);

@@ -5,10 +5,8 @@ using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public interface IYuzuPropertyResolver<M, Type> : IYuzuPropertyResolver, IYuzuMappingResolver
+    public interface IYuzuPropertyReplaceResolver<M, Type> : IYuzuPropertyReplaceResolver, IYuzuMappingResolver
     {
         Type Resolve(M source, UmbracoMappingContext context);
     }
-
-    public interface IYuzuPropertyResolver { }
 }

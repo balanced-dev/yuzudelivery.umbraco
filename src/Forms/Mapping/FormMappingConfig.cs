@@ -13,8 +13,8 @@ namespace YuzuDelivery.Umbraco.Forms
     {
         public FormMappingConfig()
         {
-            ManualMaps.AddType<FormTypeConvertor>();
-            ManualMaps.AddType<FormBuilderTypeConverter>();
+            ManualMaps.AddTypeReplace<FormTypeConvertor>();
+            ManualMaps.AddTypeReplace<FormBuilderTypeConverter>();
         }
     }
 }

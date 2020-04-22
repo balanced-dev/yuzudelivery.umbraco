@@ -12,8 +12,8 @@ namespace YuzuDelivery.Umbraco.Core
     {
         public DefaultItemMappings()
         {
-            ManualMaps.AddType<DefaultItemsConvertor>(false);
-            ManualMaps.AddType<DefaultItemConvertor>(false);
+            ManualMaps.AddTypeReplace<DefaultItemsConvertor>(false);
+            ManualMaps.AddTypeReplace<DefaultItemConvertor>(false);
         }
     }
 

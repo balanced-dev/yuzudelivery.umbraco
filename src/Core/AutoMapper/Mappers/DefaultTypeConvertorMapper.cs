@@ -12,20 +12,20 @@ using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public class DefaultTypeMapper : IYuzuTypeMapper
+    public class DefaultTypeConvertorMapper : IYuzuTypeConvertorMapper
     {
-        private readonly IYuzuDeliveryImportConfiguration config;
+        private readonly IYuzuDeliveryImportConfiguration importConfig;
         private readonly IMappingContextFactory contextFactory;
 
-        public DefaultTypeMapper(IYuzuDeliveryImportConfiguration config, IMappingContextFactory contextFactory)
+        public DefaultTypeConvertorMapper(IYuzuDeliveryImportConfiguration importConfig, IMappingContextFactory contextFactory)
         {
-            this.config = config;
+            this.importConfig = importConfig;
             this.contextFactory = contextFactory;
         }
 
         public MethodInfo MakeGenericMethod(YuzuMapperSettings baseSettings)
         {
-            var settings = baseSettings as YuzuTypeMapperSettings;
+            var settings = baseSettings as YuzuTypeConvertorMapperSettings;
 
             if (settings != null)
             {
@@ -39,22 +39,24 @@ namespace YuzuDelivery.Umbraco.Core
                 throw new Exception("Mapping settings not of type YuzuTypeMappingSettings");
         }
 
-        public AddedMapContext CreateMap<Source, Dest, TService>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext)
+        public AddedMapContext CreateMap<Source, Dest, TService>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
             where TService : class, IYuzuTypeConvertor<Source, Dest>
         {
-            var settings = baseSettings as YuzuTypeMapperSettings;
+            var settings = baseSettings as YuzuTypeConvertorMapperSettings;
 
             if (settings != null)
             {
-                if (settings.IgnoreReturnType)
-                    config.IgnoreViewmodels.Add(typeof(Type).Name);
+                config.AddActiveManualMap<TService, Dest>();
 
-                var map = mapContext.Get<Source, Dest>(cfg);
+                if (settings.IgnoreReturnType)
+                    importConfig.IgnoreViewmodels.Add(typeof(Dest).Name);
+
+                var map = mapContext.AddOrGet<Source, Dest>(cfg);
 
                 Func<Source, Dest, ResolutionContext, Dest> mappingFunction = (Source source, Dest dest, ResolutionContext context) =>
                 {
                     var typeConvertor = factory.GetInstance(typeof(TService)) as TService;
-                    var yuzuContext = contextFactory.From<UmbracoMappingContext>(context);
+                    var yuzuContext = contextFactory.From<UmbracoMappingContext>(context.Items);
 
                     return typeConvertor.Convert(source, yuzuContext);
                 };
@@ -65,8 +67,5 @@ namespace YuzuDelivery.Umbraco.Core
             else
                 throw new Exception("Mapping settings not of type YuzuTypeMappingSettings");
         }
-
-
     }
-
 }

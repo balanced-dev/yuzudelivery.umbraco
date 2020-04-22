@@ -11,7 +11,7 @@ namespace YuzuDelivery.Umbraco.Core
     {
         public ImageMappings()
         {
-            ManualMaps.AddType<ImageConvertor>(false);
+            ManualMaps.AddTypeReplace<ImageConvertor>(false);
         }
     }
 

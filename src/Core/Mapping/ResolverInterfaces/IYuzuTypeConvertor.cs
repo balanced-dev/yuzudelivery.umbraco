@@ -9,6 +9,4 @@ namespace YuzuDelivery.Umbraco.Core
     {
         Dest Convert(Source source, UmbracoMappingContext context);
     }
-
-    public interface IYuzuTypeConvertor { }
 }

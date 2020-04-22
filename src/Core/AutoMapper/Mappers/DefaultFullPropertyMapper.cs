@@ -14,12 +14,12 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public class DefaultFullPropertyMapper : IYuzuFullPropertyMapper
     {
-        private readonly IYuzuDeliveryImportConfiguration config;
+        private readonly IYuzuDeliveryImportConfiguration importConfig;
         private readonly IMappingContextFactory contextFactory;
 
-        public DefaultFullPropertyMapper(IYuzuDeliveryImportConfiguration config, IMappingContextFactory contextFactory)
+        public DefaultFullPropertyMapper(IYuzuDeliveryImportConfiguration importConfig, IMappingContextFactory contextFactory)
         {
-            this.config = config;
+            this.importConfig = importConfig;
             this.contextFactory = contextFactory;
         }
 
@@ -39,7 +39,7 @@ namespace YuzuDelivery.Umbraco.Core
                 throw new Exception("Mapping settings not of type YuzuPropertyMappingSettings");
         }
 
-        public AddedMapContext CreateMap<Source, Dest, SourceMember, DestMember, Resolver>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext)
+        public AddedMapContext CreateMap<Source, Dest, SourceMember, DestMember, Resolver>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
             where Resolver : class, IYuzuFullPropertyResolver<Source, Dest, SourceMember, DestMember>
         {
             var settings = baseSettings as YuzuFullPropertyMapperSettings;
@@ -47,10 +47,10 @@ namespace YuzuDelivery.Umbraco.Core
             if (settings != null)
             {
                 if (settings.IgnoreProperty)
-                    config.IgnorePropertiesInViewModels.Add(new KeyValuePair<string, string>(typeof(Dest).Name, settings.DestPropertyName));
+                    importConfig.IgnorePropertiesInViewModels.Add(new KeyValuePair<string, string>(typeof(Dest).Name, settings.DestPropertyName));
 
                 if (settings.IgnoreReturnType)
-                    config.IgnoreViewmodels.Add(typeof(Type).Name);
+                    importConfig.IgnoreViewmodels.Add(typeof(Type).Name);
 
                 if (!string.IsNullOrEmpty(settings.GroupName))
                     cfg.RecognizePrefixes(settings.GroupName);
@@ -59,12 +59,12 @@ namespace YuzuDelivery.Umbraco.Core
                 {
                     var propertyResolver = factory.GetInstance(typeof(Resolver)) as Resolver;
                     var sourceValue = ((SourceMember)typeof(Source).GetProperty(settings.SourcePropertyName).GetValue(m));
-                    var yuzuContext = contextFactory.From<UmbracoMappingContext>(context);
+                    var yuzuContext = contextFactory.From<UmbracoMappingContext>(context.Items);
 
                     return propertyResolver.Resolve(m, v, sourceValue, settings.DestPropertyName, yuzuContext);
                 };
 
-                var map = mapContext.Get<Source, Dest>(cfg);
+                var map = mapContext.AddOrGet<Source, Dest>(cfg);
 
                 map.ForMember(settings.DestPropertyName, opt => opt.MapFrom(mappingFunction));
 

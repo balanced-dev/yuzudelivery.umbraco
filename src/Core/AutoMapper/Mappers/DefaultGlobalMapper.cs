@@ -12,51 +12,46 @@ using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public class DefaultGroupMapper : IYuzuGroupMapper
+    public class DefaultGlobalMapper : IYuzuGlobalMapper
     {
         private readonly IYuzuDeliveryImportConfiguration importConfig;
 
-        public DefaultGroupMapper(IYuzuDeliveryImportConfiguration importConfig)
+        public DefaultGlobalMapper(IYuzuDeliveryImportConfiguration importConfig)
         {
             this.importConfig = importConfig;
         }
 
         public MethodInfo MakeGenericMethod(YuzuMapperSettings baseSettings)
         {
-            var settings = baseSettings as YuzuGroupMapperSettings;
+            var settings = baseSettings as YuzuGlobalMapperSettings;
 
             if (settings != null)
             {
                 var genericArguments = new List<Type>();
                 genericArguments.Add(settings.Source);
-                genericArguments.Add(settings.DestParent);
-                genericArguments.Add(settings.DestChild);
+                genericArguments.Add(settings.Dest);
 
                 var method = GetType().GetMethod("CreateMap");
                 return method.MakeGenericMethod(genericArguments.ToArray());
             }
             else
-                throw new Exception("Mapping settings not of type YuzuGroupMapperSettings");
+                throw new Exception("Mapping settings not of type YuzuGlobalMapperSettings");
         }
 
-        public AddedMapContext CreateMap<Source, DestParent, DestChild>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
+        public AddedMapContext CreateMap<Source, Dest>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
         {
-            var settings = baseSettings as YuzuGroupMapperSettings;
+            var settings = baseSettings as YuzuGlobalMapperSettings;
 
             if (settings != null)
             {
                 cfg.RecognizePrefixes(settings.GroupName);
 
-                mapContext.AddOrGet<Source, DestChild>(cfg);
-
-                var parentMap = mapContext.AddOrGet<Source, DestParent>(cfg);
-
-                parentMap.ForMember(settings.PropertyName, opt => opt.MapFrom(y => y));
+                mapContext.AddOrGet<Source, Dest>(cfg);
 
                 return mapContext;
             }
             else
-                throw new Exception("Mapping settings not of type YuzuGroupMapperSettings");
+                throw new Exception("Mapping settings not of type YuzuGlobalMapperSettings");
         }
     }
 }

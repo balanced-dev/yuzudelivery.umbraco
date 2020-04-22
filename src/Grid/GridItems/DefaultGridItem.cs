@@ -17,11 +17,13 @@ namespace YuzuDelivery.Umbraco.Grid
     {
         private string docTypeAlias;
         private readonly IMapper mapper;
+        private readonly IYuzuTypeFactoryRunner typeFactoryRunner;
 
         public DefaultGridItem(string docTypeAlias, IMapper mapper)
         {
             this.docTypeAlias = docTypeAlias;
             this.mapper = mapper;
+            this.typeFactoryRunner = DependencyResolver.Current.GetService<IYuzuTypeFactoryRunner>();
         }
 
         public Type ElementType { get { return typeof(M); } }
@@ -50,7 +52,9 @@ namespace YuzuDelivery.Umbraco.Grid
         {
             var item = model.ToElement<M>();
 
-            var output = mapper.Map<V>(item, contextItems);
+            var output = typeFactoryRunner.Run<V>(contextItems);
+            if (output == null)
+                output = mapper.Map<V>(model, contextItems);
 
             if (config != null && typeof(V).GetProperty("Config") != null)
                 typeof(V).GetProperty("Config").SetValue(output, config);

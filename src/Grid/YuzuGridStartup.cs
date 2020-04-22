@@ -33,6 +33,8 @@ namespace YuzuDelivery.Umbraco.Grid
             composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(GridVmBuilderConfig), Lifetime.Transient);
             composition.Register(typeof(IUpdateableImportConfiguration), typeof(GridImportConfig), Lifetime.Transient);
 
+            composition.Register(typeof(YuzuMappingConfig), typeof(GridAutoMapping));
+
             GridContext.Current.Converters.Add(new DtgeGridConverter());
         }
 
@@ -97,11 +99,14 @@ namespace YuzuDelivery.Umbraco.Grid
 
     public class GridImportConfig : UpdateableImportConfiguration
     {
-        public GridImportConfig()
+        public GridImportConfig(IVmPropertyFinder vmPropertyFinder)
             : base()
         {
             IgnoreViewmodels.Add<vmBlock_DataRows>();
             IgnoreViewmodels.Add<vmBlock_DataGrid>();
+
+            SpecialistProperties.Add("Grids", vmPropertyFinder.GetProperties(typeof(vmBlock_DataGrid)));
+            SpecialistProperties.Add("Rows", vmPropertyFinder.GetProperties(typeof(vmBlock_DataRows)));
         }
     }
 }

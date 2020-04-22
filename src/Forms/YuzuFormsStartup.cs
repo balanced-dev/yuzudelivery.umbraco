@@ -29,6 +29,8 @@ namespace YuzuDelivery.Umbraco.Forms
             composition.Register(typeof(IUpdateableImportConfiguration), typeof(FormImportConfig), Lifetime.Transient);
 
             composition.Register<YuzuMappingConfig, FormMappingConfig>();
+
+            composition.Register(typeof(YuzuMappingConfig), typeof(FormAutoMapping));
         }
     }
 
@@ -69,12 +71,11 @@ namespace YuzuDelivery.Umbraco.Forms
 
     public class FormImportConfig : UpdateableImportConfiguration
     {
-        public FormImportConfig()
+        public FormImportConfig(IVmPropertyFinder vmPropertyFinder)
             : base()
         {
-            IgnoreProperties.Add("Form");
-            IgnoreProperties.Add("FormEndpoint");
-
+            IgnoreViewmodels.Add<vmBlock_DataForm>();
+            IgnoreViewmodels.Add<vmBlock_DataFormBuilder>();
             IgnoreViewmodels.Add<vmBlock_Form>();
             IgnoreViewmodels.Add<vmBlock_FormButton>();
             IgnoreViewmodels.Add<vmBlock_FormCheckboxRadio>();
@@ -85,6 +86,8 @@ namespace YuzuDelivery.Umbraco.Forms
             IgnoreViewmodels.Add<vmBlock_FormTextInput>();
             IgnoreViewmodels.Add<vmBlock_Recaptcha>();
             IgnoreViewmodels.Add<vmBlock_TitleAndDescription>();
+
+            SpecialistProperties.Add("Forms", vmPropertyFinder.GetProperties(typeof(vmBlock_DataForm)));
         }
     }
 

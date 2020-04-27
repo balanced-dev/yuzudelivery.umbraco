@@ -8,21 +8,21 @@ using YuzuDelivery.Core;
 namespace YuzuDelivery.Umbraco.Core
 {
 
-    public class DefaultItemMappings : YuzuMappingConfig
+    public class DefaultElementMapping : YuzuMappingConfig
     {
-        public DefaultItemMappings()
+        public DefaultElementMapping()
         {
-            ManualMaps.AddTypeReplace<DefaultItemsConvertor>(false);
-            ManualMaps.AddTypeReplace<DefaultItemConvertor>(false);
+            ManualMaps.AddTypeReplace<DefaultPublishedElementCollectionConvertor>(false);
+            ManualMaps.AddTypeReplace<DefaultPublishedElementCollectionToSingleConvertor>(false);
         }
     }
 
-    public class DefaultItemsConvertor : IYuzuTypeConvertor<IEnumerable<IPublishedElement>, IEnumerable<object>>
+    public class DefaultPublishedElementCollectionConvertor : IYuzuTypeConvertor<IEnumerable<IPublishedElement>, IEnumerable<object>>
     {
         private readonly IMapper mapper;
-        private readonly IDefaultItem[] defaultItems;
+        private readonly IDefaultPublishedElement[] defaultItems;
 
-        public DefaultItemsConvertor(IMapper mapper, IDefaultItem[] defaultItems)
+        public DefaultPublishedElementCollectionConvertor(IMapper mapper, IDefaultPublishedElement[] defaultItems)
         {
             this.mapper = mapper;
             this.defaultItems = defaultItems;
@@ -47,12 +47,12 @@ namespace YuzuDelivery.Umbraco.Core
         }
     }
 
-    public class DefaultItemConvertor : IYuzuTypeConvertor<IEnumerable<IPublishedElement>, object>
+    public class DefaultPublishedElementCollectionToSingleConvertor : IYuzuTypeConvertor<IEnumerable<IPublishedElement>, object>
     {
         private readonly IMapper mapper;
-        private readonly IDefaultItem[] defaultItems;
+        private readonly IDefaultPublishedElement[] defaultItems;
 
-        public DefaultItemConvertor(IMapper mapper, IDefaultItem[] defaultItems)
+        public DefaultPublishedElementCollectionToSingleConvertor(IMapper mapper, IDefaultPublishedElement[] defaultItems)
         {
             this.mapper = mapper;
             this.defaultItems = defaultItems;

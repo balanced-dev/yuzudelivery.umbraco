@@ -18,7 +18,7 @@ namespace YuzuDelivery.Umbraco.Core
         }
 
         public static E ToModel<E>(this IPublishedContent x)
-            where E : PublishedElementModel
+            where E : PublishedContentModel
         {
             if (x != null)
             {

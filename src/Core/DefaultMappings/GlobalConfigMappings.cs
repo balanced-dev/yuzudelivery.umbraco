@@ -25,9 +25,6 @@ namespace YuzuDelivery.Umbraco.Core
                     documentTypeAlias = vmHelperService.Get(vmName).ContentType.Alias;
 
                 var groupName = global.Value.StoreContentAs.GroupName;
-                if (string.IsNullOrEmpty(groupName))
-                    groupName = importConfig.DefaultPropertyGroup;
-
 
                 var sourceType = config.CMSModels.Where(x => x.Name.ToLower() == documentTypeAlias.ToLower()).FirstOrDefault();
                 var dest = config.ViewModels.Where(x => x.Name == vmName).FirstOrDefault();

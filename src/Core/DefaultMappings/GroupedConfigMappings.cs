@@ -20,21 +20,21 @@ namespace YuzuDelivery.Umbraco.Core
             {
                 var vmName = group.Key;
                 var documentTypeAlias = group.Value.DocumentTypeAlias;
+                var groupSettings = group.Value.StoreContentAs.As<GroupStoreContentAs>();
 
                 var groupName = group.Value.StoreContentAs.GroupName;
                 if (string.IsNullOrEmpty(groupName))
                     groupName = importConfig.DefaultPropertyGroup;
 
-                var parentPropertyName = group.Value.StoreContentAs.As<GroupStoreContentAs>().ParentPropertyName;
+                var parentPropertyName = groupSettings.ParentPropertyName;
 
                 var sourceType = config.CMSModels.Where(x => x.Name.ToLower() == documentTypeAlias.ToLower()).FirstOrDefault();
-                var destParent = config.ViewModels.Where(x => x.Name == vmGetterService.GetVmTypeNameFromDocumentTypeAlias(documentTypeAlias)).FirstOrDefault();
+                var destParent = config.ViewModels.Where(x => x.Name == groupSettings.ParentPropertyType).FirstOrDefault();
                 var destChild = config.ViewModels.Where(x => x.Name == vmName).FirstOrDefault();
 
                 if(sourceType != null && destParent != null && destChild != null)
-                    ManualMaps.AddGroup(sourceType, destParent, destChild, groupName, groupName);
+                    ManualMaps.AddGroup(sourceType, destParent, destChild, parentPropertyName, groupName);
             }
-
         }
     }
 }

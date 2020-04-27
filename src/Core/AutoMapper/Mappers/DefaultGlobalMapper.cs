@@ -44,7 +44,8 @@ namespace YuzuDelivery.Umbraco.Core
 
             if (settings != null)
             {
-                cfg.RecognizePrefixes(settings.GroupName);
+                if (settings.GroupName != null)
+                    cfg.RecognizePrefixes(settings.GroupName);
 
                 mapContext.AddOrGet<Source, Dest>(cfg);
 
@@ -55,3 +56,4 @@ namespace YuzuDelivery.Umbraco.Core
         }
     }
 }
+

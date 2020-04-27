@@ -41,15 +41,18 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register<LinkIPublishedContentConvertor>();
             composition.Register<LinkConvertor>();
             composition.Register<ImageConvertor>();
+            composition.Register(typeof(SubBlocksObjectResolver<,>));
 
-            composition.Register<DefaultItemConvertor>();
+            composition.Register<DefaultPublishedElementCollectionConvertor>();
+            composition.Register<DefaultPublishedElementCollectionToSingleConvertor>();
 
             composition.Register<IMappingContextFactory, UmbracoMappingContextFactory>(Lifetime.Request);
             composition.Register<IYuzuTypeFactoryRunner, UmbracoTypeFactoryRunner>();
 
-            composition.Register(typeof(YuzuMappingConfig), typeof(DefaultItemMappings));
+            composition.Register(typeof(YuzuMappingConfig), typeof(DefaultElementMapping));
             composition.Register(typeof(YuzuMappingConfig), typeof(ImageMappings));
             composition.Register(typeof(YuzuMappingConfig), typeof(LinkMappings));
+            composition.Register(typeof(YuzuMappingConfig), typeof(ListOfSubBlocksMappings));
             composition.Register(typeof(YuzuMappingConfig), typeof(ManualMappingsMappings));
             composition.Register(typeof(YuzuMappingConfig), typeof(GroupedConfigMappings));
             composition.Register(typeof(YuzuMappingConfig), typeof(GlobalConfigMappings));
@@ -66,7 +69,7 @@ namespace YuzuDelivery.Umbraco.Core
 
             composition.Register(typeof(IMapperAddItem), typeof(UmbracoMapperAddItems));
 
-            AddDefaultItems(composition);
+            AddDefaultPublishedElements(composition);
             SetupHbsHelpers();
         }
 
@@ -81,19 +84,19 @@ namespace YuzuDelivery.Umbraco.Core
             new PictureSource();
         }
 
-        public void AddDefaultItems(Composition composition)
+        public void AddDefaultPublishedElements(Composition composition)
         {
-            composition.Register<IDefaultItem[]>((factory) =>
+            composition.Register<IDefaultPublishedElement[]>((factory) =>
             {
                 var config = factory.GetInstance<IYuzuConfiguration>();
                 var mapper = factory.GetInstance<IMapper>();
 
                 var viewmodelAssemblies = config.ViewModelAssemblies;
 
-                var baseItemType = typeof(DefaultItem<,>);
-                var items = new List<IDefaultItem>();
+                var baseItemType = typeof(DefaultPublishedElement<,>);
+                var items = new List<IDefaultPublishedElement>();
 
-                var viewmodelTypes = viewmodelAssemblies.SelectMany(x => x.GetTypes()).Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
+                var viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
@@ -105,7 +108,7 @@ namespace YuzuDelivery.Umbraco.Core
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {
                         var makeme = baseItemType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper }) as IDefaultItem;
+                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper }) as IDefaultPublishedElement;
 
                         items.Add(o);
                     }
@@ -222,4 +225,5 @@ namespace YuzuDelivery.Umbraco.Core
             });
         }
     }
+
 }

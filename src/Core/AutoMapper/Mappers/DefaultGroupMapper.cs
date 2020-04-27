@@ -50,8 +50,8 @@ namespace YuzuDelivery.Umbraco.Core
                 mapContext.AddOrGet<Source, DestChild>(cfg);
 
                 var parentMap = mapContext.AddOrGet<Source, DestParent>(cfg);
-
                 parentMap.ForMember(settings.PropertyName, opt => opt.MapFrom(y => y));
+
 
                 return mapContext;
             }

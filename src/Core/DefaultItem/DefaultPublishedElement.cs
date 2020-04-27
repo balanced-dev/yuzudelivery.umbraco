@@ -7,13 +7,13 @@ using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public class DefaultItem<M, V> : IDefaultItem
+    public class DefaultPublishedElement<M, V> : IDefaultPublishedElement
     where M : PublishedElementModel
     {
         private string docTypeAlias;
         private readonly IMapper mapper;
 
-        public DefaultItem(string docTypeAlias, IMapper mapper)
+        public DefaultPublishedElement(string docTypeAlias, IMapper mapper)
         {
             this.docTypeAlias = docTypeAlias;
             this.mapper = mapper;
@@ -31,6 +31,12 @@ namespace YuzuDelivery.Umbraco.Core
             var output = mapper.Map<V>(item, context.Items);
             return output;
         }
+    }
+
+    public interface IDefaultPublishedElement
+    {
+        object Apply(IPublishedElement element, UmbracoMappingContext context);
+        bool IsValid(IPublishedElement element);
     }
 
 }

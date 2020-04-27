@@ -265,6 +265,7 @@
     <Compile Include="AutoMapper\Mappers\MapperSettings\YuzuTypeFactoryMapperSettings.cs" />
     <Compile Include="DefaultMappings\GlobalConfigMappings.cs" />
     <Compile Include="DefaultMappings\GroupedConfigMappings.cs" />
+    <Compile Include="DefaultMappings\ListOfSubBlocksMappings.cs" />
     <Compile Include="DefaultMappings\ManualMappingsMappings.cs" />
     <Compile Include="AutoMapper\Mappers\MapperSettings\YuzuPropertyAfterMapperSettings.cs" />
     <Compile Include="AutoMapper\Mappers\MapperSettings\YuzuTypeAfterMapperSettings.cs" />
@@ -291,11 +292,10 @@
     <Compile Include="Mapping\UmbracoMappingContext.cs" />
     <Compile Include="Mapping\UmbracoTypeFactoryResolver.cs" />
     <Compile Include="PublishedModelExtensions.cs" />
-    <Compile Include="DefaultItem\DefaultItem.cs" />
-    <Compile Include="DefaultItem\IDefaultItem.cs" />
+    <Compile Include="DefaultItem\DefaultPublishedElement.cs" />
     <Compile Include="DefaultMappings\Default\vmBlock_DataImage.cs" />
     <Compile Include="DefaultMappings\Default\vmBlock_DataLink.cs" />
-    <Compile Include="DefaultMappings\DefaultItemMapping.cs" />
+    <Compile Include="DefaultMappings\DefaultElementMapping.cs" />
     <Compile Include="DefaultMappings\ImageMappings.cs" />
     <Compile Include="DefaultMappings\LinkMappings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

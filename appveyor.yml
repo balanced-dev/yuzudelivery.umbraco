@@ -7,8 +7,6 @@ environment:
 image: Visual Studio 2017
 configuration: Release
 cache: src/packages/
-nuget:
-  account_feed: true
 install:
   nuget sources add -Name AppVeyorFeed -Source https://ci.appveyor.com/nuget/philwhittaker-efxj7l9jj9vc -UserName %nuget_user% -Password %nuget_password%
 assembly_info:

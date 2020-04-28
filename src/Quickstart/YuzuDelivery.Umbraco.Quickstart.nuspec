@@ -25,6 +25,6 @@
     <file src="StandaloneContent\tools\web.config.install.xdt" target="Content\web.config.install.xdt" />
     <file src="StandaloneContent\tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
     <file src="StandaloneContent\Yuzu\Startup.cs.pp" target="Content\Yuzu\Startup.cs.pp" />
-    <file src="StandaloneContent\Yuzu\Mapping\readme.txt" target="Content\Yuzu\Mapping\readme.txt" />
+    <file src="StandaloneContent\Yuzu\Mappings\readme.txt" target="Content\Yuzu\Mappings\readme.txt" />
   </files>
 </package>

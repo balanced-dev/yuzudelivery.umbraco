@@ -264,6 +264,9 @@
     <Reference Include="YuzuDelivery.Core, Version=1.0.44.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YuzuDelivery.Core.1.0.44\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
+    <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.76.22\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompositionExtensions.cs" />
@@ -318,10 +321,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.csproj">
-      <Project>{b53158ed-127f-4814-b5c5-5d29147b28cf}</Project>
-      <Name>YuzuDelivery.Umbraco.Import</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj">
       <Project>{a9b8f2ac-90f9-4219-bcda-7ff6e8266c19}</Project>
       <Name>YuzuDelivery.Umbraco.Core</Name>

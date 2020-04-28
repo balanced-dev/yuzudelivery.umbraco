@@ -20,6 +20,7 @@
         <add key="YuzuViewmodelBuilderDirectory" value="~/../$rootnamespace$.Core/ViewModels" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuImportActive" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuImportCustomConfig" value="/YuzuConfig.json" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+        <add key="YuzuImportManualMappingDirectory" value="~/../$rootnamespace$.Core/Yuzu/Mappings/" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing"/>
     </appSettings>
 
     <system.web>

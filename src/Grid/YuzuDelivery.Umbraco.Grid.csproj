@@ -182,6 +182,9 @@
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.8.1.1\lib\net472\Umbraco.Core.dll</HintPath>
     </Reference>
+    <Reference Include="YuzuDelivery.Core, Version=1.0.44.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Core.1.0.44\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutomaticGrid\AutomaticGridExtensions.cs" />
@@ -214,10 +217,6 @@
     <None Include="Web\UI\App_Plugins\YuzuBackofficeCss\package.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\YuzuDelivery.Core\YuzuDelivery.Core\YuzuDelivery.Core.csproj">
-      <Project>{9a998ea1-26c6-4100-b915-d520551cd463}</Project>
-      <Name>YuzuDelivery.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.csproj">
       <Project>{b53158ed-127f-4814-b5c5-5d29147b28cf}</Project>
       <Name>YuzuDelivery.Umbraco.Import</Name>

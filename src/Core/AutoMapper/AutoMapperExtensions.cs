@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Umbraco.Core.Composing;
 using YuzuDelivery.Core;
-using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using Umbraco.Core;
 

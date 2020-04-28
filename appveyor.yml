@@ -1,7 +1,7 @@
 version: 1.2.14.{build}
 environment:
-  core_version: 1.0.40
-  import_version: 1.0.76
+  core_version: 1.0.44
+  import_version: 1.0.76.22
   umbraco_version: 8.5.3
   umbraco_forms_version: 8.2.0
 image: Visual Studio 2017
@@ -9,6 +9,7 @@ configuration: Release
 cache: src/packages/
 nuget:
   project_feed: true
+  account_feed: true
 assembly_info:
   patch: true
   file: AssemblyInfo.*

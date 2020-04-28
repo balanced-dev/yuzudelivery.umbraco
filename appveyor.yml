@@ -1,4 +1,6 @@
 version: 1.2.14.{build}
+nuget:
+  account_feed: true
 environment:
   core_version: 1.0.44
   import_version: 1.0.76.22
@@ -7,8 +9,6 @@ environment:
 image: Visual Studio 2017
 configuration: Release
 cache: src/packages/
-nuget:
-  account_feed: true
 assembly_info:
   patch: true
   file: AssemblyInfo.*

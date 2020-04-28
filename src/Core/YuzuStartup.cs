@@ -52,7 +52,7 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register(typeof(YuzuMappingConfig), typeof(DefaultElementMapping));
             composition.Register(typeof(YuzuMappingConfig), typeof(ImageMappings));
             composition.Register(typeof(YuzuMappingConfig), typeof(LinkMappings));
-            composition.Register(typeof(YuzuMappingConfig), typeof(ListOfSubBlocksMappings));
+            composition.Register(typeof(YuzuMappingConfig), typeof(SubBlocksMappings));
             composition.Register(typeof(YuzuMappingConfig), typeof(ManualMappingsMappings));
             composition.Register(typeof(YuzuMappingConfig), typeof(GroupedConfigMappings));
             composition.Register(typeof(YuzuMappingConfig), typeof(GlobalConfigMappings));

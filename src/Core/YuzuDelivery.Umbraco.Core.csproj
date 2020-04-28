@@ -271,7 +271,7 @@
     <Compile Include="AutoMapper\Mappers\MapperSettings\YuzuTypeFactoryMapperSettings.cs" />
     <Compile Include="DefaultMappings\GlobalConfigMappings.cs" />
     <Compile Include="DefaultMappings\GroupedConfigMappings.cs" />
-    <Compile Include="DefaultMappings\ListOfSubBlocksMappings.cs" />
+    <Compile Include="DefaultMappings\SubBlocksMappings.cs" />
     <Compile Include="DefaultMappings\ManualMappingsMappings.cs" />
     <Compile Include="AutoMapper\Mappers\MapperSettings\YuzuPropertyAfterMapperSettings.cs" />
     <Compile Include="AutoMapper\Mappers\MapperSettings\YuzuTypeAfterMapperSettings.cs" />

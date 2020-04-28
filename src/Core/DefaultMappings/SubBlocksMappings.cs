@@ -11,15 +11,15 @@ using YuzuDelivery.Umbraco.Import;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public class ListOfSubBlocksMappings : YuzuMappingConfig
+    public class SubBlocksMappings : YuzuMappingConfig
     {
-        public ListOfSubBlocksMappings(IVmPropertyMappingsFinder vmPropertyMappingsFinder)
+        public SubBlocksMappings(IVmPropertyMappingsFinder vmPropertyMappingsFinder)
         {
             var listOfObjectsMappings = vmPropertyMappingsFinder.GetMappings<object>();
 
             foreach (var i in listOfObjectsMappings)
             {
-                if (i.SourceType != null)
+                if (i.SourceType != null && i.SourceProperty != null && i.SourceProperty.PropertyType == typeof(IPublishedContent))
                 {
                     var resolverType = typeof(SubBlocksObjectResolver<,>).MakeGenericType(i.SourceType, i.DestType);
 
@@ -54,5 +54,4 @@ namespace YuzuDelivery.Umbraco.Core
             return mapper.Map(sourceMember, cmsModel, viewmodel, context.Items);
         }
     }
-
 }

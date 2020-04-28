@@ -1,6 +1,4 @@
 version: 1.2.14.{build}
-nuget:
-  account_feed: true
 environment:
   core_version: 1.0.44
   import_version: 1.0.76.22
@@ -9,6 +7,10 @@ environment:
 image: Visual Studio 2017
 configuration: Release
 cache: src/packages/
+nuget:
+  account_feed: true
+install:
+  nuget sources add -Name AppVeyorFeed -Source https://ci.appveyor.com/nuget/philwhittaker-efxj7l9jj9vc -UserName %nuget_user% -Password %nuget_password%
 assembly_info:
   patch: true
   file: AssemblyInfo.*

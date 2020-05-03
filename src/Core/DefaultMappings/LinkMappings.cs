@@ -30,6 +30,7 @@ namespace YuzuDelivery.Umbraco.Core
                     Title = link.Name,
                     Label = link.Name,
                     Href = link.Url,
+                    IsActive = link == context.Model
                 };
             }
             else
@@ -49,7 +50,8 @@ namespace YuzuDelivery.Umbraco.Core
                     {
                         Title = link.Name,
                         Label = link.Name,
-                        Href = link.Url
+                        Href = link.Url,
+                        IsExternalLink = true
                     };
                 }
                 else
@@ -65,7 +67,8 @@ namespace YuzuDelivery.Umbraco.Core
                             {
                                 Title = link.Name,
                                 Label = link.Name,
-                                Href = content.Url
+                                Href = content.Url,
+                                IsActive = link == context.Model
                             };
                             return d;
                         }

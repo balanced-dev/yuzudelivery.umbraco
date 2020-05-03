@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Umbraco.Core.Models.PublishedContent;
 using YuzuDelivery.Core;
+using Umbraco.Web;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -36,7 +37,9 @@ namespace YuzuDelivery.Umbraco.Core
                 return new vmBlock_DataImage
                 {
                     Src = image.Url,
-                    Alt = string.Empty
+                    Alt = image.Value<string>("alt"),
+                    Height = image.Value<int>("umbracoHeight"),
+                    Width = image.Value<int>("umbracoWidth")
                 };
             }
             return new vmBlock_DataImage();
@@ -49,7 +52,9 @@ namespace YuzuDelivery.Umbraco.Core
                 return new vmBlock_DataImage
                 {
                     Src = image.Url,
-                    Alt = string.Empty
+                    Alt = image.Value<string>("alt"),
+                    Height = image.Value<int>("umbracoHeight"),
+                    Width = image.Value<int>("umbracoWidth")
                 };
             }
             return new vmBlock_DataImage();

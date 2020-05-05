@@ -113,7 +113,7 @@ namespace YuzuDelivery.Umbraco.Core
 
         public virtual string GetVersion()
         {
-            var assembly = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.GetName().Name.Contains("ViewModelGenerator")).FirstOrDefault();
+            var assembly = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.GetTypes().Any(y => y == typeof(GenerateController))).FirstOrDefault();
             if (assembly != null)
                 return assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
             else

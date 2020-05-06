@@ -3,12 +3,4 @@
 	Layout = "master.cshtml";
 }
 
-@(Html.RenderFETemplate<vmPage_Home>
-    (new RenderSettings()
-    {
-    Template = "home",
-    MapFrom = Model,
-    ShowJson = false
-    },
-    new Dictionary<string, object>() { { "HtmlHelper", Html } }))
-
+@(Html.RenderYuzu<vmPage_Home>(Model))

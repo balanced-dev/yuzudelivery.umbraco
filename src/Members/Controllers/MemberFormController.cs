@@ -11,210 +11,127 @@ using Umbraco.Web;
 using YuzuDelivery.Umbraco.Forms;
 using YuzuDelivery.Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Web.Controllers;
 
 namespace YuzuDelivery.Umbraco.Members
 {
     public class MemberFormController : SurfaceController
     {
-        protected IMemberService memberService;
-        protected IYuzuDeliveryMembersConfig config;
+        private readonly IMemberService memberService;
+        private readonly IYuzuDeliveryMembersConfig config;
+        private readonly YuzuFormViewModelFactory viewmodelFactory;
 
-        public MemberFormController(IMemberService memberService, IYuzuDeliveryMembersConfig config)
+        public MemberFormController(IMemberService memberService, IYuzuDeliveryMembersConfig config, YuzuFormViewModelFactory viewmodelFactory)
         {
             this.memberService = memberService;
             this.config = config;
+            this.viewmodelFactory = viewmodelFactory;
         }
 
         public ActionResult Login()
         {
-            vmBlock_DataFormBuilder model = null;
-
             if (!Umbraco.MemberIsLoggedOn())
             {
-                model = new vmBlock_DataFormBuilder()
-                {
-                    Title = "Login",
-                    Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
+                var formFields = new List<object>()
                     {
-                        new vmSub_DataFormBuilderFieldset()
-                        {
-                            Fields = new List<object>()
-                            {
-                                new vmBlock_FormTextInput() { Name = "loginModel.Username", Type = "text", Placeholder = "Email Address", IsRequired = true },
-                                new vmBlock_FormTextInput() { Name = "loginModel.Password", Type = "password", Placeholder = "Password", IsRequired = true },
-                            }
-                        }
-                    },
-                    SubmitButtonText = "Login",
-                    ActionLinks = new List<vmBlock_DataLink>()
-                    {
-                        new vmBlock_DataLink() { Label = config.ForgottenPasswordLabel, Href = config.ForgottenPasswordUrl },
-                        new vmBlock_DataLink() { Label = config.RegisterLabel, Href = config.RegisterUrl },
-                    }
-                };
+                        new vmBlock_FormTextInput() { Name = "loginModel.Username", Type = "text", Placeholder = "Email Address", IsRequired = true },
+                        new vmBlock_FormTextInput() { Name = "loginModel.Password", Type = "password", Placeholder = "Password", IsRequired = true },
+                    };
+
+                var model = viewmodelFactory.Create(this, formFields, x => false);
+                model.AddHandler<UmbLoginController>(x => x.HandleLogin(null));
+                model.AddAntiForgeryToken = false;
+
+                return PartialView("YuzuForms", model);
             }
             else
+            {
                 Response.Redirect(config.HomeUrl);
-
-            return PartialView("YuzuForms", model);
+                return null;
+            }
         }
 
         public ActionResult ForgottenPassword()
         {
-            vmBlock_DataFormBuilder model = null;
-
             if (!Umbraco.MemberIsLoggedOn())
             {
-                if (TempData["FormSuccess"] != null && TempData["FormSuccess"].ToString() == "True")
-                {
-                    model = new vmBlock_DataFormBuilder()
+                var formFields = new List<object>()
                     {
-                        Title = "Forgotten Password",
-                        IsSuccess = true,
-                        SuccessMessage = "We have emailed a link to change your password",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.BackLabel, Href = config.HomeUrl }
-                        }
+                        new vmBlock_FormTextInput() { Name = "forgottenPasswordVm.Email", Type = "text", Placeholder = "Email Address", IsRequired = true },
                     };
-                }
-                else
-                {
-                    model = new vmBlock_DataFormBuilder()
-                    {
-                        Title = "Forgotten Password",
-                        Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
-                        {
-                            new vmSub_DataFormBuilderFieldset()
-                            {
-                                Fields = new List<object>()
-                                {
-                                    new vmBlock_FormTextInput() { Name = "forgottenPasswordVm.Email", Type = "text", Placeholder = "Email Address", IsRequired = true },
-                                },
-                            }
-                        },
-                        SubmitButtonText = "Submit",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.CancelLabel, Href = config.HomeUrl }
-                        }
-                    };
-                }
+
+                var model = viewmodelFactory.Create(this, formFields, x => x.HasTempData("FormSuccess"));
+                model.AddHandler<MemberHandlerController>(x => x.HandleForgottenPassword(null));
+
+                return PartialView("YuzuForms", model);
             }
             else
+            {
                 Response.Redirect(config.HomeUrl);
-
-            return PartialView("YuzuForms", model);
+                return null;
+            }
         }
 
         public ActionResult Register()
         {
-            vmBlock_DataFormBuilder model = null;
-
             if (!Umbraco.MemberIsLoggedOn())
             {
-                if (TempData["FormSuccess"] != null && TempData["FormSuccess"].ToString() == "True")
-                {
-                    model = new vmBlock_DataFormBuilder()
+                var formFields = new List<object>()
                     {
-                        Title = "Register",
-                        IsSuccess = true,
-                        SuccessMessage = "Account created successfully.",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.BackLabel, Href = config.HomeUrl }
-                        }
+                        new vmBlock_FormTextInput() { Name = "registerModel.Name", Type = "text", Placeholder = "Name", IsRequired = true },
+                        new vmBlock_FormTextInput() { Name = "registerModel.Email", Type = "text", Placeholder = "Email Address", IsRequired = true },
+                        new vmBlock_FormTextInput() { Name = "registerModel.Password", Type = "password", Placeholder = "Password", IsRequired = true }
                     };
-                }
-                else
-                {
-                    model = new vmBlock_DataFormBuilder()
-                    {
-                        Title = "Register",
-                        Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
-                        {
-                            new vmSub_DataFormBuilderFieldset()
-                            {
-                                Fields = new List<object>()
-                                {
-                                    new vmBlock_FormTextInput() { Name = "registerModel.Name", Type = "text", Placeholder = "Name", IsRequired = true },
-                                    new vmBlock_FormTextInput() { Name = "registerModel.Email", Type = "text", Placeholder = "Email Address", IsRequired = true },
-                                    new vmBlock_FormTextInput() { Name = "registerModel.Password", Type = "password", Placeholder = "Password", IsRequired = true }
-                                },
-                            }
-                        },
-                        SubmitButtonText = "Submit",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.CancelLabel, Href = config.HomeUrl }
-                        }
-                    };
-                }
+
+
+                var model = viewmodelFactory.Create(this, formFields, x => x.HasTempData("FormSuccess"));
+                model.AddHandler<UmbRegisterController>(x => x.HandleRegisterMember(null));
+                model.AddAntiForgeryToken = false;
+
+                return PartialView("YuzuForms", model);
             }
             else
+            {
                 Response.Redirect(config.HomeUrl);
-
-            return PartialView("YuzuForms", model);
+                return null;
+            }
         }
 
         public ActionResult ChangeMember()
         {
-            vmBlock_DataFormBuilder model = null;
-
             if (Umbraco.MemberIsLoggedOn())
             {
-                if (TempData["FormSuccess"] != null && TempData["FormSuccess"].ToString() == "True")
+                var memberModel = Members.GetCurrentMember();
+                var member = memberService.GetById(memberModel.Id);
+
+                var formFields = new List<object>()
                 {
-                    model = new vmBlock_DataFormBuilder()
-                    {
-                        Title = "Change Member",
-                        IsSuccess = true,
-                        SuccessMessage = "User details have been updated",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.BackLabel, Href = config.HomeUrl }
-                        }
-                    };
-                }
-                else
-                {
-                    model = new vmBlock_DataFormBuilder()
-                    {
-                        Title = "Change Member",
-                        Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
-                        {
-                            new vmSub_DataFormBuilderFieldset()
-                            {
-                                Fields = new List<object>()
-                                {
-                                    new vmBlock_FormTextInput() { Name = "changeMemberVm.Name", Type = "text", Placeholder = "Name", IsRequired = true },
-                                    new vmBlock_FormTextInput() { Name = "changeMemberVm.Email", Type = "text", Placeholder = "Email Address", IsRequired = true }
-                                },
-                            }
-                        },
-                        SubmitButtonText = "Change",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.CancelLabel, Href = config.HomeUrl }
-                        }
-                    };
-                }
+                    new vmBlock_FormTextInput() { Name = "changeMemberVm.Name", Type = "text", Label = "Full Name", Value = member.Name, Placeholder = "Full Name", IsRequired = true },
+                    new vmBlock_FormTextInput() { Name = "changeMemberVm.Email", Type = "text", Label = "Email Address", Value = member.Email, Placeholder = "Email Address", IsRequired = true },
+                };
+
+                var model = viewmodelFactory.Create(this, formFields, x => x.HasTempData("FormSuccess"), x => x.ChangeMember());
+                model.AddHandler<MemberHandlerController>(x => x.HandleUpdate(null));
+
+                return PartialView("YuzuForms", model);
             }
             else
+            {
                 Response.Redirect(config.HomeUrl);
-
-            return PartialView("YuzuForms", model);
+                return null;
+            }
         }
 
         public ActionResult ChangePassword()
         {
-            vmBlock_DataFormBuilder model = null;
+            var model = new YuzuFormViewModel();
             IMember member = null;
             IPublishedContent memberModel = null;
+            var userKey = Request.QueryString["id"];
 
-            if (Request.QueryString["id"] != null)
+            if (!string.IsNullOrEmpty(userKey))
             {
-                member = memberService.GetByKey(Guid.Parse(Request.QueryString["id"]));
+                member = memberService.GetByKey(Guid.Parse(userKey));
                 memberModel = Members.GetById(member.Id);
             }
 
@@ -222,52 +139,26 @@ namespace YuzuDelivery.Umbraco.Members
             {
                 if (TempData["FormSuccess"] != null && TempData["FormSuccess"].ToString() == "True")
                 {
-                    model = new vmBlock_DataFormBuilder()
-                    {
-                        Title = "Change Password",
-                        IsSuccess = true,
-                        SuccessMessage = "Password has been changed",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.BackLabel, Href = config.HomeUrl }
-                        }
-                    };
+                    model.Form = viewmodelFactory.Success("Change Password", "Your password has been changed");
                 }
-                else if (member != null && memberModel.Value<DateTime>("ForgottenPasswordExpiry") < DateTime.Now)
+                else if (member != null && memberModel.Value<DateTime>("ForgottenPasswordExpiry") < DateTime.UtcNow)
                 {
-                    model = new vmBlock_DataFormBuilder()
+                    model.Form = viewmodelFactory.Success("Change Password", "Password change link has timed out, please try again");
+                    model.Form.ActionLinks = new List<vmBlock_DataLink>()
                     {
-                        Title = "Change Password",
-                        IsSuccess = true,
-                        SuccessMessage = "Password change link has timed out, please try again",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.ForgottenPasswordLabel, Href = config.ForgottenPasswordUrl }
-                        }
+                        new vmBlock_DataLink() { Label = config.ForgottenPasswordLabel, Href = config.ForgottenPasswordUrl }
                     };
                 }
                 else
                 {
-                    model = new vmBlock_DataFormBuilder()
+                    var formFields = new List<object>()
                     {
-                        Title = "Change Password",
-                        Fieldsets = new List<vmSub_DataFormBuilderFieldset>()
-                        {
-                            new vmSub_DataFormBuilderFieldset()
-                            {
-                                Fields = new List<object>()
-                                {
-                                    new vmBlock_FormTextInput() { Name = "changePasswordVm.Password", Type = "password", Placeholder = "Password", IsRequired = true },
-                                    new vmBlock_FormTextInput() { Name = "changePasswordVm.ConfirmPassword", Type = "password", Placeholder = "Confirm Password", IsRequired = true }
-                                },
-                            }
-                        },
-                        SubmitButtonText = "Change",
-                        ActionLinks = new List<vmBlock_DataLink>()
-                        {
-                            new vmBlock_DataLink() { Label = config.CancelLabel, Href = config.HomeUrl }
-                        }
+                        new vmBlock_FormTextInput() { Name = "changePasswordVm.Password", Type = "password", Label = "Password", Placeholder = "Password", IsRequired = true },
+                        new vmBlock_FormTextInput() { Name = "changePasswordVm.ConfirmPassword", Type = "password", Label = "Confirm Password", Placeholder = "Confirm Password", IsRequired = true },
+                        new vmBlock_FormHidden() { Name = "changePasswordVm.UserKey", Value = userKey }
                     };
+                    model.Form = viewmodelFactory.Form("Change Password", "Change Password", formFields);
+                    model.AddHandler<MemberHandlerController>(x => x.HandleChangePassword(null));
                 }
             }
             else

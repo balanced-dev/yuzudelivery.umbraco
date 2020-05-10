@@ -12,9 +12,6 @@ namespace YuzuDelivery.Umbraco.Members
         public YuzuDeliveryMembersConfiguration()
         {
             ForgottenPasswordLabel = "Forgotten Password?";
-            RegisterLabel = "Register";
-            BackLabel = "Back";
-            CancelLabel = "Cancel";
 
             EmailNotFoundErrorMessage = "Email address not found";
             MemberNotFoundErrorMessage = "Member not found";
@@ -23,16 +20,10 @@ namespace YuzuDelivery.Umbraco.Members
         }
 
         public string HomeUrl { get; set; }
-        public string MembersHomeUrl { get; set; }
         public string ForgottenPasswordUrl { get; set; }
-        public string LoginUrl { get; set; }
-        public string RegisterUrl { get; set; }
         public string ChangePasswordUrl { get; set; }
 
         public string ForgottenPasswordLabel { get; set; }
-        public string RegisterLabel { get; set; }
-        public string CancelLabel { get; set; }
-        public string BackLabel { get; set; }
 
         public string EmailNotFoundErrorMessage { get; set; }
         public string MemberNotFoundErrorMessage { get; set; }

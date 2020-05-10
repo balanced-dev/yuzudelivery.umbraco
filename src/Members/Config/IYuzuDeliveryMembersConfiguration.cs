@@ -7,16 +7,10 @@ namespace YuzuDelivery.Umbraco.Members
     public interface IYuzuDeliveryMembersConfig
     {
         string HomeUrl { get; set; }
-        string MembersHomeUrl { get; set; }
         string ForgottenPasswordUrl { get; set; }
-        string LoginUrl { get; set; }
-        string RegisterUrl { get; set; }
         string ChangePasswordUrl { get; set; }
 
         string ForgottenPasswordLabel { get; set; }
-        string RegisterLabel { get; set; }
-        string CancelLabel { get; set; }
-        string BackLabel { get; set; }
 
         string EmailNotFoundErrorMessage { get; set; }
         string MemberNotFoundErrorMessage { get; set; }

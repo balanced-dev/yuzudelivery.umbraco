@@ -3,12 +3,47 @@
 @using System.Web.Mvc
 @using YuzuDelivery.Core;
 @using YuzuDelivery.Umbraco.Grid;
-@{ var gridItem = Html.GridPartial(Model.Item); }
-<span class="yuzu-back-office" style="all: initial; pointer-events: none;">
-    @Html.RenderYuzu(new RenderSettings()
-{
-        Template = string.Format("par{0}", Model.Item.GetType().Name),
-        Data = () => { return gridItem.CreateVm(Model.Item, new Dictionary<string, object>() { { "HtmlHelper", Html } }); },
-        ShowJson = false
-    })
-</span>
+@using HtmlAgilityPack;
+
+@{
+    try
+    {
+        var gridItem = Html.GridPartial(Model.Item);
+        var htmlDoc = new HtmlDocument();
+        var output = Html.RenderYuzu(new RenderSettings()
+        {
+            Template = string.Format("par{0}", Model.Item.GetType().Name),
+            Data = () => { return gridItem.CreateVm(Model.Item, new Dictionary<string, object>() { { "HtmlHelper", Html } }); },
+            ShowJson = false
+        });
+
+        htmlDoc.LoadHtml(output.ToHtmlString());
+
+        if (!string.IsNullOrEmpty(htmlDoc.DocumentNode.InnerText.Trim()))
+        {
+            <span class="yuzu-back-office" style="all: initial; pointer-events: none;">
+                @output
+            </span>
+        }
+        else
+        {
+            <div class="umb-editor-placeholder dtge-editor-placeholder ng-scope">
+                <i class="icon icon-os-x"></i>
+                <div class="help-text ng-binding">
+                    @Model.ContentType.Alias.FirstCharacterToUpper() : Content is Empty
+                </div>
+            </div>
+        }
+
+    }
+    catch (Exception ex)
+    {
+        <div class="umb-editor-placeholder dtge-editor-placeholder ng-scope">
+            <i class="icon icon-os-x"></i>
+            <div class="help-text ng-binding">
+                @Model.ContentType.Alias.FirstCharacterToUpper() : Preview not available
+            </div>
+            <div>@ex.Message</div>
+        </div>
+    }
+}

@@ -6,6 +6,7 @@ using Umbraco.Web.Models;
 using Umbraco.Web.Composing;
 using Umbraco.Core;
 using YuzuDelivery.Core;
+using Umbraco.Web;
 
 namespace YuzuDelivery.Umbraco.Core
 {    
@@ -40,6 +41,13 @@ namespace YuzuDelivery.Umbraco.Core
 
     public class LinkConvertor : IYuzuTypeConvertor<Link, vmBlock_DataLink>
     {
+        public IPublishedContentQuery contentQuery;
+
+        public LinkConvertor(IPublishedContentQuery contentQuery)
+        {
+            this.contentQuery = contentQuery;
+        }
+
         public vmBlock_DataLink Convert(Link link, UmbracoMappingContext context)
         {
             if (link != null)
@@ -59,14 +67,14 @@ namespace YuzuDelivery.Umbraco.Core
                     var id = link.Udi as GuidUdi;
                     if(id != null)
                     {
-                        var content = Current.UmbracoHelper.Content(id.Guid);
+                        var content = contentQuery.Content(id);
 
                         if(content != null)
                         {
                             var d = new vmBlock_DataLink()
                             {
-                                Title = link.Name,
-                                Label = link.Name,
+                                Title = content.Name,
+                                Label = content.Name,
                                 Href = content.Url,
                                 IsActive = link == context.Model
                             };

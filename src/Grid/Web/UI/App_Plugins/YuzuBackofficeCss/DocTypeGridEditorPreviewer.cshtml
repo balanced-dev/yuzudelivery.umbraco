@@ -4,7 +4,6 @@
 @using YuzuDelivery.Core;
 @using YuzuDelivery.Umbraco.Grid;
 @using HtmlAgilityPack;
-
 @{
     try
     {
@@ -18,8 +17,10 @@
         });
 
         htmlDoc.LoadHtml(output.ToHtmlString());
+        var imageNodes = htmlDoc.DocumentNode.SelectNodes("//img");
+        var hasImage = imageNodes != null ? imageNodes.Any(x => x.Attributes.Any(y => !string.IsNullOrEmpty(y.Value))) : false;
 
-        if (!string.IsNullOrEmpty(htmlDoc.DocumentNode.InnerText.Trim()))
+        if (!string.IsNullOrEmpty(htmlDoc.DocumentNode.InnerText.Trim()) || hasImage)
         {
             <span class="yuzu-back-office" style="all: initial; pointer-events: none;">
                 @output
@@ -38,12 +39,20 @@
     }
     catch (Exception ex)
     {
-        <div class="umb-editor-placeholder dtge-editor-placeholder ng-scope">
-            <i class="icon icon-os-x"></i>
-            <div class="help-text ng-binding">
-                @Model.ContentType.Alias.FirstCharacterToUpper() : Preview not available
+        try
+        {
+            <div class="umb-editor-placeholder dtge-editor-placeholder ng-scope">
+                <i class="icon icon-os-x"></i>
+                <div class="help-text ng-binding">
+                    @Model.ContentType.Alias.FirstCharacterToUpper() : Preview not available
+                </div>
+                <div>@ex.Message</div>
             </div>
-            <div>@ex.Message</div>
-        </div>
+        }
+        catch
+        {
+            <text>Content is Empty</text>
+        }
+
     }
 }

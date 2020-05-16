@@ -27,7 +27,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
             foreach (var i in rowMappings)
             {
-                var configType = AddConfigMapping(i.DestProperty, ConfigType.Rows);
+                var configType = AddConfigMapping<vmBlock_DataRows>(i.DestProperty, ConfigType.Rows);
                 Type resolverType = null;
 
                 if(i.SourceType != null)
@@ -45,21 +45,23 @@ namespace YuzuDelivery.Umbraco.Grid
 
             foreach (var i in gridMappings)
             {
-                var rowsConfigType = AddConfigMapping(i.DestProperty, ConfigType.Rows);
-                var colsConfigType = AddConfigMapping(i.DestProperty, ConfigType.Cells);
+                var rowsConfigType = AddConfigMapping<vmBlock_DataGrid>(i.DestProperty, ConfigType.Rows);
+                var colsConfigType = AddConfigMapping<vmBlock_DataGrid>(i.DestProperty, ConfigType.Cells);
 
                 Type resolverType = null;
 
-                if (rowsConfigType == null && colsConfigType == null)
-                    resolverType = typeof(GridRowColumnConvertor<,>).MakeGenericType(i.SourceType, i.DestType);
-                else if(colsConfigType == null)
-                    resolverType = typeof(GridRowColumnConvertor<,,>).MakeGenericType(i.SourceType, i.DestType, rowsConfigType);
-                else
-                    resolverType = typeof(GridRowColumnConvertor<,,,>).MakeGenericType(i.SourceType, i.DestType, rowsConfigType, colsConfigType);
+                if (i.SourceType != null)
+                {
+                    if (rowsConfigType == null && colsConfigType == null)
+                        resolverType = typeof(GridRowColumnConvertor<,>).MakeGenericType(i.SourceType, i.DestType);
+                    else if (colsConfigType == null)
+                        resolverType = typeof(GridRowColumnConvertor<,,>).MakeGenericType(i.SourceType, i.DestType, rowsConfigType);
+                    else
+                        resolverType = typeof(GridRowColumnConvertor<,,,>).MakeGenericType(i.SourceType, i.DestType, rowsConfigType, colsConfigType);
 
-                AddResolverMapping(i, resolverType);
+                    AddResolverMapping(i, resolverType);
+                }
             }
-
         }
 
         private void AddResolverMapping(VmPropertyMappingsFinder.Settings i, Type resolverType)
@@ -73,7 +75,7 @@ namespace YuzuDelivery.Umbraco.Grid
             });
         }
 
-        private Type AddConfigMapping(PropertyInfo destProperty, ConfigType type)
+        private Type AddConfigMapping<V>(PropertyInfo destProperty, ConfigType type)
         {
             var path = "/rows/config";
             if(type == ConfigType.Cells)
@@ -82,7 +84,7 @@ namespace YuzuDelivery.Umbraco.Grid
             var ofType = schemaMetaService.GetOfType(destProperty, "refs");
             if(!string.IsNullOrEmpty(ofType))
             {
-                var configTypeName = schemaMetaService.Get(typeof(vmBlock_DataRows), "refs", path, ofType).FirstOrDefault();
+                var configTypeName = schemaMetaService.Get(typeof(V), "refs", path, ofType).FirstOrDefault();
 
                 if(!string.IsNullOrEmpty(configTypeName))
                 {

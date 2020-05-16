@@ -25,6 +25,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
             composition.Register(typeof(GridRowConvertor<,>));
             composition.Register(typeof(GridRowConvertor<,,>));
+            composition.Register(typeof(GridRowColumnConvertor<,>));
             composition.Register(typeof(GridRowColumnConvertor<,,>));
             composition.Register(typeof(GridRowColumnConvertor<,,,>));
             composition.Register(typeof(GridConfigConverter<>));

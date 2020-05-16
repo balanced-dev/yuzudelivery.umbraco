@@ -12,7 +12,7 @@
 	<dependencies>
     <dependency id="YuzuDelivery.Core" version="$core_version$" />
 		<dependency id="Skybrud.Umbraco.GridData" version="3.0.0-beta003" />
-    <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.0.0" />
+    <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.2.0" />
 	</dependencies>
   </metadata>
   <files>

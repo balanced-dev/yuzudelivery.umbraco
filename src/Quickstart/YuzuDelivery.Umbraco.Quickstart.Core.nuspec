@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>YuzuDelivery.Umbraco.QuickStart.Core</id>
-    <version>1.0.0-beta</version>
+    <version>1.0.0</version>
     <authors>Phil Whittaker</authors>
     <owners>Phil Whittaker</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>

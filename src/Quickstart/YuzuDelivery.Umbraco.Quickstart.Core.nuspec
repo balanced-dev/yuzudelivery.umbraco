@@ -7,9 +7,9 @@
     <owners>Phil Whittaker</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://balanced.dev/media/1102/yuzu-package-icon.png</iconUrl>
+    <iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
     <description>Yuzu Delivery For Umbracos</description>
-    <copyright>Copyright 2018-2020 HiFi Ltd</copyright>
+    <copyright>Copyright 2019-2020 HiFi Ltd</copyright>
     <tags>umbraco cms</tags>
     <dependencies>
       <dependency id="UmbracoCms.Core" version="$umbraco_version$" />

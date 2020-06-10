@@ -7,7 +7,7 @@
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Yuzu Delivery For Umbraco- setup and basic blocks</description>
-    <iconUrl>https://balanced.dev/media/1102/yuzu-package-icon.png</iconUrl>
+    <iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
     <copyright>Copyright 2018-2020 HiFi Ltd</copyright>
     <tags>umbraco cms</tags>
 	<dependencies>

@@ -45,7 +45,9 @@ namespace YuzuDelivery.Umbraco.Core
 
             if (settings != null)
             {
-                cfg.RecognizePrefixes(settings.GroupName);
+                var groupNameWithoutSpaces = settings.GroupName.Replace(" ", "");
+
+                cfg.RecognizePrefixes(groupNameWithoutSpaces);
 
                 mapContext.AddOrGet<Source, DestChild>(cfg);
 

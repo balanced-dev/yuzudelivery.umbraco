@@ -11,6 +11,11 @@ namespace YuzuDelivery.Umbraco.Forms
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.1)")]
     public partial class vmBlock_FormSelect : IFormFieldElementConfig
     {
+        public vmBlock_FormSelect()
+        {
+            Options = new System.Collections.Generic.List<vmSub_FormSelectOption>();
+        }
+
         [Newtonsoft.Json.JsonProperty("label", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Label { get; set; }
 

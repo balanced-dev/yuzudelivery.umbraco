@@ -25,7 +25,7 @@ namespace YuzuDelivery.Umbraco.Core
 
             ViewModelAssemblies = new Assembly[] { localAssembly };
 
-            CMSModels = localAssembly.GetTypes().Where(x => x.BaseType == typeof(PublishedElementModel) || x.BaseType == typeof(PublishedContentModel)).ToList();
+            CMSModels = localAssembly.GetTypes().Where(x => x.GetCustomAttribute<PublishedModelAttribute>() != null).ToList();
 
             TemplateLocations = new List<ITemplateLocation>()
                 {

@@ -1,7 +1,7 @@
 version: 1.2.22.{build}
 environment:
   core_version: 1.0.47
-  import_version: 1.0.86
+  import_version: 1.0.88
   umbraco_version: 8.7.0
   umbraco_forms_version: 8.5.3
 image: Visual Studio 2017

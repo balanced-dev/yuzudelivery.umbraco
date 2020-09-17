@@ -37,7 +37,7 @@ on_finish:
 
     appveyor PushArtifact YuzuDelivery.Umbraco.Members.%APPVEYOR_BUILD_VERSION%.nupkg
 
-    nuget pack src/Members/YuzuDelivery.Umbraco.PositionalContent.nuspec -Version %APPVEYOR_BUILD_VERSION%
+    nuget pack src/PositionalContent/YuzuDelivery.Umbraco.PositionalContent.nuspec -Version %APPVEYOR_BUILD_VERSION%
 
     appveyor PushArtifact YuzuDelivery.Umbraco.PositionalContent.%APPVEYOR_BUILD_VERSION%.nupkg
     

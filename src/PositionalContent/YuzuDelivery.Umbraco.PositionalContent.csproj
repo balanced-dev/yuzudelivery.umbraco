@@ -7,8 +7,8 @@
     <ProjectGuid>{9F1B6B25-0A45-4B82-9282-D302B233AB9D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Yuzu.Umbraco.PositionalContent</RootNamespace>
-    <AssemblyName>Yuzu.Umbraco.PositionalContent</AssemblyName>
+    <RootNamespace>YuzuDelivery.Umbraco.PositionalContent</RootNamespace>
+    <AssemblyName>YuzuDelivery.Umbraco.PositionalContent</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -9,10 +9,9 @@
     <license type="expression">MIT</license>
     <iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
     <copyright>Copyright 2019-2020 HiFi Ltd</copyright>
-	<dependencies>
-    <dependency id="HiFi.PositionalContent.Core" version="2.0.1" />
-    <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
-	</dependencies>
+    <dependencies>
+      <dependency id="HiFi.PositionalContent.Core" version="2.0.1" />
+    </dependencies>
   </metadata>
   <files>
      <file src="bin\Release\YuzuDelivery.Umbraco.PositionalContent.dll" target="lib\net472" />

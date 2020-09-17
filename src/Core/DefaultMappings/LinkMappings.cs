@@ -71,10 +71,12 @@ namespace YuzuDelivery.Umbraco.Core
 
                         if(content != null)
                         {
+                            var name = string.IsNullOrEmpty(link.Name) ? content.Name : link.Name;
+
                             var d = new vmBlock_DataLink()
                             {
-                                Title = content.Name,
-                                Label = content.Name,
+                                Title = name,
+                                Label = name,
                                 Href = content.Url,
                                 IsActive = link == context.Model
                             };

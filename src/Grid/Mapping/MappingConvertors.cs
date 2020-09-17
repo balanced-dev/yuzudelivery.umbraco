@@ -9,6 +9,7 @@ using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Grid
 {
+
     public class GridConfigConverter<T> : IYuzuTypeConvertor<Dictionary<string, object>, T>
     {
         public T Convert(Dictionary<string, object> source, UmbracoMappingContext context)
@@ -17,7 +18,7 @@ namespace YuzuDelivery.Umbraco.Grid
                 return default(T);
 
             var config = JsonConvert.SerializeObject(source);
-            return JsonConvert.DeserializeObject<T>(config);
+            return JsonConvert.DeserializeObject<T>(config, new CustomBooleanJsonConverter());
         }
     }
 
@@ -95,5 +96,19 @@ namespace YuzuDelivery.Umbraco.Grid
             return gridService.CreateRowsColumns<TConfigRow, TConfigCol>(sourceMember, context);
         }
     }
+
+    public class CustomBooleanJsonConverter : JsonConverter<bool>
+    {
+        public override bool ReadJson(JsonReader reader, Type objectType, bool existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            return Convert.ToBoolean(reader.ValueType == typeof(string) ? Convert.ToByte(reader.Value) : reader.Value);
+        }
+
+        public override void WriteJson(JsonWriter writer, bool value, JsonSerializer serializer)
+        {
+            serializer.Serialize(writer, value);
+        }
+    }
+
 
 }

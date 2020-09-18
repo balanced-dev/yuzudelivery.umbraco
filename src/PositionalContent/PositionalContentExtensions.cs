@@ -9,7 +9,6 @@ using Umbraco.Core.Models.PublishedContent;
 
 namespace YuzuDelivery.Umbraco.PositionalContent
 {
-
     public static class PositionalContentExtensions
     {
 
@@ -17,10 +16,48 @@ namespace YuzuDelivery.Umbraco.PositionalContent
         {
             var posConItems = DependencyResolver.Current.GetServices<IPosConContentItem>();
 
-            return posConItems
-                .Where(x => x.GetType().GetInterfaces().Any(y => y.GetGenericArguments().Any(z => z == publishedElement.GetType())))
+            var item = posConItems
                 .Cast<IPosConContentItem>()
+                .Where(x => x.ModelType == publishedElement.GetType())
                 .FirstOrDefault();
+
+            if(item != null)
+            {
+                return item;
+            }
+            else
+            {
+                posConItems = DependencyResolver.Current.GetService<IPosConContentItemInternal[]>();
+
+                return posConItems
+                    .Where(x => x.ModelType == publishedElement.GetType())
+                    .Cast<IPosConContentItem>()
+                    .FirstOrDefault();
+            }
+        }
+
+        public static IPosConImageItem PosConPartialForImage(this HtmlHelper helper, IPublishedElement publishedElement)
+        {
+            var posConItems = DependencyResolver.Current.GetServices<IPosConImageItem>();
+
+            var item = posConItems
+                .Cast<IPosConImageItem>()
+                .Where(x => x.ModelType == publishedElement.GetType())
+                .FirstOrDefault();
+
+            if (item != null)
+            {
+                return item;
+            }
+            else
+            {
+                posConItems = DependencyResolver.Current.GetService<IPosConImageItemInternal[]>();
+
+                return posConItems
+                    .Where(x => x.ModelType == publishedElement.GetType())
+                    .Cast<IPosConImageItem>()
+                    .FirstOrDefault();
+            }
         }
 
         public static R PositionalContentPartial<R>(this UmbracoHelper helper)

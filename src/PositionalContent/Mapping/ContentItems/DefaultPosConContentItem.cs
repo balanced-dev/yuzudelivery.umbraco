@@ -14,6 +14,8 @@ namespace YuzuDelivery.Umbraco.PositionalContent
     {
         public IMapper mapper;
 
+        public Type ModelType => typeof(M);
+
         public DefaultPosConContentItem(IMapper mapper)
         {
             this.mapper = mapper;

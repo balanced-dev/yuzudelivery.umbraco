@@ -1,8 +1,8 @@
-version: 1.2.23.{build}
+version: 1.2.24.{build}
 environment:
-  core_version: 1.0.47
-  import_version: 1.0.88
-  umbraco_version: 8.7.0
+  core_version: 1.0.48
+  import_version: 1.0.89
+  umbraco_version: 8.8.0
   umbraco_forms_version: 8.5.3
 image: Visual Studio 2017
 configuration: Release
@@ -63,11 +63,11 @@ for:
     only:
       - master
 
-  version: 1.2.23
+  version: 1.2.24
 
 -
   branches:
     only:
       - dev
 
-  version: 1.2.23.{build}
+  version: 1.2.24.{build}

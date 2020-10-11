@@ -30,7 +30,7 @@ namespace YuzuDelivery.Umbraco.Core
         public bool IsExternalLink { get; set; }
 
         [Newtonsoft.Json.JsonProperty("iconName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IconName { get; set; }
+        public string IconName { get; set; }
 
         [Newtonsoft.Json.JsonProperty("_ref", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string _ref { get; set; }

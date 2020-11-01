@@ -72,13 +72,14 @@ namespace YuzuDelivery.Umbraco.Core
                         if(content != null)
                         {
                             var name = string.IsNullOrEmpty(link.Name) ? content.Name : link.Name;
+                            var udi = context.Model != null ? new GuidUdi("document", context.Model.Key) : null;
 
                             var d = new vmBlock_DataLink()
                             {
                                 Title = name,
                                 Label = name,
                                 Href = content.Url,
-                                IsActive = link == context.Model
+                                IsActive = link.Udi == udi
                             };
                             return d;
                         }

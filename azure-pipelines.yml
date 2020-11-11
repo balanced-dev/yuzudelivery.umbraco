@@ -63,7 +63,7 @@ steps:
     command: 'pack'
     packagesToPack: 'src/Core/YuzuDelivery.Umbraco.Core.nuspec'
     versioningScheme: 'off'
-    buildProperties: 'core_version="$(core_version)";import_version="$(import_version)"'
+    arguments: '-Properties core_version="$(core_version)",import_version="$(import_version)"'
 
 - task: NuGetCommand@2
   inputs:

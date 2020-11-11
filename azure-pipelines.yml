@@ -13,11 +13,11 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '1.2.25'
-  core_version: '1.0.48'
-  import_version: '1.0.89'
-  umbraco_version: '8.8.0'
-  umbraco_forms_version: '8.5.3'
+  version: 1.2.25
+  core_version: 1.0.48
+  import_version: 1.0.89
+  umbraco_version: 8.8.0
+  umbraco_forms_version: 8.5.3
 
 name: $(version)$(Rev:.r)
 
@@ -58,6 +58,7 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: NuGetCommand@2
+  displayName: PackCore 
   inputs:
     command: 'pack'
     packagesToPack: 'src/Core/YuzuDelivery.Umbraco.Core.nuspec'

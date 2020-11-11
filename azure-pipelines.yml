@@ -63,14 +63,14 @@ steps:
     command: 'pack'
     packagesToPack: 'src/Core/YuzuDelivery.Umbraco.Core.nuspec'
     versioningScheme: 'off'
-    buildProperties: 'core_version="$(core_version)",import_version="$(import_version)"'
+    buildProperties: 'core_version="$(core_version)";import_version="$(import_version)"'
 
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
     packagesToPack: 'src/Forms/YuzuDelivery.Umbraco.Forms.nuspec'
     versioningScheme: 'off'
-    buildProperties: 'core_version="$(core_version)",import_version="$(import_version)"'
+    buildProperties: 'core_version="$(core_version)";import_version="$(import_version)"'
 
 - task: NuGetCommand@2
   inputs:

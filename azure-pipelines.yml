@@ -18,13 +18,12 @@ variables:
   import_version: '1.0.89'
   umbraco_version: '8.8.0'
   umbraco_forms_version: '8.5.3'
-  counter: $[counter(1, 0)]
   ${{ if eq(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
-    branchName: .${{ variables['counter'] }}
+    revision: .${{ variables['Build.BuildId'] }}
   ${{ if ne( variables['Build.SourceBranchName'], 'azure-pipelines') }}:
     branchName: ''
 
-name: $(version)$(branchName)
+name: $(version)$(revision)
 
 steps:
 - task: Assembly-Info-NetFramework@2

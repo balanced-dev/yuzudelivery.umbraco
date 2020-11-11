@@ -14,8 +14,8 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   version: 1.2.25
-  core_version: 1.0.48
-  import_version: 1.0.89
+  core_version: '1.0.48'
+  import_version: '1.0.89'
   umbraco_version: 8.8.0
   umbraco_forms_version: 8.5.3
 

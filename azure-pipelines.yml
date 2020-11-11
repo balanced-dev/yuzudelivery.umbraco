@@ -58,13 +58,11 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: NuGetCommand@2
-  displayName: PackCore 
+  displayName: Nuget Pack Core 
   inputs:
-    command: 'pack'
-    packagesToPack: 'src/Core/YuzuDelivery.Umbraco.Core.nuspec'
-    versioningScheme: 'off'
-    arguments: '-Properties core_version="$(core_version)",import_version="$(import_version)"'
-
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\Core\YuzuDelivery.Umbraco.Core.nuspec" -Version $(Build.BuildNumber) -Properties core_version="$(core_version);"import_version="$(import_version)"'
+    
 - task: NuGetCommand@2
   inputs:
     command: 'pack'

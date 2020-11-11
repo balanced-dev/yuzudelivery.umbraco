@@ -13,8 +13,32 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  version: '1.2.25'
+  core_version: '1.0.48'
+  import_version: '1.0.89'
+  umbraco_version: '8.8.0'
+  umbraco_forms_version: '8.5.3'
+
+name: $(version)$(Rev:.r)
 
 steps:
+- task: Assembly-Info-NetFramework@2
+  inputs:
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: |
+      **\AssemblyInfo.cs
+
+      **\AssemblyInfo.vb
+    InsertAttributes: false
+    FileEncoding: 'auto'
+    WriteBOM: false
+    VersionNumber: '$(Build.BuildNumber)'
+    FileVersionNumber: '$(Build.BuildNumber)'
+    InformationalVersion: '$(Build.BuildNumber)'
+    LogLevel: 'verbose'
+    FailOnWarning: false
+    DisableTelemetry: false
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
@@ -32,3 +56,72 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Core/YuzuDelivery.Umbraco.Core.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'core_version="$(core_version)",import_version="$(import_version)"'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Forms/YuzuDelivery.Umbraco.Forms.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'core_version="$(core_version)",import_version="$(import_version)"'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Grid/YuzuDelivery.Umbraco.Grid.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'core_version="$(core_version)",import_version="$(import_version)"'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Members/YuzuDelivery.Umbraco.Members.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'core_version="$(core_version)",y_umb_version="$(version)$(Rev:.r)"'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/PositionalContent/YuzuDelivery.Umbraco.PositionalContent.nuspec'
+    versioningScheme: 'off'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Quickstart/YuzuDelivery.Umbraco.Quickstart.Web.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'core_version="$(core_version)",import_version="$(import_version)",umbraco_version="$(umbraco_version)",umbraco_forms_version="$(umbraco_forms_version)",y_umb_version="$(version)$(Rev:.r)"'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Quickstart/YuzuDelivery.Umbraco.Quickstart.Core.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'core_version="$(core_version)",import_version="$(import_version)",umbraco_version="$(umbraco_version)",umbraco_forms_version="$(umbraco_forms_version)",y_umb_version="$(version)$(Rev:.r)"'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Quickstart/YuzuDelivery.Umbraco.Quickstart.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'core_version="$(core_version)",import_version="$(import_version)",umbraco_version="$(umbraco_version)",umbraco_forms_version="$(umbraco_forms_version)",y_umb_version="$(version)$(Rev:.r)"'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/QuickstartExample/YuzuDelivery.Umbraco.Quickstart.Example.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'y_umb_version="$(version)$(Rev:.r)"'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'bfaa6bc6-9775-4d15-bf70-5bba69811803/0d5a2d7b-5eaa-444f-9208-7e7089885a00'

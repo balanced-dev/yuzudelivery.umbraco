@@ -23,7 +23,7 @@ variables:
   ${{ if ne( variables['Build.SourceBranchName'], 'azure-pipelines') }}:
     revision: ''
 
-name: $(version)$(revision)
+name: $(version).$(revision)
 
 steps:
 - task: Assembly-Info-NetFramework@2

@@ -19,7 +19,7 @@ variables:
   umbraco_version: '8.8.0'
   umbraco_forms_version: '8.5.3'
   ${{ if eq(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
-    revision: .${{ variables['Build.SourceBranchName'] }}
+    revision: .${{ variables['Build.BuildId'] }}
   ${{ if ne( variables['Build.SourceBranchName'], 'azure-pipelines') }}:
     revision: ''
 

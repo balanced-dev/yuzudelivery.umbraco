@@ -19,11 +19,11 @@ variables:
   umbraco_version: '8.8.0'
   umbraco_forms_version: '8.5.3'
   ${{ if eq(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
-    revision: '-$(Build.SourceBranchName)'
-  ${{ if ne( variables['Build.SourceBranchName'], 'azure-pipelines') }}:
-    revision: ''
+    branchName: '-$(Build.SourceBranchName)'
+  ${{ if ne(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
+    branchName: ''
 
-name: $(version)$(revision)
+name: $(version)$(branchName)
 
 steps:
 - task: Assembly-Info-NetFramework@2

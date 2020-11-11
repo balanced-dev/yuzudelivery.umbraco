@@ -18,10 +18,10 @@ variables:
   import_version: '1.0.89'
   umbraco_version: '8.8.0'
   umbraco_forms_version: '8.5.3'
-  ${{ if eq(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
-    branchName: '-$(Build.SourceBranchName)'
-  ${{ if ne(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
     branchName: ''
+  ${{ if ne( variables['Build.SourceBranchName'], 'master') }}:
+    branchName: -${{ variables['Build.SourceBranchName'] }}
 
 name: $(version)$(branchName)
 

@@ -4,7 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- azure-pipelines
+- master
+- dev
 
 pool:
   vmImage: 'windows-latest'
@@ -18,12 +19,12 @@ variables:
   import_version: '1.0.89'
   umbraco_version: '8.8.0'
   umbraco_forms_version: '8.5.3'
-  ${{ if ne(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
+  ${{ if ne(variables['Build.SourceBranchName'], 'dev') }}:
     revision: $[ counter('.', 0) ]
     separator: '.'
-  ${{ if eq( variables['Build.SourceBranchName'], 'azure-pipelines') }}:
+  ${{ if eq( variables['Build.SourceBranchName'], 'master') }}:
     revision: ''
-    separator: '-'
+    separator: ''
 
 name: $(version)$(separator)$(revision)
 

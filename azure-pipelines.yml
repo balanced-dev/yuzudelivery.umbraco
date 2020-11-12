@@ -23,7 +23,7 @@ variables:
     separator: '.'
   ${{ if eq( variables['Build.SourceBranchName'], 'azure-pipelines') }}:
     revision: ''
-    separator: '.'
+    separator: ''
 
 name: $(version)$(separator)$(revision)
 

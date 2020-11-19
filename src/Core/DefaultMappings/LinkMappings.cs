@@ -78,7 +78,7 @@ namespace YuzuDelivery.Umbraco.Core
                             {
                                 Title = name,
                                 Label = name,
-                                Href = content.Url,
+                                Href = link.Url,
                                 IsActive = link.Udi == udi
                             };
                             return d;

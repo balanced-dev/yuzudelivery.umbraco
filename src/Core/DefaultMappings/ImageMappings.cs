@@ -39,7 +39,8 @@ namespace YuzuDelivery.Umbraco.Core
                     Src = image.Url,
                     Alt = image.Value<string>("alt"),
                     Height = image.Value<int>("umbracoHeight"),
-                    Width = image.Value<int>("umbracoWidth")
+                    Width = image.Value<int>("umbracoWidth"),
+                    FileSize = image.Value<int>("umbracoBytes")
                 };
             }
             return new vmBlock_DataImage();
@@ -54,7 +55,8 @@ namespace YuzuDelivery.Umbraco.Core
                     Src = image.Url,
                     Alt = image.Value<string>("alt"),
                     Height = image.Value<int>("umbracoHeight"),
-                    Width = image.Value<int>("umbracoWidth")
+                    Width = image.Value<int>("umbracoWidth"),
+                    FileSize = image.Value<int>("umbracoBytes")
                 };
             }
             return new vmBlock_DataImage();

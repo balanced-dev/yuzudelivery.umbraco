@@ -12,7 +12,7 @@
         var output = Html.RenderYuzu(new RenderSettings()
         {
             Template = string.Format("par{0}", Model.Item.GetType().Name),
-            Data = () => { return gridItem.CreateVm(Model.Item, new Dictionary<string, object>() { { "HtmlHelper", Html } }); },
+            Data = () => { return gridItem.CreateVm(Model.Item, new Dictionary<string, object>() { { "HtmlHelper", Html }, { "Model", Model.Page } }); },
             ShowJson = false
         });
 

@@ -34,6 +34,7 @@ namespace YuzuDelivery.Umbraco.Forms
                     IsOneOfSet = true,
                     _ref = "parFormCheckboxRadio"
                 }).ToList(),
+                Conditions = model.Condition.Rules.Any() ? model.Condition : null,
                 _ref = "parFormCheckboxRadioList"
             };
         }

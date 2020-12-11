@@ -21,6 +21,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 Placeholder = model.PlaceholderText,
                 IsRequired = model.Mandatory,
                 RequiredMessage = model.RequiredErrorMessage,
+                Conditions = model.Condition.Rules.Any() ? model.Condition : null,
                 _ref = "parFormTextArea"
             };
         }

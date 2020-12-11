@@ -33,6 +33,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 RequiredMessage = model.RequiredErrorMessage,
                 Pattern = model.Regex,
                 PatternMessage = model.InvalidErrorMessage,
+                Conditions = model.Condition.Rules.Any() ? model.Condition : null,
                 _ref = "parFormTextInput"
             };
         }

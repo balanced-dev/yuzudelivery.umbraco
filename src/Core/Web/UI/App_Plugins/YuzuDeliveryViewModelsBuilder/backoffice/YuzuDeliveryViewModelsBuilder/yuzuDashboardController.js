@@ -27,6 +27,20 @@
                 });
         };
 
+        vm.refreshTemplates = function () {
+
+            YuzuDeliveryCoreResources.refreshTemplates()
+                .then(function (response) {
+
+                    if (response.data === true) {
+                        notificationsService.success("Templates Refreshed", "Happy Templating!");
+                    } else {
+                        notificationsService.error("Error", "Something went wrong resfreshing templates.");
+                    }
+
+                });
+        };
+
         YuzuDeliveryCoreResources.dashboard()
             .then(function (response) {
                 vm.enabled = response.data.Item1;
@@ -41,6 +55,9 @@
         return {
             build: function () {
                 return $http.get('/umbraco/backoffice/YuzuDeliveryViewModelsBuilder/Generate/Build');
+            },
+            refreshTemplates: function () {
+                return $http.get('/umbraco/backoffice/YuzuDeliveryViewModelsBuilder/Generate/RefreshTemplates');
             },
             dashboard: function () {
                 return $http.get('/umbraco/backoffice/YuzuDeliveryViewModelsBuilder/Generate/GetDashboard');

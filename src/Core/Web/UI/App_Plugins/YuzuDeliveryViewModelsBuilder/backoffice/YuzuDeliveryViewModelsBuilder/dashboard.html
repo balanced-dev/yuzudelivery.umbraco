@@ -36,9 +36,36 @@
                             <span style="color: red; font-weight: bold;">Last generation failed with the following error:</span>
                             <pre style="width: 80%; white-space: pre-line; background: #f8f8f8; padding: 4px; font-size: small;">{{vm.dashboard.lastError}}</pre>
                         </div>
+
                     </div>
 
                 </umb-box-content>
+
+            </umb-box>
+
+            <umb-box>
+                <umb-box-content>
+
+                    <h3 class="bold">Templating</h3>
+
+                    <umb-load-indicator ng-show="vm.loading"></umb-load-indicator>
+
+                    <div ng-show="!vm.loading">
+
+                        <p>
+                            If you have updated the templates since the app started, you can clear the cache and re-load them using this function.
+                        </p>
+
+                        <div ng-show="vm.enabled && !vm.generating">
+                            <button type="button" ng-click="vm.refreshTemplates()" class="btn btn-success">
+                                <span>Refresh Template Cache</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </umb-box-content>
+
             </umb-box>
 
         </umb-editor-container>

@@ -10,6 +10,7 @@ using YuzuDelivery.Core;
 using Umbraco.Web.Mvc;
 using System.Web.Mvc;
 using System.Reflection;
+using Umbraco.Core.Composing;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -64,6 +65,13 @@ namespace YuzuDelivery.Umbraco.Core
             }
 
             return string.Empty;
+        }
+
+        [System.Web.Http.HttpGet]
+        public bool RefreshTemplates()
+        {
+            Current.AppCaches.RuntimeCache.ClearByKey("feTemplates");
+            return true;
         }
 
         [System.Web.Http.HttpGet]

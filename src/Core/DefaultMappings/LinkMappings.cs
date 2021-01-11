@@ -59,7 +59,8 @@ namespace YuzuDelivery.Umbraco.Core
                         Title = link.Name,
                         Label = link.Name,
                         Href = link.Url,
-                        IsExternalLink = true
+                        IsExternalLink = true,
+                        IsNewTab = link.Target == "_blank"
                     };
                 }
                 else

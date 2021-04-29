@@ -261,8 +261,8 @@
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Web.8.1.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="YuzuDelivery.Core, Version=1.0.44.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Core.1.0.44\lib\net472\YuzuDelivery.Core.dll</HintPath>
+    <Reference Include="YuzuDelivery.Core, Version=1.0.48.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Core.1.0.48\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.77\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
@@ -270,12 +270,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompositionExtensions.cs" />
+    <Compile Include="FormElements\FieldTypes\DefaultViewModels\vmBlock_FormBlank.cs" />
     <Compile Include="FormElements\FieldTypes\DefaultViewModels\vmBlock_Recaptcha.cs" />
     <Compile Include="FormElements\FieldTypes\DefaultViewModels\vmBlock_TitleAndDescription.cs" />
     <Compile Include="FormElements\FieldTypes\DefaultViewModels\vmBlock_FormHidden.cs" />
     <Compile Include="FormElements\FieldTypes\DefaultViewModels\vmBlock_FormCheckboxRadioList.cs" />
     <Compile Include="FormElements\FieldTypes\DefaultViewModels\vmBlock_FormCheckboxRadio.cs" />
     <Compile Include="FormElements\FieldTypes\DefaultViewModels\vmBlock_FormSelect.cs" />
+    <Compile Include="FormElements\FieldTypes\DefaultViewModels\vmBlock_FormFileInput.cs" />
+    <Compile Include="FormElements\FieldTypes\ColumnBlank\ColumnBlankFieldType.cs" />
     <Compile Include="FormElements\IFormFieldElementConfig.cs" />
     <Compile Include="FormElements\FieldTypes\parSingleChoiceFieldMapping.cs" />
     <Compile Include="FormElements\FieldTypes\parRecaptcha2FieldMapping.cs" />

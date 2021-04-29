@@ -54,7 +54,7 @@ namespace YuzuDelivery.Umbraco.Forms
                     {
                         new vmSub_DataFormBuilderFieldset()
                         {
-                            Fields = formFields
+                            //Fields = formFields
                         }
                     },
                 SubmitButtonText = submitButton

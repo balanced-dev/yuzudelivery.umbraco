@@ -55,6 +55,7 @@ namespace YuzuDelivery.Umbraco.Forms
             ExcludeViewmodelsAtGeneration.Add<vmSub_DataFormBuilderValidation>();
 
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormButton>();
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormBlank>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormCheckboxRadio>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormCheckboxRadioList>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormHidden>();

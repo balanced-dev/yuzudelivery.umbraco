@@ -22,30 +22,73 @@ namespace YuzuDelivery.Umbraco.Forms
 
         public List<object> UmbracoFormParseFieldMappings(IList<FieldsetContainerViewModel> fieldsets)
         {
-            return fieldsets.SelectMany(y => y.Fields.Select(z =>
+            return fieldsets.SelectMany(x => x.Fields.Select(z => GetFieldVm(z)).Where(z => z != null).ToList()).ToList();
+        }
+
+        public List<vmSub_DataFormBuilderRow> UmbracoFormParseGridMappings(IList<FieldsetContainerViewModel> fieldsets)
+        {
+            var firstColumn = fieldsets.FirstOrDefault();
+
+            return firstColumn.Fields.Select((x, index) =>
             {
-                foreach (var f in formfieldMappings)
+                var columns = new List<object>();
+
+                columns.Add(GetFieldVm(x));
+
+                foreach(var f in fieldsets)
                 {
-                    if (f.IsValid(z.FieldType.Name))
+                    if(f != firstColumn)
                     {
-                        var viewmodel = f.Apply(z);
-                        RunPostProcessor(z, ref viewmodel);
-                        return viewmodel;
+                        var otherFieldsetField = f.Fields.ElementAtOrDefault(index);
+
+                        if(otherFieldsetField != null)
+                        {
+                            if (otherFieldsetField.FieldTypeName == _FormsConstant.ColumnBlank_Name)
+                            {
+                                var fieldName = _FormsConstant.ColumnBlank_Blank_Type;
+                                if (otherFieldsetField.AdditionalSettings.ContainsKey(fieldName) && otherFieldsetField.AdditionalSettings[fieldName] == _FormsConstant.ColumnBlank_BlankSpace)
+                                    columns.Add(new vmBlock_FormBlank());
+                            }
+                            else
+                            {
+                                columns.Add(GetFieldVm(otherFieldsetField));
+                            }
+                        }
                     }
                 }
 
-                foreach (var f in formfieldMappingsInternal)
+                return new vmSub_DataFormBuilderRow()
                 {
-                    if (f.IsValid(z.FieldType.Name))
-                    {
-                        var viewmodel = f.Apply(z);
-                        RunPostProcessor(z, ref viewmodel);
-                        return viewmodel;
-                    }
-                }
+                    Columns = columns.Where(y => y != null).ToList()
+                };
 
-                return null;
-            })).Where(x => x != null).ToList();
+            }).ToList();
+
+        }
+
+        private object GetFieldVm(FieldViewModel z)
+        {
+            foreach (var f in formfieldMappings)
+            {
+                if (f.IsValid(z.FieldType.Name))
+                {
+                    var viewmodel = f.Apply(z);
+                    RunPostProcessor(z, ref viewmodel);
+                    return viewmodel;
+                }
+            }
+
+            foreach (var f in formfieldMappingsInternal)
+            {
+                if (f.IsValid(z.FieldType.Name))
+                {
+                    var viewmodel = f.Apply(z);
+                    RunPostProcessor(z, ref viewmodel);
+                    return viewmodel;
+                }
+            }
+
+            return null;
         }
 
         private void RunPostProcessor(FieldViewModel z, ref object viewmodel)
@@ -61,5 +104,6 @@ namespace YuzuDelivery.Umbraco.Forms
                 }
             }
         }
+
     }
 }

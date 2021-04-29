@@ -27,7 +27,8 @@ namespace YuzuDelivery.Umbraco.Forms
                     Fieldsets = source.CurrentPage.Fieldsets.Select(x => new vmSub_DataFormBuilderFieldset()
                     {
                         Legend = x.Caption,
-                        Fields = formElementMapGetter.UmbracoFormParseFieldMappings(x.Containers)
+                        Fields = x.Containers.Count == 1 ? formElementMapGetter.UmbracoFormParseFieldMappings(x.Containers) : null,
+                        Rows = x.Containers.Count > 1 ? formElementMapGetter.UmbracoFormParseGridMappings(x.Containers) : null
                     }).ToList(),
                     SuccessMessage = source.IsLastPage ? source.SubmitCaption : string.Empty
                 };

@@ -81,6 +81,7 @@ namespace YuzuDelivery.Umbraco.Core
             new DynPartial();
             new ModPartial();
             new ToString();
+            new ToLowerCase();
             new PictureSource();
         }
 

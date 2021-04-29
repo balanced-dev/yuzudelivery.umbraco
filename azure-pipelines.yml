@@ -14,10 +14,10 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '1.2.30'
+  version: '1.2.31'
   core_version: '1.0.48'
-  import_version: '1.0.89'
-  umbraco_version: '8.8.0'
+  import_version: '1.0.92'
+  umbraco_version: '8.12.2'
   umbraco_forms_version: '8.5.3'
   ${{ if eq(variables['Build.SourceBranchName'], 'dev') }}:
     revision: $[ counter('.', 0) ]

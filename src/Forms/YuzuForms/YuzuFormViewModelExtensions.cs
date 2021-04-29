@@ -31,8 +31,8 @@ namespace YuzuDelivery.Umbraco.Forms
 
         public static void AddFormField(this vmBlock_DataFormBuilder formBuilder, object field, int fieldsetIndex = 0)
         {
-            if (formBuilder.Fieldsets.ElementAt(fieldsetIndex) != null)
-                ((List<Object>)formBuilder.Fieldsets[fieldsetIndex].Fields).Add(field);
+            //if (formBuilder.Fieldsets.ElementAt(fieldsetIndex) != null)
+                //((List<Object>)formBuilder.Fieldsets[fieldsetIndex].Fields).Add(field);
         }
 
         public static void AddHandler<C>(this YuzuFormViewModel formBuilder, Expression<Func<C, ActionResult>> actionLambda)

@@ -53,9 +53,11 @@ else
 
         @Html.AntiForgeryToken()
 
-        <input type="hidden" name="FormId" value="@Model.FormId" />
-        @Html.HiddenFor(x => Model.FormName)
-        @Html.HiddenFor(x => Model.RecordId)
+        @Html.HiddenFor(x => Model.FormId, new { id = (string)null })
+        @Html.HiddenFor(x => Model.FormName, new { id = (string)null })
+        @Html.HiddenFor(x => Model.RecordId, new { id = (string)null })
+        @Html.HiddenFor(x => Model.PreviousClicked, new { id = (string)null })
+        @Html.HiddenFor(x => Model.Theme, new { id = (string)null })
 
         <input type="hidden" name="FormStep" value="@Model.FormStep" />
         <input type="hidden" name="RecordState" value="@Model.RecordState" />

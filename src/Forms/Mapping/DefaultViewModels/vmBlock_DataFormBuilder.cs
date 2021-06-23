@@ -30,6 +30,9 @@ namespace YuzuDelivery.Umbraco.Forms
         [Newtonsoft.Json.JsonProperty("submitButtonText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SubmitButtonText { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("footerText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FooterText { get; set; }
+
         [Newtonsoft.Json.JsonProperty("actionLinks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<vmBlock_DataLink> ActionLinks { get; set; }
 

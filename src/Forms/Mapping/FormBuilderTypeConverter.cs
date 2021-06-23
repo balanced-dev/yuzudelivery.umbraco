@@ -17,7 +17,7 @@ namespace YuzuDelivery.Umbraco.Forms
             this.formElementMapGetter = formElementMapGetter;
         }
 
-        public vmBlock_DataFormBuilder Convert(FormViewModel source, UmbracoMappingContext context)
+        public virtual vmBlock_DataFormBuilder Convert(FormViewModel source, UmbracoMappingContext context)
         {
             if (source != null)
             {

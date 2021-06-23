@@ -27,6 +27,9 @@ namespace YuzuDelivery.Umbraco.Forms
 
                 var ofType = schemaMetaService.GetOfType(property, "refs");
 
+                if (string.IsNullOrEmpty(ofType))
+                    throw new Exception("Form Type not set in definition e.g \"anyOfType\": \"parFormBuilder\" below the ref");
+
                 if (formValue != null && formValue.ToString() != string.Empty)
                 {
                     return new vmBlock_DataForm()

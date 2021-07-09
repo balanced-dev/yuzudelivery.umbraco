@@ -32,13 +32,13 @@ namespace YuzuDelivery.Umbraco.Grid
 
         public static void AddGridRowsWithColumns<TSource, TDest, TConfig>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember)
         {
-            AddGrid<GridRowConvertor<TSource, TDest>, TSource, TDest, vmBlock_DataGrid>(resolvers, sourceMember, destMember);
+            AddGrid<GridRowColumnConvertor<TSource, TDest, TDest, TConfig>, TSource, TDest, vmBlock_DataGrid>(resolvers, sourceMember, destMember);
             AddConfig<TConfig>(resolvers);
         }
 
         public static void AddGridRowsWithColumns<TSource, TDest, TConfigRow, TConfigCol>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember)
         {
-            AddGrid<GridRowConvertor<TSource, TDest>, TSource, TDest, vmBlock_DataGrid>(resolvers, sourceMember, destMember);
+            AddGrid<GridRowColumnConvertor<TSource, TDest, TConfigRow, TConfigCol>, TSource, TDest, vmBlock_DataGrid>(resolvers, sourceMember, destMember);
             AddConfig<TConfigRow>(resolvers);
             AddConfig<TConfigCol>(resolvers);
         }

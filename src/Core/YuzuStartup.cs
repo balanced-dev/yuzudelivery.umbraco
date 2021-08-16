@@ -41,6 +41,7 @@ namespace YuzuDelivery.Umbraco.Core
             composition.Register<LinkIPublishedContentConvertor>();
             composition.Register<LinkConvertor>();
             composition.Register<ImageConvertor>();
+            composition.Register<MediWithCropsConvertor>();
             composition.Register(typeof(SubBlocksObjectResolver<,>));
 
             composition.Register<DefaultPublishedElementCollectionConvertor>();
@@ -48,6 +49,8 @@ namespace YuzuDelivery.Umbraco.Core
 
             composition.Register<IMappingContextFactory, UmbracoMappingContextFactory>(Lifetime.Request);
             composition.Register<IYuzuTypeFactoryRunner, UmbracoTypeFactoryRunner>();
+
+            composition.Register<ImageFactory>();
 
             composition.Register(typeof(YuzuMappingConfig), typeof(DefaultElementMapping));
             composition.Register(typeof(YuzuMappingConfig), typeof(ImageMappings));

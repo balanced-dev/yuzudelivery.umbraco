@@ -57,7 +57,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
         public static bool IsContentType(this GridControl control, string contentTypeAlias)
         {
-            return control.GetValue<GridControlDtgeValue>().Content.ContentType.Alias == contentTypeAlias;
+            return control.GetValue<GridControlDtgeValue>().Content.ContentType?.Alias == contentTypeAlias;
         }
 
     }

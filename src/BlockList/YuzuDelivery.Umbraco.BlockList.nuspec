@@ -15,6 +15,6 @@
     </dependencies>
   </metadata>
   <files>
-     <file src="bin\Release\YuzuDelivery.Umbraco.PositionalContent.dll" target="lib\net472" />
+     <file src="bin\Release\YuzuDelivery.Umbraco.BlockList.dll" target="lib\net472" />
   </files>
 </package>

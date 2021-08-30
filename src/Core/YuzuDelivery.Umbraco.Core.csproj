@@ -354,6 +354,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web\UI\App_Plugins\YuzuBackofficeCss\package.manifest" />
     <None Include="Web\UI\App_Plugins\YuzuDeliveryViewModelsBuilder\package.manifest" />
     <None Include="YuzuDelivery.Umbraco.Core.nuspec" />
   </ItemGroup>

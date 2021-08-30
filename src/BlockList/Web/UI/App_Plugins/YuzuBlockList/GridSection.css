@@ -1,0 +1,119 @@
+﻿.section-view .section-view__card {
+    margin: 0 0 20px;
+    padding-left: 0;
+    width: auto;
+    background-color: #fff;
+    border-style: dashed;
+    display: block;
+}
+
+.section-view .section-view__card:hover {
+    background-color: rgb(253, 253, 255);
+    border-style: solid;
+}
+
+.section-view__section {
+    margin: 0 -10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.section-view__column {
+    padding: 20px 10px 0 10px;
+}
+
+.section-view__column:not(:hover) .umb-control-group .control-label {
+    opacity: .25;
+}
+
+.section-view__column .umb-block-list__block--create-button {
+    left: 0;
+}
+
+.section-view .controls {
+    margin-left: 0;
+}
+
+.section-view__column:not(:hover) .umb-block-list__create-button {
+    border-color: #e9e9eb;
+}
+
+/* Settings Wrapper */
+
+.section-view__settings .umb-block-list__wrapper {
+    display: flex;
+    max-width: 100%;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    position: relative;
+    top: 10px;
+}
+
+.section-view__settings .umb-control-group .control-header {
+    display: none;
+}
+
+.section-view__settings .umb-block-list__block--create-button {
+    display: none;
+}
+ 
+
+/* Create Button */
+.section-view__settings .umb-block-list__actions {
+    border: 0;
+}
+
+.section-view__settings .umb-block-list__create-button:after {
+    content: 'Column Settings'
+}
+
+.section-view__settings .umb-block-list__create-button localize {
+    display: none;
+}
+
+.section-view__settings .umb-block-list__create-button:disabled,
+.section-view__settings .umb-block-list__clipboard-button:disabled {
+    display: none;
+}
+
+/* Action Button */
+
+.section-view__settings .umb-block-list__block {
+    width: 200px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.section-view__settings .umb-block-list__block--view {
+    display: inline-block;
+    position: initial;
+    width: auto;
+    min-height: auto;
+    border-radius: initial;
+}
+
+.section-view__settings .umb-block-list__block--actions {
+    opacity: 0.2;
+    position: initial;
+    top: initial;
+    right: initial;
+}
+
+.section-view__settings .umb-block-list__block:not(:hover) .umb-block-list__block--view {
+    opacity: 0.2;
+}
+
+
+/* Content Styles */
+
+.section-view__content .umb-control-group .control-header {
+    position: relative;
+    top: -30px;
+
+}
+
+.section-view__content article {
+    height: auto !important;
+}

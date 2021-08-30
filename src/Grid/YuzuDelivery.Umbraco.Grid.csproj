@@ -216,8 +216,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Web\UI\App_Plugins\YuzuBackofficeCss\DocTypeGridEditorPreviewer.cshtml" />
-    <None Include="Web\UI\App_Plugins\YuzuBackofficeCss\package.manifest" />
+    <None Include="Web\UI\App_Plugins\YuzuGrid\DocTypeGridEditorPreviewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj">

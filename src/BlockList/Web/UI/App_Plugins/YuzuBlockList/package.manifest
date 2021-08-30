@@ -1,0 +1,10 @@
+{   
+	css: [
+		'~/App_Plugins/YuzuBackofficeCss/GridSection.css'
+    ],
+	javascript: [
+		"~/app_plugins/YuzuBackofficeCss/GridContentColumnsSettingsController.js",
+		"~/app_plugins/YuzuBackofficeCss/GridContentItem.js",
+		"~/app_plugins/YuzuBackofficeCss/GridContentSection.js"
+	]
+}

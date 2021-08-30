@@ -21,7 +21,7 @@ namespace YuzuDelivery.Umbraco.Import
         private readonly IDocumentTypePropertyService documentTypePropertyService;
         public const string DataEditorName = "Umbraco.BlockList";
 
-        public const string DefaultCustomView = "~/App_Plugins/YuzuBackofficeCss/GridContentItem.html";
+        public const string DefaultCustomView = "~/App_Plugins/YuzuBlockList/GridContentItem.html";
 
         public BlockListDataTypeFactory(IDataTypeService dataTypeService, IDocumentTypePropertyService documentTypePropertyService, IContentTypeService contentTypeService, IContentTypeForVmService contentTypeForVmTypeService)
         {

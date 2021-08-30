@@ -14,8 +14,8 @@ namespace YuzuDelivery.Umbraco.Import
         private readonly BlockListDataTypeFactory blockListDataTypeFactory;
         private readonly ILogger logger;
 
-        public const string SectionCustomView = "~/App_Plugins/YuzuBackofficeCss/GridContentSection.html";
-        public const string ConfigCustomView = "~/App_Plugins/YuzuBackofficeCss/GridContentColumnsSettings.html";
+        public const string SectionCustomView = "~/App_Plugins/YuzuBlockList/GridContentSection.html";
+        public const string ConfigCustomView = "~/App_Plugins/YuzuBlockList/GridContentColumnsSettings.html";
 
         public BlockListGridCreationService(BlockListGridRowConfigToContent gridRowConfigToContent, BlockListDataTypeFactory blockListDataTypeFactory, IYuzuDeliveryImportConfiguration importConfig, ILogger logger)
         {

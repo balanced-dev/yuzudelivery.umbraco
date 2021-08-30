@@ -16,9 +16,9 @@ variables:
   buildConfiguration: 'Release'
   version: '1.2.34'
   core_version: '1.0.48'
-  import_version: '1.0.92'
-  umbraco_version: '8.13.0'
-  umbraco_forms_version: '8.7.3'
+  import_version: '1.0.96.16'
+  umbraco_version: '8.15.1'
+  umbraco_forms_version: '8.7.6'
   ${{ if eq(variables['Build.SourceBranchName'], 'dev') }}:
     revision: $[ counter('.', 0) ]
     separator: '.'

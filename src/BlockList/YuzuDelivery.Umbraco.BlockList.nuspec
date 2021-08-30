@@ -17,13 +17,6 @@
   </metadata>
   <files>
      <file src="bin\Release\YuzuDelivery.Umbraco.BlockList.dll" target="lib\net472" />
-     <file src="Web\UI\App_Plugins\YuzuBlockList\GridContentColumnsSettings.html" target="Content\App_Plugins\YuzuBlockList\GridContentColumnsSettings.html"/>
-     <file src="Web\UI\App_Plugins\YuzuBlockList\GridContentColumnsSettingsController.js" target="Content\App_Plugins\YuzuBlockList\GridContentColumnsSettingsController.js"/>
-     <file src="Web\UI\App_Plugins\YuzuBlockList\GridContentItem.html" target="Content\App_Plugins\YuzuBlockList\GridContentItem.html"/>
-     <file src="Web\UI\App_Plugins\YuzuBlockList\GridContentItem.js" target="Content\App_Plugins\GridContentItem.js"/>
-     <file src="Web\UI\App_Plugins\YuzuBlockList\GridContentSection.html" target="Content\App_Plugins\YuzuBlockList\GridContentSection.html"/>
-     <file src="Web\UI\App_Plugins\YuzuBlockList\GridContentSection.js" target="Content\App_Plugins\YuzuBlockList\GridContentSection.js"/>
-     <file src="Web\UI\App_Plugins\YuzuBlockList\GridSection.css" target="Content\App_Plugins\YuzuBlockList\GridSection.css"/>
-     <file src="Web\UI\App_Plugins\YuzuBlockList\package.manifest" target="Content\App_Plugins\YuzuBlockList\package.manifest"/>
+     <file src="Web\UI\App_Plugins\YuzuBlockList\**\*.*" target="Content\App_Plugins\YuzuBlockList\" />
   </files>
 </package>

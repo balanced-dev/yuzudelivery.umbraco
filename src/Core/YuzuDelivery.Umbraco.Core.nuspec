@@ -20,6 +20,7 @@
   </metadata>
   <files>
      <file src="bin\Release\YuzuDelivery.Umbraco.Core.dll" target="lib\net472" />
+     <file src="Web\UI\App_Plugins\YuzuBackofficeCss\**\*.*" target="Content\App_Plugins\YuzuBackofficeCss\" />
      <file src="Web\UI\App_Plugins\YuzuDeliveryViewModelsBuilder\**\*.*" target="Content\App_Plugins\YuzuDeliveryViewModelsBuilder\" />
   </files>
 </package>

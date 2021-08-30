@@ -87,6 +87,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
                     CurrentContentData.Add(new JProperty(name, JObject.FromObject(value)));
                 return this;
             }
+
             public BlockListDbModelBuilder AddSettingsProperty<V>(Expression<Func<V, object>> property, object value)
             {
                 AddSettingsProperty(names.AsAlias(property.GetMemberName()), value);

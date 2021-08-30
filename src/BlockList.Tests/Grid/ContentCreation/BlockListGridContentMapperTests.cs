@@ -75,7 +75,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         }
 
         [Test]
-        public void DataRow_Can_add_to_row_items()
+        public void DataRow_multiple_items_in_one_row()
         {
             CreateData();
 
@@ -97,7 +97,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         }
 
         [Test]
-        public void DataRow_Can_add_to_separete_rows()
+        public void DataRow_multiple_items_in_two_rows()
         {
             CreateData();
 
@@ -124,7 +124,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         }
 
         [Test]
-        public void DataRow_Can_add_content_and_row_config()
+        public void DataRow_row_config()
         {
             CreateData();
 
@@ -144,7 +144,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         }
 
         [Test]
-        public void DataRow_Can_add_content_and_item_config()
+        public void DataRow_item_config()
         {
             CreateData();
 
@@ -164,28 +164,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         }
 
         [Test]
-        public void DataGrid_Can_add_single_colmn_item()
-        {
-            CreateData();
-
-            SectionProperties(properties, AssignSections);
-
-            var outer = CreateBuilder();
-            var innerRow = CreateBuilder();
-
-            dataGrid.Rows.Add(new vmSub_DataGridRow());
-            dataGrid.Rows[0].Columns.Add(new vmSub_DataGridColumn());
-            dataGrid.Rows[0].Columns[0].Items.Add(new vmBlock_DataGridRowItem());
-            dataGrid.Rows[0].Columns[0].Items[0].Content = CreateContentBlockVm(innerRow, "title");
-            dataGrid.Rows[0].Columns[0].Config = CreateSettingsBlockVm(outer, "hero");
-
-            StubFullWidthRow(outer, innerRow);
-
-            ActAndAssert(dataGrid, outer);
-        }
-
-        [Test]
-        public void DataGrid_Can_add_single_colmn_item_with_config()
+        public void DataGrid_single_column_item()
         {
             CreateData();
 
@@ -205,7 +184,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         }
 
         [Test]
-        public void DataGrid_Can_add_two_colmn_item()
+        public void DataGrid_two_columns_items()
         {
             umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(false, "twoColumnSection", "50", "50,50"));
 
@@ -230,6 +209,28 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             ActAndAssert(dataGrid, outer);
         }
 
+        [Test]
+        public void DataGrid_column_config()
+        {
+            CreateData();
+
+            SectionProperties(properties, AssignSections);
+
+            var outer = CreateBuilder();
+            var innerRowContent = CreateBuilder();
+            var innerRowSettings = CreateBuilder();
+
+            dataGrid.Rows.Add(new vmSub_DataGridRow());
+            dataGrid.Rows[0].Columns.Add(new vmSub_DataGridColumn());
+            dataGrid.Rows[0].Columns[0].Items.Add(new vmBlock_DataGridRowItem());
+            dataGrid.Rows[0].Columns[0].Items[0].Content = CreateContentBlockVm(innerRowContent, "title");
+            dataGrid.Rows[0].Columns[0].Config = CreateSettingsAsContentBlockVm(innerRowSettings, "hero");
+
+            StubFullWidthRow(outer, innerRowContent, innerRowSettings);
+
+            ActAndAssert(dataGrid, outer);
+        }
+
         public BlockListDbModelBuilder CreateBuilder()
         {
             return new BlockListDbModelBuilder(umb, names, container);
@@ -242,6 +243,13 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             return vm;
         }
 
+        public object CreateSettingsAsContentBlockVm(BlockListDbModelBuilder builder, string value)
+        {
+            var vm = new vmBlock_SettingsBlock() { Id = value };
+            StubContentBlock<vmBlock_SettingsBlock>(builder, x => x.Id, value);
+            return vm;
+        }
+
         public object CreateSettingsBlockVm(BlockListDbModelBuilder builder, string value)
         {
             var vm = new vmBlock_SettingsBlock() { Id = value };
@@ -249,10 +257,14 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             return vm;
         }
 
-        public void StubFullWidthRow(BlockListDbModelBuilder outer, BlockListDbModelBuilder inner)
+        public void StubFullWidthRow(BlockListDbModelBuilder outer, BlockListDbModelBuilder innerContent, BlockListDbModelBuilder innerSettings = null)
         {
             outer.AddContentData("fullWidthSection");
-            outer.AddContentProperty("w100", inner.Expected);
+            outer.AddContentProperty("w100", innerContent.Expected);
+            if(innerSettings != null)
+            {
+                outer.AddContentProperty("w100Settings", innerSettings.Expected);
+            }
         }
 
         public void StubTwoColumnWidthRow(BlockListDbModelBuilder outer, params BlockListDbModelBuilder[] inner)

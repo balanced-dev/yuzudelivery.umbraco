@@ -95,6 +95,12 @@ steps:
     arguments: 'pack "$(Build.SourcesDirectory)\src\PositionalContent\YuzuDelivery.Umbraco.PositionalContent.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber)'
 
 - task: NuGetCommand@2
+  displayName: Nuget Pack Blocklist Editor
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\BlockList\YuzuDelivery.Umbraco.BlockList.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber)'
+
+- task: NuGetCommand@2
   displayName: Nuget Pack Quickstart Web
   inputs:
     command: 'custom'

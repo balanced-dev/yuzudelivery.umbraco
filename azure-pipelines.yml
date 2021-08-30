@@ -106,7 +106,7 @@ steps:
   displayName: Nuget Pack Blocklist Editor
   inputs:
     command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\BlockList\YuzuDelivery.Umbraco.BlockList.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber)'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\BlockList\YuzuDelivery.Umbraco.BlockList.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";y_umb_version="$(Build.BuildNumber)"'
 
 - task: NuGetCommand@2
   displayName: Nuget Pack Quickstart Web

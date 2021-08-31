@@ -28,6 +28,7 @@ namespace $rootnamespace$
             composition.RegisterYuzuMapping(assembly);
 
             composition.RegisterFormStrategies(assembly);
+            //swap out for block list if using!
             composition.RegisterGridStrategies(assembly);
         }
     }

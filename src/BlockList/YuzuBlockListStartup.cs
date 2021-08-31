@@ -40,7 +40,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             composition.Register(typeof(BlockListToTypeConvertor<>));
             composition.Register(typeof(BlockListToListOfTypesConvertor<>));
 
-            composition.Register<IInlineBlockCreator, BlockListEditorCreationService>();
+            composition.Register<IInlineBlockCreator, BlockListEditorCreationService>(Lifetime.Singleton);
 
             //Grid blocklist
             composition.Register<BlockListGridMapping>();
@@ -48,7 +48,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             composition.Register<BlockListGridConverter>();
             composition.Register<BlockListGridDataService>();
 
-            composition.Register<IGridSchemaCreationService, BlockListGridCreationService>();
+            composition.Register<IGridSchemaCreationService, BlockListGridCreationService>(Lifetime.Singleton);
 
             composition.Register(typeof(YuzuMappingConfig), typeof(BlockListAutoMapping));
 

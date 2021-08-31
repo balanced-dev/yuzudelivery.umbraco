@@ -10,6 +10,7 @@ using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.UmbracoModels;
 using YuzuDelivery.ViewModels;
 using YuzuDelivery.Umbraco.Grid;
+using YuzuDelivery.Umbraco.BlockList;
 using YuzuDelivery.Umbraco.Forms;
 
 namespace $rootnamespace$
@@ -28,8 +29,8 @@ namespace $rootnamespace$
             composition.RegisterYuzuMapping(assembly);
 
             composition.RegisterFormStrategies(assembly);
-            //swap out for block list if using!
             composition.RegisterGridStrategies(assembly);
+            composition.RegisterBlockListStrategies(assembly);
         }
     }
 }

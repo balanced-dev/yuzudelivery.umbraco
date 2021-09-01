@@ -13,6 +13,8 @@ using System.Reflection;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
+    [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
+    [ComposeAfter(typeof(YuzuImportComposer))]
     public class YuzuBlockListStartup : IUserComposer
     {
 

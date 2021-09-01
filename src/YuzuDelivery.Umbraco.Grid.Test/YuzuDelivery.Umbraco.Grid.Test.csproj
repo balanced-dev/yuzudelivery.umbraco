@@ -319,15 +319,19 @@
       <HintPath>..\packages\YuzuDelivery.Core.1.0.48\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.96.16\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.96.18\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import.Tests.Integration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Test.Integration.1.0.96.16\lib\net472\YuzuDelivery.Umbraco.Import.Tests.Integration.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Test.Integration.1.0.96.18\lib\net472\YuzuDelivery.Umbraco.Import.Tests.Integration.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Change\TypeAndProperties\DataType\GridChangeTests.cs" />
+    <Compile Include="Content\ContentMappers\GridContentMappperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Umbraco\DataTypes\DataTypeCreation\GridSchemaCreationServiceTests.cs" />
+    <Compile Include="_Setup\GridTestBuilder.cs" />
+    <Compile Include="_Setup\Mocks\DGTEServiceMocks.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Grid\YuzuDelivery.Umbraco.Grid.csproj">

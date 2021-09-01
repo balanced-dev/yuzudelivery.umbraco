@@ -11,6 +11,7 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
+using YuzuDelivery.Umbraco.Grid.Test;
 
 namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
 {
@@ -31,6 +32,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
         public SchemaChangeController svc;
         public VmToContentPropertyMap map;
 
+        public DGTEServiceMocks dtgeServiceMocks { get; set; }
+
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
@@ -40,7 +43,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
         [SetUp]
         public void Setup()
         {
-            BaseSetup();
+            BaseSetup(new GridTestBuilder());
 
             svc = container.Resolve<SchemaChangeController>();
 
@@ -49,6 +52,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
 
             umb.ImportConfig.IgnoreViewmodels.Add("vmBlock_DataGrid");
             umb.ImportConfig.IgnoreViewmodels.Add("vmBlock_DataRows");
+
+            dtgeServiceMocks = new DGTEServiceMocks(container, umb);
         }
 
         #region RowBuilder Basics
@@ -214,7 +219,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
 
             svc.ChangeProperty(map);
 
-            var config = umb.DTGEService.Configs.FirstOrDefault();
+            var config = dtgeServiceMocks.Configs.FirstOrDefault();
 
             Approvals.AssertEquals(CreateDTGEConfig("Grid", "grid", new string[] { "rte", "gridImage" }).ToJson(), config.ToJson());
         }
@@ -229,12 +234,12 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             umb.DataType.AddAndStubUpdate(1, "Grid", "Umbraco.Grid")
                 .PropertyType.ForCreating<vmBlock_With_Grid>(x => x.Grid, 1, 1);
 
-            umb.DTGEService.Configs.Add(CreateDTGEConfig("Grid", "grid", new string[] { "rte", "gridImage" }));
+            dtgeServiceMocks.Configs.Add(CreateDTGEConfig("Grid", "grid", new string[] { "rte", "gridImage" }));
             map.ContentDataTypeId = 1;
 
             svc.ChangeProperty(map);
 
-            var config = umb.DTGEService.Configs.FirstOrDefault();
+            var config = dtgeServiceMocks.Configs.FirstOrDefault();
 
             Approvals.AssertEquals(CreateDTGEConfig("Grid", "grid", new string[] { "rte", "gridImage", "summary" }).ToJson(), config.ToJson());
         }

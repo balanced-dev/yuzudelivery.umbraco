@@ -24,7 +24,7 @@ namespace YuzuDelivery.Umbraco.Import
             this.logger = logger;
         }
 
-        public IDataType Create(VmToContentPropertyMap data, string dtgeNameGridName)
+        public IDataType Create(VmToContentPropertyMap data)
         {
             var contentEditor = CreatOrUpdateContentEditor(data);
             var columnSettingsEditor = CreatOrUpdateColumnSettingsEditor(data);
@@ -32,7 +32,7 @@ namespace YuzuDelivery.Umbraco.Import
             return CreatOrUpdateSectionEditor(data, contentEditor.Id, columnSettingsEditor?.Id);
         }
 
-        public IDataType Update(VmToContentPropertyMap data, IDataType dataTypeDefinition, string dtgeNameGridName)
+        public IDataType Update(VmToContentPropertyMap data, IDataType dataTypeDefinition)
         {
             var contentEditor = CreatOrUpdateContentEditor(data);
             var columnSettingsEditor = CreatOrUpdateColumnSettingsEditor(data);

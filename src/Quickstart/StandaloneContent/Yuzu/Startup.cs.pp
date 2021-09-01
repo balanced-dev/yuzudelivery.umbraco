@@ -29,6 +29,8 @@ namespace $rootnamespace$
             composition.RegisterYuzuMapping(assembly);
 
             composition.RegisterFormStrategies(assembly);
+
+            //choose only one!
             composition.RegisterGridStrategies(assembly);
             composition.RegisterBlockListStrategies(assembly);
         }

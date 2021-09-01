@@ -294,10 +294,10 @@
       <HintPath>..\packages\YuzuDelivery.Core.1.0.48\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.96.16\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.96.18\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
     </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import.Tests.Integration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Test.Integration.1.0.96.16\lib\net472\YuzuDelivery.Umbraco.Import.Tests.Integration.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Test.Integration.1.0.96.18\lib\net472\YuzuDelivery.Umbraco.Import.Tests.Integration.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

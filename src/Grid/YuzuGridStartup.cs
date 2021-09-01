@@ -23,6 +23,9 @@ namespace YuzuDelivery.Umbraco.Grid
 
             composition.Register<IGridService, GridService>(Lifetime.Singleton);
 
+            composition.RegisterUnique<IGridSchemaCreationService, GridSchemaCreationService>();
+            composition.Register<IDTGEService, DTGEService>(Lifetime.Singleton);
+
             composition.Register(typeof(GridRowConvertor<,>));
             composition.Register(typeof(GridRowConvertor<,,>));
             composition.Register(typeof(GridRowColumnConvertor<,>));
@@ -68,18 +71,6 @@ namespace YuzuDelivery.Umbraco.Grid
 
                 return gridItems.ToArray();
             }, Lifetime.Singleton);
-        }
-    }
-
-
-    public static class StringExtensions
-    {
-        public static string FirstCharacterToLower(this string str)
-        {
-            if (String.IsNullOrEmpty(str) || Char.IsLower(str, 0))
-                return str;
-
-            return Char.ToLowerInvariant(str[0]) + str.Substring(1);
         }
     }
 

@@ -60,7 +60,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, assign: true);
 
-            var output = svc.Create(propertyMapBuilder.CurrentProperty, null).Configuration;
+            var output = svc.Create(propertyMapBuilder.CurrentProperty).Configuration;
 
             SectionProperties(properties, assert: true);
 
@@ -79,7 +79,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, assign: true);
 
-            svc.Create(propertyMapBuilder.CurrentProperty, null);
+            svc.Create(propertyMapBuilder.CurrentProperty);
 
             builder.AddBlock("Test", "Test", null);
             builder.Expected.UseLiveEditing = true;
@@ -98,7 +98,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, assign: true);
 
-            svc.Create(propertyMapBuilder.CurrentProperty, null);
+            svc.Create(propertyMapBuilder.CurrentProperty);
 
             SectionProperties(properties, assert: true);
 
@@ -122,7 +122,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, assign: true);
 
-            svc.Create(propertyMapBuilder.CurrentProperty, null);
+            svc.Create(propertyMapBuilder.CurrentProperty);
 
             SectionProperties(properties, assert: true);
 
@@ -141,7 +141,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, rowConfig, colConfig, assign: true);
 
-            svc.Create(propertyMapBuilder.CurrentProperty, null);
+            svc.Create(propertyMapBuilder.CurrentProperty);
 
             if (rowConfig != null) umb.ContentType.WasCreated(rowConfig);
             if (colConfig != null)
@@ -173,7 +173,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, null, null, assign: true);
 
-            svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"], null);
+            svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"]);
 
             umb.ContentType.WasNotCreated("Test");
             umb.ContentType.WasCreated("Test2");
@@ -204,7 +204,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, null, null, assign: true);
 
-            svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"], null);
+            svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"]);
 
             umb.ContentType.WasNotCreated("FullWidthSection");
             umb.ContentType.WasCreated("TwoColumnSection");

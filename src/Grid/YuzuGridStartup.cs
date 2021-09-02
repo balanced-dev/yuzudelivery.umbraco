@@ -10,6 +10,8 @@ using Skybrud.Umbraco.GridData.Dtge;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Import;
+using YuzuDelivery.Umbraco.Core;
+using System.Reflection;
 
 namespace YuzuDelivery.Umbraco.Grid 
 {
@@ -21,6 +23,10 @@ namespace YuzuDelivery.Umbraco.Grid
         public void Compose(Composition composition)
         {
             AddDefaultGridItems(composition);
+
+            var assembly = Assembly.GetExecutingAssembly();
+
+            composition.RegisterAll<IContentMapper>(assembly);
 
             composition.Register<IGridService, GridService>(Lifetime.Singleton);
 

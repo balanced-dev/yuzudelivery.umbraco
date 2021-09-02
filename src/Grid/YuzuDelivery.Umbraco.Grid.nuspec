@@ -11,8 +11,8 @@
     <copyright>Copyright 2018-2020 HiFi Ltd</copyright>
 	<dependencies>
     <dependency id="YuzuDelivery.Core" version="$core_version$" />
-		<dependency id="Skybrud.Umbraco.GridData" version="3.0.0" />
-    <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.2.0" />
+		<dependency id="Skybrud.Umbraco.GridData" version="3.0.1" />
+    <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.2.7" />
 	</dependencies>
   </metadata>
   <files>

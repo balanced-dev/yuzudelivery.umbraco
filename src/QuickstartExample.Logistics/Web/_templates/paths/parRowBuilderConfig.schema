@@ -1,0 +1,12 @@
+{
+    "enums": {
+        "/backgroundTheme": [
+            "light",
+            "none"
+        ],
+        "/width": [
+            "full"
+        ]
+    },
+    "refs": {}
+}

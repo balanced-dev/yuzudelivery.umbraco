@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/navSections/link": [
+            "/dataLink"
+        ],
+        "/navSections/subLinks": [
+            "/dataLink"
+        ]
+    }
+}

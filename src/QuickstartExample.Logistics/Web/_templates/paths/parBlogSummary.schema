@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/link": [
+            "/dataLink"
+        ],
+        "/image": [
+            "/dataImage"
+        ]
+    }
+}

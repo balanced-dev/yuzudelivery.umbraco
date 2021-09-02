@@ -1,0 +1,49 @@
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    {{#each linkSections}}
+                        <div class="col-md-3">
+                            <h2 class="footer-heading mb-4">{{title}}</h2>
+                            <ul class="list-unstyled">
+                                {{#each links}}
+                                    <li><a href="{{href}}" title="{{title}}">{{label}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    {{/each}}
+                    {{#if socialSection}}
+                        <div class="col-md-3">
+                            <h2 class="footer-heading mb-4">{{socialSection.title}}</h2>
+                            {{#each socialSection.links}}
+                                <a href="{{link.href}}" title="{{link.title}}" class="pl-0 pr-3"><span class="icon-{{type}}"></span></a>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+            {{#if newsletterSection}}
+                <div class="col-md-3">
+                    <h2 class="footer-heading mb-4">{{newsletterSection.title}}</h2>
+                        {{> parForm newsletterSection.form}}
+                </div>
+            {{/if}}
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+            <div class="col-md-12">
+                <div class="border-top pt-5">
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                           target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>

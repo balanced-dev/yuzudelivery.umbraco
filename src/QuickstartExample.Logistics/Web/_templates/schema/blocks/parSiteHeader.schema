@@ -1,0 +1,24 @@
+{
+    "id": "/parSiteHeader",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "nav": {
+            "$ref": "/parSiteNav"
+        },
+        "companyName": {
+            "type": "string"
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": false
+}

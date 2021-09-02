@@ -1,0 +1,34 @@
+{
+    "id": "/parRowBuilderConfig",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "backgroundTheme": {
+            "type": "string",
+            "enum": [
+                "light",
+                "none"
+            ]
+        },
+        "borderBottom": {
+            "type": "boolean"
+        },
+        "width": {
+            "type": "string",
+            "enum": [
+                "full"
+            ]
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,26 @@
+<div class="mx-auto text-center">
+    {{#if navLinks.[0]}}
+        <nav class="site-navigation position-relative text-right" role="navigation">
+            <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+                {{#each navLinks}}
+                    <li><a class="nav-link" href="{{href}}" title="{{title}}">{{label}}</a></li>
+                {{/each}}
+            </ul>
+        </nav>
+    {{/if}}
+</div>
+
+<div class="ml-auto w-25">
+    {{#if navButtons.[0]}}
+        <nav class="site-navigation position-relative text-right" role="navigation">
+            <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
+                {{#each navButtons}}
+                <li class="cta"><a class="nav-link" href="{{href}}" title="{{title}}"><span>{{label}}</span></a></li>
+                {{/each}}
+            </ul>
+        </nav>
+    {{/if}}        
+    <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right">
+        <span class="icon-menu h3"></span>
+    </a>
+</div>

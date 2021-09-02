@@ -1,0 +1,42 @@
+<div class="future-blobs">
+    <div class="blob_2">
+        <img src="/_client/images/blob_2.svg" alt="Image">
+    </div>
+    <div class="blob_1">
+        <img src="/_client/images/blob_1.svg" alt="Image">
+    </div>
+</div>
+<div class="container">
+    {{#if title}}
+        {{> parSectionHeader title}}
+    {{/if}}
+    {{#if items.[0]}}
+    <div class="row">
+        <div class="col-lg-4 ml-auto align-self-start" data-aos="fade-up" data-aos-delay="100">
+            <div class="p-4 rounded bg-white why-choose-us-box">
+                {{#each items}}
+                    <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                        <div class="mr-3">
+                            {{#if icon}}
+                                <span class="custom-icon-inner">
+                                    <span class="icon icon-{{enum icon}}"></span>
+                                </span>
+                            {{/if}}
+                        </div>
+                        <div>
+                            {{#if text}}
+                                <h3 class="m-0">{{text}}</h3>
+                            {{/if}}
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        {{#if image.src}}
+            <div class="col-lg-7 align-self-end" data-aos="fade-left" data-aos-delay="200">
+                <img class="img-fluid" src="{{image.src}}" alt="{{image.alt}}"/>
+            </div>
+        {{/if}}
+    </div>
+    {{/if}}
+</div>

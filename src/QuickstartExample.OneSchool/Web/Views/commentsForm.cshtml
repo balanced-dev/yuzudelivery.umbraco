@@ -1,0 +1,12 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Course>
+@{
+    var course = Model as Course;
+}
+
+@(Html.RenderYuzu<YuzuDelivery.Umbraco.Forms.vmBlock_DataForm>(
+    course.CommentFormForm,
+    new Dictionary<string, object>() { { "FormBuilderTemplate", "parFormBuilder" } },
+    new RenderSettings() {
+        Template = "parForm"
+    }))
+

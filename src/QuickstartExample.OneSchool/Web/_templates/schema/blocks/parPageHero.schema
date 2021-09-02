@@ -1,0 +1,45 @@
+{
+    "id": "/parPageHero",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "text": {
+            "type": "string"
+        },
+        "links": {
+            "type": "array",
+            "items": {
+                "$ref": "./dataLink.schema"
+            }
+        },
+        "signupForm": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "form": {
+                    "$ref": "./dataForm.schema",
+                    "anyOfType": "parFormBuilder"
+                }
+            }
+        },
+        "backgroundImage": {
+            "$ref": "./dataImage.schema"
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": false
+}

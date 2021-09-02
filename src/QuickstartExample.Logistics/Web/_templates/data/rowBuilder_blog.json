@@ -1,0 +1,155 @@
+{
+    "content": {
+        "rows": [
+            {
+                "config": {
+                    "borderBottom": false,
+                    "backgroundTheme": "none",
+                    "width": "full"
+                },
+                "items": [
+                    {
+                        "image": {
+                            "src": "/_client/images/hero_bg_1.jpg",
+                            "alt": ""
+                        },
+                        "title": "Page Hero",
+                        "breadcrumbs": [
+                            {
+                                "label": "Home",
+                                "href": "/",
+                                "title": ""
+                            },
+                            {
+                                "label": "Current page",
+                                "href": "/",
+                                "title": ""
+                            }
+                        ],
+                        "_ref": "/parPageHero",
+                        "yuzu-path": "/content/rows[0]/items[0]"
+                    }
+                ]
+            },
+            {
+                "config": {
+                    "borderBottom": false,
+                    "backgroundTheme": "none",
+                    "width": "full"
+                },
+                "items": [
+                    {
+                        "blogSummaries": [
+                            {
+                                "image": {
+                                    "src": "/_client/images/blog_1.jpg",
+                                    "alt": ""
+                                },
+                                "title": "Warehousing Your Packages",
+                                "summary": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.",
+                                "author": "Theresa Winston",
+                                "date": "Jan 18, 2019 at 2:00 pm",
+                                "category": "News",
+                                "_ref": "/parBlogSummary",
+                                "yuzu-path": "/content/rows[1]/items[0]/blogSummaries[0]"
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/images/blog_2.jpg",
+                                    "alt": ""
+                                },
+                                "title": "A different blog title",
+                                "summary": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.",
+                                "author": "Theresa Winston",
+                                "date": "Jan 18, 2019 at 2:00 pm",
+                                "category": "News",
+                                "_ref": "/parBlogSummary",
+                                "yuzu-path": "/content/rows[1]/items[0]/blogSummaries[1]"
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/images/blog_1.jpg",
+                                    "alt": ""
+                                },
+                                "title": "Warehousing Your Packages",
+                                "summary": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.",
+                                "author": "Theresa Winston",
+                                "date": "Jan 18, 2019 at 2:00 pm",
+                                "category": "News",
+                                "_ref": "/parBlogSummary",
+                                "yuzu-path": "/content/rows[1]/items[0]/blogSummaries[2]"
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/images/blog_2.jpg",
+                                    "alt": ""
+                                },
+                                "title": "A different blog title",
+                                "summary": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.",
+                                "author": "Theresa Winston",
+                                "date": "Jan 18, 2019 at 2:00 pm",
+                                "category": "News",
+                                "_ref": "/parBlogSummary",
+                                "yuzu-path": "/content/rows[1]/items[0]/blogSummaries[3]"
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/images/blog_1.jpg",
+                                    "alt": ""
+                                },
+                                "title": "Warehousing Your Packages",
+                                "summary": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.",
+                                "author": "Theresa Winston",
+                                "date": "Jan 18, 2019 at 2:00 pm",
+                                "category": "News",
+                                "_ref": "/parBlogSummary",
+                                "yuzu-path": "/content/rows[1]/items[0]/blogSummaries[4]"
+                            },
+                            {
+                                "image": {
+                                    "src": "/_client/images/blog_2.jpg",
+                                    "alt": ""
+                                },
+                                "title": "A different blog title",
+                                "summary": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.",
+                                "author": "Theresa Winston",
+                                "date": "Jan 18, 2019 at 2:00 pm",
+                                "category": "News",
+                                "_ref": "/parBlogSummary",
+                                "yuzu-path": "/content/rows[1]/items[0]/blogSummaries[5]"
+                            }
+                        ],
+                        "paginationLinks": [
+                            {
+                                "isActive": true,
+                                "link": {
+                                    "label": "1",
+                                    "href": "#",
+                                    "title": ""
+                                }
+                            },
+                            {
+                                "isActive": false,
+                                "link": {
+                                    "label": "2",
+                                    "href": "#",
+                                    "title": ""
+                                }
+                            },
+                            {
+                                "isActive": false,
+                                "link": {
+                                    "label": "3",
+                                    "href": "#",
+                                    "title": ""
+                                }
+                            }
+                        ],
+                        "_ref": "/parBlogSummaryGrid",
+                        "yuzu-path": "/content/rows[1]/items[0]"
+                    }
+                ]
+            }
+        ]
+    }
+}

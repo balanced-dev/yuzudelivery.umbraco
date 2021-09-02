@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/background": [
+            "/dataImage"
+        ],
+        "/headshot": [
+            "/dataImage"
+        ]
+    }
+}

@@ -1,0 +1,13 @@
+<div class="unit-4-icon mr-4
+        {{#each _modifiers}} {{#ifCond this '===' 'stacked'}} mb-3{{/ifCond}}{{/each}}
+    "
+>
+    <span class="text-primary flaticon-{{icon}}"></span>
+</div>
+<div>
+    <h3>{{title}}</h3>
+    <p>{{text}}</p>
+    {{#if link}}
+        <p class="mb-0"><a href="{{link.href}}" title="{{link.title}}">{{link.label}}</a></p>
+    {{/if}}
+</div>

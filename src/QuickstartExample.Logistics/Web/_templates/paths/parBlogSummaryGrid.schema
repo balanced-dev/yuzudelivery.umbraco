@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/blogSummaries": [
+            "/parBlogSummary"
+        ],
+        "/paginationLinks/link": [
+            "/dataLink"
+        ]
+    }
+}

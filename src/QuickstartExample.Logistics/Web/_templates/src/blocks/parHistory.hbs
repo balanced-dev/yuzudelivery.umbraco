@@ -1,0 +1,24 @@
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-5 ml-auto mb-5 order-md-2" data-aos="fade">
+                <img src="{{image.src}}" alt="{{image.alt}}" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6 order-md-1" data-aos="fade">
+                {{#if title}}
+                    {{> parSectionHeader title }}
+                {{/if}}
+                {{{rte}}}
+                <div class="row mt-5">
+                    {{#each serviceSummaries}}
+                        <div class="col-md-12 mb-md-5 mb-0 col-lg-6">
+                            <div class="unit-4">
+                                {{{ modPartial 'parServiceSummary' this 'stacked' }}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

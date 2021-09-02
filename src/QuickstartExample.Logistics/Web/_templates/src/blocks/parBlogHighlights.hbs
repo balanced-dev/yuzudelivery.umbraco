@@ -1,0 +1,14 @@
+<div class="site-section">
+    <div class="container">
+        {{#if title}}
+            {{{ modPartial 'parSectionHeader' title 'centred' }}}
+        {{/if}}
+        <div class="row mb-3 align-items-stretch">
+            {{#each posts}}
+                <div class="col-md-6 col-lg-6 mb-4 mb-lg-4">
+                    {{> parBlogSummary this }}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

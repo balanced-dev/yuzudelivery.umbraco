@@ -1,0 +1,10 @@
+<button 
+    class="btn btn-primary btn-pill{{#each _modifiers}} {{this}}{{/each}}" 
+    type="{{#if type}}{{type}}{{else}}button{{/if}}" 
+    {{#if id}}id="{{id}}"{{/if}} 
+    {{#if name}}name="{{name}}"{{/if}} 
+    {{#if value}}value="{{value}}"{{/if}}
+    title="{{label}}"
+>
+    {{label}}
+</button>

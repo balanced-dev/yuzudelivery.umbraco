@@ -1,0 +1,32 @@
+<div 
+    class="comment-section"
+    data-controller="comments"
+    data-comments-settings='{
+        "loadingClass": "is-loading",
+        "commentListUrl": "{{endpoints.commentList}}",
+        "commentFormUrl": "{{endpoints.commentForm}}"
+    }'
+>
+    <div class="pt-5">
+        <span 
+            data-target="comments.list"
+        >
+            {{#if commentList}}
+                {{> parCommentList commentList}}
+            {{/if}}
+        </span>
+    </div>
+    {{#if commentForm.form}}
+        <div class="comment-form-wrap pt-5">
+            {{#if commentForm.title}}
+                <h3 class="mb-5">{{commentForm.title}}</h3>
+            {{/if}}
+            <div class="p-5 bg-light" 
+                data-target="comments.form"            
+                data-action="submit->comments#refreshComments"
+            >
+                {{> parForm commentForm.form }}
+            </div>
+        </div>
+    {{/if}}
+</div>

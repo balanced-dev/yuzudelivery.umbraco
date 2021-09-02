@@ -1,0 +1,37 @@
+{
+    "id": "/parTestimonialCarousel",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "title": {
+            "$ref": "/parSectionHeader"
+        },
+        "testimonials": {
+            "type": "array",
+            "items": {
+                "properties": {
+                    "headshot": {
+                        "$ref": "/dataImage"
+                    },
+                    "personName": {
+                        "type": "string"
+                    },
+                    "quote": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+<div class="site-section">
+    <div class="container">
+        {{#if title}}
+            {{{ modPartial 'parSectionHeader' title 'centred' }}}
+        {{/if}}
+        <div class="slide-one-item home-slider owl-carousel">
+            {{#each testimonials}}
+                <div>
+                    <div class="testimonial">
+                        <figure class="mb-4">
+                            <img src="{{headshot.src}}" alt="{{headshot.alt}}" class="img-fluid mb-3">
+                            <p>{{personName}}</p>
+                        </figure>
+                        <blockquote>
+                            <p>&ldquo;{{quote}}&rdquo;</p>
+                        </blockquote>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{
+    "id": "/parBlogHighlights",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "title": {
+            "$ref": "/parSectionHeader"
+        },
+        "posts": {
+            "type": "array",
+            "items": {
+                "$ref": "/parBlogSummary"
+            }
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": false
+}

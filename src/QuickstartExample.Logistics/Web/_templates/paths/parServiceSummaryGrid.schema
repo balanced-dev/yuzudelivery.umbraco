@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/header": [
+            "/parSectionHeader"
+        ],
+        "/summaries": [
+            "/parServiceSummary"
+        ]
+    }
+}

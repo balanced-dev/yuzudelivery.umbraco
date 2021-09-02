@@ -1,0 +1,18 @@
+{{#each rows}}
+    <div class="
+            {{#if @first}}intro{{else}}site{{/if}}-section
+            {{#if config.removePaddingTop}}pt-0{{/if}}
+            {{#if config.removePaddingBottom}}pb-0{{/if}}
+            {{#if config.backgroundTheme}}bg-{{config.backgroundTheme}}{{/if}}
+        " 
+        {{#if config.navigationId}}id="{{config.navigationId}}"{{/if}}
+    >
+        {{#each items}}
+            {{#ifCond _ref '===' '/parCourseList'}}
+                {{{ modPartial 'parCourseList' this 'sectionGrid' }}}
+            {{else}}
+                {{{ dynPartial _ref this }}}
+            {{/ifCond}}
+        {{/each}}
+    </div>
+{{/each}}

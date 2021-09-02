@@ -1,0 +1,16 @@
+{
+    "parCourseGrid": {
+        "refs": {
+            "/rows/columns/gridSize": [
+                "/parCourseGridSizes"
+            ],
+            "/rows/columns/items": [
+                "/parRte",
+                "/parGridImage"
+            ]
+        }
+    },
+    "anyOfTypes": [
+        "parCourseGrid"
+    ]
+}

@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.BlockL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.BlockList.Tests", "BlockList.Tests\YuzuDelivery.Umbraco.BlockList.Tests.csproj", "{FBA3724B-600D-4E7A-84EC-13B5B80EB2F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Grid.Test", "YuzuDelivery.Umbraco.Grid.Test\YuzuDelivery.Umbraco.Grid.Test.csproj", "{288F5F4B-9D22-4EDD-98C5-C035082373A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Grid.Test", "Grid.Test\YuzuDelivery.Umbraco.Grid.Test.csproj", "{288F5F4B-9D22-4EDD-98C5-C035082373A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

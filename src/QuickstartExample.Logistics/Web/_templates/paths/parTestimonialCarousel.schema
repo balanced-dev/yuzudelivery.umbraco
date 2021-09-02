@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/title": [
+            "/parSectionHeader"
+        ],
+        "/testimonials/headshot": [
+            "/dataImage"
+        ]
+    }
+}

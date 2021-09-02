@@ -1,0 +1,42 @@
+{
+    "id": "/parAdvantages",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "title": {
+            "$ref": "./parSectionHeader.schema"
+        },
+        "items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "icon": {
+                        "type": "string",
+                        "enum": [
+                            "graduation-cap",
+                            "university"
+                        ]
+                    },
+                    "text": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "image": {
+            "$ref": "./dataImage.schema"
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": false
+}

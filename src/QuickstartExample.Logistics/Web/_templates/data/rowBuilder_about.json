@@ -1,0 +1,354 @@
+{
+    "content": {
+        "rows": [
+            {
+                "config": {
+                    "borderBottom": false,
+                    "backgroundTheme": "none",
+                    "width": "full"
+                },
+                "items": [
+                    {
+                        "image": {
+                            "src": "/_client/images/hero_bg_1.jpg",
+                            "alt": ""
+                        },
+                        "title": "Page Hero",
+                        "breadcrumbs": [
+                            {
+                                "label": "Home",
+                                "href": "/",
+                                "title": ""
+                            },
+                            {
+                                "label": "Current page",
+                                "href": "/",
+                                "title": ""
+                            }
+                        ],
+                        "_ref": "/parPageHero",
+                        "yuzu-path": "/content/rows[0]/items[0]"
+                    }
+                ]
+            },
+            {
+                "config": {
+                    "borderBottom": false,
+                    "backgroundTheme": "none",
+                    "width": "full"
+                },
+                "items": [
+                    {
+                        "title": {
+                            "title": "Our history",
+                            "subTitle": "",
+                            "_ref": "/parSectionHeader",
+                            "yuzu-path": "/content/rows[1]/items[0]/title"
+                        },
+                        "rte": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis deleniti reprehenderit animi est eaque corporis! Nisi, asperiores nam amet doloribus, soluta ut reiciendis. Consequatur modi rem, vero eos ipsam voluptas.</p> <p>Error minus sint nobis dolor laborum architecto, quaerat. Voluptatum porro expedita labore esse velit veniam laborum quo obcaecati similique iusto delectus quasi!</p>",
+                        "serviceSummaries": [
+                            {
+                                "title": "Ground Shipping",
+                                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.",
+                                "icon": "frontal-truck",
+                                "link": {
+                                    "label": "Learn More",
+                                    "href": "#",
+                                    "title": ""
+                                },
+                                "_ref": "/parServiceSummary",
+                                "yuzu-path": "/content/rows[1]/items[0]/serviceSummaries[0]"
+                            },
+                            {
+                                "title": "Air Freight",
+                                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.",
+                                "icon": "travel",
+                                "link": {
+                                    "label": "Learn More",
+                                    "href": "#",
+                                    "title": ""
+                                },
+                                "_ref": "/parServiceSummary",
+                                "yuzu-path": "/content/rows[1]/items[0]/serviceSummaries[1]"
+                            }
+                        ],
+                        "image": {
+                            "src": "/_client/images/img_1.jpg",
+                            "alt": ""
+                        },
+                        "_ref": "/parHistory",
+                        "yuzu-path": "/content/rows[1]/items[0]"
+                    }
+                ]
+            },
+            {
+                "config": {
+                    "borderBottom": false,
+                    "backgroundTheme": "none",
+                    "width": "full"
+                },
+                "items": [
+                    {
+                        "title": {
+                            "title": "Our history",
+                            "subTitle": "",
+                            "_ref": "/parSectionHeader",
+                            "yuzu-path": "/content/rows[2]/items[0]/title"
+                        },
+                        "image": {
+                            "src": "/_client/images/hero_bg_4.jpg",
+                            "alt": ""
+                        },
+                        "steps": [
+                            {
+                                "stepNumber": 1,
+                                "title": "Choose Your Service",
+                                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium dicta consectetur fuga neque fugit a at. Cum quod vero assumenda iusto.",
+                                "list": [
+                                    {
+                                        "text": "Error minus sint nobis dolor"
+                                    },
+                                    {
+                                        "text": "Voluptatum porro expedita labore esse"
+                                    },
+                                    {
+                                        "text": "Voluptas unde sit pariatur earum"
+                                    }
+                                ]
+                            },
+                            {
+                                "stepNumber": 2,
+                                "title": "Select Your Payment",
+                                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium dicta consectetur fuga neque fugit a at. Cum quod vero assumenda iusto.",
+                                "list": [
+                                    {
+                                        "text": "Error minus sint nobis dolor"
+                                    },
+                                    {
+                                        "text": "Voluptatum porro expedita labore esse"
+                                    },
+                                    {
+                                        "text": "Voluptas unde sit pariatur earum"
+                                    }
+                                ]
+                            },
+                            {
+                                "stepNumber": 3,
+                                "title": "Tracking your order",
+                                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium dicta consectetur fuga neque fugit a at. Cum quod vero assumenda iusto.",
+                                "list": [
+                                    {
+                                        "text": "Error minus sint nobis dolor"
+                                    },
+                                    {
+                                        "text": "Voluptatum porro expedita labore esse"
+                                    },
+                                    {
+                                        "text": "Voluptas unde sit pariatur earum"
+                                    }
+                                ]
+                            }
+                        ],
+                        "_ref": "/parStepList",
+                        "yuzu-path": "/content/rows[2]/items[0]"
+                    }
+                ]
+            },
+            {
+                "config": {
+                    "borderBottom": true,
+                    "backgroundTheme": "none",
+                    "width": "full"
+                },
+                "items": [
+                    {
+                        "title": {
+                            "title": "Our history",
+                            "subTitle": "",
+                            "_ref": "/parSectionHeader",
+                            "yuzu-path": "/content/rows[3]/items[0]/title"
+                        },
+                        "members": [
+                            {
+                                "headshot": {
+                                    "src": "/_client/images/person_2.jpg",
+                                    "alt": ""
+                                },
+                                "personName": "Christine Rooster",
+                                "bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi at consequatur unde molestiae quidem provident voluptatum deleniti quo iste error eos est praesentium distinctio cupiditate tempore suscipit inventore deserunt tenetur.",
+                                "role": "CO-FOUNDER, PRESIDENT",
+                                "socialLinks": [
+                                    {
+                                        "type": "facebook",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "twitter",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "instagram",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "linkedin",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "headshot": {
+                                    "src": "/_client/images/person_3.jpg",
+                                    "alt": ""
+                                },
+                                "personName": "Brandon Sharp",
+                                "bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi at consequatur unde molestiae quidem provident voluptatum deleniti quo iste error eos est praesentium distinctio cupiditate tempore suscipit inventore deserunt tenetur.",
+                                "role": "CO-FOUNDER, COO",
+                                "socialLinks": [
+                                    {
+                                        "type": "facebook",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "twitter",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "instagram",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "linkedin",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "headshot": {
+                                    "src": "/_client/images/person_4.jpg",
+                                    "alt": ""
+                                },
+                                "personName": "Connor Hodson",
+                                "bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi at consequatur unde molestiae quidem provident voluptatum deleniti quo iste error eos est praesentium distinctio cupiditate tempore suscipit inventore deserunt tenetur.",
+                                "role": "MARKETING",
+                                "socialLinks": [
+                                    {
+                                        "type": "facebook",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "twitter",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "instagram",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    },
+                                    {
+                                        "type": "linkedin",
+                                        "link": {
+                                            "label": "",
+                                            "href": "#",
+                                            "title": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "_ref": "/parTeam",
+                        "yuzu-path": "/content/rows[3]/items[0]"
+                    }
+                ]
+            },
+            {
+                "config": {
+                    "borderBottom": false,
+                    "backgroundTheme": "none",
+                    "width": "full"
+                },
+                "items": [
+                    {
+                        "title": {
+                            "title": "Testimonials",
+                            "subTitle": "",
+                            "_ref": "/parSectionHeader",
+                            "yuzu-path": "/content/rows[4]/items[0]/title"
+                        },
+                        "testimonials": [
+                            {
+                                "headshot": {
+                                    "src": "/_client/images/person_5.jpg",
+                                    "alt": ""
+                                },
+                                "personName": "Bruce Rogers",
+                                "quote": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto."
+                            },
+                            {
+                                "headshot": {
+                                    "src": "/_client/images/person_3.jpg",
+                                    "alt": ""
+                                },
+                                "personName": "John Smith",
+                                "quote": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto."
+                            },
+                            {
+                                "headshot": {
+                                    "src": "/_client/images/person_2.jpg",
+                                    "alt": ""
+                                },
+                                "personName": "Christine Aguilar",
+                                "quote": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto."
+                            }
+                        ],
+                        "_ref": "/parTestimonialCarousel",
+                        "yuzu-path": "/content/rows[4]/items[0]"
+                    }
+                ]
+            }
+        ]
+    }
+}

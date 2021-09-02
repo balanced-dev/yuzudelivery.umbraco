@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/linkSection/links": [
+            "/dataLink"
+        ],
+        "/newsletterSection/form": [
+            "/dataForm^parFormFooter"
+        ]
+    }
+}

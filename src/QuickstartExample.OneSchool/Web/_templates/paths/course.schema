@@ -1,0 +1,22 @@
+{
+    "refs": {
+        "/header": [
+            "/parPageHeader"
+        ],
+        "/title": [
+            "/parCourseTitle"
+        ],
+        "/content": [
+            "/dataGrid^parCourseGrid"
+        ],
+        "/teacher": [
+            "/parCourseTeacher"
+        ],
+        "/comments": [
+            "/parComments"
+        ],
+        "/courses": [
+            "/parCourseList"
+        ]
+    }
+}

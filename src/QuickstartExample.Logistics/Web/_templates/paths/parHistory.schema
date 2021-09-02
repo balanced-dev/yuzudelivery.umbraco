@@ -1,0 +1,13 @@
+{
+    "refs": {
+        "/title": [
+            "/parSectionHeader"
+        ],
+        "/serviceSummaries": [
+            "/parServiceSummary"
+        ],
+        "/image": [
+            "/dataImage"
+        ]
+    }
+}

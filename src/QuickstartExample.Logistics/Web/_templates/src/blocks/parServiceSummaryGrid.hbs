@@ -1,0 +1,18 @@
+<div class="site-section">
+    <div class="container">
+        {{#if header}}
+            <div class="service-summary-grid__header">
+                {{{ modPartial 'parSectionHeader' header 'centred' }}}
+            </div>
+        {{/if}}
+        <div class="row align-items-stretch">
+            {{#each summaries}}
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                    <div class="unit-4 d-flex">
+                        {{> parServiceSummary this }}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{
+    "numbers": {
+        "/steps/stepNumber": {
+            "type": "number"
+        }
+    },
+    "refs": {
+        "/title": [
+            "/parSectionHeader"
+        ],
+        "/image": [
+            "/dataImage"
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "enums": {
+        "/items/icon": [
+            "graduation-cap",
+            "university"
+        ]
+    },
+    "refs": {
+        "/title": [
+            "/parSectionHeader"
+        ],
+        "/image": [
+            "/dataImage"
+        ]
+    }
+}

@@ -127,10 +127,22 @@ steps:
     arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_version="$(umbraco_version)";umbraco_forms_version="$(umbraco_forms_version)";y_umb_version="$(Build.BuildNumber)"'
 
 - task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart Example
+  displayName: Nuget Pack Quickstart Lambda Example
   inputs:
     command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample\YuzuDelivery.Umbraco.Quickstart.Example.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.Lambda\YuzuDelivery.Umbraco.Quickstart.Example.Lambda.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
+
+- task: NuGetCommand@2
+  displayName: Nuget Pack Quickstart Logistics Example
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.Logistics\YuzuDelivery.Umbraco.Quickstart.Example.Logistics.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
+
+- task: NuGetCommand@2
+  displayName: Nuget Pack Quickstart OneSchool Example
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.OneSchool\YuzuDelivery.Umbraco.Quickstart.Example.OneSchool.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
 
 - task: NuGetCommand@2
   inputs:

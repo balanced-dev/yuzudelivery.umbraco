@@ -1,0 +1,20 @@
+{
+    "refs": {
+        "": [
+            "/parBlogHighlights",
+            "/parCta",
+            "/parHomeHero",
+            "/parImageFeatureCarousel",
+            "/parVideo",
+            "/parHistory",
+            "/parStepList",
+            "/parTeam",
+            "/parBlogSummaryGrid",
+            "/parContactInformation",
+            "/parPageHero",
+            "/parServiceSummaryGrid",
+            "/parTestimonialCarousel",
+            "/parImageFeatureGrid"
+        ]
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "refs": {
+        "": [
+            "/parAdvantages",
+            "/parContactUs",
+            "/parCourseList",
+            "/parPageHero",
+            "/parProgram",
+            "/parQuote",
+            "/parSectionHeader",
+            "/parTeacherProfiles"
+        ]
+    }
+}

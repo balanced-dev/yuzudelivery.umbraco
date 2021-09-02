@@ -1,0 +1,18 @@
+{{#if navSections.[0]}}
+    <nav class="site-navigation position-relative text-right" role="navigation">
+        <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
+            {{#each navSections}}
+                <li class="{{#if isActive}}active{{/if}}{{#if subLinks.[0]}} has-children{{/if}}">
+                    <a href="{{link.href}}" title="{{link.title}}">{{link.label}}</a>
+                    {{#if subLinks.[0]}}
+                        <ul class="dropdown">
+                            {{#each subLinks}}
+                                <li><a href="{{href}}" title="{{title}}">{{label}}</a></li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+    </nav>
+{{/if}}

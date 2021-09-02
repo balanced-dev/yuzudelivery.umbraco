@@ -1,0 +1,13 @@
+{
+    "refs": {
+        "/header": [
+            "/parSiteHeader"
+        ],
+        "/content": [
+            "/dataRows^parRowBuilder"
+        ],
+        "/footer": [
+            "/parSiteFooter"
+        ]
+    }
+}

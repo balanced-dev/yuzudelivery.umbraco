@@ -1,0 +1,16 @@
+<label class="d-block mb-0" title="{{label}}">
+	<input
+		class="form-control{{#each _modifiers}} {{this}}{{/each}}" 
+		type="{{#if type}}{{type}}{{else}}text{{/if}}" 
+		autocomplete="{{#if autocomplete}}{{autocomplete}}{{else}}off{{/if}}"
+		{{#if id}}id="{{id}}" {{/if}}
+		{{#if name}}name="{{name}}" {{/if}}
+		{{#if placeholder}}placeholder="{{placeholder}}"{{/if}} 
+		{{#if pattern}}pattern="{{pattern}}"{{/if}} 
+		{{#if value}}value="{{value}}"{{/if}} 
+		{{#if isRequired}}required="required"{{/if}}
+		{{#if isReadonly}}readonly="readonly"{{/if}}
+		{{#if isDisabled}}disabled="disabled"{{/if}}
+	>
+	<span class="sr-only">{{label}}</span>
+</label>

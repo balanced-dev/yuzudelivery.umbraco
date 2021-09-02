@@ -1,0 +1,26 @@
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            {{#each blogSummaries}}
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                    {{> parBlogSummary this }}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+<div class="container text-center pb-5">
+    <div class="row">
+        <div class="col-12">
+            <p class="custom-pagination">
+                {{#each paginationLinks}}
+                    {{#if isActive}}
+                        <span>{{link.label}}</span>
+                    {{else}}
+                        <a href="{{link.href}}" title="{{link.title}}">{{link.label}}</a>
+                    {{/if}}
+                {{/each}}
+            </p>
+        </div>
+    </div>
+</div>

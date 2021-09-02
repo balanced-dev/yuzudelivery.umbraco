@@ -1,0 +1,216 @@
+{
+    "header": {
+        "backgroundImage": {
+            "src": "/_client/images/img_2.jpg",
+            "alt": ""
+        },
+        "title": "Logo Design Course",
+        "subTitles": [
+            {
+                "text": "4 Lessons / 12 Week"
+            },
+            {
+                "text": "2,193 students"
+            },
+            {
+                "link": {
+                    "label": "6 comments",
+                    "href": "#comments",
+                    "title": ""
+                }
+            }
+        ],
+        "_ref": "/parPageHeader",
+        "yuzu-path": "/header"
+    },
+    "title": {
+        "title": "Course Description",
+        "schedule": "MWF 9:30 - 11:00",
+        "_ref": "/parCourseTitle",
+        "yuzu-path": "/title"
+    },
+    "content": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "gridSize": 12,
+                        "items": [
+                            {
+                                "data": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim eum iure voluptatum provident natus, deleniti alias corporis dolorem architecto eligendi consequatur, veniam ratione qui adipisci, doloremque aspernatur? Debitis, quia, praesentium.</p><p>Molestias sit temporibus ullam voluptatem quibusdam. Accusamus labore perspiciatis similique veritatis ipsum iure quas. Nulla perspiciatis unde eveniet nihil, nesciunt repellat maxime ab libero minima voluptas dolore repudiandae adipisci. Cumque!</p><p>Enim harum voluptatem, itaque in illum quas temporibus tempore sit tempora quam atque eveniet, non aspernatur dignissimos aliquid praesentium exercitationem delectus, maxime velit saepe! Qui asperiores iure reprehenderit ad voluptas!</p>",
+                                "_ref": "/parRte",
+                                "yuzu-path": "/content/rows[0]/columns[0]/items[0]"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "gridSize": 6,
+                        "items": [
+                            {
+                                "image": {
+                                    "src": "/_client/images/img_1.jpg",
+                                    "alt": ""
+                                },
+                                "_ref": "/parGridImage",
+                                "yuzu-path": "/content/rows[1]/columns[0]/items[0]"
+                            },
+                            {
+                                "data": "<p>Ipsam fuga fugiat vero repudiandae, tenetur a ullam, expedita perspiciatis dolores rem quibusdam numquam dicta sint unde repellat magni recusandae. Id, quibusdam, voluptatum. Amet mollitia ratione, illum animi quia ex?</p>",
+                                "_ref": "/parRte",
+                                "yuzu-path": "/content/rows[1]/columns[0]/items[1]"
+                            }
+                        ]
+                    },
+                    {
+                        "gridSize": 6,
+                        "items": [
+                            {
+                                "image": {
+                                    "src": "/_client/images/img_2.jpg",
+                                    "alt": ""
+                                },
+                                "_ref": "/parGridImage",
+                                "yuzu-path": "/content/rows[1]/columns[1]/items[0]"
+                            },
+                            {
+                                "data": "<p>Ipsam fuga fugiat vero repudiandae, tenetur a ullam, expedita perspiciatis dolores rem quibusdam numquam dicta sint unde repellat magni recusandae. Id, quibusdam, voluptatum. Amet mollitia ratione, illum animi quia ex?</p>",
+                                "_ref": "/parRte",
+                                "yuzu-path": "/content/rows[1]/columns[1]/items[1]"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "teacher": {
+        "headshot": {
+            "src": "/_client/images/person_2.jpg",
+            "alt": ""
+        },
+        "title": "Course Instructor",
+        "teacherName": "Christine Downeyy",
+        "text": "Lorem ipsum dolor sit amet sectetur adipisicing elit. Ipsa porro expedita libero pariatur vero eos.",
+        "_ref": "/parCourseTeacher",
+        "yuzu-path": "/teacher"
+    },
+    "comments": {
+        "commentList": {
+            "title": "1 comment",
+            "items": [
+                {
+                    "headshot": {
+                        "src": "/_client/images/person_1.jpg",
+                        "alt": ""
+                    },
+                    "name": "Jean Doe",
+                    "timestamp": "January 9, 2018 at 2:21pm",
+                    "comment": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?"
+                }
+            ],
+            "_ref": "/parCommentList",
+            "yuzu-path": "/comments/commentList"
+        },
+        "endpoints": {
+            "commentList": "/api/getPreview/parCommentList_newComment",
+            "commentForm": "/api/getPreview/parForm_comment-submitted"
+        },
+        "commentForm": {
+            "title": "Leave a comment",
+            "form": {
+                "testForm": {
+                    "isSuccess": false,
+                    "successMessage": "Your comment has been submitted",
+                    "validation": {
+                        "title": "Form Builder Validation",
+                        "message": ""
+                    },
+                    "fieldsets": [
+                        {
+                            "fields": [
+                                {
+                                    "name": "first-name",
+                                    "placeholder": "First name",
+                                    "_ref": "/parFormTextInput"
+                                },
+                                {
+                                    "name": "last-name",
+                                    "placeholder": "Last name",
+                                    "_ref": "/parFormTextInput"
+                                },
+                                {
+                                    "name": "email-address",
+                                    "type": "email",
+                                    "placeholder": "Email Address",
+                                    "_ref": "/parFormTextInput"
+                                },
+                                {
+                                    "name": "message",
+                                    "placeholder": "Write your message here",
+                                    "_ref": "/parFormTextArea"
+                                }
+                            ]
+                        }
+                    ],
+                    "submitButtonText": "Post comment",
+                    "_ref": "/parFormBuilder"
+                },
+                "_ref": "/parForm",
+                "yuzu-path": "/comments/commentForm/form"
+            }
+        },
+        "_ref": "/parComments",
+        "yuzu-path": "/comments"
+    },
+    "courses": {
+        "title": "Courses",
+        "items": [
+            {
+                "image": {
+                    "src": "/_client/images/img_1.jpg",
+                    "alt": ""
+                },
+                "title": "Logo design course",
+                "description": "Lorem ipsum",
+                "price": "£99",
+                "duration": "4 lessons / 12 weeks",
+                "participationCount": "1,567",
+                "commentCount": 2
+            },
+            {
+                "image": {
+                    "src": "/_client/images/img_2.jpg",
+                    "alt": ""
+                },
+                "title": "JS course",
+                "description": "Lorem ipsum",
+                "price": "£54",
+                "duration": "4 lessons / 1 week",
+                "participationCount": "255",
+                "commentCount": 0
+            },
+            {
+                "image": {
+                    "src": "/_client/images/img_3.jpg",
+                    "alt": ""
+                },
+                "title": "Law of physics",
+                "description": "Lorem ipsum",
+                "price": "£99",
+                "duration": "5 lessons / 6 weeks",
+                "participationCount": "20",
+                "commentCount": 9
+            }
+        ],
+        "_ref": "/parCourseList",
+        "yuzu-path": "/courses"
+    },
+    "_layout": {
+        "name": "_page",
+        "data": "_page_grey-footer"
+    }
+}

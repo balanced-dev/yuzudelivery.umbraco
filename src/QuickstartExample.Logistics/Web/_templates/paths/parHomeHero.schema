@@ -1,0 +1,13 @@
+{
+    "refs": {
+        "/image": [
+            "/dataImage"
+        ],
+        "/link": [
+            "/dataLink"
+        ],
+        "/features/form": [
+            "/dataForm^parFormBuilder"
+        ]
+    }
+}

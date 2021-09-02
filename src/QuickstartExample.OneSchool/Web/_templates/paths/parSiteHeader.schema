@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/logo": [
+            "/dataImage"
+        ],
+        "/nav": [
+            "/parSiteNav"
+        ]
+    }
+}

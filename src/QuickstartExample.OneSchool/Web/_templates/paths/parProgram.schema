@@ -1,0 +1,13 @@
+{
+    "enums": {
+        "/statistics/icon": [
+            "graduation-cap",
+            "university"
+        ]
+    },
+    "refs": {
+        "/image": [
+            "/dataImage"
+        ]
+    }
+}

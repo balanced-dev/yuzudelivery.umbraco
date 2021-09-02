@@ -1,0 +1,12 @@
+<div class="row mb-5
+        {{#each _modifiers}}{{#ifCond this '===' 'centred'}}justify-content-center{{/ifCond}}{{/each}}
+    "
+>
+    <div class="col-md-7 border-primary
+        {{#each _modifiers}}{{#ifCond this '===' 'centred'}}text-center {{/ifCond}}{{/each}}
+    "
+>
+        <h2 class="{{#if subtitle}}mb-0 {{/if}}font-weight-light text-primary">{{title}}</h2>
+        {{#if subTitle}}<p class="color-black-opacity-5">{{subTitle}}</p>{{/if}}
+    </div>
+</div>

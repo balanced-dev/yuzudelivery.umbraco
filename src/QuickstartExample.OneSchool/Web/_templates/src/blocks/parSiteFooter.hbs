@@ -1,0 +1,60 @@
+<footer class="footer-section{{#each _modifiers}} {{this}}{{/each}}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {{#if aboutSection.title}}
+                    <h3>{{aboutSection.title}}</h3>
+                {{/if}}
+                {{#if aboutSection.text}}
+                    <p>{{aboutSection.text}}</p>
+                {{/if}}
+            </div>
+
+            <div class="col-md-3 ml-auto">
+                {{#if linkSection.title}}
+                    <h3>{{linkSection.title}}</h3>
+                {{/if}}
+                {{#if linkSection.links.[0]}}
+                    <ul class="list-unstyled footer-links">
+                        {{#each linkSection.links}}
+                            <li><a href="{{href}}" title="{{title}}">{{label}}</a></li>                            
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </div>
+
+            <div class="col-md-4">
+                {{#if newsletterSection.title}}
+                    <h3>{{newsletterSection.title}}</h3>                        
+                {{/if}}
+                {{#if newsletterSection.text}}
+                    <p>{{newsletterSection.text}}</p>  
+                {{/if}}
+                
+                
+                <form accept-charset="utf-8" action="{{newsletterSection.action}}" method="{{newsletterSection.method}}" class="footer-subscribe">
+                    <div class="d-flex mb-5">
+                        {{> parForm newsletterSection.form }}
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row pt-5 mt-5 text-center">
+            <div class="col-md-12">
+                <div class="border-top pt-5">
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                           target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>

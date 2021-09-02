@@ -1,0 +1,22 @@
+{
+    "parRowBuilder": {
+        "refs": {
+            "/rows/config": [
+                "/parRowBuilderConfig"
+            ],
+            "/rows/items": [
+                "/parAdvantages",
+                "/parContactUs",
+                "/parCourseList",
+                "/parPageHero",
+                "/parProgram",
+                "/parQuote",
+                "/parSectionHeader",
+                "/parTeacherProfiles"
+            ]
+        }
+    },
+    "anyOfTypes": [
+        "parRowBuilder"
+    ]
+}

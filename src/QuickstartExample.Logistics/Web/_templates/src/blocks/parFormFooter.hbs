@@ -1,0 +1,12 @@
+<div class="input-group">
+    {{#each fieldsets}}
+        {{#each fields}}
+            {{{ modPartial _ref this 'border-secondary' 'text-white' 'bg-transparent'}}}
+        {{/each}}
+    {{/each}}
+    <div class="input-group-append">
+        <button class="btn btn-primary btn-pill rounded-0" type="submit" >
+            {{submitButtonText}}
+        </button>
+    </div>
+</div>

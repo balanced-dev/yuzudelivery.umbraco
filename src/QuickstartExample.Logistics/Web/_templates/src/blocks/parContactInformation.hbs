@@ -1,0 +1,43 @@
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 mb-5">
+                {{#if form}}
+                    <div class="p-5 bg-white">
+                        {{> parForm form }}                        
+                    </div>
+                {{/if}}
+            </div>
+            <div class="col-md-5">
+                {{#if contactDetails.sections.[0]}}
+                    <div class="p-4 mb-3 bg-white">
+                        {{#each contactDetails.sections}}
+                            <p class="mb-0 font-weight-bold">{{title}}</p>
+                            {{#if text}}
+                                <p class="mb-4">
+                                    {{text}}
+                                </p>
+                            {{/if}}
+                            {{#if link}}
+                                <p class="{{#unless @last}}mb-4{{else}}mb-0{{/unless}}">
+                                    <a href="{{link.href}}" title="{{link.title}}">{{link.label}}</a>
+                                </p>
+                            {{/if}}
+                        {{/each}}
+                    </div>
+                {{/if}}
+                {{#if moreInfo}}
+                    <div class="p-4 mb-3 bg-white">
+                        <h3 class="h5 text-black mb-3">{{moreInfo.title}}</h3>
+                        <p>{{moreInfo.text}}</p>
+                        <p>
+                            <a class="btn btn-primary px-4 py-2 text-white" href="{{moreInfo.link.href}}" title="{{moreInfo.link.title}}">
+                                {{moreInfo.link.label}}
+                            </a>
+                        </p>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

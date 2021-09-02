@@ -1,0 +1,11 @@
+{{#each rows}}
+    <div class="
+            {{#if config.backgroundTheme}}bg-{{config.backgroundTheme}}{{/if}}
+            {{#if config.borderBottom}}border-bottom{{/if}}
+        "
+    >
+        {{#each items}}
+            {{{ dynPartial _ref this }}}
+        {{/each}}
+    </div>
+{{/each}}

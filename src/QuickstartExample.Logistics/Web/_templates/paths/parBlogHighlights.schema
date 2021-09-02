@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/title": [
+            "/parSectionHeader"
+        ],
+        "/posts": [
+            "/parBlogSummary"
+        ]
+    }
+}

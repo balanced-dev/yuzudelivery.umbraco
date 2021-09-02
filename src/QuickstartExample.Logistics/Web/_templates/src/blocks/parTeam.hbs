@@ -1,0 +1,28 @@
+<div class="site-section">
+    <div class="container">
+        {{#if title}}
+            {{{ modPartial 'parSectionHeader' title 'centred' }}}
+        {{/if}}
+        <div class="row">
+            {{#each members}}
+                <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+                    <div class="person">
+                        <img src="{{headshot.src}}" alt="{{headshot.alt}}" class="img-fluid rounded mb-5">
+                        <h3>{{personName}}</h3>
+                        <p class="position text-muted">{{role}}</p>
+                        <p class="mb-4">{{bio}}</p>
+                        <ul class="ul-social-circle">
+                            {{#each socialLinks}}
+                                <li>
+                                    <a href="{{link.href}}" title="{{link.title}}">
+                                        <span class="icon-{{type}}"></span>
+                                    </a>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

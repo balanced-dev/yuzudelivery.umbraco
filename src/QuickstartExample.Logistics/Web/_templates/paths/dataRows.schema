@@ -1,0 +1,28 @@
+{
+    "parRowBuilder": {
+        "refs": {
+            "/rows/config": [
+                "/parRowBuilderConfig"
+            ],
+            "/rows/items": [
+                "/parBlogHighlights",
+                "/parCta",
+                "/parHomeHero",
+                "/parImageFeatureCarousel",
+                "/parVideo",
+                "/parHistory",
+                "/parStepList",
+                "/parTeam",
+                "/parBlogSummaryGrid",
+                "/parContactInformation",
+                "/parPageHero",
+                "/parServiceSummaryGrid",
+                "/parTestimonialCarousel",
+                "/parImageFeatureGrid"
+            ]
+        }
+    },
+    "anyOfTypes": [
+        "parRowBuilder"
+    ]
+}

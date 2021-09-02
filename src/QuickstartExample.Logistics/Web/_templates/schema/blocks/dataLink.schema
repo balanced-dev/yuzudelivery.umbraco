@@ -1,0 +1,25 @@
+{
+    "id": "/dataLink",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "label": {
+            "type": "string"
+        },
+        "href": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

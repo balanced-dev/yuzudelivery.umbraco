@@ -145,6 +145,13 @@ steps:
     arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.OneSchool\YuzuDelivery.Umbraco.Quickstart.Example.OneSchool.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
 
 - task: NuGetCommand@2
+  displayName: Nuget Pack Quickstart Test Project
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.TestProject\YuzuDelivery.Umbraco.Quickstart.Example.TestProject.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
+
+
+- task: NuGetCommand@2
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'

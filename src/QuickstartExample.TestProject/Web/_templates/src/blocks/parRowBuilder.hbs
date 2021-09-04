@@ -19,7 +19,11 @@
             {{#each items}}
                 <div style="padding: 20px; background: #BBB; margin-bottom: 20px;">
                     <h3 style="padding-top: 0;">Row Item {{@index}}</h3>
-                    {{{ dynPartial _ref this }}}
+                    {{#if this.content}}
+                        {{{ dynPartial _ref this.content }}}
+                    {{else}}
+                        {{{ dynPartial _ref this }}}
+                    {{/if}}
                 </div>
             {{/each}}
 

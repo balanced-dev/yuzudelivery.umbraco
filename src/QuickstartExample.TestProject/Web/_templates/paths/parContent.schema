@@ -1,0 +1,30 @@
+{
+    "enums": {
+        "/enumString": [
+            "value1",
+            "value2"
+        ]
+    },
+    "numbers": {
+        "/integer": {
+            "type": "number"
+        },
+        "/number": {
+            "type": "number"
+        }
+    },
+    "refs": {
+        "/image": [
+            "/dataImage"
+        ],
+        "/imageArray": [
+            "/dataImage"
+        ],
+        "/link": [
+            "/dataLink"
+        ],
+        "/linkArray": [
+            "/dataLink"
+        ]
+    }
+}

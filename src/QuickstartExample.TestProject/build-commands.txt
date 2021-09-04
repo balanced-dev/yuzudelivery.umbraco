@@ -1,0 +1,5 @@
+nuget pack YuzuDelivery.Umbraco.QuickStart.Example.Logistics.nuspec -Properties y_umb_version="1.2.7.26"
+
+copy YuzuDelivery.Umbraco.QuickStart.Example.Logistics.1.0.0.nupkg c:\nuget\ /Y
+
+Install-Package YuzuDelivery.Umbraco.QuickStart.Example.Logistics -source c:/nuget -IncludePrerelease

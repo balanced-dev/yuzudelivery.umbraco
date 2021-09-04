@@ -96,7 +96,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             builder.Expected.ValidationLimit.Min = 0;
 
             if (!isList)
-                builder.Expected.ValidationLimit.Max = 0;
+                builder.Expected.ValidationLimit.Max = 1;
 
             var output = svc.Create(propertyMapBuilder.CurrentProperty).Configuration as BlockListConfiguration;
 

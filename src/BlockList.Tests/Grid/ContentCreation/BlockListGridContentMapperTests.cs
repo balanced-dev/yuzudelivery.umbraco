@@ -8,6 +8,7 @@ using Rhino.Mocks;
 using Umbraco.Core.Models;
 using Umbraco.Web.PropertyEditors;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Umb = Umbraco.Core.Services;
 using Umbraco.Core.Logging;
 using YuzuDelivery.Umbraco.Import;
@@ -127,6 +128,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         public void DataRow_row_config()
         {
             CreateData();
+            config.Grid.RowConfigOfType = typeof(vmBlock_SettingsBlock).Name;
 
             SectionProperties(properties, AssignSections);
 
@@ -156,7 +158,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             dataRows.Rows.Add(new vmSub_DataRowsRow());
             dataRows.Rows[0].Items.Add(new vmBlock_DataGridRowItem());
             dataRows.Rows[0].Items[0].Content = CreateContentBlockVm(innerRow, "title");
-            dataRows.Rows[0].Items[0].Config = CreateSettingsBlockVm(innerRow, "hero");
+            dataRows.Rows[0].Items[0].Config = CreateSettingsBlockVm(innerRow, "hero", addRef: true); // the addRef must change once column item configs are fully used
 
             StubFullWidthRow(outer, innerRow);
 
@@ -213,6 +215,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         public void DataGrid_column_config()
         {
             CreateData();
+            config.Grid.ColumnConfigOfType = typeof(vmBlock_SettingsBlock).Name;
 
             SectionProperties(properties, AssignSections);
 
@@ -250,9 +253,10 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             return vm;
         }
 
-        public object CreateSettingsBlockVm(BlockListDbModelBuilder builder, string value)
+        public object CreateSettingsBlockVm(BlockListDbModelBuilder builder, string value, bool addRef = false)
         {
             var vm = new vmBlock_SettingsBlock() { Id = value };
+            if (addRef) vm._ref = "/parSettingsBlock";
             StubSettingsBlock<vmBlock_SettingsBlock>(builder, x => x.Id, value);
             return vm;
         }
@@ -288,8 +292,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
 
         public void ActAndAssert(object actual, BlockListDbModelBuilder expected)
         {
-            var output = svc.GetImportValue(null, config, actual.ToJson(), "source", contentMapperFactory, contentImportPropertyService)
-                .ToObject<BlockListDbModel>();
+            var output = JToken.Parse(svc.GetImportValue(null, config, actual.ToJson(), "source", contentMapperFactory, contentImportPropertyService));
 
             Approvals.AssertEquals(expected.Expected.ToJson(), output.ToJson());
         }
@@ -339,10 +342,9 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             public string _ref { get; set; }
         }
 
+        //settings blocks don't have _ref properties
         public class vmBlock_SettingsBlock
         {
-            public vmBlock_SettingsBlock() { _ref = "/parSettingsBlock"; }
-
             [JsonProperty("id")]
             public string Id { get; set; }
             public string _ref { get; set; }

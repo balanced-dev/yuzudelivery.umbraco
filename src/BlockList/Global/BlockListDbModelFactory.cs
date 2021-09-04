@@ -23,7 +23,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             this.guidFactory = guidFactory;
         }
 
-        public virtual BlockListDbModel Create(JArray arrObjects, IContentMapperFactory contentMapperFactory, IContentImportPropertyService contentImportPropertyService, VmContentMapping vmLink = null)
+        public virtual BlockListDbModel Create(JArray arrObjects, IContentMapperFactory contentMapperFactory, IContentImportPropertyService contentImportPropertyService, VmContentMapping vmLink = null, string contentVmName = null, string settingsVmName = null)
         {
             var outputModel = new BlockListDbModel();
 
@@ -32,14 +32,14 @@ namespace YuzuDelivery.Umbraco.BlockList
                 var layout = new BlockListDbModel.LayoutItem();
 
                 var contentRawData = data["content"] != null ? data["content"] : data;
-                var content = GetObject(contentRawData, contentImportPropertyService, vmLink);
+                var content = GetObject(contentRawData, contentImportPropertyService, vmLink, contentVmName);
 
                 outputModel.ContentData.Add(JObject.FromObject(content));
                 layout.ContentUdi = content["udi"].ToString();
 
                 if(data["config"] != null)
                 {
-                    var settings = GetObject(data["config"], contentImportPropertyService, vmLink);
+                    var settings = GetObject(data["config"], contentImportPropertyService, vmLink, settingsVmName);
 
                     outputModel.SettingsData.Add(JObject.FromObject(settings));
                     layout.SettingsUdi = settings["udi"].ToString();
@@ -52,17 +52,21 @@ namespace YuzuDelivery.Umbraco.BlockList
             return outputModel;
         }
 
-        public Dictionary<string, object> GetObject(JToken data, IContentImportPropertyService contentImportPropertyService, VmContentMapping vmLink = null)
+        public Dictionary<string, object> GetObject(JToken data, IContentImportPropertyService contentImportPropertyService, VmContentMapping vmLink = null, string vmName = null)
         {
-            if (data["_ref"] != null)
+            if (data["_ref"]?.Value<string>() != null)
             {
-                var vmName = data["_ref"].ToString().BlockRefToVmTypeName();
+                vmName = data["_ref"].ToString().BlockRefToVmTypeName();
+            }
+
+            if(!string.IsNullOrEmpty(vmName))
+            {
                 vmLink = vmHelperService.GetWithMapping(vmName);
             }
 
             if (vmLink == null)
             {
-                throw new Exception("Block list content mapping link not found, a missing _ref on objects");
+                throw new Exception($"Block list content mapping vm name link not found, a missing _ref on objects for object {JsonConvert.SerializeObject(data, Formatting.Indented)}");
             }
 
             var output = new Dictionary<string, object>();
@@ -79,7 +83,10 @@ namespace YuzuDelivery.Umbraco.BlockList
                         var propertyValue = data[proprtyName].ToString();
                         contentImportPropertyService.ImportProperty(vmLink.ContentType.Name, "blockList", m, propertyValue, (name, value) =>
                         {
-                            output[name] = value;
+                            if (IsValidJson(value))
+                                output[name] = JToken.Parse(value);
+                            else
+                                output[name] = value;
                         });
                     }
                 }
@@ -91,6 +98,35 @@ namespace YuzuDelivery.Umbraco.BlockList
         public virtual string GetJsonPropertyName(PropertyInfo property)
         {
             return property.GetCustomAttributes<JsonPropertyAttribute>().Select(x => x.PropertyName).FirstOrDefault();
+        }
+
+        private bool IsValidJson(string strInput)
+        {
+            strInput = strInput.Trim();
+            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) || //For object
+                (strInput.StartsWith("[") && strInput.EndsWith("]"))) //For array
+            {
+                try
+                {
+                    var obj = JToken.Parse(strInput);
+                    return true;
+                }
+                catch (JsonReaderException jex)
+                {
+                    //Exception in parsing json
+                    Console.WriteLine(jex.Message);
+                    return false;
+                }
+                catch (Exception ex) //some other exception
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

@@ -49,7 +49,5 @@ namespace YuzuDelivery.Umbraco.BlockList
             var arrOutput = blockListDbModelFactory.Create(arrObjects, factory, import, configVmLink);
             return JsonConvert.SerializeObject(arrOutput, Formatting.Indented);
         }
-
-
     }
 }

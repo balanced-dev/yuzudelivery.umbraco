@@ -70,14 +70,15 @@ namespace YuzuDelivery.Umbraco.BlockList
                     ? new List<JToken>() { row } //rowBuilder items
                     : row["columns"].ToList(); //gridBuilder items
 
-                var content = CreateFromItems(sections, sectionProperties, contentTypes, isRowBuilder, contentMapperFactory, contentImportPropertyService);
+                var content = CreateFromItems(sections, sectionProperties, contentTypes, isRowBuilder, config, contentMapperFactory, contentImportPropertyService);
 
                 outputModel.ContentData.Add(JObject.FromObject(content));
                 layout.ContentUdi = content["udi"].ToString();
 
                 if (row["config"] != null)
                 {
-                    var settings = blockListDbModelFactory.GetObject(row["config"], contentImportPropertyService);
+
+                    var settings = blockListDbModelFactory.GetObject(row["config"], contentImportPropertyService, vmName: config.Grid.RowConfigOfType);
                     outputModel.SettingsData.Add(JObject.FromObject(settings));
                     layout.SettingsUdi = settings["udi"].ToString();
                 }
@@ -88,7 +89,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             return outputModel;
         }
 
-        private Dictionary<string, object> CreateFromItems(List<JToken> sections, BlockListGridRowConfigToContent.Property[] allSectionProperties, List<GridContentType> contentTypes, bool isRowBuilder, IContentMapperFactory contentMapperFactory, IContentImportPropertyService contentImportPropertyService)
+        private Dictionary<string, object> CreateFromItems(List<JToken> sections, BlockListGridRowConfigToContent.Property[] allSectionProperties, List<GridContentType> contentTypes, bool isRowBuilder, ContentPropertyConfig config, IContentMapperFactory contentMapperFactory, IContentImportPropertyService contentImportPropertyService)
         {
             var gridSize = sections.Count;
 
@@ -113,11 +114,11 @@ namespace YuzuDelivery.Umbraco.BlockList
                 index = 0;
                 foreach (var property in configSectionProperties)
                 {
-                    var config = sections[index]["config"] as JToken;
-                    if (config != null)
+                    var configObj = sections[index]["config"] as JToken;
+                    if (configObj != null)
                     {
-                        var items = new JArray(config);
-                        output[property.Alias] = blockListDbModelFactory.Create(items, contentMapperFactory, contentImportPropertyService);
+                        var items = new JArray(configObj);
+                        output[property.Alias] = blockListDbModelFactory.Create(items, contentMapperFactory, contentImportPropertyService, contentVmName: config.Grid.ColumnConfigOfType);
                     }
                     index++;
                 }

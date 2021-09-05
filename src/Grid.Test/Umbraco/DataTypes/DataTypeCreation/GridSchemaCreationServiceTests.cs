@@ -151,7 +151,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
                         label = "someProperty",
                         key = "someProperty",
                         view = "textstring",
-                        applyTo = "row|cell",
+                        applyTo = (string) null,
                         prevalues = new string[] { "preValue" }
                     }
                 },

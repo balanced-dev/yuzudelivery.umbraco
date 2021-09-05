@@ -34,6 +34,7 @@
                                 "label": "label"
                             }
                         },
+                        "gridSize": 6,
                         "items": [
                             {
                                 "string": "string",
@@ -141,6 +142,7 @@
                                 "label": "label"
                             }
                         },
+                        "gridSize": 6,
                         "items": [
                             {
                                 "string": "string",

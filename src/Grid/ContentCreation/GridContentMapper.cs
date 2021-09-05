@@ -262,16 +262,18 @@ namespace YuzuDelivery.Umbraco.Grid
                 var f = d as JArray;
                 foreach (var g in f)
                 {
-                    var h = g as JObject;
-                    foreach (var l in h)
+                    if(g is JObject)
                     {
-                        if (IsValidJson(l.Value.ToString()))
+                        var h = g as JObject;
+                        foreach (var l in h)
                         {
-                            var parsedJson = JToken.Parse(l.Value.ToString());
-                            h[l.Key] = RecursiveParseJsonProperties(parsedJson);
+                            if (IsValidJson(l.Value.ToString()))
+                            {
+                                var parsedJson = JToken.Parse(l.Value.ToString());
+                                h[l.Key] = RecursiveParseJsonProperties(parsedJson);
+                            }
                         }
                     }
-
                 }
             }
             if (d is JObject)

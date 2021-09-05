@@ -160,7 +160,7 @@ namespace YuzuDelivery.Umbraco.Import
         public string GetConfigConfigApplyTo(ContentPropertyConfigGrid.ConfigValueItem config)
         {
             if (config.Row && config.Column)
-                return "row|cell";
+                return null;
             else if (config.Row)
                 return "row";
             else if (config.Column)

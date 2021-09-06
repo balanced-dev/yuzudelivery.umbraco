@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="en" intName="English (US)" localName="English (US)" lcid="" culture="en-US">
+  <creator>
+    <name>HiFi</name>
+    <link>http://hifi.agency</link>
+  </creator>
+  <area alias="treeHeaders">
+    <key alias="ui">User Interfaces</key>
+  </area>
+</language>

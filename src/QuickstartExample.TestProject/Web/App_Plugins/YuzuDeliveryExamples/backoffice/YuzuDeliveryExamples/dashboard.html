@@ -1,0 +1,55 @@
+﻿<div ng-controller="YuzuDeliveryExamplesDashboardController as vm">
+    <umb-editor-view footer="false">
+        <umb-editor-header name="vm.page.title"
+                           name-locked="true"
+                           hide-alias="true"
+                           hide-description="true"
+                           hide-icon="true">
+
+        </umb-editor-header>
+        <style type="text/css">
+            .examples-schedule li {
+                margin-bottom: 15px;
+            }
+            .examples-schedule a {
+                text-decoration: underline;
+            }
+            .examples-schedule a.running {
+                color: orange;
+                font-weight: bold;
+            }
+            .examples-schedule a.completed {
+                color: green;   
+                font-weight: bold;
+            }
+            .examples-schedule a.error {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+        <umb-editor-container class="form-horizontal">
+
+            <umb-box>
+                <umb-box-content>
+
+                    <h3 class="bold">Create Test Project Example</h3>
+
+                    <umb-load-indicator ng-show="vm.loading"></umb-load-indicator>
+
+                    <div class="examples-schedule" ng-show="!vm.loading">
+                        
+                        <ol>
+                            <li><a href="" class="{{vm.actionClass('viewModels')}}" ng-click="vm.runAction('viewModels')">Generate ViewModels</a>  <br /><small>Remember: viewmodels to the App_Data folder</small></li>
+                            <li><a href="" class="{{vm.actionClass('docTypes')}}" ng-click ="vm.runAction('docTypes')">Create Document Types</a>  <br /><small>Remember: models to the App_Data folder</small></li>
+                            <li><a href="" class="{{vm.actionClass('templates')}}" ng-click ="vm.runAction('templates')">Create Templates and Permissions</a></li>
+                            <li><a href="" class="{{vm.actionClass('content')}}" ng-click ="vm.runAction('content')">Create Content</a></li>
+                        </ol>
+
+                    </div>
+
+                </umb-box-content>
+            </umb-box>
+
+        </umb-editor-container>
+    </umb-editor-view>
+</div>

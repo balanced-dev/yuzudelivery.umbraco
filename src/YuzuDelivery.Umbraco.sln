@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.BlockL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Grid.Test", "Grid.Test\YuzuDelivery.Umbraco.Grid.Test.csproj", "{288F5F4B-9D22-4EDD-98C5-C035082373A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.TestProject", "QuickstartExample.TestProject\YuzuDelivery.Umbraco.TestProject.csproj", "{FC6DDAF7-EB33-4308-9F38-74A52BC25749}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{288F5F4B-9D22-4EDD-98C5-C035082373A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{288F5F4B-9D22-4EDD-98C5-C035082373A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{288F5F4B-9D22-4EDD-98C5-C035082373A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

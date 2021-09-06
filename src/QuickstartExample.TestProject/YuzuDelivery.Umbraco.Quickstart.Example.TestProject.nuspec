@@ -16,6 +16,7 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="bin\Release\YuzuDelivery.Umbraco.TestProject.dll" target="lib\net472" />
     <file src="Web\**\*.*" target="Content\" />
   </files>
 </package>

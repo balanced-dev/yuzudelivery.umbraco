@@ -69,6 +69,7 @@ steps:
       **\*test*.dll
       !**\*TestAdapter.dll
       !**\YuzuDelivery.Umbraco.Import.Tests.Integration.dll
+      !**\YuzuDelivery.Umbraco.TestProject.dll.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
 

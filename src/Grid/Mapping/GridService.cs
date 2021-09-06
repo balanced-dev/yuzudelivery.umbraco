@@ -41,7 +41,7 @@ namespace YuzuDelivery.Umbraco.Grid
                             Items = area.Controls.Select(control =>
                             {
                                 var dtgeEditor = control.GetValue<GridControlDtgeValue>();
-                                return Content(new GridItemData() { Control = control, ContextItems = context.Items });
+                                return Content(new GridItemData() { Control = control, ContextItems = context.Items, RowConfig = rowConfig });
                             }).Where(x => x != null).ToList()
                         };
                     }).ToList() : new List<vmSub_DataRowsRow>()
@@ -67,7 +67,7 @@ namespace YuzuDelivery.Umbraco.Grid
                             Items = area.Controls.Select(control =>
                             {
                                 var dtgeEditor = control.GetValue<GridControlDtgeValue>();
-                                return Content(new GridItemData() { Control = control, ContextItems = context.Items });
+                                return Content(new GridItemData() { Control = control, ContextItems = context.Items, RowConfig = rowConfig });
                             }).Where(x => x != null).ToList()
                         };
                     }).ToList() : new List<vmSub_DataRowsRow>()
@@ -100,7 +100,7 @@ namespace YuzuDelivery.Umbraco.Grid
                                     Items = area.Controls.Select(control =>
                                     {
                                         var dtgeEditor = control.GetValue<GridControlDtgeValue>();
-                                        return Content(new GridItemData() { Control = control, ContextItems = context.Items });
+                                        return Content(new GridItemData() { Control = control, ContextItems = context.Items, RowConfig = rowConfig, ColConfig = columnConfig });
                                     }).Where(x => x != null).ToList()
                                 };
 
@@ -136,7 +136,7 @@ namespace YuzuDelivery.Umbraco.Grid
                                     Items = area.Controls.Select(control =>
                                     {
                                         var dtgeEditor = control.GetValue<GridControlDtgeValue>();
-                                        return Content(new GridItemData() { Control = control, ContextItems = context.Items });
+                                        return Content(new GridItemData() { Control = control, ContextItems = context.Items, RowConfig = rowConfig, ColConfig = columnConfig });
                                     }).Where(x => x != null).ToList()
                                 };
 
@@ -170,7 +170,7 @@ namespace YuzuDelivery.Umbraco.Grid
                                     Items = area.Controls.Select(control =>
                                     {
                                         var dtgeEditor = control.GetValue<GridControlDtgeValue>();
-                                        return Content(new GridItemData() { Control = control, ContextItems = context.Items });
+                                        return Content(new GridItemData() { Control = control, ContextItems = context.Items, RowConfig = rowConfig, ColConfig = columnConfig });
                                     }).Where(x => x != null).ToList()
                                 };
 

@@ -325,12 +325,19 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Web\App_Plugins\YuzuDeliveryExamples\package.manifest" />
+    <None Include="YuzuDelivery.Umbraco.Quickstart.Example.TestProject.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj">
       <Project>{a9b8f2ac-90f9-4219-bcda-7ff6e8266c19}</Project>
       <Name>YuzuDelivery.Umbraco.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web\App_Plugins\YuzuDeliveryExamples\backoffice\YuzuDeliveryExamples\dashboard.html" />
+    <Content Include="Web\App_Plugins\YuzuDeliveryExamples\backoffice\YuzuDeliveryExamples\yuzuDashboardController.js" />
+    <Content Include="Web\App_Plugins\YuzuDeliveryExamples\lang\en-US.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets" Condition="Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" />

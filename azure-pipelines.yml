@@ -14,7 +14,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '1.2.34'
+  version: '1.2.35'
   core_version: '1.0.48'
   import_version: '1.0.97'
   umbraco_version: '8.16.0'

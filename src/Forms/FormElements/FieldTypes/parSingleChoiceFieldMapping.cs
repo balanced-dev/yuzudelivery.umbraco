@@ -33,7 +33,7 @@ namespace YuzuDelivery.Umbraco.Forms
                     IsRequired = model.Mandatory,
                     _ref = "parFormCheckboxRadio"
                 }).ToList(),
-                Conditions = model.Condition.Rules.Any() ? model.Condition : null,
+                Conditions = model.Condition != null && model.Condition.Rules.Any() ? model.Condition : null,
                 _ref = "parFormCheckboxRadioList"
             };
         }

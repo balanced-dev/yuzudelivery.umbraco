@@ -37,7 +37,8 @@ namespace YuzuDelivery.Umbraco.Forms
                         {
                             formId = formValue,
                             view = "YuzuUmbracoForms.cshtml",
-                            template = formFieldTemplate
+                            template = formFieldTemplate,
+                            items = context.Items
                         }).ToHtmlString()
                     };
                 }

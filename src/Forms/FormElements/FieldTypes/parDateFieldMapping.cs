@@ -40,7 +40,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 IsRequired = model.Mandatory,
                 RequiredMessage = model.RequiredErrorMessage,
                 Pattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}",
-                Conditions = model.Condition.Rules.Any() ? model.Condition : null,
+                Conditions = model.Condition != null && model.Condition.Rules.Any() ? model.Condition : null,
                 _ref = "parFormTextInput"
             };
         }

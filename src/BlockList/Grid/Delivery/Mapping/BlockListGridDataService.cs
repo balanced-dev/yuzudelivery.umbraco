@@ -21,11 +21,11 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         private IEnumerable<Type> viewmodelTypes;
 
-        public BlockListGridDataService(IMapper mapper, IYuzuConfiguration config, IGridItem[] gridItems, IGridItemInternal[] gridItemsInternal)
+        public BlockListGridDataService(IMapper mapper, IYuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IGridItem[] gridItems, IGridItemInternal[] gridItemsInternal)
         {
             this.mapper = mapper;
             this.config = config;
-            this.sectionAliases = new string[] { "fullWidthSection", "twoColumnSection" };
+            this.sectionAliases = importConfig.GridRowConfigs.Select(x => x.Name.FirstCharacterToLower()).ToArray();
 
             this.gridItems = gridItems;
             this.gridItemsInternal = gridItemsInternal;

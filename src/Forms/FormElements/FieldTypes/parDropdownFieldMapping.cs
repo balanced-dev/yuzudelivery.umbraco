@@ -32,7 +32,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 }).ToList(),
                 IsRequired = model.Mandatory,
                 RequiredMessage = model.RequiredErrorMessage,
-                Conditions = model.Condition.Rules.Any() ? model.Condition : null,
+                Conditions = model.Condition != null && model.Condition.Rules.Any() ? model.Condition : null,
                 _ref = "parFormSelect"
             };
         }

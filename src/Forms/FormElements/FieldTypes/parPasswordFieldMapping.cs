@@ -23,7 +23,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 Placeholder = model.PlaceholderText,
                 Pattern = model.Regex,
                 PatternMessage = model.InvalidErrorMessage,
-                Conditions = model.Condition.Rules.Any() ? model.Condition : null,
+                Conditions = model.Condition != null && model.Condition.Rules.Any() ? model.Condition : null,
                 _ref = "parFormTextInput"
             };
         }

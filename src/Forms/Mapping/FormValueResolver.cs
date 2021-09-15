@@ -35,7 +35,7 @@ namespace YuzuDelivery.Umbraco.Forms
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
-                        LiveForm = context.Html.Action("Render", "UmbracoForms",
+                        LiveForm = context.Html?.Action("Render", "UmbracoForms",
                         new
                         {
                             formId = formValue,

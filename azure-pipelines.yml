@@ -20,7 +20,7 @@ variables:
   import_version: '1.0.98.24'
   umbraco_version: '8.15.3'
   umbraco_forms_version: '8.7.6'
-  ${{ if eq(variables['Build.SourceBranchName'], 'dev') }}:
+  ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
     revision: $[ counter('.', 0) ]
     separator: '.'
   ${{ if eq( variables['Build.SourceBranchName'], 'master') }}:

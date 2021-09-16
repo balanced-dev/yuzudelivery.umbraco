@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Umbraco.Core.Models;
+using Mod = Umbraco.Core.Models;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Web.PropertyEditors;
 using Newtonsoft.Json;
@@ -60,7 +60,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, assign: true);
 
-            var output = svc.Create(propertyMapBuilder.CurrentProperty).Configuration;
+            var output = svc.Create(propertyMapBuilder.CurrentProperty).Umb().Configuration;
 
             SectionProperties(properties, assert: true);
 
@@ -173,7 +173,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, null, null, assign: true);
 
-            svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"]);
+            svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"].Yuzu());
 
             umb.ContentType.WasNotCreated("Test");
             umb.ContentType.WasCreated("Test2");
@@ -204,7 +204,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             SectionProperties(properties, null, null, assign: true);
 
-            svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"]);
+            svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"].Yuzu());
 
             umb.ContentType.WasNotCreated("FullWidthSection");
             umb.ContentType.WasCreated("TwoColumnSection");

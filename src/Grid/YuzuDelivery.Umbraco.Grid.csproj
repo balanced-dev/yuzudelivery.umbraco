@@ -255,8 +255,11 @@
     <Reference Include="YuzuDelivery.Core, Version=1.0.48.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YuzuDelivery.Core.1.0.48\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
+    <Reference Include="YuzuDelivery.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Import.1.0.98.24\lib\net472\YuzuDelivery.Import.dll</HintPath>
+    </Reference>
     <Reference Include="YuzuDelivery.Umbraco.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.96.18\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
+      <HintPath>..\packages\YuzuDelivery.Umbraco.Import.Core.1.0.98.24\lib\net472\YuzuDelivery.Umbraco.Import.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,7 @@ using System.Reflection;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using Umb = Umbraco.Core.Services;
-using Umbraco.Core.Models;
+using Mod = Umbraco.Core.Models;
 using Umbraco.ModelsBuilder.Embedded.BackOffice;
 
 namespace YuzuDelivery.Umbraco.TestProject
@@ -78,7 +78,7 @@ namespace YuzuDelivery.Umbraco.TestProject
         [System.Web.Http.HttpGet]
         public bool AddTemplates()
         {
-            var home = contentTypeService.Create("Home", "home", false);
+            var home = contentTypeService.Create("Home", "home", false).Umb();
             home.AllowedAsRoot = true;
             AddTemplateToContentType(home);
 
@@ -86,7 +86,7 @@ namespace YuzuDelivery.Umbraco.TestProject
             var gridPage = GetContentAddTemplate("gridPage");
             var basicPage = GetContentAddTemplate("basicPage");
 
-            contentTypeService.AddPermissions(home.Id, new List<IContentType>() { rowPage, gridPage, basicPage });
+            contentTypeService.AddPermissions(home.Id, new List<IContentType>() { rowPage.Yuzu(), gridPage.Yuzu(), basicPage.Yuzu() });
 
             return true;
         }
@@ -106,17 +106,17 @@ namespace YuzuDelivery.Umbraco.TestProject
 
         }
 
-        public void CreateContent(string name, IContent parent)
+        public void CreateContent(string name, Mod.IContent parent)
         {
-            var type = contentTypeService.GetByAlias(name);
-            var content = new Content(name.FirstCharacterToUpper(), parent, type);
+            var contenttype = contentTypeService.GetByAlias(name);
+            var content = new Mod.Content(name.FirstCharacterToUpper(), parent, contenttype.Umb());
             content.TemplateId = GetTemplateId(name);
             contentService.SaveAndPublish(content);
 
             ImportContent(name, content);
         }
 
-        public void ImportContent(string name, IContent content)
+        public void ImportContent(string name, Mod.IContent content)
         {
             contentImport.Import(new ImportContentFromFileVm()
             {
@@ -131,18 +131,18 @@ namespace YuzuDelivery.Umbraco.TestProject
             });
         }
 
-        public IContentType GetContentAddTemplate(string alias)
+        public Mod.IContentType GetContentAddTemplate(string alias)
         {
             var contentType = umbContentTypeService.Get(alias);
             AddTemplateToContentType(contentType);
             return contentType;
         }
 
-        public void AddTemplateToContentType(IContentType contentType)
+        public void AddTemplateToContentType(Mod.IContentType contentType)
         {
             var result = fileService.CreateTemplateForContentType(contentType.Alias, contentType.Name);
-            contentType.AllowedTemplates = new List<ITemplate>() { result.Result.Entity };
-            contentTypeService.Save(contentType);
+            contentType.AllowedTemplates = new List<Mod.ITemplate>() { result.Result.Entity };
+            umbContentTypeService.Save(contentType);
             contentType.SetDefaultTemplate(result.Result.Entity);
         }
 

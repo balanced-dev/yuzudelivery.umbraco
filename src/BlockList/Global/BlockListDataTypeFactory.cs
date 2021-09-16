@@ -37,8 +37,8 @@ namespace YuzuDelivery.Umbraco.Import
 
             var dataTypeDefinition = dataTypeService.GetByName(dataTypeName);
             if(dataTypeDefinition == null) dataTypeDefinition = dataTypeService.CreateDataType(dataTypeName, DataEditorName);
-            dataTypeDefinition.Name = dataTypeName;
-            dataTypeDefinition.Configuration = blockListConfig;
+            dataTypeDefinition.Umb().Name = dataTypeName;
+            dataTypeDefinition.Umb().Configuration = blockListConfig;
 
             return dataTypeService.Save(dataTypeDefinition);
         }
@@ -72,8 +72,8 @@ namespace YuzuDelivery.Umbraco.Import
                 Label = blockName.RemoveAllVmPrefixes().CamelToSentenceCase(),
                 View = options.CustomView == null ? DefaultCustomView : options.CustomView,
                 EditorSize = "medium",
-                ContentElementTypeKey = contentType.Key,
-                SettingsElementTypeKey = settingsType?.Key,
+                ContentElementTypeKey = contentType.Umb().Key,
+                SettingsElementTypeKey = settingsType?.Umb().Key,
                 ForceHideContentEditorInOverlay = options.ForceHideContentEditor
             };
         }

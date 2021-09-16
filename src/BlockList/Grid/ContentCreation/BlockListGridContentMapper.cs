@@ -56,7 +56,7 @@ namespace YuzuDelivery.Umbraco.BlockList
                 return new GridContentType()
                 {
                     Alias = contentType.Alias,
-                    Key = contentType.Key,
+                    Key = contentType.Umb().Key,
                     Size = x.Size
                 };
             }).ToList();

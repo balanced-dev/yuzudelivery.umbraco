@@ -70,8 +70,8 @@ namespace YuzuDelivery.Umbraco.BlockList
             }
 
             var output = new Dictionary<string, object>();
-            output["contentTypeKey"] = vmLink.ContentType.Key;
-            output["udi"] = Udi.Create("element", guidFactory.CreateNew(vmLink.ContentType.Key));
+            output["contentTypeKey"] = vmLink.ContentType.Umb().Key;
+            output["udi"] = Udi.Create("element", guidFactory.CreateNew(vmLink.ContentType.Umb().Key));
 
             foreach (var m in vmLink.Mappings.Where(x => x.CmsPropertyType != null).OrderBy(x => x.CmsPropertyType.SortOrder))
             {

@@ -39,7 +39,7 @@ namespace YuzuDelivery.Umbraco.Import
 
 
             var dataTypeDefinition = dataTypeService.CreateDataType(dataTypeName, DataEditorName);
-            dataTypeDefinition.Configuration = gridConfig;
+            dataTypeDefinition.Umb().Configuration = gridConfig;
 
             dgteService.CreateOrUpdate(dataTypeName, dataTypeAlias, data.Config.AllowedTypes);
 
@@ -57,7 +57,7 @@ namespace YuzuDelivery.Umbraco.Import
 
             gridConfig.Items = JObject.FromObject(CreateConfigItems(data.Config, dataTypeAlias));
 
-            dataTypeDefinition.Configuration = gridConfig;
+            dataTypeDefinition.Umb().Configuration = gridConfig;
 
             dgteService.CreateOrUpdate(dataTypeName, dataTypeAlias, data.Config.AllowedTypes);
 

@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Umbraco.Core.Models;
+using Mod = Umbraco.Core.Models;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Web.PropertyEditors;
 using Newtonsoft.Json;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Umb = Umbraco.Core.Services;
-using Umbraco.Core.Logging;
+using Log = Umbraco.Core.Logging;
 using YuzuDelivery.Umbraco.Import;
 
 namespace YuzuDelivery.Umbraco.Grid.Test
@@ -51,7 +51,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
             data = new VmToContentPropertyMap();
             data.Config = config;
 
-            dataType = MockRepository.GenerateStub<IDataType>();
+            var umbDataType = MockRepository.GenerateStub<Mod.IDataType>();
+            dataType = new DataType(umbDataType);
 
             svc = MockRepository.GeneratePartialMock<GridSchemaCreationService>(new object[] { dataTypeService, importConfig, dgteService, logger });
 
@@ -225,7 +226,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
         public string GetConfigAsJson()
         {
-            var dataTypeConfig = ((GridConfiguration)dataType.Configuration).Items;
+            var dataTypeConfig = ((GridConfiguration)dataType.Umb().Configuration).Items;
             return JsonConvert.SerializeObject(dataTypeConfig, Formatting.Indented);
         }
     }

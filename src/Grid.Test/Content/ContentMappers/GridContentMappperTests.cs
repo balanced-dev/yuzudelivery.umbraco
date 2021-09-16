@@ -7,7 +7,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Umbraco.Core.Models;
+using Mod = Umbraco.Core.Models;
 using System.Reflection;
 using ApprovalTests;
 using ApprovalTests.Reporters;
@@ -73,8 +73,10 @@ namespace YuzuDelivery.Umbraco.Grid.Test
             vmContentMapping.ContentType = contentType;
             vmContentMapping.Mappings = mappings;
 
-            dataType = MockRepository.GenerateStub<IDataType>();
-            dataType.Name = "gridDataType";
+            var umbDataType = MockRepository.GenerateStub<Mod.IDataType>();
+            umbDataType.Name = "gridDataType";
+
+            dataType = new DataType(umbDataType);
 
             dgteService.Stub(x => x.GetByName(dataType.Name)).Return(JObject.FromObject(new
             {

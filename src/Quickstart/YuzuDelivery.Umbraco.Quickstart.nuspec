@@ -14,6 +14,7 @@
     <dependency id="UmbracoCms" version="$umbraco_version$" />
     <dependency id="UmbracoForms" version="$umbraco_forms_version$" />
     <dependency id="YuzuDelivery.Core" version="$core_version$" />
+    <dependency id="YuzuDelivery.Import" version="$import_version$" />
     <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
     <dependency id="YuzuDelivery.Umbraco.Forms" version="$y_umb_version$" />
     <dependency id="YuzuDelivery.Umbraco.Members" version="$y_umb_version$" />

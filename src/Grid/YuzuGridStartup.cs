@@ -17,7 +17,7 @@ namespace YuzuDelivery.Umbraco.Grid
 {
 
     [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    [ComposeAfter(typeof(YuzuImportComposer))]
+    [ComposeAfter(typeof(YuzuUmbracoImportComposer))]
     public class YuzuGridStartup : IUserComposer
     {
         public void Compose(Composition composition)

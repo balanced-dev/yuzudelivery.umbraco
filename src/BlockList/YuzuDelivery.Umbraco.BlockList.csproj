@@ -287,7 +287,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompositionExtensions.cs" />
+    <Compile Include="Global\BlockListContextExtensions.cs" />
     <Compile Include="Global\BlockListDataTypeFactory.cs" />
+    <Compile Include="Global\_BlockList_Constants.cs" />
     <Compile Include="Grid\ContentCreation\BlockListGridContentMapper.cs" />
     <Compile Include="Grid\Delivery\Mapping\DefaultViewModels\vmBlock_DataGridRowItem.cs" />
     <Compile Include="Grid\Delivery\Mapping\BlockListGridMapping.cs" />

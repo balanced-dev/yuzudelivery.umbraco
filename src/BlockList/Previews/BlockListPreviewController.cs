@@ -18,6 +18,7 @@ using YuzuDelivery.Core;
 using Umbraco.Web.Mvc;
 using Our.Umbraco.DocTypeGridEditor.Helpers;
 using YuzuDelivery.ViewModels;
+using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -60,7 +61,7 @@ namespace YuzuDelivery.Umbraco.BlockList
                 {
                     output.Preview = yuzuDefinitionTemplates.Render(new RenderSettings()
                     {
-                        Data = () => { return mapper.Map(model, modelType, vmType, new Dictionary<string, object>() { { "Model", model } }); },
+                        Data = () => { return mapper.Map(model, modelType, vmType, new Dictionary<string, object>() { { "Model", model }, { _BlockList_Constants.IsInPreview, true } }); },
                         Template = yuzuDefinitionTemplates.GetSuspectTemplateName(modelType)
                     });
                 }

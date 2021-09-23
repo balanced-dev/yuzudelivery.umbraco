@@ -42,14 +42,14 @@ namespace YuzuDelivery.Umbraco.BlockList
                     Rows = grid.Any() ? grid.Where(x => sectionAliases.Contains(x.Content.ContentType.Alias)).Select(rowBlockList =>
                     {
                         var rowContent = rowBlockList.Content;
-                        var rowConfig = rowBlockList.Settings;
+                        var rowSettingsVm = GetRowSettingsVm(rowBlockList, context);
 
                         var columnProperty = rowContent.Properties.FirstOrDefault();
                         var columnContent = rowContent.Value<BlockListModel>(columnProperty.Alias);
 
                         return new vmSub_DataRowsRow()
                         {
-                            Config = CreateVm(rowConfig, context.Items),
+                            Config = rowSettingsVm,
                             Items = columnContent?
                                 .Select(cell => CreateContentAndConfig(new GridItemData(cell, context.Items)))
                                 .Where(x => x != null).ToList()
@@ -67,25 +67,25 @@ namespace YuzuDelivery.Umbraco.BlockList
             {
                 return new vmBlock_DataGrid()
                 {
-                    Rows = grid.Any() ? grid.Where(x => sectionAliases.Contains(x.Content.ContentType.Alias)).Select(row =>
+                    Rows = grid.Any() ? grid.Where(x => sectionAliases.Contains(x.Content.ContentType.Alias)).Select(rowBlockList =>
                     {
-                        var rowContent = row.Content;
-                        var rowConfig = row.Settings;
+                        var rowContent = rowBlockList.Content;
+                        var rowSettingsVm = GetRowSettingsVm(rowBlockList, context);
+
                         var columns = rowContent.Properties.Where(y => !y.Alias.EndsWith("Settings"));
 
                         return new vmSub_DataGridRow()
                         {
-                            Config = CreateVm(rowConfig, context.Items),
+                            Config = rowSettingsVm,
                             Columns = columns.Select(columnProperty => {
 
                                 var columnContent = columnProperty.Value<BlockListModel>();
-                                var columnConfig = rowContent.Value<BlockListModel>(columnProperty.Alias + "Settings")
-                                    .Select(x => x.Content).FirstOrDefault();
+                                var columnSettingsVm = GetColumnSettingsVm(rowContent, columnProperty, context);
 
                                 return new vmSub_DataGridColumn()
                                 {
                                     GridSize = 12 / columns.Count(),
-                                    Config = CreateVm(columnConfig, context.Items),
+                                    Config = columnSettingsVm,
                                     Items = columnContent?
                                         .Select(cell => CreateContentAndConfig(new GridItemData(cell, context.Items)))
                                         .Where(x => x != null).ToList()
@@ -100,17 +100,57 @@ namespace YuzuDelivery.Umbraco.BlockList
                 return null;
         }
 
-        public vmBlock_DataGridRowItem CreateContentAndConfig(GridItemData data)
+        private object GetRowSettingsVm(BlockListItem rowBlockList, UmbracoMappingContext context)
         {
+            context.Items.Remove(_BlockList_Constants.RowSettings);
+
+            var rowConfig = rowBlockList.Settings;
+
+            var vm = CreateVm(rowConfig, context.Items);
+            if(vm != null)
+                context.Items[_BlockList_Constants.RowSettings] = vm;
+
+            return vm;
+        }
+
+        private object GetColumnSettingsVm(IPublishedElement rowContent, IPublishedProperty columnProperty, UmbracoMappingContext context)
+        {
+            context.Items.Remove(_BlockList_Constants.ColumnSettings);
+
+            var columnConfig = rowContent.Value<BlockListModel>(columnProperty.Alias + "Settings")
+           .Select(x => x.Content).FirstOrDefault();
+
+            var vm = CreateVm(columnConfig, context.Items);
+            if(vm != null)
+                context.Items[_BlockList_Constants.ColumnSettings] = vm;
+
+            return vm;
+        }
+
+        public object GetContentSettingsVm(GridItemData data)
+        {
+            data.ContextItems.Remove(_BlockList_Constants.ContentSettings);
+
+            var vm = CreateVm(data.Config, data.ContextItems);
+            if (vm != null) 
+                data.ContextItems[_BlockList_Constants.ContentSettings] = vm; 
+            return vm;
+        }
+
+        public virtual vmBlock_DataGridRowItem CreateContentAndConfig(GridItemData data)
+        {
+            var settingsVm = GetContentSettingsVm(data);
+            var contentVm = CreateVm(data.Content, data.ContextItems);
+
             return new vmBlock_DataGridRowItem()
             {
-                Content = CreateVm(data.Content, data.ContextItems),
-                Config = CreateVm(data.Config, data.ContextItems)
+                Content = contentVm,
+                Config = settingsVm
             };
         }
 
 
-        public object CreateVm(IPublishedElement model, IDictionary<string, object> context)
+        public virtual object CreateVm(IPublishedElement model, IDictionary<string, object> context)
         {
             foreach (var i in gridItems)
             {

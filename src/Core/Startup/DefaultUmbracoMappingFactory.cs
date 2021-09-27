@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
 using YuzuDelivery.Core;
 using AutoMapper.Configuration;
 

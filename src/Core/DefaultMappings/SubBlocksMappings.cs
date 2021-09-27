@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web.Models;
-using Umbraco.Web.Composing;
-using Umbraco.Core;
+﻿using System.Linq;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core.Models.PublishedContent;
+#else
+using Umbraco.Core.Models.PublishedContent;
+#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {

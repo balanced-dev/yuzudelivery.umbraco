@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Umbraco.Web.WebApi;
 using YuzuDelivery.Core.ViewModelBuilder;
-using System.IO;
+using IO = System.IO;
 using YuzuDelivery.Core;
-using Umbraco.Web.Mvc;
-using System.Web.Mvc;
 using System.Reflection;
+
+#if NETCOREAPP
+using Umbraco.Cms.Web.Common.Attributes;
+using Umbraco.Cms.Web.BackOffice.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
+#else
+using Umbraco.Web.WebApi;
+using Umbraco.Web.Mvc;
+using System.Web.Http;
+#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -21,17 +30,17 @@ namespace YuzuDelivery.Umbraco.Core
         private readonly IYuzuViewmodelsBuilderConfig builderConfig;
         private readonly IMapper mapper;
 
-        public GenerateController()
+        public GenerateController(ReferencesService referencesService, BuildViewModelsService buildViewModelsSvc, IYuzuViewmodelsBuilderConfig builderConfig, IMapper mapper)
         {
-            this.referencesService = DependencyResolver.Current.GetService<ReferencesService>();
-            this.buildViewModelsSvc = DependencyResolver.Current.GetService<BuildViewModelsService>();
-            this.builderConfig = DependencyResolver.Current.GetService<IYuzuViewmodelsBuilderConfig>();
+            this.referencesService = referencesService;
+            this.buildViewModelsSvc = buildViewModelsSvc;
+            this.builderConfig = builderConfig;
 
             //must be resolved here so that all profiles are created before viewmodel generation
-            this.mapper = DependencyResolver.Current.GetService<IMapper>();
+            this.mapper = mapper;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public string Build()
         {
             var generatedFolder = builderConfig.GeneratedViewmodelsOutputFolder;
@@ -51,22 +60,22 @@ namespace YuzuDelivery.Umbraco.Core
                 return GetError(ex);
             }
 
-            if (!Directory.Exists(generatedFolder))
-                Directory.CreateDirectory(generatedFolder);
+            if (!IO.Directory.Exists(generatedFolder))
+                IO.Directory.CreateDirectory(generatedFolder);
 
-            foreach (var file in Directory.GetFiles(generatedFolder, "*.generated.cs"))
-                File.Delete(file);
+            foreach (var file in IO.Directory.GetFiles(generatedFolder, "*.generated.cs"))
+                IO.File.Delete(file);
 
             foreach (var file in genFiles)
             {
-                var filename = Path.Combine(generatedFolder, file.Key + ".generated.cs");
-                File.WriteAllText(filename, file.Value);
+                var filename = IO.Path.Combine(generatedFolder, file.Key + ".generated.cs");
+                IO.File.WriteAllText(filename, file.Value);
             }
 
             return string.Empty;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public (bool Enabled, string Dashboard) GetDashboard()
         {
             var sb = new StringBuilder();

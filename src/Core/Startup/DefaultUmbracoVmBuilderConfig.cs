@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
 using YuzuDelivery.Core.ViewModelBuilder;
 using System.Web;
 using System.Configuration;
 using System.IO;
+using Imp = YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+using Umbraco.Extensions;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Exceptions;
+#else
+using Umbraco.Core;
+#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -17,19 +24,33 @@ namespace YuzuDelivery.Umbraco.Core
         public DefaultUmbracoVmBuilderConfig(IFactory factory)
             : base(factory.GetAllInstances<IUpdateableVmBuilderConfig>())
         {
-            var Server = HttpContext.Current.Server;
+            var mapPath = factory.GetInstance<Imp.MapPathAbstraction>();
+            var settings = factory.GetInstance<SettingsAbstraction>();
 
-            EnableViewmodelsBuilder = ConfigurationManager.AppSettings["YuzuViewmodelBuilderActive"] == "true";
+            EnableViewmodelsBuilder = settings.ViewmodelActive;
 
-            var acceptUnsafe = ConfigurationManager.AppSettings["YuzuViewmodelBuilderAcceptUnsafeDirectory"] == "true";
-            var root = Server.MapPath("~/");
+            var acceptUnsafe = settings.ViewmodelAcceptUnsafeDirectory;
 
-            GeneratedViewmodelsOutputFolder = ConfigurationManager.AppSettings["YuzuViewmodelBuilderDirectory"];
+            GeneratedViewmodelsOutputFolder = settings.ViewmodelDirectory;
+
+#if NETCOREAPP
+            var root = mapPath.Get("");
+
             if (string.IsNullOrEmpty(GeneratedViewmodelsOutputFolder))
-                GeneratedViewmodelsOutputFolder = Server.MapPath("/App_Data/ViewModels");
+                GeneratedViewmodelsOutputFolder = mapPath.Get("/yuzu/viewModels");
             else
                 GeneratedViewmodelsOutputFolder = GetModelsDirectory(root, GeneratedViewmodelsOutputFolder, acceptUnsafe);
+#else
+            var root = mapPath.Get("~/");
+
+            if (string.IsNullOrEmpty(GeneratedViewmodelsOutputFolder))
+                GeneratedViewmodelsOutputFolder = mapPath.Get("/App_Data/ViewModels");
+            else
+                GeneratedViewmodelsOutputFolder = GetModelsDirectory(root, GeneratedViewmodelsOutputFolder, acceptUnsafe);
+#endif
         }
+
+
 
         private string GetModelsDirectory(string root, string config, bool acceptUnsafe)
         {
@@ -37,7 +58,7 @@ namespace YuzuDelivery.Umbraco.Core
             // unless AcceptUnsafeModelsDirectory and then everything is OK.
 
             if (!Path.IsPathRooted(root))
-                throw new ConfigurationErrorsException($"Root is not rooted \"{root}\".");
+                ThrowException($"Root is not rooted \"{root}\".");
 
             if (config.StartsWith("~/"))
             {
@@ -50,7 +71,7 @@ namespace YuzuDelivery.Umbraco.Core
                 root = Path.GetFullPath(root);
 
                 if (!dir.StartsWith(root) && !acceptUnsafe)
-                    throw new ConfigurationErrorsException($"Invalid models directory \"{config}\".");
+                    ThrowException($"Invalid models directory \"{config}\".");
 
                 return dir;
             }
@@ -58,8 +79,22 @@ namespace YuzuDelivery.Umbraco.Core
             if (acceptUnsafe)
                 return Path.GetFullPath(config);
 
-            throw new ConfigurationErrorsException($"Invalid models directory \"{config}\".");
+            ThrowException($"Invalid models directory \"{config}\".");
+            throw new Exception();
         }
+
+#if NETCOREAPP
+        private void ThrowException(string message)
+        {
+            throw new ConfigurationException(message);
+        }
+#else
+        private void ThrowException(string message)
+        {
+            throw new ConfigurationErrorsException(message);
+        }
+#endif
+
 
     }
 }

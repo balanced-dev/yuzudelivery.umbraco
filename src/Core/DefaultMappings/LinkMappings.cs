@@ -1,12 +1,20 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using System.Collections.Generic;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web.Models;
-using Umbraco.Web.Composing;
+﻿using YuzuDelivery.Core;
+using YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Microsoft.Extensions.DependencyInjection;
+using Umbraco.Cms.Web;
+using Umbraco.Extensions;
+#else
 using Umbraco.Core;
-using YuzuDelivery.Core;
+using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
+using Umbraco.Web.Models;
+#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -30,7 +38,7 @@ namespace YuzuDelivery.Umbraco.Core
                 {
                     Title = link.Name,
                     Label = link.Name,
-                    Href = link.Url,
+                    Href = link.Url(),
                     IsActive = link == context.Model
                 };
             }
@@ -41,15 +49,18 @@ namespace YuzuDelivery.Umbraco.Core
 
     public class LinkConvertor : IYuzuTypeConvertor<Link, vmBlock_DataLink>
     {
-        public IPublishedContentQuery contentQuery;
 
-        public LinkConvertor(IPublishedContentQuery contentQuery)
+        public IPublishedContentQueryAccessorYuzu _contentQueryAccessor;
+
+        public LinkConvertor(IPublishedContentQueryAccessorYuzu contentQueryAccessor)
         {
-            this.contentQuery = contentQuery;
+            _contentQueryAccessor = contentQueryAccessor;
         }
 
         public vmBlock_DataLink Convert(Link link, UmbracoMappingContext context)
         {
+            _contentQueryAccessor.TryGetValue(out IPublishedContentQuery contentQuery);
+
             if (link != null)
             {
                 if (link.Type == LinkType.External)
@@ -109,4 +120,5 @@ namespace YuzuDelivery.Umbraco.Core
         }
 
     }
+
 }

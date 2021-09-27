@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Linq;
-using System.Web.Mvc;
 using System.Collections.Generic;
-using Umbraco.Core.Models.PublishedContent;
 using YuzuDelivery.Core;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core.Models.PublishedContent;
+#else
+using Umbraco.Core.Models.PublishedContent;
+#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {

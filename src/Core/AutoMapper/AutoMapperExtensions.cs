@@ -3,13 +3,15 @@ using AutoMapper.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
-using Umbraco.Core.Composing;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core;
+#else
 using Umbraco.Core;
+#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {

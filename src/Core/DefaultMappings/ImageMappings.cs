@@ -1,10 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
-using Umbraco.Core.Models.PublishedContent;
-using YuzuDelivery.Core;
+﻿using YuzuDelivery.Core;
+
+#if NETCOREAPP
+using Umbraco.Extensions;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Web;
+#else
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
+#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {

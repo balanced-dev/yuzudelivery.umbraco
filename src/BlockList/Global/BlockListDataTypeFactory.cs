@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using YuzuDelivery.Umbraco.Import;
+using YuzuDelivery.Core;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.PropertyEditors;
+using Umb = Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Logging;
+#else
 using Umbraco.Core.Models;
 using Umbraco.Core;
 using Umbraco.Web.PropertyEditors;
 using Umb = Umbraco.Core.Services;
-using YuzuDelivery.Umbraco.Import;
-using YuzuDelivery.Core;
 using Umbraco.Core.Logging;
+#endif
 
 namespace YuzuDelivery.Umbraco.Import
 {

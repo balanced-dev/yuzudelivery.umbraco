@@ -1,23 +1,23 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
-using Umbraco.Core;
-using Umbraco.Core.Models;
-using Umbraco.Core.PropertyEditors;
-using Umbraco.Web.Editors;
-using Umbraco.Web.WebApi;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Umbraco.Core.Composing;
-using YuzuDelivery.Umbraco.Import;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Core.Models.Blocks;
 using YuzuDelivery.Core;
-using Umbraco.Web.Mvc;
 using Our.Umbraco.DocTypeGridEditor.Helpers;
-using YuzuDelivery.ViewModels;
+
+#if NETCOREAPP
+using Umbraco.Cms.Web.Common.Attributes;
+using Umbraco.Cms.Web.BackOffice.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
+using Umbraco.Cms.Core.Services;
+#else
+using Umbraco.Core.Services;
+using Umbraco.Web.WebApi;
+using Umbraco.Web.Mvc;
+using System.Web.Http;
+#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -27,24 +27,44 @@ namespace YuzuDelivery.Umbraco.BlockList
         private readonly IYuzuDefinitionTemplates yuzuDefinitionTemplates;
         private readonly IMapper mapper;
         private readonly IYuzuConfiguration config;
+        private readonly IContentTypeService contentTypeService;
+        #if NETCOREAPP 
+        private readonly DocTypeGridEditorHelper docTypeGridEditorHelper; 
+        #endif
 
-        public BlockListPreviewController(IMapper mapper, IYuzuConfiguration config, IYuzuDefinitionTemplates yuzuDefinitionTemplates)
+        public BlockListPreviewController(IMapper mapper, IYuzuConfiguration config, IYuzuDefinitionTemplates yuzuDefinitionTemplates, IContentTypeService contentTypeService
+#if NETCOREAPP
+            , DocTypeGridEditorHelper docTypeGridEditorHelper
+#endif
+            )
         {
             this.mapper = mapper;
             this.config = config;
             this.yuzuDefinitionTemplates = yuzuDefinitionTemplates;
+            this.contentTypeService = contentTypeService;
+#if NETCOREAPP
+            this.docTypeGridEditorHelper = docTypeGridEditorHelper;
+#endif
         }
 
         [HttpPost]
+#if NETCOREAPP
+        public PreviewReturn GetPartialData([FromForm] PreviewDTO data)
+#else
         public PreviewReturn GetPartialData([FromBody] PreviewDTO data)
+#endif
         {
             var output = new PreviewReturn();
 
             try
             {
-                var contentType = Current.Services.ContentTypeService.Get(Guid.Parse(data.ContentTypeKey));
+                var contentType = contentTypeService.Get(Guid.Parse(data.ContentTypeKey));
 
+#if NETCOREAPP
+                var model = docTypeGridEditorHelper.ConvertValueToContent(Guid.NewGuid().ToString(), contentType.Alias, data.Content);
+#else
                 var model = DocTypeGridEditorHelper.ConvertValueToContent(Guid.NewGuid().ToString(), contentType.Alias, data.Content);
+#endif
 
                 var modelType = config.CMSModels.Where(x => contentType.Alias.FirstCharacterToUpper() == x.Name).FirstOrDefault();
 

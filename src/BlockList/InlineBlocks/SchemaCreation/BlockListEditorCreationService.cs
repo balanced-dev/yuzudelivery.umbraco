@@ -1,20 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Umbraco.Core.Models;
+﻿using System.Linq;
 using Umbraco.Core;
-using Umbraco.Web.PropertyEditors;
-using Umbraco.Core.Logging;
 using YuzuDelivery.Core;
-using Umb = Umbraco.Core.Services;
+
+#if NETCOREAPP
+using Umbraco.Extensions;
+using Umbraco.Cms.Core.Logging;
+using Umbraco.Cms.Core.PropertyEditors;
+#else
+using Umbraco.Core.Logging;
+using Umbraco.Web.PropertyEditors;
+#endif
 
 namespace YuzuDelivery.Umbraco.Import
 {
     public class BlockListEditorCreationService : IInlineBlockCreator
     {
         private readonly BlockListDataTypeFactory blockListDataTypeFactory;
-        private readonly ILogger logger;
+        protected ILogger<SchemaChangeController> logger;
 
-        public BlockListEditorCreationService(BlockListDataTypeFactory blockListDataTypeFactory, ILogger logger)
+        public BlockListEditorCreationService(BlockListDataTypeFactory blockListDataTypeFactory, ILogger<SchemaChangeController> logger)
         {
             this.blockListDataTypeFactory = blockListDataTypeFactory;
             this.logger = logger;
@@ -22,7 +26,7 @@ namespace YuzuDelivery.Umbraco.Import
 
         public virtual IDataType Create(VmToContentPropertyMap data)
         {
-            logger.Info<SchemaChangeController>(_LoggerConstants.Schema_DataType_Creating, "Block List", data.VmName, data.VmPropertyName);
+            logger.Info(_LoggerConstants.Schema_DataType_Creating, "Block List", data.VmName, data.VmPropertyName);
 
             var dataTypeName = GetDataTypeName(data);
 

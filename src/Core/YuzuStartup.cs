@@ -91,18 +91,6 @@ namespace YuzuDelivery.Umbraco.Core
             SetupHbsHelpers();
         }
 
-        public void SetupHbsHelpers()
-        {
-            new IfCond();
-            new YuzuDelivery.Core.Array();
-            new YuzuDelivery.Core.Enum();
-            new DynPartial();
-            new ModPartial();
-            new ToString();
-            new ToLowerCase();
-            new PictureSource();
-        }
-
         public void AddDefaultPublishedElements(IUmbracoBuilder builder)
         {
             builder.Services.AddSingleton<IDefaultPublishedElement[]>((factory) =>
@@ -136,8 +124,6 @@ namespace YuzuDelivery.Umbraco.Core
                 return items.ToArray();
             });
         }
-
-    }
 #else
     [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
     public class YuzuStartup : IUserComposer
@@ -206,18 +192,6 @@ namespace YuzuDelivery.Umbraco.Core
             SetupHbsHelpers();
         }
 
-        public void SetupHbsHelpers()
-        {
-            new IfCond();
-            new YuzuDelivery.Core.Array();
-            new YuzuDelivery.Core.Enum();
-            new DynPartial();
-            new ModPartial();
-            new ToString();
-            new ToLowerCase();
-            new PictureSource();
-        }
-
         public void AddDefaultPublishedElements(Composition composition)
         {
             composition.Register<IDefaultPublishedElement[]>((factory) =>
@@ -252,8 +226,21 @@ namespace YuzuDelivery.Umbraco.Core
             }, Lifetime.Singleton);
         }
 
-    }
 #endif
+        public void SetupHbsHelpers()
+        {
+            new IfCond();
+            new YuzuDelivery.Core.Array();
+            new YuzuDelivery.Core.Enum();
+            new DynPartial();
+            new ModPartial();
+            new ToString();
+            new ToLowerCase();
+            new PictureSource();
+        }
+    }
+
+
     public class CoreUmbracoConfig : UpdateableConfig
     {
         public CoreUmbracoConfig()

@@ -5,9 +5,15 @@ using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.UmbracoModels;
 using YuzuDelivery.ViewModels;
+using YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core.Models.Blocks;
+using Umbraco.Cms.Core.Models.PublishedContent;
+#else
 using Umbraco.Core.Models.Blocks;
 using Umbraco.Core.Models.PublishedContent;
-using YuzuDelivery.Umbraco.Import;
+#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {

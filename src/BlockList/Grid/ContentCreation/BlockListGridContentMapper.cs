@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Umbraco.Core;
-using Umbraco.Core.Models;
-using Umbraco.Core.Models.Blocks;
-using YuzuDelivery.Core;
-using System.Reflection;
 using YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core;
+#else
+using Umbraco.Core;
+#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {

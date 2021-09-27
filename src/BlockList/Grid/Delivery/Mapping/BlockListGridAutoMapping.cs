@@ -2,7 +2,7 @@
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.BlockList;
 
-namespace Yuzy.BlockListEditor
+namespace YuzuDelivery.Umbraco.BlockList
 {
     public class BlockListGridAutoMapping : YuzuMappingConfig
     {

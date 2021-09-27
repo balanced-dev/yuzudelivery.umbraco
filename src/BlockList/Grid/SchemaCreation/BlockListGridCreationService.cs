@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Umbraco.Core.Logging;
-using Umbraco.Core.Models;
-using Umbraco.Web.PropertyEditors;
+﻿using System.Linq;
 using YuzuDelivery.Core;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core.Logging;
+using Umbraco.Cms.Core.PropertyEditors;
+#else
+using Umbraco.Core.Logging;
+using Umbraco.Web.PropertyEditors;
+#endif
 
 namespace YuzuDelivery.Umbraco.Import
 {
@@ -12,16 +15,14 @@ namespace YuzuDelivery.Umbraco.Import
     {
         private readonly BlockListGridRowConfigToContent gridRowConfigToContent;
         private readonly BlockListDataTypeFactory blockListDataTypeFactory;
-        private readonly ILogger logger;
 
         public const string SectionCustomView = "~/App_Plugins/YuzuBlockList/GridContentSection.html";
         public const string ConfigCustomView = "~/App_Plugins/YuzuBlockList/GridContentColumnsSettings.html";
 
-        public BlockListGridCreationService(BlockListGridRowConfigToContent gridRowConfigToContent, BlockListDataTypeFactory blockListDataTypeFactory, IYuzuDeliveryImportConfiguration importConfig, ILogger logger)
+        public BlockListGridCreationService(BlockListGridRowConfigToContent gridRowConfigToContent, BlockListDataTypeFactory blockListDataTypeFactory, IYuzuDeliveryImportConfiguration importConfig)
         {
             this.gridRowConfigToContent = gridRowConfigToContent;
             this.blockListDataTypeFactory = blockListDataTypeFactory;
-            this.logger = logger;
         }
 
         public IDataType Create(VmToContentPropertyMap data)

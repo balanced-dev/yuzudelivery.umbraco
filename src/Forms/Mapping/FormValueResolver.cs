@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
+
+#if NETCOREAPP 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+#else
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
+#endif
 
 namespace YuzuDelivery.Umbraco.Forms
 {
@@ -14,10 +20,20 @@ namespace YuzuDelivery.Umbraco.Forms
     {
         private ISchemaMetaService schemaMetaService;
 
+#if NETCOREAPP 
+        private readonly IViewRenderService _viewRenderService;
+
+        public FormValueResolver(ISchemaMetaService schemaMetaService, IViewRenderService viewRenderService)
+        {
+            this.schemaMetaService = schemaMetaService;
+            _viewRenderService = viewRenderService;
+        }
+#else
         public FormValueResolver(ISchemaMetaService schemaMetaService)
         {
             this.schemaMetaService = schemaMetaService;
         }
+#endif
 
         public vmBlock_DataForm Resolve(Source source, Destination destination, object formValue, string propertyName, UmbracoMappingContext context)
         {
@@ -35,13 +51,25 @@ namespace YuzuDelivery.Umbraco.Forms
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
+#if NETCOREAPP 
+                        LiveForm = _viewRenderService.RenderToStringAsync("Render",
+                        new
+                        {
+                            formId = formValue,
+                            view = "YuzuUmbracoForms.cshtml",
+                            template = ofType,
+                            items = context.Items
+                        }).Result
+#else
                         LiveForm = context.Html?.Action("Render", "UmbracoForms",
                         new
                         {
                             formId = formValue,
                             view = "YuzuUmbracoForms.cshtml",
-                            template = ofType
+                            template = ofType,
+                            items = context.Items
                         }).ToHtmlString()
+#endif
                     };
                 }
 

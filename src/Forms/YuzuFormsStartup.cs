@@ -2,15 +2,49 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Core.ViewModelBuilder;
 
+#if NETCOREAPP 
+using Umbraco.Extensions;
+using Umbraco.Cms.Core.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.Models.PublishedContent;
+#else
+using Umbraco.Core;
+using Umbraco.Core.Composing;
+using Umbraco.Core.Models.PublishedContent;
+#endif
+
 namespace YuzuDelivery.Umbraco.Forms
 {
+#if NETCOREAPP
+    public class YuzuFormsStartup : IComposer
+    {
+        public void Compose(IUmbracoBuilder builder)
+        {
+            builder.Services.AddSingleton<IFormElementMapGetter, FormElementMapGetter>();
+            builder.RegisterAll<IFormFieldMappingsInternal>(typeof(YuzuFormsStartup).Assembly);
+
+            builder.Services.AddTransient<FormBuilderTypeConverter>();
+            builder.Services.AddTransient<FormTypeConvertor>();
+            builder.Services.AddTransient(typeof(FormValueResolver<,>));
+
+            //MUST be transient lifetimes
+            builder.Services.AddTransient(typeof(IUpdateableConfig), typeof(FormUmbracoConfig));
+            builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(FormVmBuilderConfig));
+            builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(FormImportConfig));
+
+            builder.Services.AddTransient<YuzuMappingConfig, FormMappingConfig>();
+
+            builder.Services.AddTransient(typeof(YuzuMappingConfig), typeof(FormAutoMapping));
+        }
+    }
+#else
     [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
     public class YuzuFormsStartup : IUserComposer
     {
@@ -33,6 +67,7 @@ namespace YuzuDelivery.Umbraco.Forms
             composition.Register(typeof(YuzuMappingConfig), typeof(FormAutoMapping));
         }
     }
+#endif
 
     public class FormUmbracoConfig : UpdateableConfig
     {

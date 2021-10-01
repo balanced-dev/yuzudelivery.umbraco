@@ -12,10 +12,12 @@ namespace YuzuDelivery.Umbraco.Grid
     {
 
         protected IVmHelperService vmHelperService;
+        private readonly MapPathAbstraction mapPath;
 
-        public DTGEService(IVmHelperService vmHelperService)
+        public DTGEService(IVmHelperService vmHelperService, MapPathAbstraction mapPath)
         {
             this.vmHelperService = vmHelperService;
+            this.mapPath = mapPath;
         }
 
         const string ConfigPath = "/config/grid.editors.config.js";
@@ -51,14 +53,14 @@ namespace YuzuDelivery.Umbraco.Grid
 
         public virtual JArray Get()
         {
-            var configFile = File.ReadAllText(HttpContext.Current.Server.MapPath(ConfigPath));
+            var configFile = File.ReadAllText(mapPath.Get(ConfigPath));
             return JArray.Parse(configFile);
         }
 
         public virtual void Save(JArray config)
         {
             var configFile = JsonConvert.SerializeObject(config, Formatting.Indented);
-            File.WriteAllText(HttpContext.Current.Server.MapPath(ConfigPath), configFile);
+            File.WriteAllText(mapPath.Get(ConfigPath), configFile);
         }
 
         public class GridConfig

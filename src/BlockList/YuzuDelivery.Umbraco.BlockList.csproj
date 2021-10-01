@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net472;net5.0</TargetFrameworks>
@@ -9,19 +9,19 @@
     <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="1.2.7" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="9.0.0-rc004" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-rc004" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="9.0.0" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0" />
     <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="9.0.0-rc001" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="YuzuDelivery.Core" Version="1.0.49.3" />
+    <PackageReference Include="YuzuDelivery.Import" Version="1.0.98.37" />
+    <PackageReference Include="YuzuDelivery.Umbraco.Import.Core" Version="1.0.98.37" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\YuzuDelivery.Core\YuzuDelivery.Core\YuzuDelivery.Core.csproj" />
-    <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Import\YuzuDelivery.Import.csproj" />
-    <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.csproj" />
     <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj" />
   </ItemGroup>
 

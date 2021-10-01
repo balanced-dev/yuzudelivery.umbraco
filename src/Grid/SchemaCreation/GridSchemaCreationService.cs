@@ -1,24 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Umbraco.Core.Models;
-using Umbraco.Web.PropertyEditors;
 using Newtonsoft.Json.Linq;
-using Umbraco.Core.Logging;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Grid;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.PropertyEditors;
+#else
+using Umbraco.Core.Models;
+using Umbraco.Web.PropertyEditors;
+#endif
 
 namespace YuzuDelivery.Umbraco.Import
 {
     public class GridSchemaCreationService : IGridSchemaCreationService
     {
         private readonly IDataTypeService dataTypeService;
-        private readonly ILogger logger;
+        private readonly ILogger<SchemaChangeController> logger;
         private readonly IYuzuDeliveryImportConfiguration importConfig;
         private readonly IDTGEService dgteService;
 
         public const string DataEditorName = "Umbraco.Grid";
 
-        public GridSchemaCreationService(IDataTypeService dataTypeService, IYuzuDeliveryImportConfiguration importConfig, IDTGEService dgteService, ILogger logger)
+        public GridSchemaCreationService(IDataTypeService dataTypeService, IYuzuDeliveryImportConfiguration importConfig, IDTGEService dgteService, ILogger<SchemaChangeController> logger)
         {
             this.dataTypeService = dataTypeService;
             this.importConfig = importConfig;
@@ -28,7 +33,7 @@ namespace YuzuDelivery.Umbraco.Import
 
         public virtual IDataType Create(VmToContentPropertyMap data)
         {
-            logger.Info<SchemaChangeController>(_LoggerConstants.Schema_DataType_Creating, "Grid Layout", data.VmName, data.VmPropertyName);
+            logger.Info(_LoggerConstants.Schema_DataType_Creating, "Grid Layout", data.VmName, data.VmPropertyName);
 
             var dataTypeName = GetDataTypeName(data);
             var dataTypeAlias = GetDataTypeAlias(data);
@@ -48,7 +53,7 @@ namespace YuzuDelivery.Umbraco.Import
 
         public virtual IDataType Update(VmToContentPropertyMap data, IDataType dataTypeDefinition)
         {
-            logger.Info<SchemaChangeController>(_LoggerConstants.Schema_DataType_Updating, "Grid Layout", data.VmName, data.VmPropertyName);
+            logger.Info(_LoggerConstants.Schema_DataType_Updating, "Grid Layout", data.VmName, data.VmPropertyName);
 
             var dataTypeName = GetDataTypeName(data);
             var dataTypeAlias = GetDataTypeAlias(data);

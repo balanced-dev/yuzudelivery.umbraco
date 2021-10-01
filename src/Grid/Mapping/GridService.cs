@@ -1,26 +1,32 @@
 ﻿using System;
 using System.Linq;
-using System.Web.Mvc;
 using System.Collections.Generic;
-using Skybrud.Umbraco.GridData;
 using Skybrud.Umbraco.GridData.Dtge;
 using Newtonsoft.Json;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
+
+#if NETCOREAPP
+using Skybrud.Umbraco.GridData.Models;
+#else
+using Skybrud.Umbraco.GridData;
+#endif
 
 namespace YuzuDelivery.Umbraco.Grid
 {
     public class GridService : IGridService
     {
         private IMapper mapper;
-        private readonly IGridItem[] gridItems;
-        private readonly IGridItemInternal[] gridItemsInternal;
+        private readonly IEnumerable<IGridItem> gridItems;
+        private readonly IEnumerable<IGridItemInternal> gridItemsInternal;
+        private readonly IEnumerable<IAutomaticGridConfig> automaticGridConfig;
 
-        public GridService(IMapper mapper, IGridItem[] gridItems, IGridItemInternal[] gridItemsInternal)
+        public GridService(IMapper mapper, IEnumerable<IGridItem> gridItems, IEnumerable<IGridItemInternal> gridItemsInternal, IEnumerable<IAutomaticGridConfig> automaticGridConfig)
         {
             this.mapper = mapper;
             this.gridItems = gridItems;
             this.gridItemsInternal = gridItemsInternal;
+            this.automaticGridConfig = automaticGridConfig;
         }
 
 
@@ -32,7 +38,7 @@ namespace YuzuDelivery.Umbraco.Grid
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(y =>
                     {
-                        var rowConfig = y.Config.ToDictionary(y.HasConfig).AddCalculatedRowConfig(y);
+                        var rowConfig = y.Config.ToDictionary(y.HasConfig).AddCalculatedRowConfig(y, automaticGridConfig);
                         var area = y.Areas.FirstOrDefault();
 
                         return new vmSub_DataRowsRow()
@@ -59,7 +65,7 @@ namespace YuzuDelivery.Umbraco.Grid
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(y =>
                     {
-                        var rowConfig = y.Config.ToDictionary(y.HasConfig).AddCalculatedRowConfig(y);
+                        var rowConfig = y.Config.ToDictionary(y.HasConfig).AddCalculatedRowConfig(y, automaticGridConfig);
                         var area = y.Areas.FirstOrDefault();
 
                         return new vmSub_DataRowsRow()
@@ -85,13 +91,13 @@ namespace YuzuDelivery.Umbraco.Grid
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(row =>
                     {
-                        var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row);
+                        var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row, automaticGridConfig);
 
                         return new vmSub_DataGridRow()
                         {
                             Config = mapper.Map<TConfig>(rowConfig),
                             Columns = row.Areas.Select(area => {
-                                var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area);
+                                var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area, automaticGridConfig);
 
                                 return new vmSub_DataGridColumn()
                                 {
@@ -121,13 +127,13 @@ namespace YuzuDelivery.Umbraco.Grid
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(row =>
                     {
-                        var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row);
+                        var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row, automaticGridConfig);
 
                         return new vmSub_DataGridRow()
                         {
                             Config = mapper.Map<TConfigRow>(rowConfig),
                             Columns = row.Areas.Select(area => {
-                                var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area);
+                                var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area, automaticGridConfig);
 
                                 return new vmSub_DataGridColumn()
                                 {
@@ -157,12 +163,12 @@ namespace YuzuDelivery.Umbraco.Grid
                 {
                     Rows = grid.Sections.Any() ? grid.Sections.FirstOrDefault().Rows.Where(x => x.Areas.Any()).Select(row =>
                     {
-                        var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row);
+                        var rowConfig = row.Config.ToDictionary(row.HasConfig).AddCalculatedRowConfig(row, automaticGridConfig);
 
                         return new vmSub_DataGridRow()
                         {
                             Columns = row.Areas.Select(area => {
-                                var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area);
+                                var columnConfig = area.Config.ToDictionary(area.HasConfig).AddCalculatedAreaSettings(row, area, automaticGridConfig);
 
                                 return new vmSub_DataGridColumn()
                                 {

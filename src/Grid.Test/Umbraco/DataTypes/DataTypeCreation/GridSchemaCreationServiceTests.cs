@@ -21,7 +21,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
     public class GridSchemaCreationServiceTests
     {
         public IDataTypeService dataTypeService;
-        public ILogger logger;
+        public ILogger<SchemaChangeController> logger;
         public IDTGEService dgteService;
         public IYuzuDeliveryImportConfiguration importConfig;
 
@@ -37,7 +37,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
         public void Setup()
         {
             dataTypeService = MockRepository.GenerateStub<IDataTypeService>();
-            logger = MockRepository.GenerateStub<ILogger>();
+            logger = MockRepository.GenerateStub<ILogger<SchemaChangeController>>();
             dgteService = MockRepository.GenerateStub<IDTGEService>();
             importConfig = new YuzuDeliveryImportConfiguration(new List<IUpdateableImportConfiguration>());
 

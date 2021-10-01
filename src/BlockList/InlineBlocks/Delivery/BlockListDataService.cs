@@ -5,9 +5,15 @@ using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.UmbracoModels;
 using YuzuDelivery.ViewModels;
+using YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+using Umbraco.Cms.Core.Models.Blocks;
+using Umbraco.Cms.Core.Models.PublishedContent;
+#else
 using Umbraco.Core.Models.Blocks;
 using Umbraco.Core.Models.PublishedContent;
-using YuzuDelivery.Umbraco.Import;
+#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -15,15 +21,25 @@ namespace YuzuDelivery.Umbraco.BlockList
     {
         private readonly IMapper mapper;
         private readonly IYuzuConfiguration config;
-        private readonly IBlockListItem[] blockListItems;
+        private readonly IEnumerable<IBlockListItem> blockListItems;
+#if NETCOREAPP
+        private readonly IPublishedValueFallback publishedValueFallback;
+#endif
 
         private IEnumerable<Type> viewmodelTypes;
 
-        public BlockListDataService(IMapper mapper, IYuzuConfiguration config, IBlockListItem[] blockListItems)
+        public BlockListDataService(IMapper mapper, IYuzuConfiguration config, IEnumerable<IBlockListItem> blockListItems
+#if NETCOREAPP
+            , IPublishedValueFallback publishedValueFallback
+#endif
+            )
         {
             this.mapper = mapper;
             this.config = config;
             this.blockListItems = blockListItems;
+#if NETCOREAPP
+            this.publishedValueFallback = publishedValueFallback;
+#endif
 
             this.viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix) || x.Name.StartsWith(YuzuConstants.Configuration.SubPrefix));
         }
@@ -58,7 +74,11 @@ namespace YuzuDelivery.Umbraco.BlockList
             var modelType = config.CMSModels.Where(x => x.Name == alias).FirstOrDefault();
             var vmType = viewmodelTypes.Where(x => x.Name.EndsWith(alias)).FirstOrDefault();
 
+#if NETCOREAPP
+            var o = i.Content.ToElement(modelType, publishedValueFallback);
+#else
             var o = i.Content.ToElement(modelType);
+#endif
             if (o != null)
             {
                 var custom = blockListItems.Where(x => x.IsValid(i)).FirstOrDefault();
@@ -70,18 +90,5 @@ namespace YuzuDelivery.Umbraco.BlockList
             }
             return default(V);
         }
-    }
-
-    public static class PublishedModelExtensions
-    {
-        public static object ToElement(this IPublishedElement x, Type type)
-        {
-            if (x != null && x.GetType() == type)
-            {
-                return Activator.CreateInstance(type, new object[] { x });
-            }
-            return null;
-        }
-
     }
 }

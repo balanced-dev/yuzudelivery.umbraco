@@ -5,6 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Skybrud.Umbraco.GridData;
 
+#if NETCOREAPP
+using Skybrud.Umbraco.GridData.Models;
+#else
+using Skybrud.Umbraco.GridData;
+#endif
+
 namespace YuzuDelivery.Umbraco.Grid
 {
     public interface IAutomaticGridConfig

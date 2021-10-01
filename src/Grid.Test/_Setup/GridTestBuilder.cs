@@ -14,7 +14,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
             builder.Register<IDTGEService>((IComponentContext factory) =>
             {
                 return MockRepository.GeneratePartialMock<DTGEService>(new object[] {
-                    factory.Resolve<IVmHelperService>()
+                    factory.Resolve<IVmHelperService>(),
+                    factory.Resolve<MapPathAbstraction>()
                 });
             }).SingleInstance();
 

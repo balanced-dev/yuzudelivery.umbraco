@@ -16,11 +16,21 @@ namespace YuzuDelivery.Umbraco.Core
     {
         private string docTypeAlias;
         private readonly IMapper mapper;
+#if NETCOREAPP
+        private readonly IPublishedValueFallback publishedValueFallback;
+#endif
 
-        public DefaultPublishedElement(string docTypeAlias, IMapper mapper)
+        public DefaultPublishedElement(string docTypeAlias, IMapper mapper
+#if NETCOREAPP
+            , IPublishedValueFallback publishedValueFallback
+#endif
+            )
         {
             this.docTypeAlias = docTypeAlias;
             this.mapper = mapper;
+#if NETCOREAPP
+            this.publishedValueFallback = publishedValueFallback;
+#endif
         }
 
         public virtual bool IsValid(IPublishedElement element)
@@ -30,7 +40,11 @@ namespace YuzuDelivery.Umbraco.Core
 
         public virtual object Apply(IPublishedElement element, UmbracoMappingContext context)
         {
+#if NETCOREAPP
+            var item = element.ToElement<M>(publishedValueFallback);
+#else
             var item = element.ToElement<M>();
+#endif
 
             var output = mapper.Map<V>(item, context.Items);
             return output;

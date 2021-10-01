@@ -1,14 +1,27 @@
 ﻿using Newtonsoft.Json;
-using Skybrud.Umbraco.GridData;
-using Skybrud.Umbraco.GridData.Dtge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web.Mvc;
+using System.Threading.Tasks;
 using YuzuDelivery.Umbraco.Core;
+using Skybrud.Umbraco.GridData.Dtge;
+
+#if NETCOREAPP
+using Umbraco.Extensions;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Web.Common.UmbracoContext;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Skybrud.Umbraco.GridData.Models;
+#else
+using System.Web.Mvc;
 using Umbraco.Web;
+using Umbraco.Web.Mvc;
 using Umbraco.Core.Models.PublishedContent;
+using Skybrud.Umbraco.GridData;
+#endif
 
 namespace YuzuDelivery.Umbraco.Forms
 {
@@ -35,7 +48,11 @@ namespace YuzuDelivery.Umbraco.Forms
                 //((List<Object>)formBuilder.Fieldsets[fieldsetIndex].Fields).Add(field);
         }
 
+#if NETCOREAPP
+        public static void AddHandler<C>(this YuzuFormViewModel formBuilder, Expression<Func<C, Task<IActionResult>>> actionLambda)
+#else
         public static void AddHandler<C>(this YuzuFormViewModel formBuilder, Expression<Func<C, ActionResult>> actionLambda)
+#endif
         {
             Type type = typeof(C);
 
@@ -65,7 +82,11 @@ namespace YuzuDelivery.Umbraco.Forms
                 return (arrEndpoint[0], arrEndpoint[1]);
         }
 
+#if NETCOREAPP
+        public static IPublishedElement GetGridFormForEndpoint<C, M>(this UmbracoContext context, Expression<Func<C, Task<IActionResult>>> actionLambda, Expression<Func<M, GridDataModel>> gridProperty, string endpointPropertyName = "endpoint")
+#else
         public static IPublishedElement GetGridFormForEndpoint<C, M>(this UmbracoContext context, Expression<Func<C, ActionResult>> actionLambda, Expression<Func<M, GridDataModel>> gridProperty, string endpointPropertyName = "endpoint")
+#endif
             where C : Controller
         {
             Type type = typeof(C);

@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YuzuDelivery.Umbraco.Forms;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
+using YuzuDelivery.Core;
+using YuzuDelivery.Umbraco.Core;
+using YuzuDelivery.Umbraco.Forms;
+
+#if NETCOREAPP
+using Umbraco.Extensions;
+using Umbraco.Cms.Core.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Umbraco.Cms.Web.Common.UmbracoContext;
+using Skybrud.Umbraco.GridData.Models;
+#else
 using System.Web.Mvc;
 using Umbraco.Web;
-using YuzuDelivery.Umbraco.Core;
-using YuzuDelivery.Umbraco.Grid;
+using Umbraco.Web.Mvc;
 using Umbraco.Web.Models;
 using Skybrud.Umbraco.GridData;
-using YuzuDelivery.Core;
+#endif
 
 namespace YuzuDelivery.Umbraco.Forms
 {
@@ -61,7 +69,11 @@ namespace YuzuDelivery.Umbraco.Forms
             };
         }
 
+#if NETCOREAPP
+        public YuzuFormViewModel Create<C>(C c, List<object> formFields, Expression<Func<C, bool>> isSuccess, Expression<Func<C, Task<IActionResult>>> handler = null, string template = null)
+#else
         public YuzuFormViewModel Create<C>(C c, List<object> formFields, Expression<Func<C, bool>> isSuccess, Expression<Func<C, ActionResult>> handler = null, string template = null)
+#endif
             where C : Controller
         {
             var model = new YuzuFormViewModel();
@@ -86,7 +98,11 @@ namespace YuzuDelivery.Umbraco.Forms
             return model;
         }
 
+#if NETCOREAPP
+        public YuzuFormViewModel CreateForGridItem<C, M>(C c, List<object> formFields, Expression<Func<C, bool>> isSuccess, Expression<Func<C, Task<IActionResult>>> getContentFromProperty, Expression<Func<M, GridDataModel>> gridProperty, Expression<Func<C, Task<IActionResult>>> handler = null, string template = null)
+#else
         public YuzuFormViewModel CreateForGridItem<C, M>(C c, List<object> formFields, Expression<Func<C, bool>> isSuccess, Expression<Func<C, ActionResult>> getContentFromProperty, Expression<Func<M, GridDataModel>> gridProperty, Expression<Func<C, ActionResult>> handler = null, string template = null)
+#endif
             where C : Controller
         {
             var model = new YuzuFormViewModel();

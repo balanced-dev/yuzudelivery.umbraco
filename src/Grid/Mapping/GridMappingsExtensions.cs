@@ -7,40 +7,45 @@ using Skybrud.Umbraco.GridData;
 using System.Linq.Expressions;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
-using System.Web.Mvc;
 using YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+using Skybrud.Umbraco.GridData.Models;
+#else
+using Skybrud.Umbraco.GridData;
+#endif
 
 namespace YuzuDelivery.Umbraco.Grid
 {
     public static class GridMappingsExtensions
     {
-        public static void AddGridWithRows<TSource, TDest>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataRows>> destMember)
+        public static void AddGridWithRows<TSource, TDest>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataRows>> destMember, IYuzuDeliveryImportConfiguration importConfig)
         {
             AddGrid<GridRowConvertor<TSource, TDest>, TSource, TDest, vmBlock_DataRows>(resolvers, sourceMember, destMember);
         }
 
-        public static void AddGridWithRows<TSource, TDest, TConfig>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataRows>> destMember)
+        public static void AddGridWithRows<TSource, TDest, TConfig>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataRows>> destMember, IYuzuDeliveryImportConfiguration importConfig)
         {
             AddGrid<GridRowConvertor<TSource, TDest, TConfig>, TSource, TDest, vmBlock_DataRows>(resolvers, sourceMember, destMember);
-            AddConfig<TConfig>(resolvers);
+            AddConfig<TConfig>(resolvers, importConfig);
         }
 
-        public static void AddGridRowsWithColumns<TSource, TDest>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember)
+        public static void AddGridRowsWithColumns<TSource, TDest>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember, IYuzuDeliveryImportConfiguration importConfig)
         {
             AddGrid<GridRowConvertor<TSource, TDest>, TSource, TDest, vmBlock_DataGrid>(resolvers, sourceMember, destMember);
         }
 
-        public static void AddGridRowsWithColumns<TSource, TDest, TConfig>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember)
+        public static void AddGridRowsWithColumns<TSource, TDest, TConfig>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember, IYuzuDeliveryImportConfiguration importConfig)
         {
             AddGrid<GridRowColumnConvertor<TSource, TDest, TDest, TConfig>, TSource, TDest, vmBlock_DataGrid>(resolvers, sourceMember, destMember);
-            AddConfig<TConfig>(resolvers);
+            AddConfig<TConfig>(resolvers, importConfig);
         }
 
-        public static void AddGridRowsWithColumns<TSource, TDest, TConfigRow, TConfigCol>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember)
+        public static void AddGridRowsWithColumns<TSource, TDest, TConfigRow, TConfigCol>(this List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, vmBlock_DataGrid>> destMember, IYuzuDeliveryImportConfiguration importConfig)
         {
             AddGrid<GridRowColumnConvertor<TSource, TDest, TConfigRow, TConfigCol>, TSource, TDest, vmBlock_DataGrid>(resolvers, sourceMember, destMember);
-            AddConfig<TConfigRow>(resolvers);
-            AddConfig<TConfigCol>(resolvers);
+            AddConfig<TConfigRow>(resolvers, importConfig);
+            AddConfig<TConfigCol>(resolvers, importConfig);
         }
 
         private static void AddGrid<ResolverType, TSource, TDest, TDestMember>(List<YuzuMapperSettings> resolvers, Expression<Func<TSource, GridDataModel>> sourceMember, Expression<Func<TDest, TDestMember>> destMember)
@@ -54,10 +59,9 @@ namespace YuzuDelivery.Umbraco.Grid
             });
         }
 
-        private static void AddConfig<TConfig>(List<YuzuMapperSettings> resolvers)
+        private static void AddConfig<TConfig>(List<YuzuMapperSettings> resolvers, IYuzuDeliveryImportConfiguration importConfig)
         {
-            var config = DependencyResolver.Current.GetService<IYuzuDeliveryImportConfiguration>();
-            config.IgnoreViewmodels.Add<TConfig>();
+            importConfig.IgnoreViewmodels.Add<TConfig>();
 
             resolvers.Add(new YuzuTypeConvertorMapperSettings()
             {

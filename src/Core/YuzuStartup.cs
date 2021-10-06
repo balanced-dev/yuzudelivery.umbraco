@@ -27,7 +27,17 @@ namespace YuzuDelivery.Umbraco.Core
     {
         public void Compose(IUmbracoBuilder builder)
         {
+            Inflector.Inflector.SetDefaultCultureFunc = () => System.Threading.Thread.CurrentThread.CurrentUICulture;
+
             YuzuConstants.Initialize(new YuzuConstantsConfig());
+
+            builder.Services.AddOptions<CoreSettings>()
+                .Bind(builder.Config.GetSection("Yuzu:Core"))
+                .ValidateDataAnnotations();
+
+            builder.Services.AddOptions<VmGenerationSettings>()
+                .Bind(builder.Config.GetSection("Yuzu:VmGeneration"))
+                .ValidateDataAnnotations();
 
             builder.Services.AddSingleton<IHandlebarsProvider, HandlebarsProvider>();
             builder.Services.AddTransient<IYuzuDefinitionTemplates, YuzuDefinitionTemplates>();

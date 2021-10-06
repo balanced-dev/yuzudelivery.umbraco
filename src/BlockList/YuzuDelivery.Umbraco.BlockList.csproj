@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
-    <PackageReference Include="YuzuDelivery.Core" Version="1.0.49.3" />
+    <PackageReference Include="YuzuDelivery.Core" Version="1.0.49.4" />
     <PackageReference Include="YuzuDelivery.Import" Version="1.0.98.37" />
     <PackageReference Include="YuzuDelivery.Umbraco.Import.Core" Version="1.0.98.37" />
   </ItemGroup>

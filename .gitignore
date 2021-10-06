@@ -338,3 +338,5 @@ ASALocalRun/
 
 
 # End of https://www.gitignore.io/api/visualstudio
+src/BlockList/YuzuDelivery.Umbraco.BlockList.internal.csproj
+src/Core/YuzuDelivery.Umbraco.Core.internal.csproj

@@ -10,14 +10,22 @@
     <iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
     <copyright>Copyright 2019-2020 HiFi Ltd</copyright>
 	<dependencies>
-    <dependency id="YuzuDelivery.Core" version="$core_version$" />
-    <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
-    <dependency id="YuzuDelivery.Umbraco.Forms" version="$y_umb_version$" />
+    <group targetFramework="net472">
+      <dependency id="YuzuDelivery.Core" version="1.0.48" />
+      <dependency id="YuzuDelivery.Umbraco.Core" version="1.0.0" />
+      <dependency id="YuzuDelivery.Umbraco.Forms" version="1.0.0" />
+    </group>  
+    <group targetFramework="net5.0">
+      <dependency id="YuzuDelivery.Core" version="1.0.48" />
+      <dependency id="YuzuDelivery.Umbraco.Core" version="1.0.0" />
+      <dependency id="YuzuDelivery.Umbraco.Forms" version="1.0.0" />
+    </group>
 	</dependencies>
   </metadata>
   <files>
-     <file src="bin\Release\YuzuDelivery.Umbraco.Members.dll" target="lib\net472" />
-     <file src="tools\views.web.config.install.xdt" target="Content\Views\web.config.install.xdt" />
-     <file src="Web\UI\Views\Partials\Logout.cshtml" target="Content\Views\Partials\Logout.cshtml" />
+     <file src="bin\Debug\net472\YuzuDelivery.Umbraco.Members.dll" target="lib\net472" />
+     <file src="bin\Debug\net5.0\YuzuDelivery.Umbraco.Members.dll" target="lib\net5.0" />
+     <file src="tools\views.web.config.install.xdt" target="Content\net472\Views\web.config.install.xdt" />
+     <file src="Web\UI\Views\Partials\Logout.cshtml" target="Content\net472\Views\Partials\Logout.cshtml" />
   </files>
 </package>

@@ -4,19 +4,28 @@
     <id>YuzuDelivery.Umbraco.BlockList</id>
     <version>1.0.0</version>
     <authors>Phil Whittaker</authors>
+    <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Yuzu Framework - blocklist setup</description>
-    <license type="expression">MIT</license>
     <iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
     <copyright>Copyright 2019-2020 HiFi Ltd</copyright>
     <dependencies>
-      <dependency id="YuzuDelivery.Core" version="$core_version$" />
-      <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
-      <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.2.0" />
+      <group targetFramework="net472">
+        <dependency id="YuzuDelivery.Core" version="$core_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
+        <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.2.0" />
+      </group>
+      <group targetFramework="net5.0">
+        <dependency id="YuzuDelivery.Core" version="$core_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
+        <dependency id="Our.Umbraco.DocTypeGridEditor" version="9.0.0-rc001" />
+      </group>
     </dependencies>
   </metadata>
   <files>
-     <file src="bin\Release\YuzuDelivery.Umbraco.BlockList.dll" target="lib\net472" />
+     <file src="bin\Release\net472\YuzuDelivery.Umbraco.BlockList.dll" target="lib\net472" />
+     <file src="bin\Release\net5.0\YuzuDelivery.Umbraco.BlockList.dll" target="lib\net5.0" />
      <file src="Web\UI\App_Plugins\YuzuBlockList\**\*.*" target="Content\App_Plugins\YuzuBlockList\" />
+     <file src="build\**\*.*" target="build" />
   </files>
 </package>

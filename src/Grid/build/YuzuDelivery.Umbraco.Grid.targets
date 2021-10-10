@@ -1,0 +1,19 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<PropertyGroup>
+		<yuzuDeliveryGridContentFilesPath>$(MSBuildThisFileDirectory)..\content\App_Plugins\YuzuGrid\**\*.*</yuzuDeliveryGridContentFilesPath>
+	</PropertyGroup>
+
+	<Target Name="CopyYuzuDeliveryUmbracoGridAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0'">
+		<ItemGroup>
+			<yuzuDeliveryGridContentFiles Include="$(yuzuDeliveryGridContentFilesPath)" />
+		</ItemGroup>
+		<Message Text="Copying Yuzu Delivery Import content files: $(yuzuDeliveryGridContentFilesPath) - #@(yuzuDeliveryGridContentFiles->Count()) files"  Importance="high" />
+		<Copy
+            SourceFiles="@(yuzuDeliveryGridContentFiles)"
+            DestinationFiles="@(yuzuDeliveryGridContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\DocTypeGridEditor\%(RecursiveDir)%(Filename)%(Extension)')"
+            SkipUnchangedFiles="true" />
+
+	</Target>
+
+</Project>

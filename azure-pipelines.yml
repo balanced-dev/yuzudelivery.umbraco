@@ -18,8 +18,8 @@ variables:
   version: '1.2.40'
   core_version: '1.0.49.4'
   import_version: '1.0.98.39'
-  umbraco_version: '8.15.3'
-  umbraco_forms_version: '8.7.6'
+  umbraco_v8_version: '8.15.3'
+  umbraco_v8_forms_version: '8.7.6'
   ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
     revision: $[ counter('.', 0) ]
     separator: '.'
@@ -74,6 +74,12 @@ steps:
     searchFolder: '$(System.DefaultWorkingDirectory)'
 
 - task: NuGetCommand@2
+  displayName: Nuget Pack Blocklist Editor
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\BlockList\YuzuDelivery.Umbraco.BlockList.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";y_umb_version="$(Build.BuildNumber)"'
+
+- task: NuGetCommand@2
   displayName: Nuget Pack Core 
   inputs:
     command: 'custom'
@@ -102,42 +108,6 @@ steps:
   inputs:
     command: 'custom'
     arguments: 'pack "$(Build.SourcesDirectory)\src\PositionalContent\YuzuDelivery.Umbraco.PositionalContent.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber)'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Blocklist Editor
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\BlockList\YuzuDelivery.Umbraco.BlockList.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart Web
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.Web.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_version="$(umbraco_version)";umbraco_forms_version="$(umbraco_forms_version)";y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart Core
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.Core.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_version="$(umbraco_version)";umbraco_forms_version="$(umbraco_forms_version)";y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_version="$(umbraco_version)";umbraco_forms_version="$(umbraco_forms_version)";y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart Lambda Example
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.Lambda\YuzuDelivery.Umbraco.Quickstart.Example.Lambda.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart Test Project
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.TestProject\YuzuDelivery.Umbraco.Quickstart.Example.TestProject.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
 
 - task: NuGetCommand@2
   inputs:

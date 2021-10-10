@@ -1,8 +1,0 @@
-{
-    "parGridBuilder": {
-        "refs": {}
-    },
-    "anyOfTypes": [
-        "parGridBuilder"
-    ]
-}

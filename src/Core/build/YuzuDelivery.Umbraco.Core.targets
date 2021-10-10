@@ -1,0 +1,37 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<PropertyGroup>
+		<yuzuDeliveryBackOfficeContentFilesPath>$(MSBuildThisFileDirectory)..\content\App_Plugins\YuzuBackOfficeCss\**\*.*</yuzuDeliveryBackOfficeContentFilesPath>
+		<yuzuDeliveryCoreContentFilesPath>$(MSBuildThisFileDirectory)..\content\App_Plugins\YuzuDeliveryViewModelBuilder\**\*.*</yuzuDeliveryCoreContentFilesPath>
+	</PropertyGroup>
+
+	<Target Name="CopyYuzuDeliveryUmbracoCoreAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0'">
+		<ItemGroup>
+			<yuzuDeliveryBackOfficeFiles Include="$(yuzuDeliveryBackOfficeContentFilesPath)" />
+			<yuzuDeliveryViewModelBuilderFiles Include="$(yuzuDeliveryBackOfficeContentFilesPath)" />
+		</ItemGroup>
+
+		<Message Text="Copying Yuzu Delivery BackOffice content files: $(yuzuDeliveryBackOfficeContentFilesPath) - #@(yuzuDeliveryBackOfficeFiles->Count()) files"  Importance="high" />
+		<Copy
+            SourceFiles="@(yuzuDeliveryBackOfficeFiles)"
+            DestinationFiles="@(yuzuDeliveryBackOfficeFiles->'$(MSBuildProjectDirectory)\App_Plugins\YuzuBackOfficeCss\%(RecursiveDir)%(Filename)%(Extension)')"
+            SkipUnchangedFiles="true" />
+
+		<Message Text="Copying Yuzu Delivery Viewmodel Builder content files: $(yuzuDeliveryViewModelBuilderFiles) - #@(yuzuDeliveryViewModelBuilderFiles->Count()) files"  Importance="high" />
+		<Copy
+            SourceFiles="@(yuzuDeliveryViewModelBuilderFiles)"
+            DestinationFiles="@(yuzuDeliveryViewModelBuilderFiles->'$(MSBuildProjectDirectory)\App_Plugins\YuzuDeliveryViewModelBuilder\%(RecursiveDir)%(Filename)%(Extension)')"
+            SkipUnchangedFiles="true" />
+
+	</Target>
+	<Target Name="ClearYuzuDeliveryUmbracoCoreAssets" BeforeTargets="Clean" Condition="'$(TargetFramework)' == 'net5.0'">
+		<ItemGroup>
+			<yuzuDeliveryBackOfficeDir Include="$(MSBuildProjectDirectory)\App_Plugins\YuzuBackOfficeCss\" />
+			<yuzuDeliveryViewModelBuilderDir Include="$(MSBuildProjectDirectory)\App_Plugins\YuzuDeliveryViewModelBuilder\" />
+		</ItemGroup>
+		<Message Text="Clear old yuzu core data"  Importance="high" />
+		<RemoveDir Directories="@(yuzuDeliveryBackOfficeDir)"  />
+		<RemoveDir Directories="@(yuzuDeliveryViewModelBuilderDir)"  />
+	</Target>
+
+</Project>

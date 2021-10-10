@@ -1,5 +1,0 @@
-nuget pack YuzuDelivery.Umbraco.QuickStart.Example.Lambda.nuspec -Properties y_umb_version="1.2.7.26"
-
-copy YuzuDelivery.Umbraco.QuickStart.Example.Lambda.1.0.0.nupkg c:\nuget\ /Y
-
-Install-Package YuzuDelivery.Umbraco.QuickStart.Example.Lambda -source c:/nuget -IncludePrerelease

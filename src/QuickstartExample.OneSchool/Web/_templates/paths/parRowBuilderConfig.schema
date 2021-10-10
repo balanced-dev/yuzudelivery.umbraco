@@ -1,9 +1,0 @@
-{
-    "enums": {
-        "/width": [
-            "full",
-            "container"
-        ]
-    },
-    "refs": {}
-}

@@ -1,7 +1,0 @@
-{
-    "refs": {
-        "/teachers/headshot": [
-            "/dataImage"
-        ]
-    }
-}

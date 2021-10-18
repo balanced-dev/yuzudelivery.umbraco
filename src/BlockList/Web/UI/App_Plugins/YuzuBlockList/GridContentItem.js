@@ -25,6 +25,20 @@
 
     });
 
+function getCircularReplacer() {
+    const seen = new WeakSet();
+    return (key, value) => {
+        if (key == "$block")
+            return null;
+        if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) {
+                return;
+            }
+            seen.add(value);
+        }
+        return value;
+    };
+};
 
 angular.module('umbraco.resources').factory('yuzuDeliveryBlockListResources',
     function ($q, $http, $routeParams, umbRequestHelper) {
@@ -32,7 +46,8 @@ angular.module('umbraco.resources').factory('yuzuDeliveryBlockListResources',
             getPreview: function (blockData) {
 
                 var url = "/umbraco/backoffice/YuzuDeliveryUmbracoImport/BlockListPreview/GetPartialData";
-                var resultParameters = { content: JSON.stringify(blockData, false), contentTypeKey: blockData.contentTypeKey };
+                var json = JSON.stringify(blockData, getCircularReplacer())
+                var resultParameters = { content: json, contentTypeKey: blockData.contentTypeKey };
 
                 return $http.post(url, resultParameters, {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },

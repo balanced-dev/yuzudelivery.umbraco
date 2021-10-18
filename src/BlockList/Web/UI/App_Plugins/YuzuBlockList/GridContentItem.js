@@ -28,7 +28,7 @@
 function getCircularReplacer() {
     const seen = new WeakSet();
     return (key, value) => {
-        if (key == "$block")
+        if (key === "$block")
             return null;
         if (typeof value === "object" && value !== null) {
             if (seen.has(value)) {

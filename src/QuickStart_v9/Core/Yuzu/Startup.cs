@@ -15,7 +15,7 @@ using YuzuDelivery.Umbraco.Grid;
 using YuzuDelivery.Umbraco.BlockList;
 using YuzuDelivery.Umbraco.Forms;
 
-namespace $rootnamespace$
+namespace Umbraco.Cms.Web.UI
 {
     public class YuzuComposer : IComposer
     {

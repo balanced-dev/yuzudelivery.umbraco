@@ -1,27 +1,33 @@
+Install-Module Newtonsoft.Json
+Import-Module Newtonsoft.Json
+
 Remove-Item 'UmbracoTemplates' -Recurse -ErrorAction Ignore
+Remove-Item 'Core/Yuzu' -Recurse -ErrorAction Ignore
+Remove-Item 'Core/UmbracpProject.csproj' -ErrorAction Ignore
 Remove-Item 'Standalone' -Recurse -ErrorAction Ignore
 Remove-Item 'Web' -Recurse -ErrorAction Ignore
 
-$UmbracoVersion = "9.0.0"
-$UmbracoFormsVersion = "9.0.0"
-$YuzuDeliveryCoreVersion = "1.0.48"
-$YuzuDeliveryImportVersion = "1.0.96"
-$YuzuDeliveryUmbracoVersion = "1.0.22"
+$UmbracoVersion = "9.0.1"
+$UmbracoFormsVersion = "9.0.1"
+$YuzuDeliveryCoreVersion = "1.0.49.4"
+$YuzuDeliveryImportVersion = "1.0.98.39"
+$YuzuDeliveryUmbracoVersion = "1.2.40.51"
 
 $author = "Hi-Fi Ltd"
-$groupIdentity = "YuzuDelivery.Templates"
 
-$descriptionStandalone = "Standalone web project for Umbraco Yuzu delivery"
-$identityStandalone = "YuzuDelivery.Umbraco.Templates.CSharp"
-$nameStandalone = "Yuzu Delivery"
-$shortNameStandalone = "yuzu-delivery"
-$defaultNameStandalone = "YuzuDelivery1"
+$groupIdentityStandalone    = "YuzuDelivery.Templates"
+$descriptionStandalone      = "Standalone web project for Umbraco Yuzu delivery"
+$identityStandalone         = "YuzuDelivery.Umbraco.Templates.CSharp"
+$nameStandalone             = "Yuzu Delivery"
+$shortNameStandalone        = "yuzu-delivery"
+$defaultNameStandalone      = "YuzuDelivery1"
 
-$descriptionWeb = "Web only project for Umbraco Yuzu delivery"
-$identityWeb = "YuzuDelivery.Umbraco.Templates.Web.CSharp"
-$nameWeb = "Yuzu Delivery Web"
-$shortNameWeb = "yuzu-delivery-web"
-$defaultNameWeb = "YuzuDelivery.Web1"
+$groupIdentityWeb           = "YuzuDelivery.Templates.Web"
+$descriptionWeb             = "Web only project for Umbraco Yuzu delivery"
+$identityWeb                = "YuzuDelivery.Umbraco.Templates.CSharp.Web"
+$nameWeb                    = "Yuzu Delivery Web"
+$shortNameWeb               = "yuzu-delivery-web"
+$defaultNameWeb             = "YuzuDelivery.Web1"
 
 
 #Download Umbraco.Templates nuget package
@@ -47,8 +53,18 @@ function Update-ViewImports {
         $Folder
     )
 
-    $ViewImports = Get-Content ".\$($folder)\Views\_ViewImports.cshtml", ".\Yuzu\StandaloneContent\_ViewImports.cshtml"
+    $ViewImports = Get-Content ".\$($folder)\Views\_ViewImports.cshtml", ".\Yuzu\_ViewImports.cshtml"
     Set-Content ".\$($folder)\Views\_ViewImports.cshtml" $ViewImports
+}
+
+function Copy-Yuzu-Composer {
+    param (
+        $Folder
+    )
+
+    $pathToYuzuDir = ".\$($folder)\Yuzu"
+
+    Copy-Item -Path ".\Yuzu\Startup" -Destination $pathToYuzuDir -Recurse
 }
 
 function Update-ModeslBuilder {
@@ -125,7 +141,7 @@ function Add-Yuzu-AppSettings {
             }
             Import = [PSCustomObject]@{ 
                 IsActive = $True 
-                Directory = "/yuzu/YuzuConfig.json"
+                Config = "/yuzu/YuzuConfig.json"
                 ManualMappingDirectory = "/yuzu/Mappings/"
                 Data = "/wwwroot/_client/images"
                 Images = "/yuzu/_templates/data"
@@ -157,23 +173,38 @@ function Copy-Forms-Partials {
 
 function Add-Project-Dependencies {
     param (
-        $Folder
+        $Folder,
+        [bool] $isCore
     )
 
     $pathToConfig = ".\$($folder)\UmbracoProject.csproj"
 
     $csproj = [xml](get-content $pathToConfig)
 
-    $newNode = [xml]"
-        <ItemGroup>
-            <PackageReference Include='Umbraco.Cms.Forms' Version='$($UmbracoFormsVersion)' />
-            <PackageReference Include='YuzuDelivery.Core' Version='$($YuzuDeliveryCoreVersion)' />
-            <PackageReference Include='YuzuDelivery.Import' Version='$($YuzuDeliveryImportVersion)' />
-            <PackageReference Include='YuzuDelivery.Umbraco.Import' Version='$($YuzuDeliveryImportVersion)' />
-            <PackageReference Include='YuzuDelivery.Umbraco.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
-            <PackageReference Include='YuzuDelivery.Umbraco.Forms' Version='$($YuzuDeliveryUmbracoVersion)' />
-            <PackageReference Include='YuzuDelivery.Umbraco.Members' Version='$($YuzuDeliveryUmbracoVersion)' />
-        </ItemGroup>"
+    if($isCore) {
+        $newNode = [xml]"
+            <ItemGroup>
+                <PackageReference Include='Umbraco.Forms.Core' Version='$($UmbracoFormsVersion)' />
+                <PackageReference Include='YuzuDelivery.Core' Version='$($YuzuDeliveryCoreVersion)' />
+                <PackageReference Include='YuzuDelivery.Import' Version='$($YuzuDeliveryImportVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Import.Core' Version='$($YuzuDeliveryImportVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Forms' Version='$($YuzuDeliveryUmbracoVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Members' Version='$($YuzuDeliveryUmbracoVersion)' />
+            </ItemGroup>"
+    }
+    else {
+        $newNode = [xml]"
+            <ItemGroup>
+                <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />
+                <PackageReference Include='YuzuDelivery.Core' Version='$($YuzuDeliveryCoreVersion)' />
+                <PackageReference Include='YuzuDelivery.Import' Version='$($YuzuDeliveryImportVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Import' Version='$($YuzuDeliveryImportVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Forms' Version='$($YuzuDeliveryUmbracoVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Members' Version='$($YuzuDeliveryUmbracoVersion)' />
+            </ItemGroup>"
+    }
 
     $newNode = $csproj.ImportNode($newNode.ItemGroup, $true)
     $csproj.Project.AppendChild($newNode) | out-null
@@ -189,27 +220,32 @@ function Update-Template-Meta {
 
     $pathToTemplateJson = ".\$($folder)\.template.config\template.json"
 
-    $templateJson = get-content $pathToTemplateJson ` | ConvertFrom-Json
+    $json = get-content $pathToTemplateJson
 
-    $templateJson.author = $author
-    $templateJson.groupIdentity = $groupIdentity
+    $config = [Newtonsoft.Json.Linq.JObject]::Parse($json) # parse string
+
+    $config["author"].Value = $author
 
     if($isCore) {
-        $templateJson.description = $descriptionWeb
-        $templateJson.identity = $identityWeb
-        $templateJson.name = $nameWeb
-        $templateJson.shortName = $shortNameWeb
-        $templateJson.defaultName = $defaultNameWeb
+        $config["groupIdentity"].Value = $groupIdentityWeb
+        $config["description"].Value = $descriptionWeb
+        $config["identity"].Value = $identityWeb
+        $config["name"].Value = $nameWeb
+        $config["shortName"].Value = $shortNameWeb
+        $config["shortName"].Value = $shortNameWeb
+        $config["defaultName"].Value = $defaultNameWeb
     }
     else {
-        $templateJson.description = $descriptionStandalone
-        $templateJson.identity = $identityStandalone
-        $templateJson.name = $nameStandalone
-        $templateJson.shortName = $shortNameStandalone
-        $templateJson.defaultName = $defaultNameStandalone
+        $config["groupIdentity"].Value = $groupIdentityStandalone
+        $config["description"].Value = $descriptionStandalone
+        $config["identity"].Value = $identityStandalone
+        $config["name"].Value = $nameStandalone
+        $config["shortName"].Value = $shortNameStandalone
+        $config["shortName"].Value = $shortNameStandalone
+        $config["defaultName"].Value = $defaultNameStandalone
     }
 
-    $output = ConvertTo-Json $templateJson | Format-Json
+    $output = [Newtonsoft.Json.JsonConvert]::SerializeObject($config)
 
     Set-Content $pathToTemplateJson $output
 
@@ -221,6 +257,9 @@ Copy-Template -folder 'Standalone'
 Update-ViewImports -folder 'Web'
 Update-ViewImports -folder 'Standalone'
 
+Copy-Yuzu-Composer 'Core'
+Copy-Yuzu-Composer 'Standalone'
+
 Update-ModeslBuilder -folder 'Web' -isCore $True 
 Update-ModeslBuilder -folder 'Standalone' -isCore $False 
 
@@ -230,8 +269,9 @@ Add-Yuzu-AppSettings -folder 'Standalone' -isCore $False
 Copy-Forms-Partials -folder 'Web'
 Copy-Forms-Partials -folder 'Standalone'
 
-Add-Project-Dependencies 'Web'
-Add-Project-Dependencies 'Standalone'
+Add-Project-Dependencies 'Core' -isCore $True
+Add-Project-Dependencies 'Web' -isCore $False
+Add-Project-Dependencies 'Standalone' -isCore $False
 
 Update-Template-Meta 'Web' -isCore $True
 Update-Template-Meta 'Standalone' -isCore $False

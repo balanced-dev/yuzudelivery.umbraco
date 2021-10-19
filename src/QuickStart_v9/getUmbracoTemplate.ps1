@@ -2,8 +2,7 @@ Install-Module Newtonsoft.Json
 Import-Module Newtonsoft.Json
 
 Remove-Item 'UmbracoTemplates' -Recurse -ErrorAction Ignore
-Remove-Item 'Core/Yuzu' -Recurse -ErrorAction Ignore
-Remove-Item 'Core/UmbracpProject.csproj' -ErrorAction Ignore
+Remove-Item 'Core' -Recurse -ErrorAction Ignore
 Remove-Item 'Standalone' -Recurse -ErrorAction Ignore
 Remove-Item 'Web' -Recurse -ErrorAction Ignore
 
@@ -21,6 +20,13 @@ $identityStandalone         = "YuzuDelivery.Umbraco.Templates.CSharp"
 $nameStandalone             = "Yuzu Delivery"
 $shortNameStandalone        = "yuzu-delivery"
 $defaultNameStandalone      = "YuzuDelivery1"
+
+$groupIdentityCore           = "YuzuDelivery.Templates.Core"
+$descriptionCore             = "Core only project for Umbraco Yuzu delivery"
+$identityCore               = "YuzuDelivery.Umbraco.Templates.CSharp.Core"
+$nameCore                    = "Yuzu Delivery Core"
+$shortNameCore               = "yuzu-delivery-core"
+$defaultNameCore             = "YuzuDelivery.Core"
 
 $groupIdentityWeb           = "YuzuDelivery.Templates.Web"
 $descriptionWeb             = "Web only project for Umbraco Yuzu delivery"
@@ -57,6 +63,14 @@ function Update-ViewImports {
     Set-Content ".\$($folder)\Views\_ViewImports.cshtml" $ViewImports
 }
 
+function Copy-Icon {
+    param (
+        $Folder
+    )
+
+    Copy-Item -Path ".\Yuzu\Icon\icon.png" -Destination ".\$($folder)\.template.config\icon.png"
+}
+
 function Copy-Yuzu-Composer {
     param (
         $Folder
@@ -67,16 +81,21 @@ function Copy-Yuzu-Composer {
     Copy-Item -Path ".\Yuzu\Startup" -Destination $pathToYuzuDir -Recurse
 }
 
+function Copy-Yuzu-Core {
+
+    Copy-Item -Path ".\Yuzu\Core\" -Destination ".\Core" -Recurse
+}
+
 function Update-ModeslBuilder {
     param (
         $Folder,
-        [bool] $isCore
+        [bool] $isWeb
     )
 
     $AppSettings = Get-Content ".\$($folder)\appsettings.Development.json"
     $toFind = '"Hosting'
 
-    if($isCore) {
+    if($isWeb) {
         $replaceWith = '"ModelsBuilder": {
             "ModelsMode": "SourceCodeManual",
             "ModelsNamespace": "YuzuDelivery.Umbraco",
@@ -119,7 +138,7 @@ function Format-Json([Parameter(Mandatory, ValueFromPipeline)][String] $json) {
 function Add-Yuzu-AppSettings {
     param (
         $Folder,
-        [bool] $isCore
+        [bool] $isWeb
     )
 
     $AppSettings = Get-Content -Path ".\$($folder)\appsettings.Development.json" -Raw
@@ -149,7 +168,7 @@ function Add-Yuzu-AppSettings {
         }
     }
 
-    if($isCore) {
+    if($isWeb) {
         $yuzu.Yuzu.VmGeneration.AcceptUnsafeDirectory = $True 
         $yuzu.Yuzu.VmGeneration.Directory = "~/../Umbraco.Cms.Web.UI/ViewModels"
     }
@@ -215,7 +234,8 @@ function Add-Project-Dependencies {
 function Update-Template-Meta {
     param (
         $Folder,
-        [bool] $isCore
+        [bool] $isCore,
+        [bool] $isWeb
     )
 
     $pathToTemplateJson = ".\$($folder)\.template.config\template.json"
@@ -227,6 +247,17 @@ function Update-Template-Meta {
     $config["author"].Value = $author
 
     if($isCore) {
+        $config["symbols"]["version"]["defaultValue"].Value = $UmbracoVersion
+
+        $config["groupIdentity"].Value = $groupIdentityCore
+        $config["description"].Value = $descriptionCore
+        $config["identity"].Value = $identityCore
+        $config["name"].Value = $nameCore
+        $config["shortName"].Value = $shortNameCore
+        $config["shortName"].Value = $shortNameCore
+        $config["defaultName"].Value = $defaultNameCore
+    }
+    elseif($isWeb) {
         $config["groupIdentity"].Value = $groupIdentityWeb
         $config["description"].Value = $descriptionWeb
         $config["identity"].Value = $identityWeb
@@ -253,6 +284,7 @@ function Update-Template-Meta {
 
 Copy-Template -folder 'Web'
 Copy-Template -folder 'Standalone'
+Copy-Yuzu-Core
 
 Update-ViewImports -folder 'Web'
 Update-ViewImports -folder 'Standalone'
@@ -260,21 +292,26 @@ Update-ViewImports -folder 'Standalone'
 Copy-Yuzu-Composer 'Core'
 Copy-Yuzu-Composer 'Standalone'
 
-Update-ModeslBuilder -folder 'Web' -isCore $True 
-Update-ModeslBuilder -folder 'Standalone' -isCore $False 
+Update-ModeslBuilder -folder 'Web' -isWeb $True 
+Update-ModeslBuilder -folder 'Standalone' -isWeb $False 
 
-Add-Yuzu-AppSettings -folder 'Web' -isCore $True
-Add-Yuzu-AppSettings -folder 'Standalone' -isCore $False
+Add-Yuzu-AppSettings -folder 'Web' -isWeb $True
+Add-Yuzu-AppSettings -folder 'Standalone' -isWeb $False
 
 Copy-Forms-Partials -folder 'Web'
 Copy-Forms-Partials -folder 'Standalone'
+
+Copy-Icon -folder 'Core'
+Copy-Icon -folder 'Web'
+Copy-Icon -folder 'Standalone'
 
 Add-Project-Dependencies 'Core' -isCore $True
 Add-Project-Dependencies 'Web' -isCore $False
 Add-Project-Dependencies 'Standalone' -isCore $False
 
-Update-Template-Meta 'Web' -isCore $True
-Update-Template-Meta 'Standalone' -isCore $False
+Update-Template-Meta 'Core' -isWeb $True -isCore $True
+Update-Template-Meta 'Web' -isWeb $True -isCore $False
+Update-Template-Meta 'Standalone' -isWeb $False -isCore $False
 
 # Create Core Template
 # Test template

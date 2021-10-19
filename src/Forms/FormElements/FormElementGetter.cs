@@ -14,11 +14,11 @@ namespace YuzuDelivery.Umbraco.Forms
 {
     public class FormElementMapGetter : IFormElementMapGetter
     {
-        private IFormFieldMappings[] formfieldMappings;
-        private IFormFieldPostProcessor[] formFieldPostProcessors;
-        private IFormFieldMappingsInternal[] formfieldMappingsInternal;
+        private IEnumerable<IFormFieldMappings> formfieldMappings;
+        private IEnumerable<IFormFieldPostProcessor> formFieldPostProcessors;
+        private IEnumerable<IFormFieldMappingsInternal> formfieldMappingsInternal;
 
-        public FormElementMapGetter(IFormFieldMappings[] formfieldMappings, IFormFieldPostProcessor[] formFieldPostProcessors, IFormFieldMappingsInternal[] formfieldMappingsInternal)
+        public FormElementMapGetter(IEnumerable<IFormFieldMappings> formfieldMappings, IEnumerable<IFormFieldPostProcessor> formFieldPostProcessors, IEnumerable<IFormFieldMappingsInternal> formfieldMappingsInternal)
         {
             this.formfieldMappings = formfieldMappings;
             this.formFieldPostProcessors = formFieldPostProcessors;

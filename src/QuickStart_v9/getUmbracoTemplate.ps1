@@ -10,7 +10,7 @@ $UmbracoVersion = "9.0.1"
 $UmbracoFormsVersion = "9.0.1"
 $YuzuDeliveryCoreVersion = "1.0.49.4"
 $YuzuDeliveryImportVersion = "1.0.98.39"
-$YuzuDeliveryUmbracoVersion = "1.2.40.51"
+$YuzuDeliveryUmbracoVersion = "1.2.40.54"
 
 $author = "Hi-Fi Ltd"
 

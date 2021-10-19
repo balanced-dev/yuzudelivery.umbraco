@@ -16,7 +16,7 @@ namespace YuzuDelivery.Umbraco.Forms
         private string SiteKey;
 
 #if NETCOREAPP
-        public parRecaptcha2FieldMapping(IOptionsSnapshot<Recaptcha2Settings> configuration)
+        public parRecaptcha2FieldMapping(IOptions<Recaptcha2Settings> configuration)
         {
             this.SiteKey = configuration.Value.PublicKey;
         }

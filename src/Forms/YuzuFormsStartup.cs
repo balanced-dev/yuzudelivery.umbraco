@@ -27,6 +27,8 @@ namespace YuzuDelivery.Umbraco.Forms
     {
         public void Compose(IUmbracoBuilder builder)
         {
+            builder.Services.AddTransient<IViewRenderService, ViewRenderService>();
+
             builder.Services.AddSingleton<IFormElementMapGetter, FormElementMapGetter>();
             builder.RegisterAll<IFormFieldMappingsInternal>(typeof(YuzuFormsStartup).Assembly);
 

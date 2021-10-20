@@ -9,8 +9,8 @@ Remove-Item 'Web' -Recurse -ErrorAction Ignore
 $UmbracoVersion = "9.0.1"
 $UmbracoFormsVersion = "9.0.1"
 $YuzuDeliveryCoreVersion = "1.0.49.4"
-$YuzuDeliveryImportVersion = "1.0.98.39"
-$YuzuDeliveryUmbracoVersion = "1.2.40.54"
+$YuzuDeliveryImportVersion = "1.0.98.41"
+$YuzuDeliveryUmbracoVersion = "1.2.40.55"
 
 $author = "Hi-Fi Ltd"
 
@@ -162,8 +162,9 @@ function Add-Yuzu-AppSettings {
                 IsActive = $True 
                 Config = "/yuzu/YuzuConfig.json"
                 ManualMappingDirectory = "/yuzu/Mappings/"
-                Data = "/wwwroot/_client/images"
-                Images = "/yuzu/_templates/data"
+                Data = "/yuzu/_templates/data"
+                ImagesDef = "/_client/images"
+                ImagesDel = "/wwwroot/_client/images"
             }
         }
     }

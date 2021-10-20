@@ -14,7 +14,7 @@
         <add key="YuzuPartials" value="/_templates/src/blocks" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuSchemaMeta" value="/_templates/paths" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuData" value="/_templates/data" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
-        <add key="YuzuImages" value="/_client/images" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+        <add key="YuzuImagesDef" value="/_client/images" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuViewmodelBuilderActive" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuViewmodelBuilderAcceptUnsafeDirectory" value="true" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
         <add key="YuzuViewmodelBuilderDirectory" value="~/../$rootnamespace$.Core/ViewModels" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />

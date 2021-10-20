@@ -17,7 +17,7 @@ variables:
   buildConfiguration: 'Release'
   version: '1.2.40'
   core_version: '1.0.49.4'
-  import_version: '1.0.98.39'
+  import_version: '1.0.98.41'
   umbraco_v8_version: '8.15.3'
   umbraco_v8_forms_version: '8.7.6'
   ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:

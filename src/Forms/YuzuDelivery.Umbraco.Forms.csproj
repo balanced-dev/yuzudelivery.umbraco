@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj" />
-    <ProjectReference Include="..\Grid\YuzuDelivery.Umbraco.Grid.csproj" />
   </ItemGroup>
 
   <Target Name="RemoveLuceneAnalyzer" BeforeTargets="CoreCompile">

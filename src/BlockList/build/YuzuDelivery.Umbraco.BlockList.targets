@@ -8,7 +8,7 @@
 		<ItemGroup>
 			<yuzuDeliveryBlockListContentFiles Include="$(yuzuDeliveryBlockListContentFilesPath)" />
 		</ItemGroup>
-		<Message Text="Copying Yuzu Delivery Import content files: $(yuzuDeliveryBlockListContentFilesPath) - #@(yuzuDeliveryBlockListContentFiles->Count()) files"  Importance="high" />
+		<Message Text="Copying Yuzu Delivery BlockList content files: $(yuzuDeliveryBlockListContentFilesPath) - #@(yuzuDeliveryBlockListContentFiles->Count()) files"  Importance="high" />
 		<Copy
             SourceFiles="@(yuzuDeliveryBlockListContentFiles)"
             DestinationFiles="@(yuzuDeliveryBlockListContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\YuzuBlockList\%(RecursiveDir)%(Filename)%(Extension)')"

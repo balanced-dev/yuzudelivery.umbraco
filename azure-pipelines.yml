@@ -116,10 +116,13 @@ steps:
     arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart_v8\YuzuDelivery.Umbraco.Quickstart.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_version="$(umbraco_v8_version)";umbraco_forms_version="$(umbraco_v8_forms_version)";y_umb_version="$(Build.BuildNumber)"'
 
 - task: PowerShell@2
+  displayName: Create Templates
+  continueOnError: true
   inputs:
-    filePath: 'buildTemplates.ps1'
-    arguments: '-UmbracoVersion $(umbraco_v8_version) -UmbracoFormsVersion $(umbraco_v8_forms_version) -YuzuDeliveryCoreVersion $(core_version) -YuzuDeliveryImportVersion $(import_version) -YuzuDeliveryUmbracoVersion $(Build.BuildNumber)'
-    workingDirectory: '$(Build.SourcesDirectory)/src/Templates/'
+    targetType: 'inline'
+    script: |
+        cd '$(Build.SourcesDirectory)/src/Templates/'
+        ./buildTemplates.ps1
 
 - task: NuGetCommand@2
   displayName: Nuget Pack for Templates

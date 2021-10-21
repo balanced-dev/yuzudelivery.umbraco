@@ -117,9 +117,9 @@ steps:
 
 - task: PowerShell@2
   inputs:
-    filePath: 'src/Templates/buildTemplates.ps1'
-    workingDirectory: './src/Templates/'
+    filePath: 'buildTemplates.ps1'
     arguments: '-UmbracoVersion $(umbraco_v8_version) -UmbracoFormsVersion $(umbraco_v8_forms_version) -YuzuDeliveryCoreVersion $(core_version) -YuzuDeliveryImportVersion $(import_version) -YuzuDeliveryUmbracoVersion $(Build.BuildNumber)'
+    workingDirectory: '$(Build.SourcesDirectory)/src/Templates/'
 
 - task: NuGetCommand@2
   displayName: Nuget Pack for Templates

@@ -1,4 +1,4 @@
-Install-Module Newtonsoft.Json
+Install-Module Newtonsoft.Json -Scope CurrentUser -Force
 Import-Module Newtonsoft.Json
 
 Set-Location -Path .\Templates

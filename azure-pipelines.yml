@@ -117,8 +117,8 @@ steps:
 
 - task: PowerShell@2
   inputs:
-    filePath: 'buildTemplates.ps1'
-    workingDirectory: 'src/Templates/'
+    filePath: 'src/Templates/buildTemplates.ps1'
+    workingDirectory: './src/Templates/'
     arguments: '-UmbracoVersion $(umbraco_v8_version) -UmbracoFormsVersion $(umbraco_v8_forms_version) -YuzuDeliveryCoreVersion $(core_version) -YuzuDeliveryImportVersion $(import_version) -YuzuDeliveryUmbracoVersion $(Build.BuildNumber)'
 
 - task: NuGetCommand@2

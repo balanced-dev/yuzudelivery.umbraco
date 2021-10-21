@@ -17,7 +17,7 @@ variables:
   buildConfiguration: 'Release'
   version: '1.2.40'
   core_version: '1.0.49.4'
-  import_version: '1.0.98.41'
+  import_version: '1.0.98.42'
   umbraco_v8_version: '8.15.3'
   umbraco_v8_forms_version: '8.7.6'
   ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
@@ -114,6 +114,17 @@ steps:
   inputs:
     command: 'custom'
     arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart_v8\YuzuDelivery.Umbraco.Quickstart.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_version="$(umbraco_v8_version)";umbraco_forms_version="$(umbraco_v8_forms_version)";y_umb_version="$(Build.BuildNumber)"'
+
+- task: PowerShell@2
+  inputs:
+    filePath: '.src/Templates/buildTemplates.ps1'
+    arguments: '-UmbracoVersion $(umbraco_v8_version) -UmbracoFormsVersion $(umbraco_v8_forms_version) -YuzuDeliveryCoreVersion $(core_version) -YuzuDeliveryImportVersion $(import_version) -YuzuDeliveryUmbracoVersion $(Build.BuildNumber)'
+
+- task: NuGetCommand@2
+  displayName: Nuget Pack for Templates
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\Templates\YuzuDelivery.Umbraco.Templates.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber)'
 
 - task: NuGetCommand@2
   inputs:

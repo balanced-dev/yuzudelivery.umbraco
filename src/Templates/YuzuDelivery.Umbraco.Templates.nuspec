@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>YuzuDelivery.Umbraco.Templates</id>
+    <version>1.0.0</version>
+    <authors>Phil Whittaker</authors>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Yuzu Delivery dotnet tTemplates</description>
+    <iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
+    <copyright>Copyright 2018-2021 HiFi Ltd</copyright>
+    <tags>umbraco cms</tags>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+  </metadata>
+  <files>
+    <file src="templates\**\*" exclude="**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json;_rels\**\*;package\**\*" />
+  </files>
+</package>

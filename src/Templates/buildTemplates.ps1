@@ -1,16 +1,11 @@
 Install-Module Newtonsoft.Json
 Import-Module Newtonsoft.Json
 
-Remove-Item 'UmbracoTemplates' -Recurse -ErrorAction Ignore
+Set-Location -Path .\Templates
+
 Remove-Item 'Core' -Recurse -ErrorAction Ignore
 Remove-Item 'Standalone' -Recurse -ErrorAction Ignore
 Remove-Item 'Web' -Recurse -ErrorAction Ignore
-
-$UmbracoVersion = "9.0.1"
-$UmbracoFormsVersion = "9.0.1"
-$YuzuDeliveryCoreVersion = "1.0.49.4"
-$YuzuDeliveryImportVersion = "1.0.98.41"
-$YuzuDeliveryUmbracoVersion = "1.2.40.55"
 
 $author = "Hi-Fi Ltd"
 
@@ -37,12 +32,12 @@ $defaultNameWeb             = "YuzuDelivery.Web1"
 
 
 #Download Umbraco.Templates nuget package
-New-Item -Path ".\" -Name "UmbracoTemplates" -ItemType "directory"
-Invoke-WebRequest -Uri "https://www.nuget.org/api/v2/package/Umbraco.Templates/$($UmbracoVersion)" -OutFile (".\UmbracoTemplates\umbraco.templates.nupkg.zip")
+New-Item -Path ".\" -Name "..\UmbracoTemplates" -ItemType "directory"
+Invoke-WebRequest -Uri "https://www.nuget.org/api/v2/package/Umbraco.Templates/$($UmbracoVersion)" -OutFile ("..\UmbracoTemplates\umbraco.templates.nupkg.zip")
 
 #unarchive nuget package
-New-Item -Path ".\UmbracoTemplates" -Name "unarchived" -ItemType "directory"
-Expand-Archive -LiteralPath ".\UmbracoTemplates\umbraco.templates.nupkg.zip" -DestinationPath (".\UmbracoTemplates\unarchived")
+New-Item -Path "..\UmbracoTemplates" -Name "unarchived" -ItemType "directory"
+Expand-Archive -LiteralPath "..\UmbracoTemplates\umbraco.templates.nupkg.zip" -DestinationPath ("..\UmbracoTemplates\unarchived")
 
 function Copy-Template {
     param (
@@ -51,7 +46,7 @@ function Copy-Template {
 
     #Copy Umbraco Project from nuget archive to specfic project
     New-Item -Path ".\" -Name $folder -ItemType "directory"
-    Copy-Item -Path ".\UmbracoTemplates\unarchived\UmbracoProject\*" -Destination ".\$($folder)" -Recurse
+    Copy-Item -Path "..\UmbracoTemplates\unarchived\UmbracoProject\*" -Destination ".\$($folder)" -Recurse
 }
 
 function Update-ViewImports {
@@ -59,7 +54,7 @@ function Update-ViewImports {
         $Folder
     )
 
-    $ViewImports = Get-Content ".\$($folder)\Views\_ViewImports.cshtml", ".\Yuzu\_ViewImports.cshtml"
+    $ViewImports = Get-Content ".\$($folder)\Views\_ViewImports.cshtml", "..\Yuzu\_ViewImports.cshtml"
     Set-Content ".\$($folder)\Views\_ViewImports.cshtml" $ViewImports
 }
 
@@ -68,7 +63,7 @@ function Copy-Icon {
         $Folder
     )
 
-    Copy-Item -Path ".\Yuzu\Icon\icon.png" -Destination ".\$($folder)\.template.config\icon.png"
+    Copy-Item -Path "..\Yuzu\Icon\icon.png" -Destination ".\$($folder)\.template.config\icon.png"
 }
 
 function Copy-Yuzu-Composer {
@@ -78,12 +73,12 @@ function Copy-Yuzu-Composer {
 
     $pathToYuzuDir = ".\$($folder)\Yuzu"
 
-    Copy-Item -Path ".\Yuzu\Startup" -Destination $pathToYuzuDir -Recurse
+    Copy-Item -Path "..\Yuzu\Startup" -Destination $pathToYuzuDir -Recurse
 }
 
 function Copy-Yuzu-Core {
 
-    Copy-Item -Path ".\Yuzu\Core\" -Destination ".\Core" -Recurse
+    Copy-Item -Path "..\Yuzu\Core\" -Destination ".\Core" -Recurse
 }
 
 function Update-ModeslBuilder {
@@ -188,7 +183,7 @@ function Copy-Forms-Partials {
         [bool] $isCore
     )
 
-    Copy-Item -Path "..\Forms\Web\UI\Views\Partials\*" -Destination ".\$($folder)\Views\Partials" -Recurse
+    Copy-Item -Path "..\..\Forms\Web\UI\Views\Partials\*" -Destination ".\$($folder)\Views\Partials" -Recurse
 }
 
 function Add-Project-Dependencies {
@@ -229,7 +224,7 @@ function Add-Project-Dependencies {
     $newNode = $csproj.ImportNode($newNode.ItemGroup, $true)
     $csproj.Project.AppendChild($newNode) | out-null
 
-    $csproj.Save("$($PSScriptRoot)$($pathToConfig)")
+    $csproj.Save("$($PSScriptRoot)\Templates\$($pathToConfig)")
 }
 
 function Update-Template-Meta {
@@ -314,5 +309,6 @@ Update-Template-Meta 'Core' -isWeb $True -isCore $True
 Update-Template-Meta 'Web' -isWeb $True -isCore $False
 Update-Template-Meta 'Standalone' -isWeb $False -isCore $False
 
-# Create Core Template
-# Test template
+#cleanup
+Remove-Item '..\UmbracoTemplates' -Recurse -ErrorAction Ignore
+Set-Location -Path ..

@@ -122,6 +122,7 @@ steps:
     targetType: 'inline'
     script: |
         cd '$(Build.SourcesDirectory)/src/Templates/'
+        New-Item -Path ".\" -Name "Templates" -ItemType "directory"
         ./buildTemplates.ps1
 
 - task: NuGetCommand@2

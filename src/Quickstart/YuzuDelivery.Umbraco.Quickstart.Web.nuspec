@@ -22,7 +22,6 @@
         <dependency id="YuzuDelivery.Umbraco.Import.Core" version="$import_version$" />
       </group>  
       <group targetFramework="net5.0">
-        <dependency id="Umbraco.Cms" version="$umbraco_v9_version$" />
         <dependency id="Umbraco.Forms" version="$umbraco_v9_forms_version$" />
         <dependency id="YuzuDelivery.Core" version="$core_version$" />
         <dependency id="YuzuDelivery.Import" version="$import_version$" />

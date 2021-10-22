@@ -12,11 +12,16 @@
     <copyright>Copyright 2018-2021 HiFi Ltd</copyright>
     <tags>umbraco cms</tags>
     <dependencies>
-      <dependency id="YuzuDelivery.Umbraco.Quickstart" version="$y_umb_version$" />
+      <dependency id="YuzuDelivery.Umbraco.Quickstart" version="1.0.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\YuzuDelivery.Umbraco.TestProject.dll" target="lib\net472" />
-    <file src="Web\**\*.*" target="Content\" />
+    <file src="bin\Debug\net472\YuzuDelivery.Umbraco.TestProject.dll" target="lib\net472" />
+    <file src="bin\Debug\net5.0\YuzuDelivery.Umbraco.TestProject.dll" target="lib\net5.0" />
+    <file src="Web\**\*.*" target="Content\net472\" />
+    <file src="Web\_client\**\*.*" target="Content\net5.0\wwwroot\_client" />
+    <file src="Web\_templates\**\*.*" target="Content\net5.0\yuzu\_templates" />
+    <file src="Web\App_Plugins\**\*.*" target="Content\net5.0\App_Plugins\" />
+    <file src="Web\Views\**\*.*" target="Content\net5.0\Views\" />
   </files>
 </package>

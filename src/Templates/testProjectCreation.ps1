@@ -11,7 +11,7 @@ function Reset-Templates{
 }
 
 $UmbracoVersion = "9.0.1"
-$YuzuDeliveryUmbracoVersion = "1.2.40.67"
+$YuzuDeliveryUmbracoVersion = "1.2.40.68"
 
 ./buildTemplates.ps1 -UmbracoVersion $UmbracoVersion -YuzuDeliveryUmbracoVersion $YuzuDeliveryUmbracoVersion 
 
@@ -23,7 +23,7 @@ New-Item -Path ".\TestOutput\" -Name "Standalone" -ItemType "directory"
 New-Item -Path ".\TestOutput\" -Name "Core" -ItemType "directory"
 New-Item -Path ".\TestOutput\" -Name "Web" -ItemType "directory"
 
-Reset-Templates
+./resetTemplates.ps1
 Copy-Item -Path ".\nuget.config" -Destination ".\TestOutput\Standalone" -Recurse
 Copy-Item -Path ".\nuget.config" -Destination ".\TestOutput\Core" -Recurse
 Copy-Item -Path ".\nuget.config" -Destination ".\TestOutput\Web" -Recurse

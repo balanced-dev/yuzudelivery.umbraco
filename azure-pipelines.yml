@@ -130,6 +130,12 @@ steps:
     command: 'custom'
     arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_v8_version="$(umbraco_v8_version)";umbraco_v8_forms_version="$(umbraco_v8_forms_version)";umbraco_v9_version="$(umbraco_v9_version)";umbraco_v9_forms_version="$(umbraco_v9_forms_version)";y_umb_version="$(Build.BuildNumber)"'
 
+- task: NuGetCommand@2
+  displayName: Nuget Pack Quickstart Test Project
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.TestProject\YuzuDelivery.Umbraco.Quickstart.Example.TestProject.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
+
 - task: PowerShell@2
   displayName: Create Templates
   continueOnError: true

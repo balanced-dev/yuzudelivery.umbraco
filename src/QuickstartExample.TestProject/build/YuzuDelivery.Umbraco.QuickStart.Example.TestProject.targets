@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<PropertyGroup>
-		<yuzuDeliveryTemplate>$(MSBuildThisFileDirectory)..\content\Web\**\*.*</yuzuDeliveryTemplate>
+		<yuzuDeliveryTemplate>$(MSBuildThisFileDirectory)..\content\net5.0\**\*.*</yuzuDeliveryTemplate>
 	</PropertyGroup>
 
 	<Target Name="CopyYuzuTemplateAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0'">

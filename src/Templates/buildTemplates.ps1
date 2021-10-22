@@ -1,3 +1,11 @@
+param(
+[string]$UmbracoVersion,
+[string]$UmbracoFormsVersion,
+[string]$YuzuDeliveryCoreVersion,
+[string]$YuzuDeliveryImportVersion,
+[string]$YuzuDeliveryUmbracoVersion
+)
+
 Install-Module Newtonsoft.Json -Scope CurrentUser -Force
 Import-Module Newtonsoft.Json
 

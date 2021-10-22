@@ -20,6 +20,8 @@ variables:
   import_version: '1.0.98.42'
   umbraco_v8_version: '8.15.3'
   umbraco_v8_forms_version: '8.7.6'
+  umbraco_v9_version: '9.0.1'
+  umbraco_v9_forms_version: '9.0.1'
   ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
     revision: $[ counter('.', 0) ]
     separator: '.'
@@ -110,10 +112,23 @@ steps:
     arguments: 'pack "$(Build.SourcesDirectory)\src\PositionalContent\YuzuDelivery.Umbraco.PositionalContent.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber)'
 
 - task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart for Umbraco 8
+  displayName: Nuget Pack Quickstart Web
   inputs:
     command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart_v8\YuzuDelivery.Umbraco.Quickstart.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_version="$(umbraco_v8_version)";umbraco_forms_version="$(umbraco_v8_forms_version)";y_umb_version="$(Build.BuildNumber)"'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.Web.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_v8_version="$(umbraco_v8_version)";umbraco_v8_forms_version="$(umbraco_v8_forms_version)";umbraco_v9_version="$(umbraco_v9_version)";umbraco_v9_forms_version="$(umbraco_v9_forms_version)";y_umb_version="$(Build.BuildNumber)"'
+
+- task: NuGetCommand@2
+  displayName: Nuget Pack Quickstart Core
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.Core.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_v8_version="$(umbraco_v8_version)";umbraco_v8_forms_version="$(umbraco_v8_forms_version)";umbraco_v9_version="$(umbraco_v9_version)";umbraco_v9_forms_version="$(umbraco_v9_forms_version)";y_umb_version="$(Build.BuildNumber)"'
+
+
+- task: NuGetCommand@2
+  displayName: Nuget Pack Quickstart
+  inputs:
+    command: 'custom'
+    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_v8_version="$(umbraco_v8_version)";umbraco_v8_forms_version="$(umbraco_v8_forms_version)";umbraco_v9_version="$(umbraco_v9_version)";umbraco_v9_forms_version="$(umbraco_v9_forms_version)";y_umb_version="$(Build.BuildNumber)"'
 
 - task: PowerShell@2
   displayName: Create Templates
@@ -123,7 +138,7 @@ steps:
     script: |
         cd '$(Build.SourcesDirectory)/src/Templates/'
         New-Item -Path ".\" -Name "Templates" -ItemType "directory"
-        ./buildTemplates.ps1
+        ./buildTemplates.ps1 -UmbracoVersion $(umbraco_v9_version) -UmbracoFormsVersion $(umbraco_v9_forms_version) -YuzuDeliveryCoreVersion $(core_version) -YuzuDeliveryImportVersion $(import_version) -YuzuDeliveryUmbracoVersion $(Build.BuildNumber)
 
 - task: NuGetCommand@2
   displayName: Nuget Pack for Templates

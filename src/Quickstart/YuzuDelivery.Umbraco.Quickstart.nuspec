@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>YuzuDelivery.Umbraco.QuickStart</id>
+    <version>1.0.0</version>
+    <authors>Phil Whittaker</authors>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Yuzu Delivery For Umbraco- setup and basic blocks</description>
+    <iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
+    <copyright>Copyright 2018-2021 HiFi Ltd</copyright>
+    <tags>umbraco cms</tags>
+	<dependencies>
+      <group targetFramework="net472">
+        <dependency id="UmbracoCms" version="$umbraco_v8_version$" />
+        <dependency id="UmbracoForms" version="$umbraco_v8_forms_version$" />
+        <dependency id="YuzuDelivery.Core" version="$core_version$" />
+        <dependency id="YuzuDelivery.Import" version="$import_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Forms" version="$y_umb_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Members" version="$y_umb_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Import.Core" version="$import_version$" />
+      </group>  
+      <group targetFramework="net5.0">
+        <dependency id="UmbracoCms" version="$umbraco_v9_version$" />
+        <dependency id="UmbracoForms" version="$umbraco_v9_forms_version$" />
+        <dependency id="YuzuDelivery.Core" version="$core_version$" />
+        <dependency id="YuzuDelivery.Import" version="$import_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Forms" version="$y_umb_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Members" version="$y_umb_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Import.Core" version="$import_version$" />
+      </group>  
+	</dependencies>
+  </metadata>
+  <files>
+    <file src="StandaloneContent\tools\web.config.install.xdt" target="Content\net472\web.config.install.xdt" />
+    <file src="StandaloneContent\tools\views.web.config.install.xdt" target="Content\net472\Views\web.config.install.xdt" />
+    <file src="StandaloneContent\Yuzu\Startup.cs.pp" target="Content\net472\Yuzu\Startup.cs.pp" />
+    <file src="StandaloneContent\Yuzu\Mappings\readme.txt" target="Content\net472\Yuzu\Mappings\readme.txt" />
+  </files>
+</package>

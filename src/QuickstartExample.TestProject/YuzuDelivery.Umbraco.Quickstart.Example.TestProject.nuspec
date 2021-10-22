@@ -27,6 +27,6 @@
     <file src="Web\_templates\**\*.*" target="Content\net5.0\yuzu\_templates" />
     <file src="Web\App_Plugins\**\*.*" target="Content\net5.0\App_Plugins\" />
     <file src="Web\Views\**\*.*" target="Content\net5.0\Views\" />
-    <file src="build\**\*.*" target="build\net5.0\" />
+    <file src="build\**\*.*" target="build\" />
   </files>
 </package>

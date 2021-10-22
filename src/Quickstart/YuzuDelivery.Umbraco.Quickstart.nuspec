@@ -19,7 +19,7 @@
         <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
         <dependency id="YuzuDelivery.Umbraco.Forms" version="$y_umb_version$" />
         <dependency id="YuzuDelivery.Umbraco.Members" version="$y_umb_version$" />
-        <dependency id="YuzuDelivery.Umbraco.Import.Core" version="$import_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Import" version="$import_version$" />
       </group>  
       <group targetFramework="net5.0">
         <dependency id="Umbraco.Forms" version="$umbraco_v9_forms_version$" />
@@ -28,7 +28,7 @@
         <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
         <dependency id="YuzuDelivery.Umbraco.Forms" version="$y_umb_version$" />
         <dependency id="YuzuDelivery.Umbraco.Members" version="$y_umb_version$" />
-        <dependency id="YuzuDelivery.Umbraco.Import.Core" version="$import_version$" />
+        <dependency id="YuzuDelivery.Umbraco.Import" version="$import_version$" />
       </group>  
 	</dependencies>
   </metadata>

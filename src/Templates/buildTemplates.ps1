@@ -1,8 +1,5 @@
 param(
 [string]$UmbracoVersion,
-[string]$UmbracoFormsVersion,
-[string]$YuzuDeliveryCoreVersion,
-[string]$YuzuDeliveryImportVersion,
 [string]$YuzuDeliveryUmbracoVersion
 )
 
@@ -197,6 +194,7 @@ function Copy-Forms-Partials {
 function Add-Project-Dependencies {
     param (
         $Folder,
+        [bool] $isWeb,
         [bool] $isCore
     )
 
@@ -207,25 +205,19 @@ function Add-Project-Dependencies {
     if($isCore) {
         $newNode = [xml]"
             <ItemGroup>
-                <PackageReference Include='Umbraco.Forms.Core' Version='$($UmbracoFormsVersion)' />
-                <PackageReference Include='YuzuDelivery.Core' Version='$($YuzuDeliveryCoreVersion)' />
-                <PackageReference Include='YuzuDelivery.Import' Version='$($YuzuDeliveryImportVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.Import.Core' Version='$($YuzuDeliveryImportVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.Forms' Version='$($YuzuDeliveryUmbracoVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.Members' Version='$($YuzuDeliveryUmbracoVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Quickstart.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
+            </ItemGroup>"
+    }
+    elseif($isWeb) {
+        $newNode = [xml]"
+            <ItemGroup>
+                <PackageReference Include='YuzuDelivery.Umbraco.Quickstart.Web' Version='$($YuzuDeliveryUmbracoVersion)' />
             </ItemGroup>"
     }
     else {
         $newNode = [xml]"
             <ItemGroup>
-                <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />
-                <PackageReference Include='YuzuDelivery.Core' Version='$($YuzuDeliveryCoreVersion)' />
-                <PackageReference Include='YuzuDelivery.Import' Version='$($YuzuDeliveryImportVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.Import' Version='$($YuzuDeliveryImportVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.Forms' Version='$($YuzuDeliveryUmbracoVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.Members' Version='$($YuzuDeliveryUmbracoVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.Quickstart' Version='$($YuzuDeliveryUmbracoVersion)' />
             </ItemGroup>"
     }
 

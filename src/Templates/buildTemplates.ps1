@@ -1,5 +1,6 @@
 param(
 [string]$UmbracoVersion,
+[string]$UmbracoFormsVersion,
 [string]$YuzuDeliveryUmbracoVersion
 )
 

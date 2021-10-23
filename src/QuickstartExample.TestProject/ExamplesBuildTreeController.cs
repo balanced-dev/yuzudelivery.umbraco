@@ -24,17 +24,15 @@ using Umbraco.Web.WebApi.Filters;
 using Umbraco.Web.Trees;
 #endif
 
-using Umbraco.Core;
-
 namespace YuzuDelivery.Umbraco.TestProject
 {
     [Tree(Constants.Applications.Settings, "YuzuDeliveryExamples", TreeTitle = "Yuzu Viewmodels Test Project", TreeGroup = "ui", SortOrder = 17)]
     [PluginController("YuzuDeliveryExamples")]
 #if NETCOREAPP
-    public class YuzuTreeController : TreeController
+    public class YuzuExamplesTreeController : TreeController
     {
 
-        public YuzuTreeController(ILocalizedTextService localizedTextService, UmbracoApiControllerTypeCollection umbracoApiControllerTypeCollection, IEventAggregator eventAggregator)
+        public YuzuExamplesTreeController(ILocalizedTextService localizedTextService, UmbracoApiControllerTypeCollection umbracoApiControllerTypeCollection, IEventAggregator eventAggregator)
     :       base(localizedTextService, umbracoApiControllerTypeCollection, eventAggregator)
         { }
 
@@ -61,7 +59,7 @@ namespace YuzuDelivery.Umbraco.TestProject
         }
     }
 #else
-    public class YuzuTreeController : TreeController
+    public class YuzuExamplesTreeController : TreeController
     {
         protected override TreeNode CreateRootNode(FormDataCollection queryStrings)
         {

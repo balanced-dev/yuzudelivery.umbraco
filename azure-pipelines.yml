@@ -17,7 +17,7 @@ variables:
   buildConfiguration: 'Release'
   version: '1.2.40'
   core_version: '1.0.49.4'
-  import_version: '1.0.98.42'
+  import_version: '1.0.98.43'
   umbraco_v8_version: '8.15.3'
   umbraco_v8_forms_version: '8.7.6'
   umbraco_v9_version: '9.0.1'
@@ -144,7 +144,6 @@ steps:
     script: |
         cd '$(Build.SourcesDirectory)/src/Templates/'
         New-Item -Path ".\" -Name "Templates" -ItemType "directory"
-        Write-Host "Running buildTemplates UmbracoVersion $umbraco_v9_version UmbracoFormsVersion %umbraco_v9_forms_version YuzuDeliveryUmbracoVersion $Build.BuildNumber"
         ./buildTemplates.ps1 -UmbracoVersion "$(umbraco_v9_version)" -UmbracoFormsVersion "$(umbraco_v9_forms_version)" -YuzuDeliveryUmbracoVersion "$(Build.BuildNumber)"
 
 - task: NuGetCommand@2

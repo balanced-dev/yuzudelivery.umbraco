@@ -11,7 +11,6 @@ using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.UmbracoModels;
 using YuzuDelivery.ViewModels;
-using YuzuDelivery.Umbraco.Grid;
 using YuzuDelivery.Umbraco.BlockList;
 using YuzuDelivery.Umbraco.Forms;
 
@@ -31,8 +30,7 @@ namespace Umbraco.Cms.Web.UI
 
             builder.RegisterFormStrategies(assembly);
 
-            //choose only one!
-            builder.RegisterGridStrategies(assembly);
+            //you can swap this out for grid
             builder.RegisterBlockListStrategies(assembly);
         }
     }

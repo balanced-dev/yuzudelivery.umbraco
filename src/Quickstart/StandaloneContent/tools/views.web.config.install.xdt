@@ -5,6 +5,7 @@
         <host/>
         <pages>
             <namespaces>
+                <add namespace="Umbraco.Web.Mvc" xdt:Locator="Match(namespace)" xdt:Transform="InsertIfMissing" />
                 <add namespace="YuzuDelivery.UmbracoModels" xdt:Locator="Match(namespace)" xdt:Transform="InsertIfMissing" />
                 <add namespace="YuzuDelivery.ViewModels" xdt:Locator="Match(namespace)" xdt:Transform="InsertIfMissing" />
                 <add namespace="YuzuDelivery.Core" xdt:Locator="Match(namespace)" xdt:Transform="InsertIfMissing" />

@@ -11,9 +11,10 @@ function Reset-Templates{
 }
 
 $UmbracoVersion = "9.0.1"
+$UmbracoFormsVersion = "9.0.1"
 $YuzuDeliveryUmbracoVersion = "1.2.40.68"
 
-./buildTemplates.ps1 -UmbracoVersion $UmbracoVersion -YuzuDeliveryUmbracoVersion $YuzuDeliveryUmbracoVersion 
+./buildTemplates.ps1 -UmbracoVersion $UmbracoVersion -UmbracoFormsVersion $UmbracoFormsVersion -YuzuDeliveryUmbracoVersion $YuzuDeliveryUmbracoVersion 
 
 Remove-Item '.\TestOutput\Standalone' -Recurse -Force -ErrorAction Ignore
 Remove-Item '.\TestOutput\Core' -Recurse -Force -ErrorAction Ignore

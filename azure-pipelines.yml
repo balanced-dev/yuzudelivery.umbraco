@@ -144,7 +144,7 @@ steps:
     script: |
         cd '$(Build.SourcesDirectory)/src/Templates/'
         New-Item -Path ".\" -Name "Templates" -ItemType "directory"
-        ./buildTemplates.ps1 -UmbracoVersion "$(umbraco_v9_version)" -YuzuDeliveryUmbracoVersion "$(Build.BuildNumber)"
+        ./buildTemplates.ps1 -UmbracoVersion "$(umbraco_v9_version)" -UmbracoFormsVersion "$(umbraco_v9_forms_version)" -YuzuDeliveryUmbracoVersion "$(Build.BuildNumber)"
 
 - task: NuGetCommand@2
   displayName: Nuget Pack for Templates

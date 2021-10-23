@@ -205,18 +205,23 @@ function Add-Project-Dependencies {
     if($isCore) {
         $newNode = [xml]"
             <ItemGroup>
+                <PackageReference Include='Umbraco.Cms.Core' Version='$($UmbracoVersion)' />    
+                <PackageReference Include='Umbraco.Cms.Web.Common' Version='$($UmbracoVersion)' />    
+                <PackageReference Include='Umbraco.Forms.Core' Version='$($UmbracoFormsVersion)' />            
                 <PackageReference Include='YuzuDelivery.Umbraco.Quickstart.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
             </ItemGroup>"
     }
     elseif($isWeb) {
         $newNode = [xml]"
             <ItemGroup>
+                <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />            
                 <PackageReference Include='YuzuDelivery.Umbraco.Quickstart.Web' Version='$($YuzuDeliveryUmbracoVersion)' />
             </ItemGroup>"
     }
     else {
         $newNode = [xml]"
             <ItemGroup>
+                <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />
                 <PackageReference Include='YuzuDelivery.Umbraco.Quickstart' Version='$($YuzuDeliveryUmbracoVersion)' />
             </ItemGroup>"
     }

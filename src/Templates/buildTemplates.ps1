@@ -100,7 +100,7 @@ function Update-ModeslBuilder {
         $replaceWith = '"ModelsBuilder": {
             "ModelsMode": "SourceCodeManual",
             "ModelsNamespace": "YuzuDelivery.Umbraco",
-            "AcceptUnsafeModelsDirectory": "true",
+            "AcceptUnsafeModelsDirectory": true,
             "ModelsDirectory": "~/../CORE_NAMESPACE/UmbracoModels"
         },
         "Hosting' 

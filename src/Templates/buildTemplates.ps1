@@ -101,7 +101,7 @@ function Update-ModeslBuilder {
             "ModelsMode": "SourceCodeManual",
             "ModelsNamespace": "YuzuDelivery.Umbraco",
             "AcceptUnsafeModelsDirectory": "true",
-            "ModelsDirectory": "~/../Umbraco.Cms.Web.UI/UmbracoModels"
+            "ModelsDirectory": "~/../CORE_NAMESPACE/UmbracoModels"
         },
         "Hosting' 
     }
@@ -172,7 +172,7 @@ function Add-Yuzu-AppSettings {
 
     if($isWeb) {
         $yuzu.Yuzu.VmGeneration.AcceptUnsafeDirectory = $True 
-        $yuzu.Yuzu.VmGeneration.Directory = "~/../Umbraco.Cms.Web.UI/ViewModels"
+        $yuzu.Yuzu.VmGeneration.Directory = "~/../CORE_NAMESPACE/ViewModels"
     }
 
     $yuzuString = ConvertTo-Json $yuzu | Format-Json
@@ -233,6 +233,17 @@ function Add-Project-Dependencies {
     $csproj.Save("$($PSScriptRoot)\Templates\$($pathToConfig)")
 }
 
+function Update-Json {
+    param (
+        $Path,
+        $Obj 
+    )
+
+    $output = [Newtonsoft.Json.JsonConvert]::SerializeObject($Obj)
+
+    Set-Content $Path $output
+}
+
 function Update-Template-Meta {
     param (
         $Folder,
@@ -241,10 +252,11 @@ function Update-Template-Meta {
     )
 
     $pathToTemplateJson = ".\$($folder)\.template.config\template.json"
+    $pathToCliJson = ".\$($folder)\.template.config\dotnetcli.host.json"
+    $pathToIdeJson = ".\$($folder)\.template.config\ide.host.json"
 
     $json = get-content $pathToTemplateJson
-
-    $config = [Newtonsoft.Json.Linq.JObject]::Parse($json) # parse string
+    $config = [Newtonsoft.Json.Linq.JObject]::Parse($json)
 
     $config["author"].Value = $author
 
@@ -260,6 +272,27 @@ function Update-Template-Meta {
         $config["defaultName"].Value = $defaultNameCore
     }
     elseif($isWeb) {
+
+        $json = get-content $pathToCliJson
+        $cli = [Newtonsoft.Json.Linq.JObject]::Parse($json)
+
+        $json = get-content $pathToIdeJson
+        $ide = [Newtonsoft.Json.Linq.JObject]::Parse($json)
+
+        $config["symbols"]["CoreNamespace"] = $config["symbols"]["version"]
+        $config["symbols"]["CoreNamespace"]["replaces"].Value = "CORE_NAMESPACE"
+        $config["symbols"]["CoreNamespace"]["defaultValue"].Value = "Core"
+        $config["symbols"]["CoreNamespace"]["description"].Value = "The namespace of the core application"
+
+        $cli["symbolInfo"]["CoreNamespace"] = $cli["symbolInfo"]["UseHttpsRedirect"]
+        $cli["symbolInfo"]["CoreNamespace"]["longName"].Value = "core-namespace"
+        $cli["symbolInfo"]["CoreNamespace"]["shortName"].Value = "core"
+
+        $ideElement = $ide["symbolInfo"][0]
+        $ideElement["id"].Value = "CoreNamespace"
+        $ideElement["name"]["text"].Value = "The namespace of the core application"
+        $ide["symbolInfo"].Add($ideElement)
+
         $config["groupIdentity"].Value = $groupIdentityWeb
         $config["description"].Value = $descriptionWeb
         $config["identity"].Value = $identityWeb
@@ -267,6 +300,9 @@ function Update-Template-Meta {
         $config["shortName"].Value = $shortNameWeb
         $config["shortName"].Value = $shortNameWeb
         $config["defaultName"].Value = $defaultNameWeb
+
+        Update-Json -Path $pathToCliJson -Obj $cli
+        Update-Json -Path $pathToIdeJson -Obj $ide
     }
     else {
         $config["groupIdentity"].Value = $groupIdentityStandalone
@@ -278,9 +314,7 @@ function Update-Template-Meta {
         $config["defaultName"].Value = $defaultNameStandalone
     }
 
-    $output = [Newtonsoft.Json.JsonConvert]::SerializeObject($config)
-
-    Set-Content $pathToTemplateJson $output
+    Update-Json -Path $pathToTemplateJson -Obj $config
 
 }
 

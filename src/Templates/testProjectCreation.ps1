@@ -35,5 +35,5 @@ dotnet new yuzu-delivery -o .\TestOutput\Standalone
 dotnet new --install .\Templates\Core\
 dotnet new yuzu-delivery-core -o .\TestOutput\Core
 
-dotnet new --install .\Templates\Web\
-dotnet new yuzu-delivery-web -o .\TestOutput\Web
+dotnet new --install .\Templates\Web\ 
+dotnet new yuzu-delivery-web -o .\TestOutput\Web -core Test.Core

@@ -208,14 +208,16 @@ function Add-Project-Dependencies {
             <ItemGroup>
                 <PackageReference Include='Umbraco.Cms.Core' Version='$($UmbracoVersion)' />    
                 <PackageReference Include='Umbraco.Cms.Web.Common' Version='$($UmbracoVersion)' />    
-                <PackageReference Include='Umbraco.Forms.Core' Version='$($UmbracoFormsVersion)' />            
+                <PackageReference Include='Umbraco.Forms.Core' Version='$($UmbracoFormsVersion)' />      
+                <PackageReference Include='YuzuDelivery.Umbraco.BlockList' Version='$($YuzuDeliveryUmbracoVersion)' />      
                 <PackageReference Include='YuzuDelivery.Umbraco.Quickstart.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
             </ItemGroup>"
     }
     elseif($isWeb) {
         $newNode = [xml]"
             <ItemGroup>
-                <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />            
+                <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />      
+                <PackageReference Include='YuzuDelivery.Umbraco.BlockList' Version='$($YuzuDeliveryUmbracoVersion)' />        
                 <PackageReference Include='YuzuDelivery.Umbraco.Quickstart.Web' Version='$($YuzuDeliveryUmbracoVersion)' />
             </ItemGroup>"
     }
@@ -223,6 +225,7 @@ function Add-Project-Dependencies {
         $newNode = [xml]"
             <ItemGroup>
                 <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />
+                <PackageReference Include='YuzuDelivery.Umbraco.BlockList' Version='$($YuzuDeliveryUmbracoVersion)' />  
                 <PackageReference Include='YuzuDelivery.Umbraco.Quickstart' Version='$($YuzuDeliveryUmbracoVersion)' />
             </ItemGroup>"
     }

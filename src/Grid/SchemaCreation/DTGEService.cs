@@ -20,7 +20,11 @@ namespace YuzuDelivery.Umbraco.Grid
             this.mapPath = mapPath;
         }
 
+#if NETCOREAPP
+        const string ConfigPath = "/App_Plugins/DocTypeGridEditor/package.manifest";
+#else
         const string ConfigPath = "/config/grid.editors.config.js";
+#endif
 
         public virtual JObject GetByName(string name)
         {
@@ -54,13 +58,26 @@ namespace YuzuDelivery.Umbraco.Grid
         public virtual JArray Get()
         {
             var configFile = File.ReadAllText(mapPath.Get(ConfigPath));
+#if NETCOREAPP
+            var config = JObject.Parse(configFile);
+            return config["gridEditors"].Value<JArray>();
+#else
             return JArray.Parse(configFile);
+#endif
         }
 
         public virtual void Save(JArray config)
         {
+#if NETCOREAPP
+            var configFile = File.ReadAllText(mapPath.Get(ConfigPath));
+            var configObj = JObject.Parse(configFile);
+            configObj["gridEditors"] = config;
+            configFile = JsonConvert.SerializeObject(configObj, Formatting.Indented);
+            File.WriteAllText(mapPath.Get(ConfigPath), configFile);
+#else
             var configFile = JsonConvert.SerializeObject(config, Formatting.Indented);
             File.WriteAllText(mapPath.Get(ConfigPath), configFile);
+#endif
         }
 
         public class GridConfig

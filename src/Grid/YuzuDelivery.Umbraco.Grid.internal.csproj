@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Import\YuzuDelivery.Import.internal.csproj" />
     <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.internal.csproj" />
     <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.internal.csproj" />
+    <ProjectReference Include="..\Forms\YuzuDelivery.Umbraco.Forms.internal.csproj" />
   </ItemGroup>
 
   <Target Name="RemoveLuceneAnalyzer" BeforeTargets="CoreCompile">

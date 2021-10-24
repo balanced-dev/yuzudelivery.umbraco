@@ -8,3 +8,11 @@
 <div>Image Array: {{#each imageArray}}<img src="{{this.src}}" alt="{{this.alt}}" />{{/each}}</div>
 <div>Link: <a href="{{link.href}}" title="{{link.title}}">{{link.label}}</a></div>
 <div>Link Array: {{#each linkArray}}<a href="{{this.href}}" title="{{this.title}}">{{this.label}}</a> {{/each}}</div>
+{{#if subBlock}}<div>SubBlock: {{> parSubBlock subBlock}}</div>{{/if}}
+{{#if subBlocks}}<div>SubBlocks: 
+    <ul>
+        {{#each subBlocks}}
+            {{> parSubBlock this}}
+        {{/each}}
+    </ul>
+</div>{{/if}}

@@ -63,7 +63,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
         public void AddDefaultGridItems(IUmbracoBuilder builder)
         {
-            builder.Services.AddSingleton<IGridItemInternal[]>((factory) =>
+            builder.Services.AddSingleton<IEnumerable<IGridItemInternal>>((factory) =>
             {
                 var config = factory.GetService<IYuzuConfiguration>();
                 var mapper = factory.GetService<IMapper>();
@@ -89,7 +89,7 @@ namespace YuzuDelivery.Umbraco.Grid
                     }
                 }
 
-                return gridItems.ToArray();
+                return gridItems;
             });
         }
     }

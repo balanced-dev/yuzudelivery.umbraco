@@ -1,0 +1,212 @@
+{
+    "form": {
+        "testForm": {
+            "title": "Login",
+            "isSuccess": false,
+            "successMessage": "Form submitted!",
+            "fieldsets": [
+                {
+                    "fields": [
+                        {
+                            "type": "email",
+                            "name": "emailAddress",
+                            "placeholder": "Email address",
+                            "label": "Email address",
+                            "value": "",
+                            "isRequired": true,
+                            "pattern": "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+",
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "password",
+                            "name": "password",
+                            "placeholder": "Password",
+                            "label": "Password",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "url",
+                            "name": "url",
+                            "placeholder": "URL",
+                            "label": "URL",
+                            "isRequired": true,
+                            "pattern": "https?://[a-zA-Z0-9-.]+.[a-zA-Z]{2,}",
+                            "patternMessage": "Please include the full URL (e.g. http://www.example.com)",
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "date",
+                            "name": "date",
+                            "placeholder": "Date",
+                            "label": "Date",
+                            "isRequired": true,
+                            "pattern": "[0-9]{4}-[0-9]{2}-[0-9]{2}",
+                            "patternMessage": "Please use the format YYYY:MM:DD (e.g. 2001-12-01)",
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "number",
+                            "name": "number",
+                            "placeholder": "Number",
+                            "label": "Number",
+                            "isRequired": true,
+                            "pattern": "^[0-9]*$",
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "legend": "Radios",
+                            "elements": [
+                                {
+                                    "type": "radio",
+                                    "name": "radioList",
+                                    "label": "radio Label",
+                                    "value": "radio Value",
+                                    "id": "",
+                                    "isRequired": true,
+                                    "isSelected": false,
+                                    "isDisabled": false,
+                                    "isReadonly": false
+                                },
+                                {
+                                    "type": "radio",
+                                    "name": "radioList",
+                                    "label": "radio Label",
+                                    "value": "radio Value 2",
+                                    "id": "",
+                                    "isRequired": true,
+                                    "isSelected": false,
+                                    "isDisabled": false,
+                                    "isReadonly": false
+                                }
+                            ],
+                            "_ref": "/parFormCheckboxRadioList"
+                        },
+                        {
+                            "legend": "Checkboxes",
+                            "isRequired": true,
+                            "id": "checkbox-list",
+                            "requiredMessage": "At least one checkbox must be selected",
+                            "elements": [
+                                {
+                                    "type": "checkbox",
+                                    "name": "checkboxList[]",
+                                    "label": "Checkbox Label",
+                                    "value": "1",
+                                    "id": "checkboxList-1",
+                                    "checkboxRadioListId": "checkbox-list",
+                                    "isRequired": false,
+                                    "isSelected": false,
+                                    "isDisabled": false,
+                                    "isReadonly": false,
+                                    "isOneOfSet": true
+                                },
+                                {
+                                    "type": "checkbox",
+                                    "name": "checkboxList[]",
+                                    "label": "Checkbox Label",
+                                    "value": "2",
+                                    "id": "checkboxList-2",
+                                    "checkboxRadioListId": "checkbox-list",
+                                    "isRequired": false,
+                                    "isSelected": false,
+                                    "isDisabled": false,
+                                    "isReadonly": false,
+                                    "isOneOfSet": true
+                                },
+                                {
+                                    "type": "checkbox",
+                                    "name": "checkboxList[]",
+                                    "label": "Checkbox Label",
+                                    "value": "3",
+                                    "id": "checkboxList-3",
+                                    "checkboxRadioListId": "checkbox-list",
+                                    "isRequired": false,
+                                    "isSelected": false,
+                                    "isDisabled": false,
+                                    "isReadonly": false,
+                                    "isOneOfSet": true
+                                }
+                            ],
+                            "_ref": "/parFormCheckboxRadioList"
+                        },
+                        {
+                            "title": "Terms and conditions",
+                            "description": "By using this Site, you agree to be bound by, and to comply with, these Terms and Conditions. If you do not agree to these Terms and Conditions, please do not use this site.",
+                            "_ref": "/parTitleAndDescription"
+                        },
+                        {
+                            "type": "checkbox",
+                            "name": "consent",
+                            "label": "I agree to the terms and conditions",
+                            "id": "consent",
+                            "isRequired": true,
+                            "isSelected": false,
+                            "isDisabled": false,
+                            "isReadonly": false,
+                            "_ref": "/parFormCheckboxRadio"
+                        },
+                        {
+                            "label": "Form Select Label",
+                            "name": "select",
+                            "id": "select",
+                            "isRequired": true,
+                            "isDisabled": false,
+                            "isReadonly": false,
+                            "options": [
+                                {
+                                    "isDisabled": true,
+                                    "isSelected": true,
+                                    "value": "",
+                                    "label": "Choose an option"
+                                },
+                                {
+                                    "value": "2",
+                                    "label": "Option 2"
+                                },
+                                {
+                                    "value": "3",
+                                    "label": "Option 3"
+                                },
+                                {
+                                    "value": "4",
+                                    "label": "Option 4"
+                                },
+                                {
+                                    "value": "5",
+                                    "label": "Option 5"
+                                }
+                            ],
+                            "_ref": "/parFormSelect"
+                        },
+                        {
+                            "name": "textarea",
+                            "label": "Message",
+                            "value": "",
+                            "id": "",
+                            "placeholder": "Write your textarea message here",
+                            "isRequired": true,
+                            "isDisabled": false,
+                            "isReadonly": false,
+                            "_ref": "/parFormTextArea"
+                        }
+                    ]
+                }
+            ],
+            "submitButtonText": "Login",
+            "actionLinks": [
+                {
+                    "label": "Forgotten password?",
+                    "href": "#",
+                    "title": ""
+                },
+                {
+                    "label": "Not got an account?",
+                    "href": "#",
+                    "title": ""
+                }
+            ],
+            "_ref": "/parFormBuilder"
+        }
+    }
+}

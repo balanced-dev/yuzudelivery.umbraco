@@ -25,6 +25,12 @@
         ],
         "/linkArray": [
             "/dataLink"
+        ],
+        "/subBlock": [
+            "/parSubBlock"
+        ],
+        "/subBlocks": [
+            "/parSubBlock"
         ]
     }
 }

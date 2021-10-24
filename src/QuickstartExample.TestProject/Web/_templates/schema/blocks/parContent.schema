@@ -47,6 +47,15 @@
                 "$ref": "/dataLink"
             }
         },
+        "subBlock": {
+            "$ref": "/parSubBlock"
+        },
+        "subBlocks": {
+            "type": "array",
+            "items": {
+                "$ref": "/parSubBlock"
+            }
+        },
         "_ref": {
             "type": "string"
         },

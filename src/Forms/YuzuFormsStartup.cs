@@ -27,14 +27,14 @@ namespace YuzuDelivery.Umbraco.Forms
     {
         public void Compose(IUmbracoBuilder builder)
         {
-            builder.Services.AddTransient<IViewRenderService, ViewRenderService>();
-
             builder.Services.AddSingleton<IFormElementMapGetter, FormElementMapGetter>();
             builder.RegisterAll<IFormFieldMappingsInternal>(typeof(YuzuFormsStartup).Assembly);
 
             builder.Services.AddTransient<FormBuilderTypeConverter>();
             builder.Services.AddTransient<FormTypeConvertor>();
             builder.Services.AddTransient(typeof(FormValueResolver<,>));
+
+            builder.Services.AddTransient<ViewComponentHelper>();
 
             //MUST be transient lifetimes
             builder.Services.AddTransient(typeof(IUpdateableConfig), typeof(FormUmbracoConfig));

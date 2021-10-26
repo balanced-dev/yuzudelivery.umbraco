@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 
-#if NETCOREAPP 
+#if NETCOREAPP
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 #else
@@ -18,15 +16,15 @@ namespace YuzuDelivery.Umbraco.Forms
 {
     public class FormValueResolver<Source, Destination> : IYuzuFullPropertyResolver<Source, Destination, object, vmBlock_DataForm>
     {
-        private ISchemaMetaService schemaMetaService;
+        private readonly ISchemaMetaService schemaMetaService;
 
 #if NETCOREAPP 
-        private readonly IViewRenderService _viewRenderService;
+        private readonly ViewComponentHelper viewComponentHelper;
 
-        public FormValueResolver(ISchemaMetaService schemaMetaService, IViewRenderService viewRenderService)
+        public FormValueResolver(ISchemaMetaService schemaMetaService, ViewComponentHelper viewComponentHelper)
         {
             this.schemaMetaService = schemaMetaService;
-            _viewRenderService = viewRenderService;
+            this.viewComponentHelper = viewComponentHelper;
         }
 #else
         public FormValueResolver(ISchemaMetaService schemaMetaService)
@@ -41,38 +39,43 @@ namespace YuzuDelivery.Umbraco.Forms
             {
                 var property = destination.GetType().GetProperties().Where(x => x.PropertyType == typeof(vmBlock_DataForm)).FirstOrDefault();
 
-                var ofType = schemaMetaService.GetOfType(property, "refs");
+                var formBuilderTemplate = schemaMetaService.GetOfType(property, "refs");
 
-                if (string.IsNullOrEmpty(ofType))
+                if (string.IsNullOrEmpty(formBuilderTemplate))
                     throw new Exception("Form Type not set in definition e.g \"anyOfType\": \"parFormBuilder\" below the ref");
 
                 if (formValue != null && formValue.ToString() != string.Empty)
                 {
+#if NETCOREAPP
+                    context.Html.ViewContext.RouteData.Values.Add("template", formBuilderTemplate);
+                    context.Html.ViewContext.RouteData.Values.Add("mappingItems", context.Items);
+
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
-#if NETCOREAPP 
-                        LiveForm = _viewRenderService.RenderToStringAsync("Render",
-                        new
+                        LiveForm = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
                         {
                             formId = formValue,
-                            view = "YuzuUmbracoForms.cshtml",
-                            template = ofType,
+                            partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
+                            template = formBuilderTemplate,
                             items = context.Items
-                        }).Result
+                        }, context.Html.ViewContext, context.HttpContext).Result
+                    };
 #else
+                    return new vmBlock_DataForm()
+                    {
+                        TestForm = null,
                         LiveForm = context.Html?.Action("Render", "UmbracoForms",
                         new
                         {
                             formId = formValue,
-                            view = "YuzuUmbracoForms.cshtml",
-                            template = ofType,
+                            view = "YuzuUmbracoFormsV8.cshtml",
+                            template = formBuilderTemplate,
                             items = context.Items
                         }).ToHtmlString()
-#endif
                     };
+#endif
                 }
-
             }
             return null;
         }

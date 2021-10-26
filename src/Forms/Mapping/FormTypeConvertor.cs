@@ -7,14 +7,6 @@ using YuzuDelivery.Umbraco.Core;
 
 #if NETCOREAPP
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using System.IO;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 #else
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -25,11 +17,11 @@ namespace YuzuDelivery.Umbraco.Forms
     public class FormTypeConvertor : IYuzuTypeConvertor<string, vmBlock_DataForm>
     {
 #if NETCOREAPP 
-        private readonly IViewRenderService _viewRenderService;
+        private readonly ViewComponentHelper viewComponentHelper;
 
-        public FormTypeConvertor(IViewRenderService viewRenderService)
+        public FormTypeConvertor(ViewComponentHelper viewComponentHelper)
         {
-            _viewRenderService = viewRenderService;
+            this.viewComponentHelper = viewComponentHelper;
         }
 #endif
 
@@ -40,35 +32,40 @@ namespace YuzuDelivery.Umbraco.Forms
                 if (!context.Items.ContainsKey("FormBuilderTemplate"))
                     throw new Exception("Form Type Convertor requires FormBuilderTemplate in mapper options items to define which Yuzu template is used.");
 
-                var formFieldTemplate = context.Items["FormBuilderTemplate"].ToString();
+                var formBuilderTemplate = context.Items["FormBuilderTemplate"].ToString();
 
                 if (formValue != null && formValue.ToString() != string.Empty)
                 {
+#if NETCOREAPP 
+                    context.Html.ViewContext.RouteData.AddProperty("template", formBuilderTemplate);
+                    context.Html.ViewContext.RouteData.AddProperty("mappingItems", context.Items);
+
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
-#if NETCOREAPP 
-                        LiveForm = _viewRenderService.RenderToStringAsync("Render",
-                        new
+                        LiveForm = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
                         {
                             formId = formValue,
-                            view = "YuzuUmbracoForms.cshtml",
-                            template = formFieldTemplate,
+                            partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
+                            template = formBuilderTemplate,
                             items = context.Items
-                        }).Result
+                        }, context.Html.ViewContext, context.HttpContext).Result
+                    };
 #else
+                    return new vmBlock_DataForm()
+                    {
+                        TestForm = null,
                         LiveForm = context.Html?.Action("Render", "UmbracoForms",
                         new
                         {
                             formId = formValue,
-                            view = "YuzuUmbracoForms.cshtml",
-                            template = formFieldTemplate,
+                            view = "YuzuUmbracoFormsV8.cshtml",
+                            template = formBuilderTemplate,
                             items = context.Items
                         }).ToHtmlString()
-#endif
                     };
+#endif
                 }
-
             }
             return null;
         }

@@ -99,7 +99,7 @@ function Update-ModeslBuilder {
     if($isWeb) {
         $replaceWith = '"ModelsBuilder": {
             "ModelsMode": "SourceCodeManual",
-            "ModelsNamespace": "YuzuDelivery.Umbraco",
+            "ModelsNamespace": "YuzuDelivery.UmbracoModels",
             "AcceptUnsafeModelsDirectory": true,
             "ModelsDirectory": "~/../CORE_NAMESPACE/UmbracoModels"
         },
@@ -108,7 +108,7 @@ function Update-ModeslBuilder {
     else {
         $replaceWith = '"ModelsBuilder": {
             "ModelsMode": "SourceCodeManual",
-            "ModelsNamespace": "YuzuDelivery.Umbraco"
+            "ModelsNamespace": "YuzuDelivery.UmbracoModels"
         },
         "Hosting' 
     }

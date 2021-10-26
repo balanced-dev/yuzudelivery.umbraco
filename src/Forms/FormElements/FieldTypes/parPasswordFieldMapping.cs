@@ -22,7 +22,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 Name = model.Id,
                 Type = "password",
                 Label = model.Caption,
-                Value = model.Values.Select(x => x.ToString()).FirstOrDefault(),
+                Value = model.Values != null ? model.Values.Select(x => x.ToString()).FirstOrDefault() : null,
                 IsRequired = model.Mandatory,
                 RequiredMessage = model.RequiredErrorMessage,
                 Placeholder = model.PlaceholderText,

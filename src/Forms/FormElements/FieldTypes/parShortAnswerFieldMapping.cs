@@ -32,7 +32,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 Name = model.Id,
                 Id = model.Id,
                 Label = model.Caption,
-                Value = model.Values.Select(x => x.ToString()).FirstOrDefault(),
+                Value = model.Values != null ?  model.Values.Select(x => x.ToString()).FirstOrDefault() : null,
                 Placeholder = model.PlaceholderText,
                 IsRequired = model.Mandatory,
                 RequiredMessage = model.RequiredErrorMessage,

@@ -1,0 +1,68 @@
+﻿@inject IMapper mapper
+@using Umbraco.Cms.Web
+@using YuzuDelivery.Umbraco.Forms;
+@inherits UmbracoViewPage<Umbraco.Forms.Web.Models.FormViewModel>
+@{
+    var formBuilderTemplate = this.ViewContext.RouteData.Values["template"].ToString();
+    var mappingItems = this.ViewContext.RouteData.Values["mappingItems"] as IDictionary<string, object>;
+}
+@if (Model.SubmitHandled)
+{
+    Func<object> form = () =>
+    {
+        return new vmBlock_DataFormBuilder()
+        {
+            IsSuccess = true,
+            SuccessMessage = Model.MessageOnSubmit
+        };
+    };
+
+    using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "data-app", "Forms" }, { "novalidate", "novalidate" } }))
+    {
+        @Html.RenderYuzu(new RenderSettings() { Template = formBuilderTemplate, Data = form, ShowJson = false })
+    }
+}
+else
+{
+    var validationSummary = Html.ValidationSummary(false);
+    vmSub_DataFormBuilderValidation validation = null;
+    if (validationSummary != null && Model.ShowValidationSummary)
+    {
+        validation = new vmSub_DataFormBuilderValidation()
+        {
+            Title = "Sorry, something went wrong....",
+            Message = validationSummary.ToHtmlString()
+        };
+    }
+
+    Func<object> form = () =>
+    {
+        var output = mapper.Map<vmBlock_DataFormBuilder>(Model, mappingItems);
+        output.IsSuccess = false;
+        output.SubmitButtonText = Model.SubmitCaption;
+        output.Validation = validation;
+        return output;
+    };
+
+
+
+    using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
+    {
+        @Html.RenderYuzu(new RenderSettings() { Template = formBuilderTemplate, Data = form, ShowJson = false })
+
+        @Html.HiddenFor(x => Model.FormId, new { id = (string)null })
+        @Html.HiddenFor(x => Model.FormName, new { id = (string)null })
+        @Html.HiddenFor(x => Model.RecordId, new { id = (string)null })
+        @Html.HiddenFor(x => Model.PreviousClicked, new { id = (string)null })
+        @Html.HiddenFor(x => Model.Theme, new { id = (string)null })
+
+        <input type="hidden" name="FormStep" value="@Model.FormStep" />
+        <input type="hidden" name="RecordState" value="@Model.RecordState" />
+
+
+        <div style="display: none">
+            <input type="text" name="@Model.FormId.ToString().Replace("-", "")" />
+        </div>
+    }
+
+}

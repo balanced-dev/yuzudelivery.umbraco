@@ -97,8 +97,9 @@ namespace YuzuDelivery.Umbraco.TestProject
             var rowPage = GetContentAddTemplate("rowPage");
             var gridPage = GetContentAddTemplate("gridPage");
             var basicPage = GetContentAddTemplate("basicPage");
+            var formPage = GetContentAddTemplate("formPage");
 
-            contentTypeService.AddPermissions(home.Id, new List<IContentType>() { rowPage.Yuzu(), gridPage.Yuzu(), basicPage.Yuzu() });
+            contentTypeService.AddPermissions(home.Id, new List<IContentType>() { rowPage.Yuzu(), gridPage.Yuzu(), basicPage.Yuzu(), formPage.Yuzu() });
 
             return true;
         }
@@ -113,19 +114,21 @@ namespace YuzuDelivery.Umbraco.TestProject
             CreateContent("gridPage", homeContent);
             CreateContent("rowPage", homeContent);
             CreateContent("basicPage", homeContent);
+            CreateContent("formPage", homeContent, false);
 
             return true;
 
         }
 
-        public void CreateContent(string name, Mod.IContent parent)
+        public void CreateContent(string name, Mod.IContent parent, bool import = true)
         {
             var contenttype = contentTypeService.GetByAlias(name);
             var content = new Mod.Content(name.FirstCharacterToUpper(), parent, contenttype.Umb());
             content.TemplateId = GetTemplateId(name);
             contentService.SaveAndPublish(content);
 
-            ImportContent(name, content);
+            if(import)
+                ImportContent(name, content);
         }
 
         public void ImportContent(string name, Mod.IContent content)

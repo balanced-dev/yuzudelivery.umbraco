@@ -24,6 +24,8 @@
     <file src="bin\Release\net5.0\YuzuDelivery.Umbraco.TestProject.dll" target="lib\net5.0" />
     <file src="Web\**\*.*" target="Content\net472\" />
     <file src="Web\_client\**\*.*" target="Content\net5.0\wwwroot\_client" />
+    <file src="Web\models\**\*.*" target="Content\net5.0\umbraco\models" />
+    <file src="Web\viewmodels\**\*.*" target="Content\net5.0\yuzu\viewmodels" />
     <file src="Web\_templates\**\*.*" target="Content\net5.0\yuzu\_templates" />
     <file src="Web\App_Plugins\**\*.*" target="Content\net5.0\App_Plugins\" />
     <file src="Web\Views\**\*.*" target="Content\net5.0\Views\" />

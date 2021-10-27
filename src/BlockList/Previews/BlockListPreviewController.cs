@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using YuzuDelivery.Core;
+using YuzuDelivery.ViewModels;
+using YuzuDelivery.Umbraco.Core;
 using Our.Umbraco.DocTypeGridEditor.Helpers;
 
 #if NETCOREAPP
@@ -80,7 +82,7 @@ namespace YuzuDelivery.Umbraco.BlockList
                 {
                     output.Preview = yuzuDefinitionTemplates.Render(new RenderSettings()
                     {
-                        Data = () => { return mapper.Map(model, modelType, vmType, new Dictionary<string, object>() { { "Model", model } }); },
+                        Data = () => { return mapper.Map(model, modelType, vmType, new Dictionary<string, object>() { { "Model", model }, { _BlockList_Constants.IsInPreview, true } }); },
                         Template = yuzuDefinitionTemplates.GetSuspectTemplateName(modelType)
                     });
                 }

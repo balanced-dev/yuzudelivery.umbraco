@@ -36,7 +36,7 @@ namespace YuzuDelivery.Umbraco.Core
         {
             if (source != null && source.ContentType != null)
             {
-                if (source.ContentType.Alias == "Image")
+                if (source.ContentType.Alias == "Image" || source.ContentType.Alias == "umbracoMediaVectorGraphics")
                     return imageFactory.CreateImage(source.Content);
                 if (source.ContentType.Alias == "File")
                     return imageFactory.CreateFile(source.Content);

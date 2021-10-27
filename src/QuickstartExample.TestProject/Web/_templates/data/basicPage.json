@@ -10,7 +10,7 @@
         "integer": 1,
         "number": 1.5,
         "image": {
-            "src": "/_client/images/example.png",
+            "src": "https://vilniustechpark.com/wp-content/uploads/2019/05/google-web.png",
             "alt": "alt"
         },
         "imageArray": [

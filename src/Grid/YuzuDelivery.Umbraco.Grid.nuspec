@@ -27,6 +27,6 @@
     <file src="bin\Release\net5.0\YuzuDelivery.Umbraco.Grid.dll" target="lib\net5.0" />
     <file src="Web\UI\App_Plugins\YuzuGrid\**\*.*" target="Content\App_Plugins\YuzuGrid\" />
     <file src="tools\install.ps1" target="tools\net472\install.ps1" />
-    <file src="build\**\*.*" target="build\net5.0" />
+    <file src="build\**\*.*" target="build" />
   </files>
 </package>

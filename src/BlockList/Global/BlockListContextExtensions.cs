@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YuzuDelivery.Umbraco.Core;
-using Umbraco.Core.Models;
-using Umbraco.Core;
-using Umbraco.Web.PropertyEditors;
-using Umbraco.Core.Models.PublishedContent;
-using Umb = Umbraco.Core.Services;
-using YuzuDelivery.Umbraco.Import;
-using YuzuDelivery.Core;
-using Umbraco.Core.Logging;
+﻿using YuzuDelivery.Core;
+
 
 namespace YuzuDelivery.Umbraco.Core
 {

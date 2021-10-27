@@ -7,7 +7,7 @@ if ($project) {
 
     $projectPath = (Get-Item $project.Properties.Item("FullPath").Value).FullName
 
-    $yuzuDocTypeGridRenderer = Join-Path $projectPath "\App_Plugins\YuzuGrid\DocTypeGridEditorPreviewerV8.cshtml"
+    $yuzuDocTypeGridRenderer = Join-Path $projectPath "\App_Plugins\YuzuGrid\v8\DocTypeGridEditorPreviewer.cshtml"
     Write-Host "Yuzu Renderer Path:" "$yuzuDocTypeGridRenderer"
     $defaultDocTypeGridRenderer = Join-Path $projectPath "\App_Plugins\DocTypeGridEditor\Render\DocTypeGridEditorPreviewer.cshtml"
     Write-Host "Default Renderer Path:" "$defaultDocTypeGridRenderer"

@@ -1,17 +1,13 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-	<PropertyGroup>
-		<yuzuDeliveryGridContentPath>$(MSBuildThisFileDirectory)..\content\App_Plugins\YuzuGrid\**\*.*</yuzuDeliveryGridContentPath>
-	</PropertyGroup>
-
-	<Target Name="CopyYuzuDeliveryUmbracoGridAssets" DependsOnTargets="CopyOurUmbracoDocTypeGridEditorAssets" Condition="'$(TargetFramework)' == 'net5.0'">
+	<Target Name="CopyYuzuDeliveryUmbracoGridAssets" DependsOnTargets="CopyOurUmbracoDocTypeGridEditorAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0'">
 		<ItemGroup>
-			<yuzuDeliveryGridContentFiles Include="$(yuzuDeliveryGridContentPath)" />
+			<yuzuDeliveryGridContentFile Include="$(MSBuildThisFileDirectory)..\content\App_Plugins\YuzuGrid\v9\DocTypeGridEditorPreviewer.cshtml" />
 		</ItemGroup>
-		<Message Text="Copying Yuzu Delivery Grid files: $(yuzuDeliveryGridContentFiles) - #@(yuzuDeliveryGridContentFiles->Count()) files"  Importance="high" />
+		<Message Text="Copying Yuzu Delivery Grid files: $(yuzuDeliveryGridContentFile)"  Importance="high" />
 		<Copy
-            SourceFiles="@(yuzuDeliveryGridContentFiles)"
-            DestinationFiles="@(yuzuDeliveryGridContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\DocTypeGridEditor\Render\%(RecursiveDir)%(Filename)%(Extension)')"
+            SourceFiles="@(yuzuDeliveryGridContentFile)"
+            DestinationFolder="$(MSBuildProjectDirectory)\App_Plugins\DocTypeGridEditor\Render\"
             SkipUnchangedFiles="true" />
 
 	</Target>

@@ -1,6 +1,5 @@
-﻿@using Our.Umbraco.DocTypeGridEditor.Web.Extensions
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<Our.Umbraco.DocTypeGridEditor.Web.PreviewModel>
-@using System.Web.Mvc
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Our.Umbraco.DocTypeGridEditor.Models.PreviewModel>
+
 @using YuzuDelivery.Core;
 @using YuzuDelivery.Umbraco.Grid;
 @using HtmlAgilityPack;
@@ -16,7 +15,7 @@
             ShowJson = false
         });
 
-        htmlDoc.LoadHtml(output.ToHtmlString());
+        htmlDoc.LoadHtml(output.ToString());
         var imageNodes = htmlDoc.DocumentNode.SelectNodes("//img");
         var hasImage = imageNodes != null ? imageNodes.Any(x => x.Attributes.Any(y => !string.IsNullOrEmpty(y.Value))) : false;
 

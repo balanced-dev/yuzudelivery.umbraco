@@ -12,7 +12,7 @@
 		<Copy
             SourceFiles="@(yuzuDeliveryTemplateFiles)"
             DestinationFiles="@(yuzuDeliveryTemplateFiles->'$(MSBuildProjectDirectory)\%(RecursiveDir)%(Filename)%(Extension)')"
-            SkipUnchangedFiles="true" />
+            SkipUnchangedFiles="true" Condition="!Exists('$(MSBuildProjectDirectory)\%(RecursiveDir)%(Filename)%(Extension)')"/>
 
 	</Target>
 

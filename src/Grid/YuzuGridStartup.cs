@@ -130,10 +130,11 @@ namespace YuzuDelivery.Umbraco.Grid
 
         public void AddDefaultGridItems(Composition composition)
         {
-            composition.Register<IGridItemInternal[]>((factory) =>
+            composition.Register<IEnumerable<IGridItemInternal>>((factory) =>
             {
                 var config = factory.GetInstance<IYuzuConfiguration>();
                 var mapper = factory.GetInstance<IMapper>();
+                var typeFactoryRunner = factory.GetInstance<IYuzuTypeFactoryRunner>();
 
                 var baseGridType = typeof(DefaultGridItem<,>);
                 var gridItems = new List<IGridItemInternal>();
@@ -148,13 +149,13 @@ namespace YuzuDelivery.Umbraco.Grid
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {
                         var makeme = baseGridType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper }) as IGridItemInternal;
+                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper, typeFactoryRunner }) as IGridItemInternal;
 
                         gridItems.Add(o);
                     }
                 }
 
-                return gridItems.ToArray();
+                return gridItems;
             }, Lifetime.Singleton);
         }
     }

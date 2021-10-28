@@ -22,8 +22,8 @@ namespace $rootnamespace$
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            composition.Register<IYuzuConfiguration>((factory) => new DefaultUmbracoConfig(factory, assembly), Lifetime.Singleton);
-            composition.Register<IYuzuViewmodelsBuilderConfig>((factory) => new DefaultUmbracoVmBuilderConfig(factory), Lifetime.Singleton);
+            composition.Register<IYuzuConfiguration>((factory) => new DefaultUmbracoConfig(new Umb8Factory(factory), assembly), Lifetime.Singleton);
+            composition.Register<IYuzuViewmodelsBuilderConfig>((factory) => new DefaultUmbracoVmBuilderConfig(new Umb8Factory(factory)), Lifetime.Singleton);
             composition.Register<IYuzuDeliveryImportConfiguration>((factory) => new DefaultUmbracoImportConfig(factory, assembly), Lifetime.Singleton);
 
             composition.RegisterYuzuMapping(assembly);

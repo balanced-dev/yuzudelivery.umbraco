@@ -140,6 +140,8 @@ namespace YuzuDelivery.Umbraco.Core
     {
         public void Compose(Composition composition)
         {
+            Inflector.Inflector.SetDefaultCultureFunc = () => System.Threading.Thread.CurrentThread.CurrentUICulture;
+
             YuzuConstants.Initialize(new YuzuConstantsConfig());
 
             composition.Register<IHandlebarsProvider, HandlebarsProvider>(Lifetime.Singleton);

@@ -173,7 +173,7 @@ function Add-Yuzu-AppSettings {
     if($isWeb) {
         $yuzu.Yuzu.VmGeneration.AcceptUnsafeDirectory = $True 
         $yuzu.Yuzu.VmGeneration.Directory = "~/../CORE_NAMESPACE/ViewModels"
-        $yuzu.Yuzu.Import.ManualMappingDirectory = "~/../CORE_NAMESPACE/yuzu/Mappings"
+        $yuzu.Yuzu.Import.ManualMappingDirectory = "~/../CORE_NAMESPACE/yuzu/Mappings/"
     }
 
     $yuzuString = ConvertTo-Json $yuzu | Format-Json

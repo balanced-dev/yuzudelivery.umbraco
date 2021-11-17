@@ -37,7 +37,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
             var assembly = Assembly.GetExecutingAssembly();
 
-            builder.RegisterAll<IContentMapper>(assembly);
+            builder.Services.RegisterAll<IContentMapper>(assembly);
 
             builder.Services.AddSingleton<IGridService, GridService>();
 

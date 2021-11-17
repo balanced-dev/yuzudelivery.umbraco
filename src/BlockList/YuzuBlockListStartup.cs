@@ -35,7 +35,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             var assembly = Assembly.GetExecutingAssembly();
 
-            builder.RegisterAll<IContentMapper>(assembly);
+            builder.Services.RegisterAll<IContentMapper>(assembly);
 
             //Global blocklist
 

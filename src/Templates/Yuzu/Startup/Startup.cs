@@ -26,12 +26,13 @@ namespace Umbraco.Cms.Web.UI
             builder.Services.AddSingleton<IYuzuViewmodelsBuilderConfig>((factory) => new DefaultUmbracoVmBuilderConfig(new Umb9Factory(factory)));
             builder.Services.AddSingleton<IYuzuDeliveryImportConfiguration>((factory) => new DefaultUmbracoImportConfig(factory, assembly));
 
-            builder.RegisterYuzuMapping(assembly);
+            builder.Services.RegisterYuzuAutoMapping(assembly);
+            builder.Services.RegisterYuzuManualMapping(assembly);
 
-            builder.RegisterFormStrategies(assembly);
+            builder.Services.RegisterFormStrategies(assembly);
 
             //you can swap this out for grid
-            builder.RegisterBlockListStrategies(assembly);
+            builder.Services.RegisterBlockListStrategies(assembly);
         }
     }
 }

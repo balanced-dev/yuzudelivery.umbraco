@@ -162,7 +162,7 @@ function Add-Yuzu-AppSettings {
             Import = [PSCustomObject]@{ 
                 IsActive = $True 
                 Config = "/yuzu/YuzuConfig.json"
-                ManualMappingDirectory = "/yuzu/Mappings/"
+                ManualMappingDirectory = "~/yuzu/Mappings/"
                 Data = "/yuzu/_templates/data"
                 ImagesDef = "/_client/images"
                 ImagesDel = "/wwwroot/_client/images"
@@ -173,6 +173,7 @@ function Add-Yuzu-AppSettings {
     if($isWeb) {
         $yuzu.Yuzu.VmGeneration.AcceptUnsafeDirectory = $True 
         $yuzu.Yuzu.VmGeneration.Directory = "~/../CORE_NAMESPACE/ViewModels"
+        $yuzu.Yuzu.Import.ManualMappingDirectory = "~/../CORE_NAMESPACE/yuzu/Mappings"
     }
 
     $yuzuString = ConvertTo-Json $yuzu | Format-Json

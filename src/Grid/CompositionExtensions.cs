@@ -7,7 +7,7 @@ using System.Reflection;
 using YuzuDelivery.Umbraco.Grid;
 
 #if NETCOREAPP
-using Umbraco.Cms.Core.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 #else
 using Umbraco.Core.Composing;
 #endif
@@ -17,10 +17,10 @@ namespace YuzuDelivery.Umbraco.Core
 #if NETCOREAPP
     public static class CompositionExtensions
     {
-        public static void RegisterGridStrategies(this IUmbracoBuilder composition, Assembly assembly)
+        public static void RegisterGridStrategies(this IServiceCollection services, Assembly assembly)
         {
-            composition.RegisterAll<IGridItem>(assembly);
-            composition.RegisterAll<IAutomaticGridConfig>(assembly);
+            services.RegisterAll<IGridItem>(assembly);
+            services.RegisterAll<IAutomaticGridConfig>(assembly);
         }
     }
 #else

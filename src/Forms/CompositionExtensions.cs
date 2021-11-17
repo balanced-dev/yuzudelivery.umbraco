@@ -7,7 +7,7 @@ using System.Reflection;
 using YuzuDelivery.Umbraco.Forms;
 
 #if NETCOREAPP
-using Umbraco.Cms.Core.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Models.Blocks;
 #else
@@ -20,10 +20,10 @@ namespace YuzuDelivery.Umbraco.Core
     public static class CompositionExtensions
     {
 #if NETCOREAPP
-        public static void RegisterFormStrategies(this IUmbracoBuilder builder, Assembly assembly)
+        public static void RegisterFormStrategies(this IServiceCollection services, Assembly assembly)
         {
-            builder.RegisterAll<IFormFieldMappings>(assembly);
-            builder.RegisterAll<IFormFieldPostProcessor>(assembly);
+            services.RegisterAll<IFormFieldMappings>(assembly);
+            services.RegisterAll<IFormFieldPostProcessor>(assembly);
         }
 #else
         public static void RegisterFormStrategies(this Composition composition, Assembly assembly)

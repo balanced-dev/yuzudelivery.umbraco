@@ -1,5 +1,5 @@
 {   
-	css: [
-		'~/_client/styles/backoffice.css'
+	"css": [
+		"~/_client/styles/backoffice.css"
     ]
 }

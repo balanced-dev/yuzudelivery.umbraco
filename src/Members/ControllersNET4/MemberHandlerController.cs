@@ -39,7 +39,7 @@ namespace YuzuDelivery.Umbraco.Members
                     member.SetValue("forgottenPasswordExpiry", DateTime.UtcNow.AddHours(3));
                     memberService.Save(member);
 
-                    var changePasswordLink = string.Format("http://{0}{1}?id={2}", Request.ServerVariables["Server_Name"], config.ChangePasswordUrl, member.Key);
+                    var changePasswordLink = string.Format("http://{0}{1}?id={2}", Request.ServerVariables["SERVER_NAME"], config.ChangePasswordUrl, member.Key);
 
                     config.ForgottenPasswordEmailAction(model.Email, member.Name, changePasswordLink);
 

@@ -11,7 +11,8 @@
                 "/parGridBuilderColumnConfig"
             ],
             "/rows/columns/items": [
-                "/parContent"
+                "/parContent",
+                "/parGlobalGrid"
             ]
         }
     },

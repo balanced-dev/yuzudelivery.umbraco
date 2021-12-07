@@ -141,8 +141,9 @@ namespace YuzuDelivery.Umbraco.TestProject
             var gridPage = GetContentAddTemplate("gridPage");
             var basicPage = GetContentAddTemplate("basicPage");
             var formPage = GetContentAddTemplate("formPage");
+            var transmuted = GetContentAddTemplate("transmuted");
 
-            contentTypeService.AddPermissions(home.Id, new List<IContentType>() { rowPage.Yuzu(), gridPage.Yuzu(), basicPage.Yuzu(), formPage.Yuzu() });
+            contentTypeService.AddPermissions(home.Id, new List<IContentType>() { rowPage.Yuzu(), gridPage.Yuzu(), basicPage.Yuzu(), formPage.Yuzu(), transmuted.Yuzu() });
 
             return true;
         }
@@ -158,6 +159,7 @@ namespace YuzuDelivery.Umbraco.TestProject
             CreateContent("rowPage", homeContent);
             CreateContent("basicPage", homeContent);
             CreateContent("formPage", homeContent, false);
+            CreateContent("transmuted", homeContent);
 
             return true;
 

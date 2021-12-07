@@ -238,6 +238,27 @@
                                 ],
                                 "_ref": "/parContent",
                                 "yuzu-path": "/content/rows[0]/columns[1]/items[0]"
+                            },
+                            {
+                                "global": {
+                                    "string": "global Property",
+                                    "_ref": "/parGlobal",
+                                    "yuzu-path": "/content/rows[0]/columns[1]/items[1]/global"
+                                },
+                                "globalList": [
+                                    {
+                                        "string": "global Property",
+                                        "_ref": "/parGlobal",
+                                        "yuzu-path": "/content/rows[0]/columns[1]/items[1]/globalList[0]"
+                                    },
+                                    {
+                                        "string": "global Another Property",
+                                        "_ref": "/parGlobal",
+                                        "yuzu-path": "/content/rows[0]/columns[1]/items[1]/globalList[1]"
+                                    }
+                                ],
+                                "_ref": "/parGlobalGrid",
+                                "yuzu-path": "/content/rows[0]/columns[1]/items[1]"
                             }
                         ]
                     }

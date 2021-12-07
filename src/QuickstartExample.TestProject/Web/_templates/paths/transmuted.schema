@@ -1,0 +1,13 @@
+{
+    "refs": {
+        "/grouped": [
+            "/parGrouped"
+        ],
+        "/global": [
+            "/parGlobal"
+        ],
+        "/globalList": [
+            "/parGlobal"
+        ]
+    }
+}

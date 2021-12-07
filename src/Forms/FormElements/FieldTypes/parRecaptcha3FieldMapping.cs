@@ -21,11 +21,9 @@ namespace YuzuDelivery.Umbraco.Forms
             this.SiteKey = configuration.Value.SiteKey;
         }
 #else
-        private readonly IFacadeConfiguration _facadeConfiguration;
-
         public parRecaptcha3FieldMapping(IFacadeConfiguration facadeConfiguration)
         {
-            this.SiteKey = _facadeConfiguration.GetSetting("RecaptchaV3SiteKey");
+            this.SiteKey = facadeConfiguration.GetSetting("RecaptchaV3SiteKey");
         }
 #endif
 

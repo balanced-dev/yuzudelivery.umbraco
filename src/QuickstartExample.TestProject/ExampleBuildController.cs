@@ -61,6 +61,49 @@ namespace YuzuDelivery.Umbraco.TestProject
             this.contentService = contentService;
         }
 
+        [HttpGet]
+        public void CreateGroups()
+        {
+
+            schemaChange.ApplyMultipleGroups(new List<GroupReturn>() {
+                new GroupReturn()
+                {
+                    ChildViewmodel = "vmBlock_Grouped",
+                    PropertyName = "Grouped",
+                    Group = "Grouped",
+                    ParentViewmodel = "vmPage_Transmuted",
+                    ToAdd = true
+                }
+            });
+
+        }
+
+        [HttpGet]
+        public void CreateGlobal()
+        {
+            var globalArea = contentTypeService.GetByAlias("globalArea").Umb();
+            if(globalArea == null)
+            {
+                globalArea = contentTypeService.Create("Global Area", "globalArea", false).Umb();
+            }
+
+            var globalAreaContent = contentService.Create("Global", -1, "globalArea");
+            var result = contentService.SaveAndPublish(globalAreaContent);
+
+
+            var globalSettings = new GlobalStoreContentAs()
+            {
+                ParentContentId = globalAreaContent.Id.ToString(),
+                PrimaryPropertyName = "string",
+                Type = StoreContentAsType.Global
+            };
+
+            schemaChange.ApplySettings(new ApplySettingsReturn()
+            {
+                ViewmodelName = "vmBlock_Global",
+                StoreContentAs = Newtonsoft.Json.JsonConvert.SerializeObject(globalSettings)
+            });
+        }
 
         [HttpGet]
         public string GenerateViewModels()
@@ -120,7 +163,7 @@ namespace YuzuDelivery.Umbraco.TestProject
 
         }
 
-        public void CreateContent(string name, Mod.IContent parent, bool import = true)
+        private void CreateContent(string name, Mod.IContent parent, bool import = true)
         {
             var contenttype = contentTypeService.GetByAlias(name);
             var content = new Mod.Content(name.FirstCharacterToUpper(), parent, contenttype.Umb());
@@ -131,7 +174,7 @@ namespace YuzuDelivery.Umbraco.TestProject
                 ImportContent(name, content);
         }
 
-        public void ImportContent(string name, Mod.IContent content)
+        private void ImportContent(string name, Mod.IContent content)
         {
             contentImport.Import(new ImportContentFromFileVm()
             {
@@ -146,14 +189,14 @@ namespace YuzuDelivery.Umbraco.TestProject
             });
         }
 
-        public Mod.IContentType GetContentAddTemplate(string alias)
+        private Mod.IContentType GetContentAddTemplate(string alias)
         {
             var contentType = umbContentTypeService.Get(alias);
             AddTemplateToContentType(contentType);
             return contentType;
         }
 
-        public void AddTemplateToContentType(Mod.IContentType contentType)
+        private void AddTemplateToContentType(Mod.IContentType contentType)
         {
             var result = fileService.CreateTemplateForContentType(contentType.Alias, contentType.Name);
             contentType.AllowedTemplates = new List<Mod.ITemplate>() { result.Result.Entity };
@@ -161,7 +204,7 @@ namespace YuzuDelivery.Umbraco.TestProject
             contentType.SetDefaultTemplate(result.Result.Entity);
         }
 
-        public int GetTemplateId(string alias)
+        private int GetTemplateId(string alias)
         {
             var template = fileService.GetTemplate(alias);
             return template != null ? template.Id : -1;

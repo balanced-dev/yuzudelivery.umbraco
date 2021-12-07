@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net472;net5.0</TargetFrameworks>
+	<AssemblyName>YuzuDelivery.Umbraco.TestProject</AssemblyName>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">

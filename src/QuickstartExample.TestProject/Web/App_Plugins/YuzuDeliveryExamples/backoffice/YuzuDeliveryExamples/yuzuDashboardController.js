@@ -42,6 +42,12 @@
 
     function YuzuDeliveryExamplesResources($http, $timeout) {
         return {
+            groups: function () {
+                return $http.get('/umbraco/backoffice/YuzuDeliveryExamples/ExampleBuild/CreateGroups');
+            },
+            global: function () {
+                return $http.get('/umbraco/backoffice/YuzuDeliveryExamples/ExampleBuild/CreateGlobal');
+            },
             viewModels: function () {
                 return $http.get('/umbraco/backoffice/YuzuDeliveryExamples/ExampleBuild/GenerateViewModels');
             },

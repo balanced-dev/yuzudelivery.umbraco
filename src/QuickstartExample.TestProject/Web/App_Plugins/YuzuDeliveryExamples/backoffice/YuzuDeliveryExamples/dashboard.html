@@ -11,21 +11,25 @@
             .examples-schedule li {
                 margin-bottom: 15px;
             }
+
             .examples-schedule a {
                 text-decoration: underline;
             }
-            .examples-schedule a.running {
-                color: orange;
-                font-weight: bold;
-            }
-            .examples-schedule a.completed {
-                color: green;   
-                font-weight: bold;
-            }
-            .examples-schedule a.error {
-                color: red;
-                font-weight: bold;
-            }
+
+                .examples-schedule a.running {
+                    color: orange;
+                    font-weight: bold;
+                }
+
+                .examples-schedule a.completed {
+                    color: green;
+                    font-weight: bold;
+                }
+
+                .examples-schedule a.error {
+                    color: red;
+                    font-weight: bold;
+                }
         </style>
         <umb-editor-container class="form-horizontal">
 
@@ -37,12 +41,14 @@
                     <umb-load-indicator ng-show="vm.loading"></umb-load-indicator>
 
                     <div class="examples-schedule" ng-show="!vm.loading">
-                        
+
                         <ol>
                             <li><a href="" class="{{vm.actionClass('viewModels')}}" ng-click="vm.runAction('viewModels')">Generate ViewModels</a>  <br /><small>Remember: viewmodels to the App_Data folder</small></li>
-                            <li><a href="" class="{{vm.actionClass('docTypes')}}" ng-click ="vm.runAction('docTypes')">Create Document Types</a>  <br /><small>Remember: models to the App_Data folder</small></li>
-                            <li><a href="" class="{{vm.actionClass('templates')}}" ng-click ="vm.runAction('templates')">Create Templates and Permissions</a></li>
-                            <li><a href="" class="{{vm.actionClass('content')}}" ng-click ="vm.runAction('content')">Create Content</a></li>
+                            <li><a href="" class="{{vm.actionClass('groups')}}" ng-click="vm.runAction('groups')">Generate Groups</a>  <br /></li>
+                            <li><a href="" class="{{vm.actionClass('global')}}" ng-click="vm.runAction('global')">Generate Globals</a>  <br /></li>
+                            <li><a href="" class="{{vm.actionClass('docTypes')}}" ng-click="vm.runAction('docTypes')">Create Document Types</a>  <br /><small>Remember: models to the App_Data folder</small></li>
+                            <li><a href="" class="{{vm.actionClass('templates')}}" ng-click="vm.runAction('templates')">Create Templates and Permissions</a></li>
+                            <li><a href="" class="{{vm.actionClass('content')}}" ng-click="vm.runAction('content')">Create Content</a></li>
                         </ol>
 
                     </div>

@@ -45,7 +45,7 @@ namespace YuzuDelivery.Umbraco.Forms
                         TestForm = null,
                         LiveForm = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
                         {
-                            formId = formValue,
+                            formId = Guid.Parse(formValue),
                             partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
                             template = formBuilderTemplate,
                             items = context.Items

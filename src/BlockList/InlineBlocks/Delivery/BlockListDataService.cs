@@ -44,14 +44,32 @@ namespace YuzuDelivery.Umbraco.BlockList
             this.viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix) || x.Name.StartsWith(YuzuConstants.Configuration.SubPrefix));
         }
 
+        public bool IsItem<V>(BlockListModel model)
+        {
+            return IsItem(typeof(V), model);
+        }
+
+        public bool IsItem(Type type, BlockListModel model)
+        {
+            var alias = model.FirstOrDefault().Content.ContentType.Alias.FirstCharacterToUpper();
+            var modelType = config.CMSModels.Where(x => x.Name == alias).FirstOrDefault();
+
+            return modelType == type;
+        }
+
         public V CreateItem<V>(BlockListModel model, UmbracoMappingContext context)
+        {
+            return ((V)CreateItem(model, context));
+        }
+
+        public object CreateItem(BlockListModel model, UmbracoMappingContext context)
         {
             if (model != null && model.Any())
             {
-                return ConvertToVm<V>(model.FirstOrDefault(), context);
+                return ConvertToVm(model.FirstOrDefault(), context);
             }
             else
-                return default(V);
+                return null;
         }
 
         public List<V> CreateList<V>(BlockListModel model, UmbracoMappingContext context)
@@ -68,7 +86,26 @@ namespace YuzuDelivery.Umbraco.BlockList
             return output;
         }
 
+        public List<object> CreateList(BlockListModel model, UmbracoMappingContext context)
+        {
+            var output = new List<object>();
+
+            foreach (var i in model)
+            {
+                var vm = ConvertToVm(i, context);
+                if (vm != null)
+                    output.Add(vm);
+            }
+
+            return output;
+        }
+
         private V ConvertToVm<V>(BlockListItem i, UmbracoMappingContext context)
+        {
+            return ((V)ConvertToVm(i, context));
+        }
+
+        private object ConvertToVm(BlockListItem i, UmbracoMappingContext context)
         {
             var alias = i.Content.ContentType.Alias.FirstCharacterToUpper();
             var modelType = config.CMSModels.Where(x => x.Name == alias).FirstOrDefault();
@@ -84,11 +121,11 @@ namespace YuzuDelivery.Umbraco.BlockList
                 var custom = blockListItems.Where(x => x.IsValid(i)).FirstOrDefault();
 
                 if (custom != null)
-                    return custom.CreateVm<V>(i, context);
+                    return custom.CreateVm(i, vmType, context);
                 else
-                    return mapper.Map<V>(o, context.Items);
+                    return mapper.Map(o, modelType, vmType, context.Items);
             }
-            return default(V);
+            return null;
         }
     }
 }

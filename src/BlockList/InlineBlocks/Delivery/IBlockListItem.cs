@@ -19,5 +19,7 @@ namespace YuzuDelivery.Umbraco.BlockList
     {
         bool IsValid(BlockListItem i);
         V CreateVm<V>(BlockListItem i, UmbracoMappingContext context);
+
+        object CreateVm(BlockListItem i, Type destinationType, UmbracoMappingContext context);
     }
 }

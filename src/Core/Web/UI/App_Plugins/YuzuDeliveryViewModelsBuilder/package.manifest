@@ -1,8 +1,5 @@
 ﻿{
   "javascript": [
     "~/App_Plugins/YuzuDeliveryViewModelsBuilder/backoffice/YuzuDeliveryViewModelsBuilder/yuzuDashboardController.js"
-  ],
-  "css": [
-    "~/App_Plugins/YuzuDeliveryViewModelsBuilder/yuzu.css"
   ]
 }

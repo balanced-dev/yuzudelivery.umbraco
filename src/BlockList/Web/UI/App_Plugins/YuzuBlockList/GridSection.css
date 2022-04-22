@@ -111,7 +111,7 @@
 .section-view__content .umb-control-group .control-header {
     position: relative;
     top: -30px;
-
+    width: 40% !important;
 }
 
 .section-view__content article {

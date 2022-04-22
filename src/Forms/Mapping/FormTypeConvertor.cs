@@ -14,16 +14,52 @@ using System.Web.Mvc.Html;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
-    public class FormTypeConvertor : IYuzuTypeConvertor<string, vmBlock_DataForm>
+#if NETCOREAPP
+
+    public class FormTypeConvertor : IYuzuTypeConvertor<Guid, vmBlock_DataForm>
     {
-#if NETCOREAPP 
         private readonly ViewComponentHelper viewComponentHelper;
 
         public FormTypeConvertor(ViewComponentHelper viewComponentHelper)
         {
             this.viewComponentHelper = viewComponentHelper;
         }
-#endif
+
+        public vmBlock_DataForm Convert(Guid formValue, UmbracoMappingContext context)
+        {
+            if (formValue != Guid.Empty)
+            {
+                if (!context.Items.ContainsKey("FormBuilderTemplate"))
+                    throw new Exception("Form Type Convertor requires FormBuilderTemplate in mapper options items to define which Yuzu template is used.");
+
+                var formBuilderTemplate = context.Items["FormBuilderTemplate"].ToString();
+
+                if (formValue != Guid.Empty && formValue.ToString() != string.Empty)
+                {
+                    context.Html.ViewContext.RouteData.Values.Add("template", formBuilderTemplate);
+                    context.Html.ViewContext.RouteData.Values.Add("mappingItems", context.Items);
+
+                    return new vmBlock_DataForm()
+                    {
+                        TestForm = null,
+                        LiveForm = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
+                        {
+                            formId = formValue,
+                            partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
+                            template = formBuilderTemplate,
+                            items = context.Items
+                        }, context.Html.ViewContext, context.HttpContext).Result
+                    };
+                }
+            }
+            return null;
+        }
+    }
+
+#else
+
+    public class FormTypeConvertor : IYuzuTypeConvertor<string, vmBlock_DataForm>
+    {
 
         public vmBlock_DataForm Convert(string formValue, UmbracoMappingContext context)
         {
@@ -36,22 +72,6 @@ namespace YuzuDelivery.Umbraco.Forms
 
                 if (formValue != null && formValue.ToString() != string.Empty)
                 {
-#if NETCOREAPP 
-                    context.Html.ViewContext.RouteData.AddProperty("template", formBuilderTemplate);
-                    context.Html.ViewContext.RouteData.AddProperty("mappingItems", context.Items);
-
-                    return new vmBlock_DataForm()
-                    {
-                        TestForm = null,
-                        LiveForm = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
-                        {
-                            formId = Guid.Parse(formValue),
-                            partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
-                            template = formBuilderTemplate,
-                            items = context.Items
-                        }, context.Html.ViewContext, context.HttpContext).Result
-                    };
-#else
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
@@ -64,10 +84,12 @@ namespace YuzuDelivery.Umbraco.Forms
                             items = context.Items
                         }).ToHtmlString()
                     };
-#endif
                 }
             }
             return null;
         }
     }
+
+#endif
+
 }

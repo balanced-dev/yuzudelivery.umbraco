@@ -24,10 +24,10 @@
 }
 else
 {
-    var validationSummary = Html.ValidationSummary(false);
     vmSub_DataFormBuilderValidation validation = null;
-    if (validationSummary != null && Model.ShowValidationSummary)
+    if (ViewContext.ModelState.ErrorCount > 0)
     {
+        var validationSummary = Html.ValidationSummary(false);
         validation = new vmSub_DataFormBuilderValidation()
         {
             Title = "Sorry, something went wrong....",

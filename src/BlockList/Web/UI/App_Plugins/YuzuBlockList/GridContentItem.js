@@ -18,7 +18,9 @@
         }
 
         $scope.$watch('block.data', function (newValue, oldValue) {
-            loadPreview();
+            if (newValue != oldValue) {
+                loadPreview();
+            }
         }, true);
 
         loadPreview();

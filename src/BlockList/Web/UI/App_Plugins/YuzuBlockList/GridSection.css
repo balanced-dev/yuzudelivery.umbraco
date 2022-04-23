@@ -15,12 +15,15 @@
 .section-view__section {
     margin: 0 -10px;
     padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    display: flex;
+    background: #f8fafc;
+    border-radius: 2px;
 }
 
 .section-view__column {
     padding: 20px 10px 0 10px;
+    background: #f1f5f9;
+    border-radius: 2px;
 }
 
 .section-view__column:not(:hover) .umb-control-group .control-label {
@@ -111,9 +114,55 @@
 .section-view__content .umb-control-group .control-header {
     position: relative;
     top: -30px;
-    width: 40% !important;
+    width: 75% !important;
+}
+
+.section-view__content umb-block-list__block--view {
+    background-color: red;
 }
 
 .section-view__content article {
     height: auto !important;
+    padding: 10px;
+    border-radius: 10px;
+    background: white;
+}
+
+/*reorder*/
+
+.sections-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sections-wrapper:not(.is-reordering) .section-reorder-handle {
+    display: none;
+}
+
+.yuzu-grid-reload {
+    align-self: flex-end;
+}
+
+.section-reorder .section-view__content article {
+    --preview-scale: 0.25;
+    --preview-height: 400px;
+    transform: scale(var(--preview-scale));
+    transform-origin: left top;
+    height: var(--preview-height) !important;
+    margin-bottom: calc(-1 * (var(--preview-height) * (1 - var(--preview-scale))));
+    overflow: hidden;
+}
+
+.section-reorder .umb-block-list__block--view {
+    display: inline;
+}
+
+.section-reorder .section-view__column {
+    padding-top: 10px;
+}
+
+.section-reorder .umb-block-list__block--actions,
+.section-reorder .umb-block-list__actions, .section-reorder .control-header, .section-reorder .umb-block-list__block--create-button, .section-reorder .section-view__settings {
+    display: none;
 }

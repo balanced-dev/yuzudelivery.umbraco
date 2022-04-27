@@ -79,7 +79,8 @@ namespace YuzuDelivery.Umbraco.Core
                     Alt = image.Value<string>("alt"),
                     Height = image.Value<int>("umbracoHeight"),
                     Width = image.Value<int>("umbracoWidth"),
-                    FileSize = image.Value<int>("umbracoBytes")
+                    FileSize = image.Value<int>("umbracoBytes"),
+                    Extension = image.Value<string>("umbracoExtension"),
                 };
             }
             return new vmBlock_DataImage();

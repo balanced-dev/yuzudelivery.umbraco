@@ -13,16 +13,16 @@
 
         const wrapper = findBlockListWrapper($element);
         const firstChild = $(wrapper).children()[0];
-        if (!firstChild.classList.contains('yuzu-grid-reload')) {
+        if (!firstChild.classList.contains('yuzu-grid-reorder')) {
 
             $(wrapper).addClass('sections-wrapper');
             const button = document.createElement('button');
-            $(button).addClass('yuzu-grid-reload btn umb-button__button btn-outline umb-button--xs umb-outline');
+            $(button).addClass('yuzu-grid-reorder btn umb-button__button btn-outline umb-button--xs umb-outline');
             $(button).text('Reorder');
             $(button).on('click', function (e) {
                 e.preventDefault();
                 if ($(button).text() == 'Reorder') {
-                    $(button).text("I'm Reordering");
+                    $(button).text("I am done reordering");
                     $(wrapper).find('.section-view').addClass('section-reorder');
                     $(wrapper).addClass('is-reordering');
                 }

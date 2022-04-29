@@ -64,6 +64,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             builder.Services.AddUnique<IGridSchemaCreationService, BlockListGridCreationService>();
 
+            builder.Services.AddTransient<YuzuMappingConfig, BlockListInlineMapping>();
             builder.Services.AddTransient(typeof(YuzuMappingConfig), typeof(BlockListGridAutoMapping));
 
             //MUST be transient lifetime
@@ -146,6 +147,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             composition.RegisterUnique<IGridSchemaCreationService, BlockListGridCreationService>();
 
+            composition.Register<YuzuMappingConfig, BlockListInlineMapping>();
             composition.Register(typeof(YuzuMappingConfig), typeof(BlockListGridAutoMapping));
 
             //MUST be transient lifetime

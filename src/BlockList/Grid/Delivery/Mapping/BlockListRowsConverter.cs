@@ -10,9 +10,9 @@ namespace YuzuDelivery.Umbraco.BlockList
 {
     public class BlockListRowsConverter : IYuzuTypeConvertor<BlockListModel, vmBlock_DataRows>
     {
-        private readonly BlockListGridDataService gridService;
+        private readonly IBlockListGridDataService gridService;
 
-        public BlockListRowsConverter(BlockListGridDataService gridService)
+        public BlockListRowsConverter(IBlockListGridDataService gridService)
         {
             this.gridService = gridService;
         }

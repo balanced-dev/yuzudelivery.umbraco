@@ -18,7 +18,7 @@ using Umbraco.Web;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
-    public class BlockListGridDataService
+    public class BlockListGridDataService : IBlockListGridDataService
     {
         private readonly IMapper mapper;
         private readonly IYuzuConfiguration config;
@@ -98,7 +98,8 @@ namespace YuzuDelivery.Umbraco.BlockList
 
                         var row = new vmSub_DataGridRow()
                         {
-                            Columns = columns.Select(columnProperty => {
+                            Columns = columns.Select(columnProperty =>
+                            {
 #if NETCOREAPP
                                 var columnContent = columnProperty.Value<BlockListModel>(publishedValueFallback);
 #else
@@ -118,7 +119,7 @@ namespace YuzuDelivery.Umbraco.BlockList
                         context.Items[_BlockList_Constants.ContextRow] = row;
 
                         int idx = 0;
-                        foreach(var column in row.Columns)
+                        foreach (var column in row.Columns)
                         {
                             context.Items[_BlockList_Constants.ContextColumn] = column;
 
@@ -146,7 +147,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             var rowConfig = rowBlockList.Settings;
 
             var vm = CreateVm(rowConfig, context.Items);
-            if(vm != null)
+            if (vm != null)
                 context.Items[_BlockList_Constants.RowSettings] = vm;
 
             return vm;
@@ -160,7 +161,7 @@ namespace YuzuDelivery.Umbraco.BlockList
            .Select(x => x.Content).FirstOrDefault();
 
             var vm = CreateVm(columnConfig, context.Items);
-            if(vm != null)
+            if (vm != null)
                 context.Items[_BlockList_Constants.ColumnSettings] = vm;
 
             return vm;
@@ -171,8 +172,8 @@ namespace YuzuDelivery.Umbraco.BlockList
             data.ContextItems.Remove(_BlockList_Constants.ContentSettings);
 
             var vm = CreateVm(data.Config, data.ContextItems);
-            if (vm != null) 
-                data.ContextItems[_BlockList_Constants.ContentSettings] = vm; 
+            if (vm != null)
+                data.ContextItems[_BlockList_Constants.ContentSettings] = vm;
             return vm;
         }
 

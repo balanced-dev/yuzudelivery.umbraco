@@ -60,7 +60,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             //Grid blocklist
             builder.Services.AddTransient<BlockListRowsConverter>();
             builder.Services.AddTransient<BlockListGridConverter>();
-            builder.Services.AddTransient<BlockListGridDataService>();
+            builder.Services.AddTransient<IBlockListGridDataService, BlockListGridDataService>();
 
             builder.Services.AddUnique<IGridSchemaCreationService, BlockListGridCreationService>();
 
@@ -143,7 +143,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             //Grid blocklist
             composition.Register<BlockListRowsConverter>();
             composition.Register<BlockListGridConverter>();
-            composition.Register<BlockListGridDataService>();
+            composition.Register<IBlockListGridDataService, BlockListGridDataService>();
 
             composition.RegisterUnique<IGridSchemaCreationService, BlockListGridCreationService>();
 

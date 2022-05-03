@@ -92,44 +92,37 @@ namespace YuzuDelivery.Umbraco.BlockList
                 {
                     Rows = grid.Any() ? grid.Where(x => sectionAliases.Contains(x.Content.ContentType.Alias)).Select(rowBlockList =>
                     {
-                        var rowContent = rowBlockList.Content;
-
-                        var columns = rowContent.Properties.Where(y => !y.Alias.EndsWith("Settings"));
-
-                        var row = new vmSub_DataGridRow()
-                        {
-                            Columns = columns.Select(columnProperty =>
-                            {
-#if NETCOREAPP
-                                var columnContent = columnProperty.Value<BlockListModel>(publishedValueFallback);
-#else
-                                var columnContent = columnProperty.Value<BlockListModel>();
-#endif
-                                return new vmSub_DataGridColumn()
-                                {
-                                    GridSize = 12 / columns.Count(),
-                                    Items = columnContent?
-                                        .Select(cell => CreateContentAndConfig(new GridItemData(cell, context.Items)))
-                                        .Where(x => x != null).ToList()
-                                };
-
-                            }).ToList()
-                        };
-
+                        var row = new vmSub_DataGridRow();
                         context.Items[_BlockList_Constants.ContextRow] = row;
 
-                        int idx = 0;
-                        foreach (var column in row.Columns)
-                        {
-                            context.Items[_BlockList_Constants.ContextColumn] = column;
-
-                            var columnProperty = columns.ElementAt(idx);
-                            var columnSettingsVm = GetColumnSettingsVm(rowContent, columnProperty, context);
-                            column.Config = columnSettingsVm;
-                            idx++;
-                        }
+                        var rowContent = rowBlockList.Content;
+                        var columns = rowContent.Properties.Where(y => !y.Alias.EndsWith("Settings"));
 
                         row.Config = GetRowSettingsVm(rowBlockList, context);
+
+                        row.Columns = columns.Select(columnProperty =>
+                        {
+                            var column = new vmSub_DataGridColumn()
+                            {
+                                GridSize = 12 / columns.Count(),
+                            };
+
+                            context.Items[_BlockList_Constants.ContextColumn] = column;
+#if NETCOREAPP
+                            var columnContent = columnProperty.Value<BlockListModel>(publishedValueFallback);
+#else
+                            var columnContent = columnProperty.Value<BlockListModel>();
+#endif
+                            var columnSettingsVm = GetColumnSettingsVm(rowContent, columnProperty, context);
+
+                            column.Config = GetColumnSettingsVm(rowContent, columnProperty, context);
+                            column.Items = columnContent?
+                                    .Select(cell => CreateContentAndConfig(new GridItemData(cell, context.Items)))
+                                    .Where(x => x != null).ToList();
+
+                            return column;
+
+                        }).ToList();
 
                         return row;
 

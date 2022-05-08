@@ -43,17 +43,29 @@ namespace YuzuDelivery.Umbraco.Import
 
         public IDataType CreateOrUpdate(string dataTypeName, string[] subBlocks, Options options = null)
         {
-            var blockListConfig = CreateBlockListConfig(subBlocks, options);
+            var blocks = new List<BlockListConfiguration.BlockConfiguration>();
 
             var dataTypeDefinition = dataTypeService.GetByName(dataTypeName);
-            if(dataTypeDefinition == null) dataTypeDefinition = dataTypeService.CreateDataType(dataTypeName, DataEditorName);
+            if(dataTypeDefinition == null) 
+                dataTypeDefinition = dataTypeService.CreateDataType(dataTypeName, DataEditorName);
+            else
+            {
+                var config = dataTypeDefinition.Umb().Configuration as BlockListConfiguration;
+                if(config != null)
+                {
+                    blocks = config.Blocks.ToList();
+                }
+            }
+
+            var blockListConfig = CreateBlockListConfig(subBlocks, blocks, options);
+
             dataTypeDefinition.Umb().Name = dataTypeName;
             dataTypeDefinition.Umb().Configuration = blockListConfig;
 
             return dataTypeService.Save(dataTypeDefinition);
         }
 
-        private BlockListConfiguration CreateBlockListConfig(string[] subBlocks, Options options)
+        private BlockListConfiguration CreateBlockListConfig(string[] subBlocks, List<BlockListConfiguration.BlockConfiguration> blocks, Options options)
         {
             options = options == null ? options = new Options() : options; 
             var blockListConfig = options.Config == null ? new BlockListConfiguration() : options.Config;
@@ -62,12 +74,12 @@ namespace YuzuDelivery.Umbraco.Import
             blockListConfig.ValidationLimit.Min = options.Min;
             blockListConfig.ValidationLimit.Max = options.Max;
 
-            var contentTypes = new List<BlockListConfiguration.BlockConfiguration>();
             foreach (var subBlock in subBlocks)
             {
-                contentTypes.Add(CreateBlockConfig(subBlock, options));
+                var alreadyExists = contentTypeService.GetByAlias(subBlock.AsAlias()) != null;
+                if(!alreadyExists) blocks.Add(CreateBlockConfig(subBlock, options));
             }
-            blockListConfig.Blocks = contentTypes.ToArray();
+            blockListConfig.Blocks = blocks.ToArray();
 
             return blockListConfig;
         }

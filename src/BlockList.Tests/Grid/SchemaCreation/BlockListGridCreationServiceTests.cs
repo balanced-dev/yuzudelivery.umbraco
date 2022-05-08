@@ -188,8 +188,9 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
         }
 
-        [Test]
-        public void Update_can_add_new_row_type()
+        [TestCase("contentTypeCreation", TestName = "Only creates content type for added row")]
+        [TestCase("thumbnails", TestName = "Doesn't update thumbnail when blocklist updates")]
+        public void Update_can_add_new_row_type(string mode)
         {
             umb.ContentType.ForUpdating("FullWidthSection");
 
@@ -199,15 +200,27 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             CreateData(defaultGridRows: false, dataTypeToUpdate: true);
 
             var assignBuilder = new BlockListConfigurationBuilder(umb);
-            assignBuilder.AddBlock("FullWidthSection", "FullWidthSection");
+            if (mode == "thumbnails")
+            {
+                assignBuilder.AddBlock("FullWidthSection", "FullWidthSection", thumbnail: "thumbnail");
+            }
             umb.DataType.Added["Test Grid Sections"].Configuration = assignBuilder.Expected;
 
             SectionProperties(properties, null, null, assign: true);
 
             svc.Update(propertyMapBuilder.CurrentProperty, umb.DataType.Added["Test Grid Sections"].Yuzu());
 
-            umb.ContentType.WasNotCreated("FullWidthSection");
-            umb.ContentType.WasCreated("TwoColumnSection");
+            if(mode == "contentTypeCreation")
+            {
+                umb.ContentType.WasNotCreated("FullWidthSection");
+                umb.ContentType.WasCreated("TwoColumnSection");
+            }
+            else if(mode == "thumbnails")
+            {
+                var config = umb.DataType.Added["Test Grid Sections"].Configuration as BlockListConfiguration;
+                Assert.AreEqual("thumbnail", config.Blocks[0].Thumbnail);
+                Assert.AreEqual(null, config.Blocks[1].Thumbnail); ;
+            }
 
         }
 

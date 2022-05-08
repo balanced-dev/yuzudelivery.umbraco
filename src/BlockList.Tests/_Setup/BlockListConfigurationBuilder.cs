@@ -23,7 +23,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests
             Expected.Blocks = new List<BlockListConfiguration.BlockConfiguration>().ToArray();
         }
 
-        public void AddBlock(string label, string contentTypeName, string settingsTypeName = null, bool forceHideContentEditor = false, string customView = null)
+        public void AddBlock(string label, string contentTypeName, string settingsTypeName = null, bool forceHideContentEditor = false, string customView = null, string thumbnail = null)
         {
             var contentTypeKey = umb.ContentType.Current.TypesByName[contentTypeName].Key;
             Guid? settingsTypeKey = null;
@@ -37,6 +37,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests
                 ContentElementTypeKey = contentTypeKey,
                 SettingsElementTypeKey = settingsTypeKey,
                 Label = label,
+                Thumbnail = thumbnail,
                 ForceHideContentEditorInOverlay = forceHideContentEditor
             });
             Expected.Blocks = current.ToArray();

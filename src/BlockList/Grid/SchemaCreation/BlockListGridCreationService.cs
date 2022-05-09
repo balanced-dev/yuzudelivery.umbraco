@@ -97,6 +97,11 @@ namespace YuzuDelivery.Umbraco.Import
                 return contentTypeService.Create(name, name.AsAlias(), true);
             };
 
+            options.GetContentTypeAction = (string name, IContentTypeService contentTypeService) =>
+            {
+                return contentTypeService.GetByAlias(name.AsAlias());
+            };
+
             options.CreatePropertiesAction = (IContentType contentType, IDocumentTypePropertyService documentTypePropertyService) =>
             {
                 var properties = sectionProperties.Where(x => x.Type == contentType.Name);

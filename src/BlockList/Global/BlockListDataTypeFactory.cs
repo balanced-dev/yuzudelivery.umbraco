@@ -76,12 +76,19 @@ namespace YuzuDelivery.Umbraco.Import
 
             foreach (var subBlock in subBlocks)
             {
-                var alreadyExists = contentTypeService.GetByAlias(subBlock.AsAlias()) != null;
-                if(!alreadyExists) blocks.Add(CreateBlockConfig(subBlock, options));
+                if(!DoesBlockAlreadyExist(subBlock, blocks, options)) 
+                    blocks.Add(CreateBlockConfig(subBlock, options));
             }
             blockListConfig.Blocks = blocks.ToArray();
 
+
             return blockListConfig;
+        }
+
+        private bool DoesBlockAlreadyExist(string subBlock, List<BlockListConfiguration.BlockConfiguration> blocks, Options options)
+        {
+            var contentType = GetContentType(subBlock, options);
+            return contentType != null && blocks.Any(x => x.ContentElementTypeKey == contentType.Umb().Key);
         }
 
         private BlockListConfiguration.BlockConfiguration CreateBlockConfig(string blockName, Options options)
@@ -112,6 +119,14 @@ namespace YuzuDelivery.Umbraco.Import
             return contentType;
         }
 
+        private IContentType GetContentType(string blockName, Options options)
+        {
+            return options.GetContentTypeAction != null ?
+                options.GetContentTypeAction(blockName, contentTypeService)
+                :
+                contentTypeForVmTypeService.Get(blockName);
+        }
+
         private IContentType CreateSettingsType(Options options)
         {
             return options.SettingsSubBlock != null ? contentTypeForVmTypeService.CreateOrUpdate(options.SettingsSubBlock, null, true) : null;
@@ -126,6 +141,7 @@ namespace YuzuDelivery.Umbraco.Import
             public string SettingsSubBlock { get; set; }
             public bool ForceHideContentEditor { get; set; }
 
+            public Func<string, IContentTypeService, IContentType> GetContentTypeAction { get; set; }
             public Func<string, IContentTypeService, IContentType> CreateContentTypeAction { get; set; }
             public Action<IContentType, IDocumentTypePropertyService> CreatePropertiesAction { get; set; }
         }

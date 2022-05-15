@@ -15,7 +15,7 @@
 		  <dependency id="Skybrud.Umbraco.GridData" version="3.0.1" />
       <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.2.7" />
     </group>  
-    <group targetFramework="net5.0;net6.0">
+    <group>
       <dependency id="YuzuDelivery.Core" version="$core_version$" />
 		  <dependency id="Skybrud.Umbraco.GridData" version="4.0.0-alpha001" />
       <dependency id="Our.Umbraco.DocTypeGridEditor" version="9.0.0-rc001" />

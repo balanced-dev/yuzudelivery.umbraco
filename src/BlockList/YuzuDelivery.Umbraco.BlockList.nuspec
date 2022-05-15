@@ -15,7 +15,7 @@
         <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
         <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.2.0" />
       </group>
-      <group targetFramework="net5.0+net6.0">
+      <group>
         <dependency id="YuzuDelivery.Core" version="$core_version$" />
         <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />
         <dependency id="Our.Umbraco.DocTypeGridEditor" version="9.0.0-rc001" />

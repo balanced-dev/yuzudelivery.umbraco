@@ -23,7 +23,7 @@
         <dependency id="YuzuDelivery.Umbraco.Members" version="$y_umb_version$" />
         <dependency id="YuzuDelivery.Umbraco.Import.Core" version="$import_version$" />
       </group>  
-      <group targetFramework="net5.0;net6.0">
+      <group>
         <dependency id="YuzuDelivery.Core" version="$core_version$" />
         <dependency id="YuzuDelivery.Import" version="$import_version$" />   
         <dependency id="YuzuDelivery.Umbraco.Core" version="$y_umb_version$" />

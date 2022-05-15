@@ -13,7 +13,7 @@
     <group targetFramework="net472">
       <dependency id="YuzuDelivery.Core" version="$core_version$" />
     </group>  
-    <group targetFramework="net5.0">
+    <group targetFramework="net5.0;net6.0">
       <dependency id="YuzuDelivery.Core" version="$core_version$" />
     </group>
 	</dependencies>
@@ -21,6 +21,7 @@
   <files>
      <file src="bin\Release\net472\YuzuDelivery.Umbraco.Forms.dll" target="lib\net472" />
      <file src="bin\Release\net5.0\YuzuDelivery.Umbraco.Forms.dll" target="lib\net5.0" />
+     <file src="bin\Release\net6.0\YuzuDelivery.Umbraco.Forms.dll" target="lib\net6.0" />
      <file src="Web\UI\Views\Partials\Forms\YuzuUmbracoFormsV8.cshtml" target="Content\net472\Views\Partials\Forms\YuzuUmbracoFormsV8.cshtml" />
      <file src="Web\UI\Views\Partials\YuzuForms.cshtml" target="Content\net472\Views\Partials\YuzuForms.cshtml" />
   </files>

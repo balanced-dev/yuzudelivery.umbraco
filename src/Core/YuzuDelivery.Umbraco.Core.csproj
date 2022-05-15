@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net472;net5.0</TargetFrameworks>
+    <TargetFrameworks>net472;net5.0;net6.0</TargetFrameworks>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
@@ -11,8 +11,12 @@
     <PackageReference Include="Umbraco.Cms.Web.Website" Version="9.0.0" />
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0" />
   </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+	<PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0-rc1" />
+	<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0-rc1" />
+  </ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="Inflector.NetStandard" Version="1.2.2" />
   </ItemGroup>

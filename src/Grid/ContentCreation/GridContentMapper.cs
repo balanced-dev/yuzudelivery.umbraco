@@ -4,9 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Umbraco.Core;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
+
+#if NETCOREAPP
+#else
+using Umbraco.Core;
+#endif
 
 namespace YuzuDelivery.Umbraco.Grid
 {

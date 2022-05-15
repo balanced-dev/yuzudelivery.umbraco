@@ -16,7 +16,7 @@
       <dependency id="Inflector.NetStandard" version="1.2.2" />
       <dependency id="YuzuDelivery.Core" version="$core_version$" />
     </group>  
-    <group targetFramework="net5.0">
+    <group targetFramework="net5.0;net6.0">
       <dependency id="NJsonSchema.CodeGeneration.CSharp" version="10.0.23" />
       <dependency id="Inflector.NetStandard" version="1.2.2" />
       <dependency id="YuzuDelivery.Core" version="$core_version$" />
@@ -26,6 +26,7 @@
   <files>
      <file src="bin\Release\net472\YuzuDelivery.Umbraco.Core.dll" target="lib\net472" />
      <file src="bin\Release\net5.0\YuzuDelivery.Umbraco.Core.dll" target="lib\net5.0" />
+     <file src="bin\Release\net6.0\YuzuDelivery.Umbraco.Core.dll" target="lib\net6.0" />
      <file src="Web\UI\App_Plugins\YuzuBackofficeCss\**\*.*" target="Content\App_Plugins\YuzuBackofficeCss\" />
      <file src="Web\UI\App_Plugins\YuzuDeliveryViewModelsBuilder\**\*.*" target="Content\App_Plugins\YuzuDeliveryViewModelsBuilder\" />
      <file src="build\**\*.*" target="build" />

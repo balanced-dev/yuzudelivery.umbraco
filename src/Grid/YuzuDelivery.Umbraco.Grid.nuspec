@@ -15,7 +15,7 @@
 		  <dependency id="Skybrud.Umbraco.GridData" version="3.0.1" />
       <dependency id="Our.Umbraco.DocTypeGridEditor" version="1.2.7" />
     </group>  
-    <group targetFramework="net5.0">
+    <group targetFramework="net5.0;net6.0">
       <dependency id="YuzuDelivery.Core" version="$core_version$" />
 		  <dependency id="Skybrud.Umbraco.GridData" version="4.0.0-alpha001" />
       <dependency id="Our.Umbraco.DocTypeGridEditor" version="9.0.0-rc001" />
@@ -25,6 +25,7 @@
   <files>
     <file src="bin\Release\net472\YuzuDelivery.Umbraco.Grid.dll" target="lib\net472" />
     <file src="bin\Release\net5.0\YuzuDelivery.Umbraco.Grid.dll" target="lib\net5.0" />
+    <file src="bin\Release\net6.0\YuzuDelivery.Umbraco.Grid.dll" target="lib\net6.0" />
     <file src="Web\UI\App_Plugins\YuzuGrid\**\*.*" target="Content\App_Plugins\YuzuGrid\" />
     <file src="tools\install.ps1" target="tools\net472\install.ps1" />
     <file src="build\**\*.*" target="build" />

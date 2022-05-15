@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Umbraco.Core;
 using YuzuDelivery.Core;
 
 #if NETCOREAPP
@@ -7,6 +6,7 @@ using Umbraco.Extensions;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.PropertyEditors;
 #else
+using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Web.PropertyEditors;
 #endif

@@ -13,6 +13,7 @@ using Imp = YuzuDelivery.Umbraco.Import;
 using Umbraco.Extensions;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Exceptions;
+using ConfigurationException = Umbraco.Cms.Core.Exceptions.ConfigurationException;
 #else
 using Umbraco.Core;
 #endif

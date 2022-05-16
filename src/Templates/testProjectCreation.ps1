@@ -10,9 +10,9 @@ function Reset-Templates{
     }
 }
 
-$UmbracoVersion = "9.0.1"
+$UmbracoVersion = "9.5.0"
 $UmbracoFormsVersion = "9.0.1"
-$YuzuDeliveryUmbracoVersion = "1.2.40.68"
+$YuzuDeliveryUmbracoVersion = "2.0.19.106"
 
 ./buildTemplates.ps1 -UmbracoVersion $UmbracoVersion -UmbracoFormsVersion $UmbracoFormsVersion -YuzuDeliveryUmbracoVersion $YuzuDeliveryUmbracoVersion 
 

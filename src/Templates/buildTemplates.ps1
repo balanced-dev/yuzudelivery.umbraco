@@ -283,7 +283,7 @@ function Update-Template-Meta {
         $json = get-content $pathToIdeJson
         $ide = [Newtonsoft.Json.Linq.JObject]::Parse($json)
 
-        $config["symbols"]["CoreNamespace"] = $config["symbols"]["version"]
+        $config["symbols"]["CoreNamespace"] = $config["symbols"]["UmbracoVersion"]
         $config["symbols"]["CoreNamespace"]["replaces"].Value = "CORE_NAMESPACE"
         $config["symbols"]["CoreNamespace"]["defaultValue"].Value = "Core"
         $config["symbols"]["CoreNamespace"]["description"].Value = "The namespace of the core application"
@@ -294,7 +294,8 @@ function Update-Template-Meta {
 
         $ideElement = $ide["symbolInfo"][0]
         $ideElement["id"].Value = "CoreNamespace"
-        $ideElement["name"]["text"].Value = "The namespace of the core application"
+        #this was removed by umbraco for some reason
+        #$ideElement["name"]["text"].Value = "The namespace of the core application"
         $ide["symbolInfo"].Add($ideElement)
 
         $config["groupIdentity"].Value = $groupIdentityWeb

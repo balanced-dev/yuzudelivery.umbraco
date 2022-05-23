@@ -5,7 +5,6 @@
 	"javascript": [
 		"~/App_Plugins/YuzuBlockList/GridContentColumnsSettingsController.js",
 		"~/App_Plugins/YuzuBlockList/GridContentItem.js",
-		"~/App_Plugins/YuzuBlockList/GridContentSection.js",
-		"~/App_Plugins/YuzuBlockList/GridWrapper.js"
+		"~/App_Plugins/YuzuBlockList/GridContentSection.js"
 	]
 }

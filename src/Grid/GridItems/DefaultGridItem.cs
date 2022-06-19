@@ -10,7 +10,6 @@ using YuzuDelivery.Umbraco.Core;
 using Skybrud.Umbraco.GridData.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 #else
-using Skybrud.Umbraco.GridData;
 using Umbraco.Core.Models.PublishedContent;
 #endif
 

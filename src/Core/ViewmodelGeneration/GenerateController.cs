@@ -122,7 +122,7 @@ namespace YuzuDelivery.Umbraco.Core
 
         public virtual string GetVersion()
         {
-            var assembly = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.GetTypes().Any(y => y == typeof(GenerateController))).FirstOrDefault();
+            var assembly = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains("Yuzu") && x.GetTypes().Any(y => y == typeof(GenerateController))).FirstOrDefault();
             if (assembly != null)
                 return assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
             else

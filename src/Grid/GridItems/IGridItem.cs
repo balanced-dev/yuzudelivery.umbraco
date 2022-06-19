@@ -1,5 +1,4 @@
-﻿using Skybrud.Umbraco.GridData;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 
 #if NETCOREAPP

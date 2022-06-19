@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Skybrud.Umbraco.GridData;
 
 #if NETCOREAPP
 using Skybrud.Umbraco.GridData.Models;

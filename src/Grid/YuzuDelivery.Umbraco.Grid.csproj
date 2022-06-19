@@ -16,9 +16,9 @@
     <PackageReference Include="Skybrud.Umbraco.GridData" Version="4.0.0-alpha001" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-	<PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0-rc1" />
-	<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0-rc1" />
-	<PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="9.0.0-rc001" />
+	<PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />
+	<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
+	<PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="10.0.0-rc4" />
 	<PackageReference Include="Skybrud.Umbraco.GridData" Version="4.0.0-alpha001" />
   </ItemGroup>	
 

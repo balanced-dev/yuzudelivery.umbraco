@@ -5,7 +5,7 @@
 		<yuzuDeliveryViewModelsBuilderContentFilesPath>$(MSBuildThisFileDirectory)..\content\App_Plugins\YuzuDeliveryViewModelsBuilder\**\*.*</yuzuDeliveryViewModelsBuilderContentFilesPath>
 	</PropertyGroup>
 
-	<Target Name="CopyYuzuDeliveryUmbracoCoreAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0'">
+	<Target Name="CopyYuzuDeliveryUmbracoCoreAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'net6.0'">
 		<ItemGroup>
 			<yuzuDeliveryBackOfficeFiles Include="$(yuzuDeliveryBackOfficeContentFilesPath)" />
 			<yuzuDeliveryViewModelBuilderFiles Include="$(yuzuDeliveryViewModelsBuilderContentFilesPath)" />
@@ -24,7 +24,7 @@
             SkipUnchangedFiles="true" />
 
 	</Target>
-	<Target Name="ClearYuzuDeliveryUmbracoCoreAssets" BeforeTargets="Clean" Condition="'$(TargetFramework)' == 'net5.0'">
+	<Target Name="ClearYuzuDeliveryUmbracoCoreAssets" BeforeTargets="Clean" Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'net6.0'">
 		<ItemGroup>
 			<yuzuDeliveryBackOfficeDir Include="$(MSBuildProjectDirectory)\App_Plugins\YuzuBackOfficeCss\" />
 			<yuzuDeliveryViewModelBuilderDir Include="$(MSBuildProjectDirectory)\App_Plugins\YuzuDeliveryViewModelBuilder\" />

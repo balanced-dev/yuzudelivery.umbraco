@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-	<Target Name="CopyYuzuDeliveryUmbracoGridAssets" DependsOnTargets="CopyOurUmbracoDocTypeGridEditorAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0'">
+	<Target Name="CopyYuzuDeliveryUmbracoGridAssets" DependsOnTargets="CopyOurUmbracoDocTypeGridEditorAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'net6.0'">
 		<ItemGroup>
 			<yuzuDeliveryGridContentFile Include="$(MSBuildThisFileDirectory)..\content\App_Plugins\YuzuGrid\v9\DocTypeGridEditorPreviewer.cshtml" />
 		</ItemGroup>

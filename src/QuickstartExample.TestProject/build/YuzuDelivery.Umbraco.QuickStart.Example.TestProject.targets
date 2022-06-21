@@ -4,7 +4,7 @@
 		<yuzuDeliveryTemplate>$(MSBuildThisFileDirectory)..\content\net5.0\**\*.*</yuzuDeliveryTemplate>
 	</PropertyGroup>
 
-	<Target Name="CopyYuzuTemplateAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0'">
+	<Target Name="CopyYuzuTemplateAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'net6.0'">
 		<ItemGroup>
 			<yuzuDeliveryTemplateFiles Include="$(yuzuDeliveryTemplate)" />
 		</ItemGroup>

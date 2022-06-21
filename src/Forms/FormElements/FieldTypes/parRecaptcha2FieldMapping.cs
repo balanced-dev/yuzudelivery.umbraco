@@ -21,9 +21,9 @@ namespace YuzuDelivery.Umbraco.Forms
             this.SiteKey = configuration.Value.PublicKey;
         }
 #else
-        public parRecaptcha2FieldMapping()
+        public parRecaptcha2FieldMapping(IFacadeConfiguration facadeConfiguration)
         {
-            this.SiteKey = Configuration.GetSetting("RecaptchaPublicKey");
+            this.SiteKey = facadeConfiguration.GetSetting("RecaptchaPublicKey");
         }
 #endif
 

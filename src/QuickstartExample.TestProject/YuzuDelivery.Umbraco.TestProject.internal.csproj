@@ -13,6 +13,11 @@
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\..\YuzuDelivery.Core\YuzuDelivery.Core\YuzuDelivery.Core.csproj" />
     <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Import\YuzuDelivery.Import.internal.csproj" />

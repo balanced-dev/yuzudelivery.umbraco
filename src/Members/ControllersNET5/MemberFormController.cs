@@ -42,10 +42,11 @@ namespace YuzuDelivery.Umbraco.Members
             ServiceContext services,
             AppCaches appCaches,
             IProfilingLogger profilingLogger,
-            IPublishedUrlProvider publishedUrlProvider, IMemberService memberService, IYuzuDeliveryMembersConfig config, YuzuFormViewModelFactory viewmodelFactory)
+            IPublishedUrlProvider publishedUrlProvider, IMemberService memberService, IMemberManager memberManager, IYuzuDeliveryMembersConfig config, YuzuFormViewModelFactory viewmodelFactory)
             : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
         {
             _memberService = memberService;
+            _memberManager = memberManager;
             this.config = config;
             this.viewmodelFactory = viewmodelFactory;
         }

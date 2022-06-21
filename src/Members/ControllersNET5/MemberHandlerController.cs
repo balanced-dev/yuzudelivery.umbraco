@@ -28,7 +28,7 @@ namespace YuzuDelivery.Umbraco.Members
 {
     public class MemberHandlerController : SurfaceController
     {
-        protected IMemberSignInManager signInManager;
+        protected IMemberSignInManager _signInManager;
         protected IYuzuDeliveryMembersConfig config;
         private readonly IMemberManager _memberManager;
         private readonly IMemberService _memberService;
@@ -41,10 +41,14 @@ namespace YuzuDelivery.Umbraco.Members
             IProfilingLogger profilingLogger,
             IPublishedUrlProvider publishedUrlProvider,
             IMemberSignInManager signInManager,
+            IMemberManager memberManager,
+            IMemberService memberService,
             IYuzuDeliveryMembersConfig config)
             : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
         {
-            this.signInManager = signInManager;
+            _signInManager = signInManager;
+            _memberManager = memberManager;
+            _memberService = memberService;
             this.config = config;
         }
 

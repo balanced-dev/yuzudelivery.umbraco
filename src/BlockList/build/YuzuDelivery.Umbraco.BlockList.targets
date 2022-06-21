@@ -4,7 +4,7 @@
 		<yuzuDeliveryBlockListContentFilesPath>$(MSBuildThisFileDirectory)..\content\App_Plugins\YuzuBlockList\**\*.*</yuzuDeliveryBlockListContentFilesPath>
 	</PropertyGroup>
 
-	<Target Name="CopyYuzuDeliveryUmbracoBlockListAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0'">
+	<Target Name="CopyYuzuDeliveryUmbracoBlockListAssets" BeforeTargets="Build" Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'net6.0'">
 		<ItemGroup>
 			<yuzuDeliveryBlockListContentFiles Include="$(yuzuDeliveryBlockListContentFilesPath)" />
 		</ItemGroup>
@@ -15,7 +15,7 @@
             SkipUnchangedFiles="true" />
 
 	</Target>
-	<Target Name="ClearYuzuDeliveryUmbracoBlockListAssets" BeforeTargets="Clean" Condition="'$(TargetFramework)' == 'net5.0'">
+	<Target Name="ClearYuzuDeliveryUmbracoBlockListAssets" BeforeTargets="Clean" Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'net6.0'">
 		<ItemGroup>
 			<yuzuDeliveryBlockListDir Include="$(MSBuildProjectDirectory)\App_Plugins\YuzuBlockList\" />
 		</ItemGroup>

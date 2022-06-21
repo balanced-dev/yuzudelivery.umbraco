@@ -15,13 +15,13 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '2.0.22'
+  version: '2.0.23'
   core_version: '2.0.5'
-  import_version: '2.0.7'
+  import_version: '2.0.7.48'
   umbraco_v8_version: '8.15.3'
   umbraco_v8_forms_version: '8.7.6'
-  umbraco_v9_version: '9.5.0'
-  umbraco_v9_forms_version: '9.4.1'
+  umbraco_v9_version: '10.0.0'
+  umbraco_v9_forms_version: '10.0.0'
   ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
     revision: $[ counter('.', 0) ]
     separator: '.'

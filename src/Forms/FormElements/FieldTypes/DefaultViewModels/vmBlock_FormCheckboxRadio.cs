@@ -60,7 +60,7 @@ namespace YuzuDelivery.Umbraco.Forms
         public string _ref { get; set; }
 
         [Newtonsoft.Json.JsonProperty("_modifiers", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> _modifiers { get; set; }
+        public System.Collections.Generic.List<vmSub_FormCheckboxRadioDataValue> _modifiers { get; set; }
 
     }
 

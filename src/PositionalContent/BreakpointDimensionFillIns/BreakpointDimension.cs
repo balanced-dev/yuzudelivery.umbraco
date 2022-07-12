@@ -3,7 +3,7 @@ using Umbraco.Core.Models.PublishedContent;
 
 namespace YuzuDelivery.Umbraco.PositionalContent
 {
-    public class BreakpointDimension
+    public class BreakpointDimension_old
     {
         public string breakpointName { get; set; }
         public Dictionary<string, string> styles { get; set; }

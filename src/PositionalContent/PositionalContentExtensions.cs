@@ -18,7 +18,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
 
             var item = posConItems
                 .Cast<IPosConContentItem>()
-                .Where(x => x.ModelType == publishedElement.GetType())
+                .Where(x => x.ElementType == publishedElement.GetType())
                 .FirstOrDefault();
 
             if(item != null)
@@ -30,7 +30,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
                 posConItems = DependencyResolver.Current.GetService<IPosConContentItemInternal[]>();
 
                 return posConItems
-                    .Where(x => x.ModelType == publishedElement.GetType())
+                    .Where(x => x.ElementType == publishedElement.GetType())
                     .Cast<IPosConContentItem>()
                     .FirstOrDefault();
             }

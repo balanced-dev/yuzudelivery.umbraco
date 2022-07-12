@@ -11,23 +11,23 @@ namespace YuzuDelivery.Umbraco.PositionalContent
     public static class BreakpointDimensionFillInExtension
     {
 
-        public static IList<BreakpointDimension> FillInEmptyBreakpoints(this IEnumerable<BreakpointDimension> dimensions, List<BreakpointDimensionFillIns> dimensionFillIns)
+        public static List<vmSub_DataPositionalContentDimension> FillInEmptyBreakpoints(this IEnumerable<vmSub_DataPositionalContentDimension> dimensions, List<BreakpointDimensionFillIns> dimensionFillIns)
         {
             var output = dimensions.ToList();
 
             foreach (var i in dimensionFillIns)
             {
-                if (!output.Any(x => x.breakpointName == i.FillIn))
+                if (!output.Any(x => x.BreakpointName.ToString() == i.FillIn))
                 {
-                    var toUse = output.Where(x => x.breakpointName == i.ToCopy).FirstOrDefault();
+                    var toUse = output.Where(x => x.BreakpointName.ToString() == i.ToCopy).FirstOrDefault();
                     var index = output.IndexOf(toUse);
 
-                    var backFill = new BreakpointDimension
+                    var backFill = new vmSub_DataPositionalContentDimension
                     {
-                        breakpointName = i.FillIn,
-                        styles = toUse.styles,
-                        content = toUse.content,
-                        hidden = toUse.hidden
+                        BreakpointName = i.FillIn,
+                        Styles = toUse.Styles,
+                        ContentOverride = toUse.ContentOverride,
+                        IsHidden = toUse.IsHidden
                     };
                     output.Insert(i.Inverse ? index + 1 : index, backFill);
                 }

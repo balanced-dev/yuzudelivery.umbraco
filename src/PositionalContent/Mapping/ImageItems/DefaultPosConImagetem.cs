@@ -27,13 +27,13 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             return content is M;
         }
 
-        public object Apply(PositionalContentModel model, IPublishedElement content, IPublishedElement settings)
+        public object Apply(PositionalContentModel model, IPublishedElement content, IPublishedElement settings, IDictionary<string, object> contextItems)
         {
             var contentModel = content.ToElement<M>();
 
             if (contentModel != null)
             {
-                var output = mapper.Map<V>(contentModel);
+                var output = mapper.Map<V>(contentModel, contextItems);
                 return output;
             }
             else

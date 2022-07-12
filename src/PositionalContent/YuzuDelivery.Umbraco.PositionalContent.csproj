@@ -280,12 +280,17 @@
     <Reference Include="YuzuDelivery.Core, Version=1.0.48.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YuzuDelivery.Core.1.0.48\lib\net472\YuzuDelivery.Core.dll</HintPath>
     </Reference>
+    <Reference Include="YuzuDelivery.Import, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YuzuDelivery.Import.2.0.0\lib\net472\YuzuDelivery.Import.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreakpointDimensionFillIns\BreakpointDimension.cs" />
     <Compile Include="BreakpointDimensionFillIns\BreakpointDimensionFillIn.cs" />
     <Compile Include="BreakpointDimensionFillIns\BreakpointDimensionFillInExtension.cs" />
     <Compile Include="Mapping\ContentItems\DefaultPosConContentItem.cs" />
+    <Compile Include="Mapping\DefaultViewModels\vmBlock_DataPositionalContent.cs" />
+    <Compile Include="Mapping\Extensions\PositionalContentExtensions.cs" />
     <Compile Include="Mapping\ImageItems\DefaultPosConImagetem.cs" />
     <Compile Include="Mapping\ImageItems\IPosConImageItem.cs" />
     <Compile Include="Mapping\ContentItems\IPosConContentItem.cs" />

@@ -29,7 +29,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             this.posConImageItemInternal = posConImageItemInternal;
         }
 
-        public object ItemContent(PositionalContentModel model, PositionalContentItem item, PositionalContentItemDimension dimension = null, bool showOverriddenOnly = true)
+        public object ItemContent(PositionalContentModel model, PositionalContentItem item, IDictionary<string, object> contextItems, PositionalContentItemDimension dimension = null, bool showOverriddenOnly = true)
         {
             if (showOverriddenOnly && dimension != null && !dimension.OverrideContent && !dimension.OverrideSettings)
                 return null;
@@ -56,7 +56,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             {
                 if(i.IsValid(content))
                 {
-                    output = i.Apply(content, settings);
+                    output = i.Apply(content, settings, contextItems);
                     AddRefProperty(output);
                     return output;
                 }
@@ -66,7 +66,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             {
                 if (i.IsValid(content))
                 {
-                    output = i.Apply(content, settings);
+                    output = i.Apply(content, settings, contextItems);
                     AddRefProperty(output);
                     return output;
                 }
@@ -75,7 +75,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             return output;
         }
 
-        public object ImageContent(PositionalContentModel model, PositionalContentBreakpoint breakpoint = null, bool showOverriddenOnly = true)
+        public object ImageContent(PositionalContentModel model, IDictionary<string, object> contextItems, PositionalContentBreakpoint breakpoint = null, bool showOverriddenOnly = true)
         {
             if (showOverriddenOnly && breakpoint != null && !breakpoint.OverrideContent && !breakpoint.OverrideSettings)
                 return null;
@@ -102,7 +102,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             {
                 if (i.IsValid(content))
                 {
-                    output = i.Apply(model, content, settings);
+                    output = i.Apply(model, content, settings, contextItems);
                     AddRefProperty(output);
                     return output;
                 }
@@ -112,7 +112,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             {
                 if (i.IsValid(content))
                 {
-                    output = i.Apply(model, content, settings);
+                    output = i.Apply(model, content, settings, contextItems);
                     AddRefProperty(output);
                     return output;
                 }
@@ -129,14 +129,14 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             return output;
         }
 
-        public BreakpointDimension Dimension(PositionalContentModel model, PositionalContentItem item, KeyValuePair<string, PositionalContentItemDimension> dimension)
+        public vmSub_DataPositionalContentDimension Dimension(PositionalContentModel model, PositionalContentItem item, KeyValuePair<string, PositionalContentItemDimension> dimension, IDictionary<string, object> contextItems)
         {
-            return new BreakpointDimension()
+            return new vmSub_DataPositionalContentDimension()
             {
-                breakpointName = dimension.Key,
-                styles = dimension.Value.PositionalStyles(),
-                content = ItemContent(model, item, dimension.Value),
-                hidden = dimension.Value.Hide
+                BreakpointName = dimension.Key,
+                Styles = dimension.Value.PositionalStyles(),
+                ContentOverride = ItemContent(model, item, contextItems, dimension.Value),
+                IsHidden = dimension.Value.Hide
             };
         }
 

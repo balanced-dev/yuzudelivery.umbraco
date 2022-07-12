@@ -6,6 +6,8 @@ using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.Composing;
 using YuzuDelivery.Core;
+using YuzuDelivery.Umbraco.Import;
+using YuzuDelivery.Core.ViewModelBuilder;
 
 namespace YuzuDelivery.Umbraco.PositionalContent
 {
@@ -18,6 +20,10 @@ namespace YuzuDelivery.Umbraco.PositionalContent
 
             AddDefaultPosConContentItems(composition);
             AddDefaultPosConImageItems(composition);
+
+            //MUST be transient lifetime
+            composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(PositionalContentVmBuilderConfig), Lifetime.Transient);
+            composition.Register(typeof(IUpdateableImportConfiguration), typeof(PositionalContentImportConfig), Lifetime.Transient);
 
         }
 
@@ -79,6 +85,28 @@ namespace YuzuDelivery.Umbraco.PositionalContent
 
                 return posConItems.ToArray();
             }, Lifetime.Singleton);
+        }
+    }
+
+    public class PositionalContentVmBuilderConfig : UpdateableVmBuilderConfig
+    {
+        public PositionalContentVmBuilderConfig()
+            : base()
+        {
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataPositionalContent>();
+            ExcludeViewmodelsAtGeneration.Add<vmSub_DataPositionalContentDimension>();
+
+            AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.PositionalContent;");
+        }
+    }
+
+    public class PositionalContentImportConfig : UpdateableImportConfiguration
+    {
+        public PositionalContentImportConfig(IVmPropertyFinder vmPropertyFinder)
+            : base()
+        {
+            IgnoreViewmodels.Add<vmBlock_DataPositionalContent>();
+            IgnoreViewmodels.Add<vmSub_DataPositionalContentDimension>();
         }
     }
 }

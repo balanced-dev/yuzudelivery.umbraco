@@ -14,7 +14,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
     {
         public IMapper mapper;
 
-        public Type ModelType => typeof(M);
+        public Type ElementType => typeof(M);
 
         public DefaultPosConContentItem(IMapper mapper)
         {
@@ -26,13 +26,13 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             return content is M;
         }
 
-        public object Apply(IPublishedElement content, IPublishedElement settings, string modifierClass = null)
+        public object Apply(IPublishedElement content, IPublishedElement settings, IDictionary<string, object> items, string modifierClass = null)
         {
             var contentModel = content.ToElement<M>();
 
             if (contentModel != null)
             {
-                var output = mapper.Map<V>(contentModel);
+                var output = mapper.Map<V>(contentModel, items);
                 return output;
             }
             else

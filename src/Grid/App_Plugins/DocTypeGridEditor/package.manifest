@@ -15,6 +15,22 @@
         "previewCssFilePath": "",
         "previewJsFilePath": ""
       }
+    },
+    {
+      "name": "Picture",
+      "alias": "picture",
+      "view": "/App_Plugins/DocTypeGridEditor/Views/DocTypeGridEditor.html",
+      "render": "/App_Plugins/DocTypeGridEditor/Render/DocTypeGridEditor.cshtml",
+      "icon": "icon-umb-media",
+      "config": {
+        "allowedDocTypes": ["picture"],
+        "nameTemplate": "",
+        "enablePreview": true,
+        "viewPath": "/Views/Partials/grid/editors/DocTypeGridEditor/",
+        "previewViewPath": "/Views/Partials/grid/editors/DocTypeGridEditor/Previews/",
+        "previewCssFilePath": "",
+        "previewJsFilePath": ""
+      }
     }
   ],
   "javascript": [

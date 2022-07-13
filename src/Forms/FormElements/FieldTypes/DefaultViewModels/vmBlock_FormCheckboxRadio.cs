@@ -54,13 +54,13 @@ namespace YuzuDelivery.Umbraco.Forms
         public object Config { get; set; }
 
         [Newtonsoft.Json.JsonProperty("dataValues", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<string> DataValues { get; set; }
+        public System.Collections.Generic.List<vmSub_FormCheckboxRadioDataValue> DataValues { get; set; }
 
         [Newtonsoft.Json.JsonProperty("_ref", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string _ref { get; set; }
 
         [Newtonsoft.Json.JsonProperty("_modifiers", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<vmSub_FormCheckboxRadioDataValue> _modifiers { get; set; }
+        public System.Collections.Generic.List<string> _modifiers { get; set; }
 
     }
 

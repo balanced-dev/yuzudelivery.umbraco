@@ -31,7 +31,7 @@ namespace YuzuDelivery.Umbraco.Forms
                         Fields = x.Containers.Count == 1 ? formElementMapGetter.UmbracoFormParseFieldMappings(x.Containers) : null,
                         Rows = x.Containers.Count > 1 ? formElementMapGetter.UmbracoFormParseGridMappings(x.Containers) : null
                     }).ToList(),
-                    Pages = source.Pages.Any() ? source.Pages.Select(x => new vmSub_DataFormBuilderPage() { Title = x.Caption, Active = x == source.CurrentPage }).ToList() : null,
+                    Pages = source.Pages.Count > 1 ? source.Pages.Select(x => new vmSub_DataFormBuilderPage() { Title = x.Caption, Active = x == source.CurrentPage }).ToList() : null,
                     PreviousButtonText = !source.IsFirstPage ? source.PreviousCaption : string.Empty,
                     NextButtonText = !source.IsLastPage ? source.NextCaption : string.Empty,
                     SubmitButtonText = source.IsLastPage ? source.SubmitCaption : string.Empty

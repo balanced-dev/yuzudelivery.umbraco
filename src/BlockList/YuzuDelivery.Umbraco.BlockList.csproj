@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
-    <PackageReference Include="YuzuDelivery.Core" Version="2.0.0" />
+    <PackageReference Include="YuzuDelivery.Core" Version="2.0.8" />
     <PackageReference Include="YuzuDelivery.Import" Version="2.0.0" />
     <PackageReference Include="YuzuDelivery.Umbraco.Import.Core" Version="2.0.0" />
   </ItemGroup>

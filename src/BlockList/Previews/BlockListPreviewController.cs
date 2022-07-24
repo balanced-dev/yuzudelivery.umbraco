@@ -83,7 +83,7 @@ namespace YuzuDelivery.Umbraco.BlockList
                     output.Preview = yuzuDefinitionTemplates.Render(new RenderSettings()
                     {
                         Data = () => { return mapper.Map(model, modelType, vmType, new Dictionary<string, object>() { { "Model", model }, { _BlockList_Constants.IsInPreview, true } }); },
-                        Template = yuzuDefinitionTemplates.GetSuspectTemplateName(modelType)
+                        Template = yuzuDefinitionTemplates.GetSuspectTemplateNameFromVm(vmType)
                     });
                 }
             }

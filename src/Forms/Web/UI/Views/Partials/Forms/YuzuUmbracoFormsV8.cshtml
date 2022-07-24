@@ -3,8 +3,18 @@
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<Umbraco.Forms.Web.Models.FormViewModel>
 @{
     var formTemplate = this.ViewContext.RouteData.Values["template"].ToString();
+    var isSubmitted = false;
+    if (this.TempData["UmbracoFormSubmitted"]?.ToString() == Model.FormId.ToString())
+    {
+        //this is a change in Umbraco Forms 8.8 where the Model.SubmitHandled can no longer be relied upon.
+        isSubmitted = true;
+    }
+    else if (Model.SubmitHandled)
+    {
+        isSubmitted = true;
+    }
 }
-@if (Model.SubmitHandled)
+@if (isSubmitted)
 {
     Func<object> form = () =>
     {
@@ -40,7 +50,6 @@ else
         items.Add("HtmlHelper", Html);
         var output = mapper.Map<vmBlock_DataFormBuilder>(Model, items);
         output.IsSuccess = false;
-        output.SubmitButtonText = Model.SubmitCaption;
         output.Validation = validation;
         return output;
     };

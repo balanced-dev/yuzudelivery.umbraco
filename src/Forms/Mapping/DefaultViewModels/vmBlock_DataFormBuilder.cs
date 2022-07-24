@@ -42,6 +42,18 @@ namespace YuzuDelivery.Umbraco.Forms
         [Newtonsoft.Json.JsonProperty("actionLinks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<vmBlock_DataLink> ActionLinks { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("pages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.List<vmSub_DataFormBuilderPage> Pages { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("previousButtonText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PreviousButtonText { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("nextButtonText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NextButtonText { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("formId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FormId { get; set; }
+
         [Newtonsoft.Json.JsonProperty("_ref", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string _ref { get; set; }
 
@@ -85,6 +97,16 @@ namespace YuzuDelivery.Umbraco.Forms
         public List<object> Columns { get; set; }
 
 
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class vmSub_DataFormBuilderPage
+    {
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Title { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("active", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Active { get; set; }
     }
 
 }

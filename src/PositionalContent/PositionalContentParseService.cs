@@ -52,6 +52,9 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             if (item.HasSettings && settings == null)
                 settings = item.GetSetting(model);
 
+            if (settings != null)
+                contextItems.Add("PositionalContentSettings", settings);
+
             foreach (var i in posConContentItems)
             {
                 if(i.IsValid(content))
@@ -97,6 +100,9 @@ namespace YuzuDelivery.Umbraco.PositionalContent
                 content = model.GetContent();
             if (model.HasSettings && settings == null)
                 settings = model.GetSetting();
+
+            if (settings != null)
+                contextItems.Add("PositionalContentSettings", settings);
 
             foreach (var i in posConImageItems)
             {

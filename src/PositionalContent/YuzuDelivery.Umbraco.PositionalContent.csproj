@@ -291,6 +291,7 @@
     <Compile Include="Mapping\ContentItems\DefaultPosConContentItem.cs" />
     <Compile Include="Mapping\DefaultViewModels\vmBlock_DataPositionalContent.cs" />
     <Compile Include="Mapping\Extensions\PositionalContentExtensions.cs" />
+    <Compile Include="Mapping\Extensions\PositionalContentManppingContextExtensions.cs" />
     <Compile Include="Mapping\ImageItems\DefaultPosConImagetem.cs" />
     <Compile Include="Mapping\ImageItems\IPosConImageItem.cs" />
     <Compile Include="Mapping\ContentItems\IPosConContentItem.cs" />

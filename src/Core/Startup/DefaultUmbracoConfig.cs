@@ -34,6 +34,9 @@ namespace YuzuDelivery.Umbraco.Core
 
             CMSModels = localAssembly.GetTypes().Where(x => x.GetCustomAttribute<PublishedModelAttribute>() != null).ToList();
 
+            //add compositions;
+            CMSModels = CMSModels.Union(CMSModels.SelectMany(x => x.GetInterfaces()).ToList());
+
             TemplateLocations = new List<ITemplateLocation>()
                 {
                     new TemplateLocation()

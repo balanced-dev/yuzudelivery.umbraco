@@ -6,6 +6,7 @@ using YuzuDelivery.Core;
 using YuzuDelivery.ViewModels;
 using YuzuDelivery.Umbraco.Core;
 using Our.Umbraco.DocTypeGridEditor.Helpers;
+using System.Reflection;
 
 #if NETCOREAPP
 using Umbraco.Cms.Web.Common.Attributes;
@@ -14,7 +15,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Models;
 #else
+using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 using Umbraco.Web.WebApi;
 using Umbraco.Web.Mvc;
@@ -68,13 +73,14 @@ namespace YuzuDelivery.Umbraco.BlockList
                 var model = DocTypeGridEditorHelper.ConvertValueToContent(Guid.NewGuid().ToString(), contentType.Alias, data.Content);
 #endif
 
-                var modelType = config.CMSModels.Where(x => contentType.Alias.FirstCharacterToUpper() == x.Name).FirstOrDefault();
+                var link = GetCmsToVmLink(contentType);
 
                 var suspectBlockTypeName = $"{YuzuConstants.Configuration.BlockPrefix}{model.ContentType.Alias.FirstCharacterToUpper()}";
 
-                var vmType = config.ViewModels.Where(x => x.Name == suspectBlockTypeName).FirstOrDefault();
+                if(link.vmType == null)
+                    link.vmType = config.ViewModels.Where(x => x.Name == suspectBlockTypeName).FirstOrDefault();
 
-                if (vmType == null)
+                if (link.vmType == null)
                 {
                     output.Error = $"Viewmodel for block type {suspectBlockTypeName} not found. Previews of sublocks not supported";
                 }
@@ -82,8 +88,8 @@ namespace YuzuDelivery.Umbraco.BlockList
                 {
                     output.Preview = yuzuDefinitionTemplates.Render(new RenderSettings()
                     {
-                        Data = () => { return mapper.Map(model, modelType, vmType, new Dictionary<string, object>() { { "Model", model }, { _BlockList_Constants.IsInPreview, true } }); },
-                        Template = yuzuDefinitionTemplates.GetSuspectTemplateNameFromVm(vmType)
+                        Data = () => { return mapper.Map(model, link.cmsType, link.vmType, new Dictionary<string, object>() { { "Model", model }, { _BlockList_Constants.IsInPreview, true } }); },
+                        Template = yuzuDefinitionTemplates.GetSuspectTemplateNameFromVm(link.vmType)
                     });
                 }
             }
@@ -94,6 +100,24 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             return output;
 
+        }
+
+        public (Type cmsType, Type vmType) GetCmsToVmLink(IContentType contentType)
+        {
+            var cmsType = config.CMSModels.Where(x => contentType.Alias.FirstCharacterToUpper() == x.Name).FirstOrDefault();
+            var cmsTypeInterfaces = cmsType.GetInterfaces();
+
+            foreach (var vmType in config.ViewModels)
+            {
+                foreach (var attribute in vmType.GetCustomAttributes<YuzuMapAttribute>())
+                {
+                    if (attribute.SourceTypeName == cmsType.Name) return (cmsType, vmType);
+                    var cmsTypeInterface = cmsTypeInterfaces.Where(x => x.Name == attribute.SourceTypeName).FirstOrDefault();
+                    if (cmsTypeInterface != null) return (cmsTypeInterface, vmType);
+                }
+            }
+
+            return (cmsType, null);
         }
     }
 

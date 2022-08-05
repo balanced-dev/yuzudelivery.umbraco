@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.ViewModelBuilder;
+using YuzuDelivery.Umbraco.Core.Helpers;
 using YuzuDelivery.Umbraco.Import;
 
 #if NETCOREAPP 
@@ -117,7 +118,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetBlockName();
                     var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
@@ -220,7 +221,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetBlockName();
                     var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 
                     var alias = umbracoModelTypeName.FirstCharacterToLower();

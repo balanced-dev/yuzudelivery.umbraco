@@ -8,11 +8,12 @@ using Umbraco.Core.Composing;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Core.ViewModelBuilder;
+using YuzuDelivery.Umbraco.Core.Helpers;
 
 namespace YuzuDelivery.Umbraco.PositionalContent
 {
     [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    public class YuzuPosContartup : IUserComposer
+    public class YuzuPosConStartup : IUserComposer
     {
         public void Compose(Composition composition)
         {
@@ -40,7 +41,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetBlockName();
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
                     var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 
@@ -70,7 +71,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetBlockName();
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
                     var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 

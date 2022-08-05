@@ -6,6 +6,7 @@ using YuzuDelivery.Core;
 using Umbraco.Web.Models;
 using Umbraco.Web;
 using Umbraco.Core.Models.PublishedContent;
+using YuzuDelivery.Umbraco.Core.Helpers;
 
 namespace YuzuDelivery.Umbraco.PositionalContent
 {
@@ -127,11 +128,11 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             return output;
         }
 
-        public object AddRefProperty(object output)
+        public static object AddRefProperty(object output)
         {
             var refProperty = output.GetType().GetProperty("_ref");
             if (refProperty != null)
-                refProperty.SetValue(output, output.GetType().Name.Replace(YuzuConstants.Configuration.BlockPrefix, "par"));
+                refProperty.SetValue(output, output.GetType().GetBlockName());
             return output;
         }
 

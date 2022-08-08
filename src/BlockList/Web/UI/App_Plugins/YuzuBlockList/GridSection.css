@@ -7,15 +7,15 @@
     display: block;
 }
 
-.section-view .section-view__card:hover {
-    background-color: rgb(253, 253, 255);
-    border-style: solid;
-}
+    .section-view .section-view__card:hover {
+        background-color: rgb(253, 253, 255);
+        border-style: solid;
+    }
 
 .section-view__section {
-    --section-view__section-column-gap:18px;
+    --section-view__section-column-gap: 18px;
     margin: 0 -10px;
-    padding: 20px;    
+    padding: 20px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     column-gap: var(--section-view__section-column-gap);
@@ -29,13 +29,13 @@
     border-radius: 2px;
 }
 
-.section-view__column:not(:hover) .umb-control-group .control-label {
-    opacity: .25;
-}
+    .section-view__column:not(:hover) .umb-control-group .control-label {
+        opacity: .25;
+    }
 
-.section-view__column .umb-block-list__block--create-button {
-    left: 0;
-}
+    .section-view__column .umb-block-list__block--create-button {
+        left: 0;
+    }
 
 .section-view .controls {
     margin-left: 0;
@@ -63,7 +63,7 @@
 .section-view__settings .umb-block-list__block--create-button {
     display: none;
 }
- 
+
 
 /* Create Button */
 .section-view__settings .umb-block-list__actions {
@@ -114,6 +114,10 @@
 
 /* Content Styles */
 
+.section-view__content .umb-block-list__actions {
+    width: 100%;
+}
+
 .section-view__content .umb-control-group .control-header {
     position: relative;
     top: -30px;
@@ -138,24 +142,24 @@
     flex-direction: column;
 }
 
-.sections-wrapper:not(.is-reordering) .section-reorder-handle {
-    display: none;
-}
+    .sections-wrapper:not(.is-reordering) .section-reorder-handle {
+        display: none;
+    }
 
 .section-reorder-handle {
-    background-color: #cbd5e1;    
-    padding: 4px;    
+    background-color: #cbd5e1;
+    padding: 4px;
     grid-column-end: 1;
     margin-right: calc(-1 * var(--section-view__section-column-gap));
 }
 
-.section-reorder-handle .icon.handle {
-    color: #1e293b;
-}
+    .section-reorder-handle .icon.handle {
+        color: #1e293b;
+    }
 
 .yuzu-grid-reorder {
     align-self: flex-end;
-    margin-bottom: 1rem!important;
+    margin-bottom: 1rem !important;
 }
 
 .section-reorder .section-view__content article {

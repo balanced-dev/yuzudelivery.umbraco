@@ -99,7 +99,9 @@ namespace YuzuDelivery.Umbraco.BlockList
                         var columns = rowContent.Properties.Where(y => !y.Alias.EndsWith("Settings"));
 
                         row.Config = GetRowSettingsVm(rowBlockList, context);
+                        row.ColumnCount = columns.Count();
 
+                        int index = 0;
                         row.Columns = columns.Select(columnProperty =>
                         {
                             var column = new vmSub_DataGridColumn()
@@ -113,12 +115,13 @@ namespace YuzuDelivery.Umbraco.BlockList
 #else
                             var columnContent = columnProperty.Value<BlockListModel>();
 #endif
-                            var columnSettingsVm = GetColumnSettingsVm(rowContent, columnProperty, context);
-
+                            column.Index = index;
                             column.Config = GetColumnSettingsVm(rowContent, columnProperty, context);
                             column.Items = columnContent?
                                     .Select(cell => CreateContentAndConfig(new GridItemData(cell, context.Items)))
                                     .Where(x => x != null).ToList();
+
+                            index++;
 
                             return column;
 

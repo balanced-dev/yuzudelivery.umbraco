@@ -38,6 +38,9 @@ namespace YuzuDelivery.Umbraco.BlockList
         [Newtonsoft.Json.JsonProperty("columns", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<vmSub_DataGridColumn> Columns { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("columnCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ColumnCount { get; set; }
+
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
 
         [Newtonsoft.Json.JsonExtensionData]
@@ -46,7 +49,6 @@ namespace YuzuDelivery.Umbraco.BlockList
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
-
 
     }
 
@@ -57,6 +59,9 @@ namespace YuzuDelivery.Umbraco.BlockList
         {
             Items = new List<vmBlock_DataGridRowItem>();
         }
+
+        [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Index { get; set; }
 
         [Newtonsoft.Json.JsonProperty("gridSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object GridSize { get; set; }

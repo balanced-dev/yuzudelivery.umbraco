@@ -36,12 +36,13 @@
         }
 
         $scope.getGridSettings = function (property) {
-            if (property.alias === 'l50')
-                return { "grid-column": "1 / span 6" };
-            else if (property.alias === 'r50')
-                return { "grid-column": "7 / span 6" };
+            console.log(property.alias);
+            if (property.alias.includes('50'))
+                return { "grid-column": "span 6 / span 6" };
+            else if (property.alias.includes('33'))
+                return { "grid-column": "span 4 / span 4" };
             else
-                return { "grid-column": "1 / span 12" };
+                return { "grid-column": "span 12 / span 12" };
         }
 
     });

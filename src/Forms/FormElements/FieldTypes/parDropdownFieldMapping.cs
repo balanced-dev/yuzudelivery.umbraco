@@ -21,7 +21,7 @@ namespace YuzuDelivery.Umbraco.Forms
         {
             var options = model.PreValues.Select((a, index) => new SelectedItem() { option = a.Value, value = a.Value }).ToList();
 
-            var selectedOption = options.Where(x => model.Values.Any(y => y.ToString() == x.value)).FirstOrDefault();
+            var selectedOption = options.FirstOrDefault(x => model.Values?.Any(y => y.ToString() == x.value) ?? false);
             if (selectedOption != null) selectedOption.selected = true;
 
 

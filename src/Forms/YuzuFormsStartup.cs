@@ -7,13 +7,14 @@ using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Core.ViewModelBuilder;
 
-#if NETCOREAPP 
+#if NETCOREAPP
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Forms.Core.Providers;
 #else
 using Umbraco.Core;
 using Umbraco.Core.Composing;
@@ -44,6 +45,11 @@ namespace YuzuDelivery.Umbraco.Forms
             builder.Services.AddTransient<YuzuMappingConfig, FormMappingConfig>();
 
             builder.Services.AddTransient(typeof(YuzuMappingConfig), typeof(FormAutoMapping));
+
+
+            // Register custom FieldTypes
+            builder.WithCollectionBuilder<FieldCollectionBuilder>()
+                .Add<ColumnBlank>();
         }
     }
 #else

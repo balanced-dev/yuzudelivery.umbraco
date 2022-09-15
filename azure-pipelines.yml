@@ -68,11 +68,12 @@ steps:
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
-      **\*test*.dll
+      **\YuzuDelivery.*.Test.dll
       !**\*TestAdapter.dll
       !**\YuzuDelivery.Umbraco.Import.Tests.Integration.dll
       !**\YuzuDelivery.Umbraco.TestProject.dll
       !**\obj\**
+      !**\packages\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
 
 - task: NuGetCommand@2

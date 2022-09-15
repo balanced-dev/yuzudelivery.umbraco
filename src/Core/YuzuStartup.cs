@@ -6,7 +6,7 @@ using YuzuDelivery.Core;
 using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Import;
 
-#if NETCOREAPP 
+#if NETCOREAPP
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
@@ -107,6 +107,7 @@ namespace YuzuDelivery.Umbraco.Core
             {
                 var config = factory.GetService<IYuzuConfiguration>();
                 var mapper = factory.GetService<IMapper>();
+                var fallback = factory.GetService<IPublishedValueFallback>();
 
                 var viewmodelAssemblies = config.ViewModelAssemblies;
 
@@ -125,7 +126,7 @@ namespace YuzuDelivery.Umbraco.Core
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {
                         var makeme = baseItemType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper }) as IDefaultPublishedElement;
+                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper, fallback }) as IDefaultPublishedElement;
 
                         items.Add(o);
                     }

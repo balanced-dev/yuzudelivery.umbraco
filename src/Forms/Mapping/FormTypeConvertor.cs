@@ -32,13 +32,8 @@ namespace YuzuDelivery.Umbraco.Forms
                 if (!context.Items.ContainsKey("FormBuilderTemplate"))
                     throw new Exception("Form Type Convertor requires FormBuilderTemplate in mapper options items to define which Yuzu template is used.");
 
-                var formBuilderTemplate = context.Items["FormBuilderTemplate"].ToString();
-
                 if (formValue != Guid.Empty && formValue.ToString() != string.Empty)
                 {
-                    context.Html.ViewContext.RouteData.Values.Add("template", formBuilderTemplate);
-                    context.Html.ViewContext.RouteData.Values.Add("mappingItems", context.Items);
-
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
@@ -46,8 +41,8 @@ namespace YuzuDelivery.Umbraco.Forms
                         {
                             formId = formValue,
                             partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
-                            template = formBuilderTemplate,
-                            items = context.Items
+                            template = context.Items["FormBuilderTemplate"].ToString(),
+                            mappingItems = context.Items
                         }, context.Html.ViewContext, context.HttpContext).Result
                     };
                 }

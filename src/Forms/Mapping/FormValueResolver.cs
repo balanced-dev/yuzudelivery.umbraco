@@ -18,7 +18,7 @@ namespace YuzuDelivery.Umbraco.Forms
     {
         private readonly ISchemaMetaService schemaMetaService;
 
-#if NETCOREAPP 
+#if NETCOREAPP
         private readonly ViewComponentHelper viewComponentHelper;
 
         public FormValueResolver(ISchemaMetaService schemaMetaService, ViewComponentHelper viewComponentHelper)
@@ -37,7 +37,7 @@ namespace YuzuDelivery.Umbraco.Forms
         {
             if (source != null)
             {
-                var property = destination.GetType().GetProperties().Where(x => x.PropertyType == typeof(vmBlock_DataForm)).FirstOrDefault();
+                var property = destination.GetType().GetProperties().FirstOrDefault(x => x.PropertyType == typeof(vmBlock_DataForm));
 
                 var formBuilderTemplate = schemaMetaService.GetOfType(property, "refs");
 
@@ -47,9 +47,6 @@ namespace YuzuDelivery.Umbraco.Forms
                 if (formValue != null && formValue.ToString() != string.Empty)
                 {
 #if NETCOREAPP
-                    context.Html.ViewContext.RouteData.Values.Add("template", formBuilderTemplate);
-                    context.Html.ViewContext.RouteData.Values.Add("mappingItems", context.Items);
-
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
@@ -58,7 +55,7 @@ namespace YuzuDelivery.Umbraco.Forms
                             formId = formValue,
                             partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
                             template = formBuilderTemplate,
-                            items = context.Items
+                            mappingItems = context.Items
                         }, context.Html.ViewContext, context.HttpContext).Result
                     };
 #else

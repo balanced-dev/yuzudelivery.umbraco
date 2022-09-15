@@ -1,14 +1,16 @@
-﻿@inject IMapper mapper
-@using Umbraco.Cms.Web
+﻿@using Umbraco.Extensions
+@using YuzuDelivery.Core
 @using YuzuDelivery.Umbraco.Forms;
-@inherits UmbracoViewPage<Umbraco.Forms.Web.Models.FormViewModel>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Forms.Web.Models.FormViewModel>
+
+@inject IMapper Mapper;
 @{
-    var formBuilderTemplate = this.ViewContext.RouteData.Values["template"].ToString();
-    var mappingItems = this.ViewContext.RouteData.Values["mappingItems"] as IDictionary<string, object>;
+    var mappingItems = (IDictionary<string, object>) ViewData["mappingItems"]!;
+    var formBuilderTemplate = ViewData["template"]!.ToString();
 }
 @if (Model.SubmitHandled)
 {
-    Func<object> form = () =>
+    Func<object> getFormData = () =>
     {
         return new vmBlock_DataFormBuilder()
         {
@@ -19,7 +21,7 @@
 
     using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "data-app", "Forms" }, { "novalidate", "novalidate" } }))
     {
-        @Html.RenderYuzu(new RenderSettings() { Template = formBuilderTemplate, Data = form, ShowJson = false })
+        @Html.RenderYuzu(new RenderSettings() { Template = formBuilderTemplate, Data = getFormData, ShowJson = false })
     }
 }
 else
@@ -35,20 +37,19 @@ else
         };
     }
 
-    Func<object> form = () =>
+    Func<object> getFormData = () =>
     {
-        var output = mapper.Map<vmBlock_DataFormBuilder>(Model, mappingItems);
+        var output = Mapper.Map<vmBlock_DataFormBuilder>(Model, mappingItems);
+
         output.IsSuccess = false;
         output.SubmitButtonText = Model.SubmitCaption;
         output.Validation = validation;
         return output;
     };
 
-
-
     using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
     {
-        @Html.RenderYuzu(new RenderSettings() { Template = formBuilderTemplate, Data = form, ShowJson = false })
+        @Html.RenderYuzu(new RenderSettings() { Template = formBuilderTemplate, Data = getFormData, ShowJson = false })
 
         @Html.HiddenFor(x => Model.FormId, new { id = (string)null })
         @Html.HiddenFor(x => Model.FormName, new { id = (string)null })
@@ -64,5 +65,4 @@ else
             <input type="text" name="@Model.FormId.ToString().Replace("-", "")" />
         </div>
     }
-
 }

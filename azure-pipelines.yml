@@ -68,10 +68,7 @@ steps:
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
-      **\YuzuDelivery.*.Test.dll
-      !**\*TestAdapter.dll
-      !**\YuzuDelivery.Umbraco.Import.Tests.Integration.dll
-      !**\YuzuDelivery.Umbraco.TestProject.dll
+      **\YuzuDelivery.*.@(Test|Tests).dll
       !**\obj\**
       !**\packages\**
     searchFolder: '$(System.DefaultWorkingDirectory)'

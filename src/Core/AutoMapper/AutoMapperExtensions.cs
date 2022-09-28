@@ -6,12 +6,7 @@ using System.Linq;
 using System.Reflection;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
-
-#if NETCOREAPP
 using Umbraco.Cms.Core;
-#else
-using Umbraco.Core;
-#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
-using Umbraco.Core;
+using Umbraco.Cms.Core;
 using Newtonsoft.Json.Linq;
 using Autofac;
-using Rhino.Mocks;
 using System.Linq.Expressions;
 
 namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
@@ -112,7 +111,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
                 var contentTypeKey = umb.ContentType.Current.TypesByName[contentTypeName].Key;
 
                 var udiGuid = Guid.Parse(guid);
-                guidFactory.Stub(x => x.CreateNew(contentTypeKey)).Return(udiGuid);
+                guidFactory.CreateNew(contentTypeKey).Returns(udiGuid);
                 var elementUdi = Udi.Create("element", udiGuid).ToString();
 
                 var output = new Dictionary<string, object>();

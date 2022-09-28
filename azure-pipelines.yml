@@ -6,159 +6,23 @@
 trigger:
 - master
 - dev
-- v9
+- feature/*
 
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  version: '2.0.34'
-  core_version: '2.0.5'
-  import_version: '2.0.9'
-  umbraco_v8_version: '8.15.3'
-  umbraco_v8_forms_version: '8.7.6'
-  umbraco_v9_version: '10.0.0'
-  umbraco_v9_forms_version: '10.0.0'
-  ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
-    revision: $[ counter('.', 0) ]
-    separator: '.'
-  ${{ if eq( variables['Build.SourceBranchName'], 'master') }}:
-    revision: ''
-    separator: ''
-
-name: $(version)$(separator)$(revision)
-
 steps:
-- task: Assembly-Info-NetFramework@2
+- task: CmdLine@2
   inputs:
-    Path: '$(Build.SourcesDirectory)'
-    FileNames: |
-      **\AssemblyInfo.cs
-      **\AssemblyInfo.vb
-    InsertAttributes: false
-    FileEncoding: 'auto'
-    WriteBOM: false
-    VersionNumber: '$(Build.BuildNumber)'
-    FileVersionNumber: '$(Build.BuildNumber)'
-    InformationalVersion: '$(Build.BuildNumber)'
-    LogLevel: 'verbose'
-    FailOnWarning: false
-    DisableTelemetry: false
-
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '$(solution)'
-    feedsToUse: 'select'
-    vstsFeed: 'bfaa6bc6-9775-4d15-bf70-5bba69811803/0d5a2d7b-5eaa-444f-9208-7e7089885a00'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\YuzuDelivery.*.@(Test|Tests).dll
-      !**\obj\**
-      !**\packages\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Blocklist Editor
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\BlockList\YuzuDelivery.Umbraco.BlockList.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Core 
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Core\YuzuDelivery.Umbraco.Core.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Forms 
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Forms\YuzuDelivery.Umbraco.Forms.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Grid 
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Grid\YuzuDelivery.Umbraco.Grid.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)"'    
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Members 
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Members\YuzuDelivery.Umbraco.Members.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Positional Content 
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\PositionalContent\YuzuDelivery.Umbraco.PositionalContent.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber)'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart Web
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.Web.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_v8_version="$(umbraco_v8_version)";umbraco_v8_forms_version="$(umbraco_v8_forms_version)";y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart Core
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.Core.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_v8_version="$(umbraco_v8_version)";umbraco_v8_forms_version="$(umbraco_v8_forms_version)";y_umb_version="$(Build.BuildNumber)"'
-
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Quickstart\YuzuDelivery.Umbraco.Quickstart.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties core_version="$(core_version)";import_version="$(import_version)";umbraco_v8_version="$(umbraco_v8_version)";umbraco_v8_forms_version="$(umbraco_v8_forms_version)";y_umb_version="$(Build.BuildNumber)"'
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack Quickstart Test Project
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\QuickstartExample.TestProject\YuzuDelivery.Umbraco.Quickstart.Example.TestProject.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber) -Properties y_umb_version="$(Build.BuildNumber)"'
-
-- task: PowerShell@2
-  displayName: Create Templates
-  continueOnError: true
-  inputs:
-    targetType: 'inline'
-    script: |
-        cd '$(Build.SourcesDirectory)/src/Templates/'
-        New-Item -Path ".\" -Name "Templates" -ItemType "directory"
-        ./buildTemplates.ps1 -UmbracoVersion "$(umbraco_v9_version)" -UmbracoFormsVersion "$(umbraco_v9_forms_version)" -YuzuDeliveryUmbracoVersion "$(Build.BuildNumber)"
-
-- task: NuGetCommand@2
-  displayName: Nuget Pack for Templates
-  inputs:
-    command: 'custom'
-    arguments: 'pack "$(Build.SourcesDirectory)\src\Templates\YuzuDelivery.Umbraco.Templates.nuspec" -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Build.BuildNumber)'
+    script: './build.cmd'
 
 - task: NuGetCommand@2
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: 'bfaa6bc6-9775-4d15-bf70-5bba69811803/0d5a2d7b-5eaa-444f-9208-7e7089885a00'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    pathToPublish: './output'     

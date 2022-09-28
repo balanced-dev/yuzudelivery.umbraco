@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-#if NETCOREAPP 
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Models;
-#else
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Core.Models;
-#endif
+
 
 namespace YuzuDelivery.Umbraco.Members
 {

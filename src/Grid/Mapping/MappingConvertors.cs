@@ -5,12 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using YuzuDelivery.Umbraco.Core;
-
-#if NETCOREAPP
 using Skybrud.Umbraco.GridData.Models;
-#else
-using Skybrud.Umbraco.GridData;
-#endif
 
 namespace YuzuDelivery.Umbraco.Grid
 {

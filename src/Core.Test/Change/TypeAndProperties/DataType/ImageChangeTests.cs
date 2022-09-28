@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Umbraco.Web.PropertyEditors;
+using Umbraco.Cms.Core.PropertyEditors;
 using NUnit.Framework;
 using Autofac;
 using YuzuDelivery.Umbraco.Core;
@@ -21,7 +21,7 @@ namespace YuzuDelivery.Umbraco.Core.Tests
         public SchemaChangeController svc;
         public VmToContentPropertyMap map;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             BaseFixtureSetup();

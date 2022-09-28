@@ -7,11 +7,6 @@ using System.Reflection;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
 
-#if NETCOREAPP
-#else
-using Umbraco.Core;
-#endif
-
 namespace YuzuDelivery.Umbraco.Grid
 {
     public class GridContentMapper : IContentMapper

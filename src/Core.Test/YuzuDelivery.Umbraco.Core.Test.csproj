@@ -1,22 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
  <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="4.0.0" />
     <PackageReference Include="Autofac" Version="5.1.2" />
-    <PackageReference Include="NUnit" Version="2.6.2" />
-    <PackageReference Include="NUnitTestAdapter" Version="2.3.0" />
-    <PackageReference Include="RhinoMocks" Version="3.6.1" />
-    <PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="UmbracoCms.Web" Version="8.16.0" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
+    <PackageReference Include="NSubstitute" Version="4.4.0" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="Umbraco.Cms" Version="10.0.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-    <PackageReference Include="YuzuDelivery.Core" Version="2.0.0" />
-    <PackageReference Include="YuzuDelivery.Import" Version="2.0.0" />
-    <PackageReference Include="YuzuDelivery.Umbraco.Import.Core" Version="2.0.0" />
-    <PackageReference Include="YuzuDelivery.Umbraco.Import.Test.Integration" Version="2.0.0" />
+    <PackageReference Include="YuzuDelivery.Core" Version="3.0.0-beta-g3afbdf71ec" />
+    <PackageReference Include="YuzuDelivery.Import" Version="3.0.0-beta-ged4159d884" />
+    <PackageReference Include="YuzuDelivery.Umbraco.Import" Version="3.0.0-beta-ged4159d884" />
+    <PackageReference Include="YuzuDelivery.Umbraco.Import.Tests.Integration" Version="3.0.0-beta-ged4159d884" />
   </ItemGroup>
 
  <ItemGroup>

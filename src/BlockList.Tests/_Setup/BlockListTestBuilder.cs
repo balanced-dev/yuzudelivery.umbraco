@@ -1,7 +1,6 @@
 ﻿using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
 using Autofac;
-using Rhino.Mocks;
 
 namespace YuzuDelivery.Umbraco.BlockList.Tests
 {
@@ -22,7 +21,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests
 
             builder.Register((IComponentContext factory) =>
             {
-                return MockRepository.GeneratePartialMock<GuidFactory>();
+                return Substitute.For<GuidFactory>();
             }).SingleInstance();
 
             return builder;

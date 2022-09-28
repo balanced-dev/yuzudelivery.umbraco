@@ -1,29 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31129.286
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Core", "Core\YuzuDelivery.Umbraco.Core.csproj", "{A9B8F2AC-90F9-4219-BCDA-7FF6E8266C19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Core", "src\Core\YuzuDelivery.Umbraco.Core.csproj", "{A9B8F2AC-90F9-4219-BCDA-7FF6E8266C19}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Core.Test", "Core.Test\YuzuDelivery.Umbraco.Core.Test.csproj", "{B8CC0CA6-24DE-4153-AFA5-F9F5EA62F683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Core.Test", "src\Core.Test\YuzuDelivery.Umbraco.Core.Test.csproj", "{B8CC0CA6-24DE-4153-AFA5-F9F5EA62F683}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Forms", "Forms\YuzuDelivery.Umbraco.Forms.csproj", "{E1B59BAF-A544-4A74-A538-9464182572D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Forms", "src\Forms\YuzuDelivery.Umbraco.Forms.csproj", "{E1B59BAF-A544-4A74-A538-9464182572D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Forms.Test", "Forms.Test\YuzuDelivery.Umbraco.Forms.Test.csproj", "{F556A286-C6E6-41AD-9343-1E4D77F63577}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Forms.Test", "src\Forms.Test\YuzuDelivery.Umbraco.Forms.Test.csproj", "{F556A286-C6E6-41AD-9343-1E4D77F63577}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Grid", "Grid\YuzuDelivery.Umbraco.Grid.csproj", "{EC27DF56-5A85-4CCA-9720-CF000269BE1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Grid", "src\Grid\YuzuDelivery.Umbraco.Grid.csproj", "{EC27DF56-5A85-4CCA-9720-CF000269BE1F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Members", "Members\YuzuDelivery.Umbraco.Members.csproj", "{EAAEA3C8-0C65-47DD-839C-BFC6F025D9C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Members", "src\Members\YuzuDelivery.Umbraco.Members.csproj", "{EAAEA3C8-0C65-47DD-839C-BFC6F025D9C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.PositionalContent", "PositionalContent\YuzuDelivery.Umbraco.PositionalContent.csproj", "{9F1B6B25-0A45-4B82-9282-D302B233AB9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.BlockList", "src\BlockList\YuzuDelivery.Umbraco.BlockList.csproj", "{DAF7A3D3-411C-448B-9489-42306783511F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.BlockList", "BlockList\YuzuDelivery.Umbraco.BlockList.csproj", "{DAF7A3D3-411C-448B-9489-42306783511F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.BlockList.Tests", "src\BlockList.Tests\YuzuDelivery.Umbraco.BlockList.Tests.csproj", "{FBA3724B-600D-4E7A-84EC-13B5B80EB2F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.BlockList.Tests", "BlockList.Tests\YuzuDelivery.Umbraco.BlockList.Tests.csproj", "{FBA3724B-600D-4E7A-84EC-13B5B80EB2F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Grid.Test", "src\Grid.Test\YuzuDelivery.Umbraco.Grid.Test.csproj", "{288F5F4B-9D22-4EDD-98C5-C035082373A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Grid.Test", "Grid.Test\YuzuDelivery.Umbraco.Grid.Test.csproj", "{288F5F4B-9D22-4EDD-98C5-C035082373A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.TestProject", "src\QuickstartExample.TestProject\YuzuDelivery.Umbraco.TestProject.csproj", "{FC6DDAF7-EB33-4308-9F38-74A52BC25749}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.TestProject", "QuickstartExample.TestProject\YuzuDelivery.Umbraco.TestProject.csproj", "{FC6DDAF7-EB33-4308-9F38-74A52BC25749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build/_build.csproj", "{471F4A9A-40AC-4952-B118-C23B58E3BD69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,10 +55,6 @@ Global
 		{EAAEA3C8-0C65-47DD-839C-BFC6F025D9C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAAEA3C8-0C65-47DD-839C-BFC6F025D9C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAAEA3C8-0C65-47DD-839C-BFC6F025D9C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F1B6B25-0A45-4B82-9282-D302B233AB9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F1B6B25-0A45-4B82-9282-D302B233AB9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F1B6B25-0A45-4B82-9282-D302B233AB9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F1B6B25-0A45-4B82-9282-D302B233AB9D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DAF7A3D3-411C-448B-9489-42306783511F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAF7A3D3-411C-448B-9489-42306783511F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAF7A3D3-411C-448B-9489-42306783511F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +71,8 @@ Global
 		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{471F4A9A-40AC-4952-B118-C23B58E3BD69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{471F4A9A-40AC-4952-B118-C23B58E3BD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

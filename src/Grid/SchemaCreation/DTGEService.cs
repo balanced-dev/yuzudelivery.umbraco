@@ -20,12 +20,8 @@ namespace YuzuDelivery.Umbraco.Grid
             this.mapPath = mapPath;
         }
 
-#if NETCOREAPP
         private static readonly string YuzuGridDirectory = "/App_Plugins/YuzuGrid/";
         private static readonly string ConfigPath = $"{YuzuGridDirectory}package.manifest";
-#else
-        const string ConfigPath = "/config/grid.editors.config.js";
-#endif
 
         public virtual JObject GetByName(string name)
         {
@@ -57,7 +53,6 @@ namespace YuzuDelivery.Umbraco.Grid
             Save(config);
         }
 
-#if NETCOREAPP
         public virtual JArray Get()
         {
             JObject config;
@@ -88,21 +83,6 @@ namespace YuzuDelivery.Umbraco.Grid
             configFile = JsonConvert.SerializeObject(configObj, Formatting.Indented);
             File.WriteAllText(mapPath.Get(ConfigPath), configFile);
         }
-#else
-
-        public virtual JArray Get()
-        {
-            var configFile = File.ReadAllText(mapPath.Get(ConfigPath));
-            return JArray.Parse(configFile);
-        }
-
-        public virtual void Save(JArray config)
-        {
-            var configFile = JsonConvert.SerializeObject(config, Formatting.Indented);
-            File.WriteAllText(mapPath.Get(ConfigPath), configFile);
-        }
-
-#endif
 
         public class GridConfig
         {

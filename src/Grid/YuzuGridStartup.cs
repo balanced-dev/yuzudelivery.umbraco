@@ -9,8 +9,6 @@ using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Core;
 using System.Reflection;
-
-#if NETCOREAPP 
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,16 +16,10 @@ using Skybrud.Umbraco.GridData.Composers;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models.PublishedContent;
-#endif
 
 namespace YuzuDelivery.Umbraco.Grid 
 {
 
-#if NETCOREAPP
     [ComposeAfter(typeof(YuzuUmbracoImportComposer))]
     public class YuzuGridStartup : IComposer
     {
@@ -93,73 +85,6 @@ namespace YuzuDelivery.Umbraco.Grid
             });
         }
     }
-#else
-    [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    [ComposeAfter(typeof(YuzuUmbracoImportComposer))]
-    public class YuzuGridStartup : IUserComposer
-    {
-        public void Compose(Composition composition)
-        {
-            AddDefaultGridItems(composition);
-
-            var assembly = Assembly.GetExecutingAssembly();
-
-            composition.RegisterAll<IContentMapper>(assembly);
-
-            composition.Register<IGridService, GridService>(Lifetime.Singleton);
-
-            composition.RegisterUnique<IGridSchemaCreationService, GridSchemaCreationService>();
-            composition.Register<IDTGEService, DTGEService>(Lifetime.Singleton);
-
-            composition.Register(typeof(GridRowConvertor<,>));
-            composition.Register(typeof(GridRowConvertor<,,>));
-            composition.Register(typeof(GridRowColumnConvertor<,>));
-            composition.Register(typeof(GridRowColumnConvertor<,,>));
-            composition.Register(typeof(GridRowColumnConvertor<,,,>));
-            composition.Register(typeof(GridConfigConverter<>));
-
-            //MUST be transient lifetime
-            composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(GridVmBuilderConfig), Lifetime.Transient);
-            composition.Register(typeof(IUpdateableImportConfiguration), typeof(GridImportConfig), Lifetime.Transient);
-
-            composition.Register(typeof(YuzuMappingConfig), typeof(GridAutoMapping));
-
-            GridContext.Current.Converters.Add(new DtgeGridConverter());
-        }
-
-
-        public void AddDefaultGridItems(Composition composition)
-        {
-            composition.Register<IEnumerable<IGridItemInternal>>((factory) =>
-            {
-                var config = factory.GetInstance<IYuzuConfiguration>();
-                var mapper = factory.GetInstance<IMapper>();
-                var typeFactoryRunner = factory.GetInstance<IYuzuTypeFactoryRunner>();
-
-                var baseGridType = typeof(DefaultGridItem<,>);
-                var gridItems = new List<IGridItemInternal>();
-                var viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
-
-                foreach (var viewModelType in viewmodelTypes)
-                {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
-                    var alias = umbracoModelTypeName.FirstCharacterToLower();
-                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
-
-                    if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
-                    {
-                        var makeme = baseGridType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper, typeFactoryRunner }) as IGridItemInternal;
-
-                        gridItems.Add(o);
-                    }
-                }
-
-                return gridItems;
-            }, Lifetime.Singleton);
-        }
-    }
-#endif
 
     public class GridVmBuilderConfig : UpdateableVmBuilderConfig
     {

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Umbraco.Web.PropertyEditors;
+using Umbraco.Cms.Core.PropertyEditors;
 using NUnit.Framework;
 using Autofac;
 using YuzuDelivery.Umbraco.Forms;
-using Rhino.Mocks;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
 
@@ -21,7 +20,7 @@ namespace Yuzu.Delivery.Forms.Tests.Integration.ChangeItem
         public SchemaChangeController svc;
         public VmToContentPropertyMap map;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             BaseFixtureSetup();

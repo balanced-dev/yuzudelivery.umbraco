@@ -6,8 +6,6 @@ using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Core.ViewModelBuilder;
-
-#if NETCOREAPP
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,15 +13,10 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Forms.Core.Providers;
-#else
-using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models.PublishedContent;
-#endif
 
 namespace YuzuDelivery.Umbraco.Forms
 {
-#if NETCOREAPP
+
     public class YuzuFormsStartup : IComposer
     {
         public void Compose(IUmbracoBuilder builder)
@@ -52,30 +45,6 @@ namespace YuzuDelivery.Umbraco.Forms
                 .Add<ColumnBlank>();
         }
     }
-#else
-    [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    public class YuzuFormsStartup : IUserComposer
-    {
-        public void Compose(Composition composition)
-        {
-            composition.Register<IFormElementMapGetter, FormElementMapGetter>(Lifetime.Singleton);
-            composition.RegisterAll<IFormFieldMappingsInternal>(typeof(YuzuFormsStartup).Assembly);
-
-            composition.Register<FormBuilderTypeConverter>();
-            composition.Register<FormTypeConvertor>();
-            composition.Register(typeof(FormValueResolver<,>));
-
-            //MUST be transient lifetimes
-            composition.Register(typeof(IUpdateableConfig), typeof(FormUmbracoConfig), Lifetime.Transient);
-            composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(FormVmBuilderConfig), Lifetime.Transient);
-            composition.Register(typeof(IUpdateableImportConfiguration), typeof(FormImportConfig), Lifetime.Transient);
-
-            composition.Register<YuzuMappingConfig, FormMappingConfig>();
-
-            composition.Register(typeof(YuzuMappingConfig), typeof(FormAutoMapping));
-        }
-    }
-#endif
 
     public class FormUmbracoConfig : UpdateableConfig
     {

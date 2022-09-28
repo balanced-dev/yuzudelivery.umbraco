@@ -7,12 +7,7 @@ using System.Linq.Expressions;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
-
-#if NETCOREAPP
 using Skybrud.Umbraco.GridData.Models;
-#else
-using Skybrud.Umbraco.GridData;
-#endif
 
 namespace YuzuDelivery.Umbraco.Grid
 {

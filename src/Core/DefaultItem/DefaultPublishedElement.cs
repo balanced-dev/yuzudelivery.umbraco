@@ -2,12 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using YuzuDelivery.Core;
-
-#if NETCOREAPP
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Umbraco.Core.Models.PublishedContent;
-#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -16,21 +11,14 @@ namespace YuzuDelivery.Umbraco.Core
     {
         private string docTypeAlias;
         private readonly IMapper mapper;
-#if NETCOREAPP
         private readonly IPublishedValueFallback publishedValueFallback;
-#endif
 
-        public DefaultPublishedElement(string docTypeAlias, IMapper mapper
-#if NETCOREAPP
-            , IPublishedValueFallback publishedValueFallback
-#endif
+        public DefaultPublishedElement(string docTypeAlias, IMapper mapper, IPublishedValueFallback publishedValueFallback
             )
         {
             this.docTypeAlias = docTypeAlias;
             this.mapper = mapper;
-#if NETCOREAPP
             this.publishedValueFallback = publishedValueFallback;
-#endif
         }
 
         public virtual bool IsValid(IPublishedElement element)
@@ -40,11 +28,7 @@ namespace YuzuDelivery.Umbraco.Core
 
         public virtual object Apply(IPublishedElement element, UmbracoMappingContext context)
         {
-#if NETCOREAPP
             var item = element.ToElement<M>(publishedValueFallback);
-#else
-            var item = element.ToElement<M>();
-#endif
 
             var output = mapper.Map<V>(item, context.Items);
             return output;

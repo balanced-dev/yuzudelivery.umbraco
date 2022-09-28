@@ -5,12 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using YuzuDelivery.Umbraco.Grid;
-
-#if NETCOREAPP
 using Microsoft.Extensions.DependencyInjection;
-#else
-using Umbraco.Core.Composing;
-#endif
 
 namespace YuzuDelivery.Umbraco.Core
 {

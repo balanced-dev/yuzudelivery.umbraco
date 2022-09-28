@@ -3,22 +3,14 @@ using System.Linq;
 using System.Text;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
-
-#if NETCOREAPP
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-#else
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
-#endif
 
 namespace YuzuDelivery.Umbraco.Forms
 {
     public class FormValueResolver<Source, Destination> : IYuzuFullPropertyResolver<Source, Destination, object, vmBlock_DataForm>
     {
         private readonly ISchemaMetaService schemaMetaService;
-
-#if NETCOREAPP
         private readonly ViewComponentHelper viewComponentHelper;
 
         public FormValueResolver(ISchemaMetaService schemaMetaService, ViewComponentHelper viewComponentHelper)
@@ -26,12 +18,6 @@ namespace YuzuDelivery.Umbraco.Forms
             this.schemaMetaService = schemaMetaService;
             this.viewComponentHelper = viewComponentHelper;
         }
-#else
-        public FormValueResolver(ISchemaMetaService schemaMetaService)
-        {
-            this.schemaMetaService = schemaMetaService;
-        }
-#endif
 
         public vmBlock_DataForm Resolve(Source source, Destination destination, object formValue, string propertyName, UmbracoMappingContext context)
         {
@@ -46,7 +32,6 @@ namespace YuzuDelivery.Umbraco.Forms
 
                 if (formValue != null && formValue.ToString() != string.Empty)
                 {
-#if NETCOREAPP
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
@@ -58,20 +43,6 @@ namespace YuzuDelivery.Umbraco.Forms
                             mappingItems = context.Items
                         }, context.Html.ViewContext, context.HttpContext).Result
                     };
-#else
-                    return new vmBlock_DataForm()
-                    {
-                        TestForm = null,
-                        LiveForm = context.Html?.Action("Render", "UmbracoForms",
-                        new
-                        {
-                            formId = formValue,
-                            view = "YuzuUmbracoFormsV8.cshtml",
-                            template = formBuilderTemplate,
-                            items = context.Items
-                        }).ToHtmlString()
-                    };
-#endif
                 }
             }
             return null;

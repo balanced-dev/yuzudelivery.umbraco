@@ -1,13 +1,8 @@
 ﻿using System.Linq;
 using Umbraco.Forms.Core;
-
-#if NETCOREAPP
 using Microsoft.Extensions.Options;
 using Umbraco.Forms.Core.Configuration;
 using Umbraco.Forms.Web.Models;
-#else
-using Umbraco.Forms.Mvc.Models;
-#endif
 
 namespace YuzuDelivery.Umbraco.Forms
 {
@@ -15,17 +10,10 @@ namespace YuzuDelivery.Umbraco.Forms
     {
         private string SiteKey;
 
-#if NETCOREAPP
         public parRecaptcha2FieldMapping(IOptions<Recaptcha2Settings> configuration)
         {
             this.SiteKey = configuration.Value.PublicKey;
         }
-#else
-        public parRecaptcha2FieldMapping(IFacadeConfiguration facadeConfiguration)
-        {
-            this.SiteKey = facadeConfiguration.GetSetting("RecaptchaPublicKey");
-        }
-#endif
 
         public bool IsValid(string name)
         {

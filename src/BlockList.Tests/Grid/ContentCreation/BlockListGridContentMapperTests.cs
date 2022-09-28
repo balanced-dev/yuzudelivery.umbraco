@@ -4,13 +4,12 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Rhino.Mocks;
-using Umbraco.Core.Models;
-using Umbraco.Web.PropertyEditors;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.PropertyEditors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Umb = Umbraco.Core.Services;
-using Umbraco.Core.Logging;
+using Umb = Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Logging;
 using YuzuDelivery.Umbraco.Import;
 using ApprovalTests;
 using ApprovalTests.Reporters;
@@ -40,7 +39,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         public vmBlock_DataRows dataRows;
         public vmBlock_DataGrid dataGrid;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             BaseFixtureSetup();

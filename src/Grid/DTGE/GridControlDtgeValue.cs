@@ -2,16 +2,9 @@
 using Newtonsoft.Json.Linq;
 using Our.Umbraco.DocTypeGridEditor.Helpers;
 using Skybrud.Essentials.Json.Extensions;
-
-#if NETCOREAPP
 using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Values;
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Skybrud.Umbraco.GridData;
-using Skybrud.Umbraco.GridData.Values;
-using Umbraco.Core.Models.PublishedContent;
-#endif
 
 namespace Skybrud.Umbraco.GridData.Dtge
 {

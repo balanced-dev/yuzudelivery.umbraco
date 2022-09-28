@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Rhino.Mocks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Mod = Umbraco.Core.Models;
+using Mod = Umbraco.Cms.Core.Models;
 using System.Reflection;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
+using Microsoft.Extensions.Hosting;
 
 namespace YuzuDelivery.Umbraco.Grid.Test
 {
@@ -41,7 +41,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
         public IContentType contentType;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             YuzuConstants.Reset();
@@ -51,18 +51,18 @@ namespace YuzuDelivery.Umbraco.Grid.Test
         [SetUp]
         public void Setup()
         {
-            vmHelperService = MockRepository.GenerateStub<IVmHelperService>();
-            dataTypeService = MockRepository.GenerateStub<IDataTypeService>();
-            dgteService = MockRepository.GenerateStub<IDTGEService>();
-            contentImportMergedService = MockRepository.GenerateStub<IContentImportMergedService>();
-            importConfig = new YuzuDeliveryImportConfiguration(new List<IUpdateableImportConfiguration>());
+            vmHelperService = Substitute.For<IVmHelperService>();
+            dataTypeService = Substitute.For<IDataTypeService>();
+            dgteService = Substitute.For<IDTGEService>();
+            contentImportMergedService = Substitute.For<IContentImportMergedService>();
+            importConfig = new YuzuDeliveryImportConfiguration(Substitute.For<IHostEnvironment>(), new List<IUpdateableImportConfiguration>());
 
-            contentImportPropertyService = MockRepository.GenerateStub<IContentImportPropertyService>();
-            contentMapperFactory = MockRepository.GenerateStub<IContentMapperFactory>();
+            contentImportPropertyService = Substitute.For<IContentImportPropertyService>();
+            contentMapperFactory = Substitute.For<IContentMapperFactory>();
 
             config = new ContentPropertyConfig();
 
-            contentType = MockRepository.GenerateStub<IContentType>();
+            contentType = Substitute.For<IContentType>();
 
             mapping = new VmToContentPropertyLink();
             mapping.CmsPropertyType = new InternalPropertyType();
@@ -73,12 +73,12 @@ namespace YuzuDelivery.Umbraco.Grid.Test
             vmContentMapping.ContentType = contentType;
             vmContentMapping.Mappings = mappings;
 
-            var umbDataType = MockRepository.GenerateStub<Mod.IDataType>();
+            var umbDataType = Substitute.For<Mod.IDataType>();
             umbDataType.Name = "gridDataType";
 
             dataType = new DataType(umbDataType);
 
-            dgteService.Stub(x => x.GetByName(dataType.Name)).Return(JObject.FromObject(new
+            dgteService.GetByName(dataType.Name).Returns(JObject.FromObject(new
             {
                 name = mapping.CmsPropertyType.Name
             }));
@@ -88,10 +88,10 @@ namespace YuzuDelivery.Umbraco.Grid.Test
             importConfig.GridRowConfigs.Add(new GridRowConfig(true, "100", "12", "12"));
             importConfig.GridRowConfigs.Add(new GridRowConfig(false, "50/50", "6", "6,6"));
 
-            svc = MockRepository.GeneratePartialMock<GridContentMapper>(new object[] { vmHelperService, dataTypeService, dgteService, contentImportMergedService, importConfig });
-            svc.Stub(x => x.GetGuid()).Return("testGuid");
+            svc = Substitute.ForPartsOf<GridContentMapper>(vmHelperService, dataTypeService, dgteService, contentImportMergedService, importConfig);           
+            svc.GetGuid().Returns("testGuid");
 
-            dataTypeService.Stub(x => x.Get(mapping.CmsPropertyType.DataTypeId)).Return(dataType);
+            dataTypeService.Get(mapping.CmsPropertyType.DataTypeId).Returns(dataType);
 
             Action<string, string, VmToContentPropertyLink, string, Action<string, string>> importProperty = (vmName, source, mapping, value, setValue) =>
             {
@@ -100,7 +100,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
                 else
                     setValue(mapping.CmsPropertyType.Alias, null);
             };
-            contentImportPropertyService.Stub(x => x.ImportProperty(null, null, null, null, null)).IgnoreArguments().Do(importProperty);
+            contentImportPropertyService.WhenForAnyArgs(x => x.ImportProperty(null, null, null, null, null))
+                .Do(x => importProperty(x.ArgAt<string>(0), x.ArgAt<string>(1), x.ArgAt<VmToContentPropertyLink>(2), x.ArgAt<string>(3), x.ArgAt<Action<string, string>>(4)));
         }
 
         [Test]
@@ -460,7 +461,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
             StubVmLink("vmBlock_Test", "test");
             CreateImportData(new string[] { "title", "obj", "objSubItem", "arraySubItem", "grandChildSubItem" });
-            dgteService.Stub(x => x.GetByName(dataType.Name)).Return(JObject.FromObject(dgteConfig));
+            dgteService.GetByName(dataType.Name).Returns(JObject.FromObject(dgteConfig));
 
             var jsonObject = JsonConvert.SerializeObject(new { title = "subObject" });
             var childJsonObj = JsonConvert.SerializeObject(new { obj = jsonObject });
@@ -586,8 +587,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
         public void StubVmLink(string vmName, string documentTypeAlias)
         {
-            svc.Stub(x => x.GetDocumentTypeAlias(vmContentMapping)).Return(documentTypeAlias);
-            vmHelperService.Stub(x => x.GetWithMapping(vmName)).Return(vmContentMapping);
+            svc.GetDocumentTypeAlias(vmContentMapping).Returns(documentTypeAlias);
+            vmHelperService.GetWithMapping(vmName).Returns(vmContentMapping);
         }
 
         public void CreateImportData(string[] propertyNames)
@@ -607,10 +608,10 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
         public PropertyInfo CreatePropertyInfo(string name, bool stubJsonPropertyName = true)
         {
-            var p = MockRepository.GenerateStub<PropertyInfo>();
-            p.Stub(x => x.Name).Return(name);
+            var p = Substitute.For<PropertyInfo>();
+            p.Name.Returns(name);
             if (stubJsonPropertyName)
-                svc.Stub(x => x.GetJsonPropertyName(p)).Return(name);
+                svc.GetJsonPropertyName(p).Returns(name);
             return p;
         }
 

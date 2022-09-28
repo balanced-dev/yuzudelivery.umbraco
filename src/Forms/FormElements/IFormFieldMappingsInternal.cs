@@ -1,8 +1,4 @@
-﻿#if NETCOREAPP 
-using Umbraco.Forms.Web.Models;
-#else
-using Umbraco.Forms.Mvc.Models;
-#endif
+﻿using Umbraco.Forms.Web.Models;
 
 namespace YuzuDelivery.Umbraco.Forms
 {

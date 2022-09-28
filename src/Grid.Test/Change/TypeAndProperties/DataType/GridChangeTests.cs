@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using Umbraco.Web.PropertyEditors;
+using Umbraco.Cms.Core.PropertyEditors;
 using NUnit.Framework;
 using Autofac;
 using YuzuDelivery.Umbraco.Grid;
-using Rhino.Mocks;
 using Newtonsoft.Json.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
@@ -34,7 +33,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
 
         public DGTEServiceMocks dtgeServiceMocks { get; set; }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             BaseFixtureSetup();

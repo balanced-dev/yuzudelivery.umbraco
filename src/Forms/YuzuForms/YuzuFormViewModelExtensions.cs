@@ -5,20 +5,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using YuzuDelivery.Umbraco.Core;
-
-#if NETCOREAPP
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Web.Common.UmbracoContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using System.Web.Mvc;
-using Umbraco.Web;
-using Umbraco.Web.Mvc;
-using Umbraco.Core.Models.PublishedContent;
-#endif
 
 namespace YuzuDelivery.Umbraco.Forms
 {
@@ -45,11 +37,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 //((List<Object>)formBuilder.Fieldsets[fieldsetIndex].Fields).Add(field);
         }
 
-#if NETCOREAPP
         public static void AddHandler<C>(this YuzuFormViewModel formBuilder, Expression<Func<C, Task<IActionResult>>> actionLambda)
-#else
-        public static void AddHandler<C>(this YuzuFormViewModel formBuilder, Expression<Func<C, ActionResult>> actionLambda)
-#endif
         {
             Type type = typeof(C);
 

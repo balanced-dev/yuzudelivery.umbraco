@@ -1,12 +1,6 @@
 ﻿using System.Collections.Generic;
-
-#if NETCOREAPP
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Models.Blocks;
-#else
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Core.Models.Blocks;
-#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {

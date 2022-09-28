@@ -4,17 +4,10 @@ using System.Linq;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
-
-#if NETCOREAPP
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.Models.Blocks;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Web;
-#else
-using Umbraco.Core.Models.Blocks;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web;
-#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -26,17 +19,11 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         private readonly IEnumerable<IGridItem> gridItems;
         private readonly IEnumerable<IGridItemInternal> gridItemsInternal;
-#if NETCOREAPP
         private readonly IPublishedValueFallback publishedValueFallback;
-#endif
 
         private IEnumerable<Type> viewmodelTypes;
 
-        public BlockListGridDataService(IMapper mapper, IYuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IEnumerable<IGridItem> gridItems, IEnumerable<IGridItemInternal> gridItemsInternal
-#if NETCOREAPP
-            , IPublishedValueFallback publishedValueFallback
-#endif
-            )
+        public BlockListGridDataService(IMapper mapper, IYuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IEnumerable<IGridItem> gridItems, IEnumerable<IGridItemInternal> gridItemsInternal, IPublishedValueFallback publishedValueFallback)
         {
             this.mapper = mapper;
             this.config = config;
@@ -44,9 +31,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             this.gridItems = gridItems;
             this.gridItemsInternal = gridItemsInternal;
-#if NETCOREAPP
             this.publishedValueFallback = publishedValueFallback;
-#endif
 
             this.viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix) || x.Name.StartsWith(YuzuConstants.Configuration.SubPrefix));
         }
@@ -110,11 +95,8 @@ namespace YuzuDelivery.Umbraco.BlockList
                             };
 
                             context.Items[_BlockList_Constants.ContextColumn] = column;
-#if NETCOREAPP
                             var columnContent = columnProperty.Value<BlockListModel>(publishedValueFallback);
-#else
-                            var columnContent = columnProperty.Value<BlockListModel>();
-#endif
+
                             column.Index = index;
                             column.Config = GetColumnSettingsVm(rowContent, columnProperty, context);
                             column.Items = columnContent?

@@ -5,21 +5,12 @@ using System.Threading.Tasks;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Forms;
-
-#if NETCOREAPP
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Umbraco.Cms.Web.Common.UmbracoContext;
 using Skybrud.Umbraco.GridData.Models;
-#else
-using System.Web.Mvc;
-using Umbraco.Web;
-using Umbraco.Web.Mvc;
-using Umbraco.Web.Models;
-using Skybrud.Umbraco.GridData;
-#endif
 
 namespace YuzuDelivery.Umbraco.Grid
 {

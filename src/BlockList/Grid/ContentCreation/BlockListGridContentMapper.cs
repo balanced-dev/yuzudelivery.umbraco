@@ -4,12 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using YuzuDelivery.Umbraco.Import;
-
-#if NETCOREAPP
 using Umbraco.Cms.Core;
-#else
-using Umbraco.Core;
-#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {

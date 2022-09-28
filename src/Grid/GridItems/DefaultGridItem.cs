@@ -5,13 +5,8 @@ using System.Collections.Generic;
 using System.Dynamic;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
-
-#if NETCOREAPP
 using Skybrud.Umbraco.GridData.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Umbraco.Core.Models.PublishedContent;
-#endif
 
 namespace YuzuDelivery.Umbraco.Grid
 {
@@ -21,22 +16,15 @@ namespace YuzuDelivery.Umbraco.Grid
         private string docTypeAlias;
         private readonly IMapper mapper;
         private readonly IYuzuTypeFactoryRunner typeFactoryRunner;
-#if NETCOREAPP
         private readonly IPublishedValueFallback publishedValueFallback;
-#endif
 
-        public DefaultGridItem(string docTypeAlias, IMapper mapper, IYuzuTypeFactoryRunner typeFactoryRunner
-#if NETCOREAPP
-            , IPublishedValueFallback publishedValueFallback
-#endif
+        public DefaultGridItem(string docTypeAlias, IMapper mapper, IYuzuTypeFactoryRunner typeFactoryRunner, IPublishedValueFallback publishedValueFallback
             )
         {
             this.docTypeAlias = docTypeAlias;
             this.mapper = mapper;
             this.typeFactoryRunner = typeFactoryRunner;
-#if NETCOREAPP
             this.publishedValueFallback = publishedValueFallback;
-#endif
         }
 
         public Type ElementType { get { return typeof(M); } }
@@ -63,12 +51,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
         public virtual object CreateVm(IPublishedElement model, IDictionary<string, object> contextItems, dynamic config = null)
         {
-#if NETCOREAPP
             var item = model.ToElement<M>(publishedValueFallback);
-#else
-            var item = model.ToElement<M>();
-#endif
-
             var output = typeFactoryRunner.Run<V>(contextItems);
             if (output == null)
                 output = mapper.Map<V>(model, contextItems);

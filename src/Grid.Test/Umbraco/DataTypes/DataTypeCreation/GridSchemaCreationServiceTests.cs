@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Rhino.Mocks;
-using Mod = Umbraco.Core.Models;
-using Umbraco.Core.PropertyEditors;
-using Umbraco.Web.PropertyEditors;
+using Mod = Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.PropertyEditors;
 using Newtonsoft.Json;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using Umb = Umbraco.Core.Services;
-using Log = Umbraco.Core.Logging;
+using Umb = Umbraco.Cms.Core.Services;
+using Log = Umbraco.Cms.Core.Logging;
 using YuzuDelivery.Umbraco.Import;
+using Microsoft.Extensions.Hosting;
 
 namespace YuzuDelivery.Umbraco.Grid.Test
 {
@@ -36,29 +35,28 @@ namespace YuzuDelivery.Umbraco.Grid.Test
         [SetUp]
         public void Setup()
         {
-            dataTypeService = MockRepository.GenerateStub<IDataTypeService>();
-            logger = MockRepository.GenerateStub<ILogger<SchemaChangeController>>();
-            dgteService = MockRepository.GenerateStub<IDTGEService>();
-            importConfig = new YuzuDeliveryImportConfiguration(new List<IUpdateableImportConfiguration>());
+            dataTypeService = Substitute.For<IDataTypeService>();
+            logger = Substitute.For<ILogger<SchemaChangeController>>();
+            dgteService = Substitute.For<IDTGEService>();
+            importConfig = new YuzuDeliveryImportConfiguration(Substitute.For<IHostEnvironment>(), new List<IUpdateableImportConfiguration>());
 
             Func<IDataType, IDataType> dataTypeAction = (dataType) => this.dataType = dataType;
-            dataTypeService.Stub(x => x.Save(dataType))
-                .IgnoreArguments()
-                .Do(dataTypeAction);
+            dataTypeService.Save(dataType)
+                .ReturnsForAnyArgs(x => dataTypeAction(x.Arg<IDataType>()));
 
             config = new ContentPropertyConfig();
 
             data = new VmToContentPropertyMap();
             data.Config = config;
 
-            var umbDataType = MockRepository.GenerateStub<Mod.IDataType>();
+            var umbDataType = Substitute.For<Mod.IDataType>();
             dataType = new DataType(umbDataType);
 
-            svc = MockRepository.GeneratePartialMock<GridSchemaCreationService>(new object[] { dataTypeService, importConfig, dgteService, logger });
+            svc = Substitute.ForPartsOf<GridSchemaCreationService>(dataTypeService, importConfig, dgteService, logger);
 
             Func<IDataType, IDataType> action = (d) => dataType = d;
-            dataTypeService.Stub(x => x.Save(dataType)).IgnoreArguments().Do(action);
-            dataTypeService.Stub(x => x.CreateDataType("Property Name", GridSchemaCreationService.DataEditorName)).Return(dataType);
+            dataTypeService.Save(dataType).ReturnsForAnyArgs(x => action(x.Arg<IDataType>()));
+            dataTypeService.CreateDataType("Property Name", GridSchemaCreationService.DataEditorName).Returns(dataType);
 
 
         }
@@ -220,8 +218,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
         public void StubGetDataTypeName()
         {
-            svc.Stub(x => x.GetDataTypeName(data)).Return("Property Name");
-            svc.Stub(x => x.GetDataTypeAlias(null)).IgnoreArguments().Return("propertyName");
+            svc.GetDataTypeName(data).Returns("Property Name");
+            svc.GetDataTypeAlias(null).ReturnsForAnyArgs(x => "propertyName");
         }
 
         public string GetConfigAsJson()

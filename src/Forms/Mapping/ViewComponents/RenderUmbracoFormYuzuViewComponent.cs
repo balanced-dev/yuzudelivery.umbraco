@@ -1,5 +1,4 @@
-﻿#if NETCOREAPP
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -42,4 +41,3 @@ namespace YuzuDelivery.Umbraco.Forms
         }
     }
 }
-#endif

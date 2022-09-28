@@ -4,11 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Umbraco.Core.Models;
-using Umbraco.Core.PropertyEditors;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.PropertyEditors;
 using Autofac;
-using Rhino.Mocks;
-using Umb = Umbraco.Core.Services;
+using Umb = Umbraco.Cms.Core.Services;
 using YuzuDelivery.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -48,8 +47,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
                 Configs = config.Select(x => x.ToObject<DTGEService.GridConfig>()).ToList();
             };
 
-            DGTEService.Stub(x => x.Save(null)).IgnoreArguments().Do(saveConfig);
-            DGTEService.Stub(x => x.Get()).IgnoreArguments().Do(getConfig);
+            DGTEService.When(x => x.Save(null)).Do(x => saveConfig(x.Arg<JArray>()));
+            DGTEService.Get().ReturnsForAnyArgs(x => getConfig());
 
         }
     }

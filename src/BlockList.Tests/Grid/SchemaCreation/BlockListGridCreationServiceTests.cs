@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Rhino.Mocks;
-using Mod = Umbraco.Core.Models;
-using Umbraco.Core.PropertyEditors;
-using Umbraco.Web.PropertyEditors;
+using Mod = Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.PropertyEditors;
 using Newtonsoft.Json;
-using Umb = Umbraco.Core.Services;
-using Umbraco.Core.Logging;
+using Umb = Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Logging;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using YuzuDelivery.Umbraco.Import;
@@ -33,7 +31,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
         public string propertyName;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             BaseFixtureSetup();

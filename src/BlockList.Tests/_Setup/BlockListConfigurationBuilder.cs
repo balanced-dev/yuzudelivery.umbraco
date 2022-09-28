@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Umbraco.Core.PropertyEditors;
-using Umbraco.Web.PropertyEditors;
+using Umbraco.Cms.Core.PropertyEditors;
+using Umbraco.Cms.Core.PropertyEditors;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
 

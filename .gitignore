@@ -346,3 +346,5 @@ src/Forms/YuzuDelivery.Umbraco.Grid.internal.csproj
 src/Templates/Templates/
 src/Templates/UmbracoTemplates/
 src/Templates/TestOutput/
+
+output/

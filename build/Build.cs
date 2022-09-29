@@ -1,7 +1,9 @@
 using System;
+using System.IO;
 using System.Linq;
 using Nuke.Common;
 using Nuke.Common.CI;
+using Nuke.Common.CI.AzurePipelines;
 using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
@@ -36,9 +38,18 @@ class Build : NukeBuild
     [NerdbankGitVersioning]
     readonly NerdbankGitVersioning NerdbankVersioning;
 
+    readonly DateTime BuildDate;
+
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
     AbsolutePath OutputDirectory => RootDirectory / "output";
+    AbsolutePath PackagesDirectory => OutputDirectory / "packages";
+    AbsolutePath TestResultsDirectory => OutputDirectory / "test_results";
+
+    public Build()
+    {
+        BuildDate = DateTime.Now;
+    }
 
     Target Clean => _ => _
         .Before(Restore)
@@ -48,6 +59,16 @@ class Build : NukeBuild
             TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
             EnsureCleanDirectory(OutputDirectory);
         });
+
+
+    Target AddAzureArtifactsFeed => _ => _
+        .OnlyWhenStatic(() => IsServerBuild)
+        .DependentFor(Restore)
+        .Executes(() =>
+            DotNetNuGetAddSource(s => s
+              .SetName("Azure Artifacts")
+              .SetSource("https://pkgs.dev.azure.com/hifiagency/Yuzu/_packaging/Yuzu.Delivery/nuget/v3/index.json"))
+        );
 
     Target Restore => _ => _
         .Executes(() =>
@@ -66,22 +87,44 @@ class Build : NukeBuild
                 .EnableNoRestore());
         });
 
-    /*Target Test => _ => _
+    Target Test => _ => _
         .DependsOn(Compile)
         .Executes(() =>
         {
-            DotNetTest(s => s
-                .SetProjectFile(Solution)
-                .SetConfiguration(Configuration)
-                .EnableNoBuild());
-        });*/
+            var testProjects = Solution.GetProjects("*.Tests");
+
+            try
+            {
+                DotNetTest(s => s
+                    .SetConfiguration(Configuration)
+                    .SetResultsDirectory(TestResultsDirectory)
+                    .EnableNoBuild()
+                    .CombineWith(testProjects, (_, project) => _
+                        .SetProjectFile(project)
+                        .SetLoggers($"trx;LogFileName={project.Name}.trx")),
+                    completeOnFailure: true);
+            }
+            finally
+            {
+                ReportTestResults();
+            }
+        });
+
+    void ReportTestResults()
+    {
+        TestResultsDirectory.GlobFiles("*.trx").ForEach(x =>
+            AzurePipelines.Instance?.PublishTestResults(
+                type: AzurePipelinesTestResultsType.VSTest,
+                title: $"{Path.GetFileNameWithoutExtension(x)}",
+                files: new string[] { x }));
+    }
 
     Target Pack => _ => _
-        .DependsOn(Compile)
+        .DependsOn(Test)
         .Executes(() =>
         {
             DotNetPack(s => s
-                .SetOutputDirectory(OutputDirectory)
+                .SetOutputDirectory(PackagesDirectory)
                 .SetConfiguration(Configuration));
         });
 
@@ -89,7 +132,8 @@ class Build : NukeBuild
         .DependsOn(Pack)
         .Executes(() =>
         {
-            Log.Information("NerdbankVersioning = {Value}", NerdbankVersioning.SimpleVersion);
+            Log.Information("NuGetPackageVersion:          {Value}", NerdbankVersioning.NuGetPackageVersion);
+            Log.Information("AssemblyInformationalVersion: {Value}", NerdbankVersioning.AssemblyInformationalVersion);
         });
 
 }

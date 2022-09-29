@@ -72,11 +72,13 @@
           "items": {
             "type": "string",
             "enum": [
+              "AddAzureArtifactsFeed",
               "Clean",
               "Compile",
               "Pack",
               "Report",
-              "Restore"
+              "Restore",
+              "Test"
             ]
           }
         },
@@ -90,11 +92,13 @@
           "items": {
             "type": "string",
             "enum": [
+              "AddAzureArtifactsFeed",
               "Clean",
               "Compile",
               "Pack",
               "Report",
-              "Restore"
+              "Restore",
+              "Test"
             ]
           }
         },

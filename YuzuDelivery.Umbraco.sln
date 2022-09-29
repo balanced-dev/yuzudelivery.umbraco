@@ -5,11 +5,7 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Core", "src\Core\YuzuDelivery.Umbraco.Core.csproj", "{A9B8F2AC-90F9-4219-BCDA-7FF6E8266C19}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Core.Test", "src\Core.Test\YuzuDelivery.Umbraco.Core.Test.csproj", "{B8CC0CA6-24DE-4153-AFA5-F9F5EA62F683}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Forms", "src\Forms\YuzuDelivery.Umbraco.Forms.csproj", "{E1B59BAF-A544-4A74-A538-9464182572D8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Forms.Test", "src\Forms.Test\YuzuDelivery.Umbraco.Forms.Test.csproj", "{F556A286-C6E6-41AD-9343-1E4D77F63577}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Grid", "src\Grid\YuzuDelivery.Umbraco.Grid.csproj", "{EC27DF56-5A85-4CCA-9720-CF000269BE1F}"
 EndProject
@@ -17,19 +13,37 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Member
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.BlockList", "src\BlockList\YuzuDelivery.Umbraco.BlockList.csproj", "{DAF7A3D3-411C-448B-9489-42306783511F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.BlockList.Tests", "src\BlockList.Tests\YuzuDelivery.Umbraco.BlockList.Tests.csproj", "{FBA3724B-600D-4E7A-84EC-13B5B80EB2F2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Grid.Test", "src\Grid.Test\YuzuDelivery.Umbraco.Grid.Test.csproj", "{288F5F4B-9D22-4EDD-98C5-C035082373A1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.TestProject", "src\QuickstartExample.TestProject\YuzuDelivery.Umbraco.TestProject.csproj", "{FC6DDAF7-EB33-4308-9F38-74A52BC25749}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{471F4A9A-40AC-4952-B118-C23B58E3BD69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Import.Tests.Integration", "..\YuzuDelivery.Umbraco.Import\tests\YuzuDelivery.Umbraco.Import.Tests.Integration\YuzuDelivery.Umbraco.Import.Tests.Integration.csproj", "{C5718FA0-6172-4822-86C7-78EE73806C02}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - Solution Items", "00 - Solution Items", "{8F8F0DF2-3C42-4116-98A6-9F48428E95FE}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
+		Directory.Build.props = Directory.Build.props
+		license.txt = license.txt
+		readme.md = readme.md
+		version.json = version.json
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Import", "..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Import\YuzuDelivery.Import.csproj", "{7B1A6849-718C-454F-AA34-1A0C06587126}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Libs", "01 - Libs", "{23FDB3B2-CCD9-442C-8C77-438764A409B8}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Import", "..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.csproj", "{4E386A8E-C601-4D77-9209-9E74DF0C0717}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Tests", "02 - Tests", "{A8DC00AE-D608-4E44-8AAD-535908D58898}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.BlockList.Tests", "tests\BlockList.Tests\YuzuDelivery.Umbraco.BlockList.Tests.csproj", "{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Core.Tests", "tests\Core.Tests\YuzuDelivery.Umbraco.Core.Tests.csproj", "{AD4F72B3-E459-444D-BCCA-D6092294B22C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Forms.Tests", "tests\Forms.Tests\YuzuDelivery.Umbraco.Forms.Tests.csproj", "{A5670F13-A461-4A77-9AC6-1E1141DDB949}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Grid.Tests", "tests\Grid.Tests\YuzuDelivery.Umbraco.Grid.Tests.csproj", "{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,18 +55,10 @@ Global
 		{A9B8F2AC-90F9-4219-BCDA-7FF6E8266C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9B8F2AC-90F9-4219-BCDA-7FF6E8266C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9B8F2AC-90F9-4219-BCDA-7FF6E8266C19}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8CC0CA6-24DE-4153-AFA5-F9F5EA62F683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8CC0CA6-24DE-4153-AFA5-F9F5EA62F683}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8CC0CA6-24DE-4153-AFA5-F9F5EA62F683}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8CC0CA6-24DE-4153-AFA5-F9F5EA62F683}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E1B59BAF-A544-4A74-A538-9464182572D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E1B59BAF-A544-4A74-A538-9464182572D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1B59BAF-A544-4A74-A538-9464182572D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1B59BAF-A544-4A74-A538-9464182572D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F556A286-C6E6-41AD-9343-1E4D77F63577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F556A286-C6E6-41AD-9343-1E4D77F63577}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F556A286-C6E6-41AD-9343-1E4D77F63577}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F556A286-C6E6-41AD-9343-1E4D77F63577}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC27DF56-5A85-4CCA-9720-CF000269BE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC27DF56-5A85-4CCA-9720-CF000269BE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC27DF56-5A85-4CCA-9720-CF000269BE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,37 +71,45 @@ Global
 		{DAF7A3D3-411C-448B-9489-42306783511F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAF7A3D3-411C-448B-9489-42306783511F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAF7A3D3-411C-448B-9489-42306783511F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBA3724B-600D-4E7A-84EC-13B5B80EB2F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBA3724B-600D-4E7A-84EC-13B5B80EB2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBA3724B-600D-4E7A-84EC-13B5B80EB2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBA3724B-600D-4E7A-84EC-13B5B80EB2F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{288F5F4B-9D22-4EDD-98C5-C035082373A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{288F5F4B-9D22-4EDD-98C5-C035082373A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{288F5F4B-9D22-4EDD-98C5-C035082373A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{288F5F4B-9D22-4EDD-98C5-C035082373A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Release|Any CPU.Build.0 = Release|Any CPU
 		{471F4A9A-40AC-4952-B118-C23B58E3BD69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{471F4A9A-40AC-4952-B118-C23B58E3BD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5718FA0-6172-4822-86C7-78EE73806C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5718FA0-6172-4822-86C7-78EE73806C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5718FA0-6172-4822-86C7-78EE73806C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5718FA0-6172-4822-86C7-78EE73806C02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B1A6849-718C-454F-AA34-1A0C06587126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B1A6849-718C-454F-AA34-1A0C06587126}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B1A6849-718C-454F-AA34-1A0C06587126}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B1A6849-718C-454F-AA34-1A0C06587126}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E386A8E-C601-4D77-9209-9E74DF0C0717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E386A8E-C601-4D77-9209-9E74DF0C0717}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E386A8E-C601-4D77-9209-9E74DF0C0717}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E386A8E-C601-4D77-9209-9E74DF0C0717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD4F72B3-E459-444D-BCCA-D6092294B22C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD4F72B3-E459-444D-BCCA-D6092294B22C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD4F72B3-E459-444D-BCCA-D6092294B22C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD4F72B3-E459-444D-BCCA-D6092294B22C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5670F13-A461-4A77-9AC6-1E1141DDB949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5670F13-A461-4A77-9AC6-1E1141DDB949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5670F13-A461-4A77-9AC6-1E1141DDB949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5670F13-A461-4A77-9AC6-1E1141DDB949}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {226AF1B5-DBE5-4581-8F9A-368634F97D6A}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DAF7A3D3-411C-448B-9489-42306783511F} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
+		{A9B8F2AC-90F9-4219-BCDA-7FF6E8266C19} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
+		{E1B59BAF-A544-4A74-A538-9464182572D8} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
+		{EC27DF56-5A85-4CCA-9720-CF000269BE1F} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
+		{EAAEA3C8-0C65-47DD-839C-BFC6F025D9C7} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
+		{FC6DDAF7-EB33-4308-9F38-74A52BC25749} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
+		{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
+		{AD4F72B3-E459-444D-BCCA-D6092294B22C} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
+		{A5670F13-A461-4A77-9AC6-1E1141DDB949} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
+		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
 	EndGlobalSection
 EndGlobal

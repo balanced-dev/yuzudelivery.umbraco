@@ -67,7 +67,8 @@ class Build : NukeBuild
         .Executes(() =>
             DotNetNuGetAddSource(s => s
               .SetName("Azure Artifacts")
-              .SetSource("https://pkgs.dev.azure.com/hifiagency/Yuzu/_packaging/Yuzu.Delivery/nuget/v3/index.json"))
+              .SetSource("https://pkgs.dev.azure.com/hifiagency/Yuzu/_packaging/Yuzu.Delivery/nuget/v3/index.json")
+              .SetPassword(AzurePipelines.Instance.AccessToken))
         );
 
     Target Restore => _ => _

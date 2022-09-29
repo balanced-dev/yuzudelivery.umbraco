@@ -68,6 +68,7 @@ class Build : NukeBuild
             DotNetNuGetAddSource(s => s
               .SetName("Azure Artifacts")
               .SetSource("https://pkgs.dev.azure.com/hifiagency/Yuzu/_packaging/Yuzu.Delivery/nuget/v3/index.json")
+              .SetUsername("devops")
               .SetPassword(AzurePipelines.Instance.AccessToken))
         );
 

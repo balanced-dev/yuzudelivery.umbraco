@@ -6,6 +6,7 @@ using Autofac;
 using YuzuDelivery.Umbraco.Forms;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
+using Umbraco.Forms.Core.PropertyEditors;
 
 namespace Yuzu.Delivery.Forms.Tests.Integration.ChangeItem
 {
@@ -61,7 +62,7 @@ namespace Yuzu.Delivery.Forms.Tests.Integration.ChangeItem
 
             svc.ChangeProperty(map);
 
-            Assert.IsInstanceOf<Dictionary<string, object>>(umb.DataType.Current.Configuration);
+            Assert.IsInstanceOf<FormPickerConfiguration>(umb.DataType.Current.Configuration);
             Assert.AreEqual("Form Picker", umb.DataType.Current.Name);
         }
 

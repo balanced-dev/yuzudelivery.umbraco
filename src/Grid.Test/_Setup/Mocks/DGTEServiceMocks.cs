@@ -47,8 +47,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
                 Configs = config.Select(x => x.ToObject<DTGEService.GridConfig>()).ToList();
             };
 
-            DGTEService.When(x => x.Save(null)).Do(x => saveConfig(x.Arg<JArray>()));
-            DGTEService.Get().ReturnsForAnyArgs(x => getConfig());
+            DGTEService.Configure().WhenForAnyArgs(x => x.Save(default)).Do(x => saveConfig(x.Arg<JArray>()));
+            DGTEService.Configure().Get().ReturnsForAnyArgs(x => getConfig());
 
         }
     }

@@ -16,9 +16,9 @@
     <PackageReference Include="Umbraco.Cms" Version="10.0.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="YuzuDelivery.Core" Version="3.0.0-beta-g3afbdf71ec" />
-    <PackageReference Include="YuzuDelivery.Import" Version="3.0.0-beta-ged4159d884" />
-    <PackageReference Include="YuzuDelivery.Umbraco.Import" Version="3.0.0-beta-ged4159d884" />
-    <PackageReference Include="YuzuDelivery.Umbraco.Import.Tests.Integration" Version="3.0.0-beta-ged4159d884" />
+    <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Import\YuzuDelivery.Import.csproj" />
+    <ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.csproj" />
+	<ProjectReference Include="..\..\..\YuzuDelivery.Umbraco.Import\tests\YuzuDelivery.Umbraco.Import.Tests.Integration\YuzuDelivery.Umbraco.Import.Tests.Integration.csproj" />
   </ItemGroup>
 
  <ItemGroup>

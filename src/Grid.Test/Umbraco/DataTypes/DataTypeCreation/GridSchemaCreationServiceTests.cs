@@ -218,8 +218,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
         public void StubGetDataTypeName()
         {
-            svc.GetDataTypeName(data).Returns("Property Name");
-            svc.GetDataTypeAlias(null).ReturnsForAnyArgs(x => "propertyName");
+            svc.Configure().GetDataTypeName(data).Returns("Property Name");
+            svc.Configure().GetDataTypeAlias(null).ReturnsForAnyArgs(x => "propertyName");
         }
 
         public string GetConfigAsJson()

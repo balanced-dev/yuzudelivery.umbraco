@@ -611,7 +611,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
             var p = Substitute.For<PropertyInfo>();
             p.Name.Returns(name);
             if (stubJsonPropertyName)
-                svc.GetJsonPropertyName(p).Returns(name);
+                svc.Configure().GetJsonPropertyName(p).Returns(name);
             return p;
         }
 

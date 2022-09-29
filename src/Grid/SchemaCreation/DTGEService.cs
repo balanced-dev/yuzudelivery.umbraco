@@ -77,11 +77,15 @@ namespace YuzuDelivery.Umbraco.Grid
 
         public virtual void Save(JArray config)
         {
-            var configFile = File.ReadAllText(mapPath.Get(ConfigPath));
-            var configObj = JObject.Parse(configFile);
-            configObj["gridEditors"] = config;
-            configFile = JsonConvert.SerializeObject(configObj, Formatting.Indented);
-            File.WriteAllText(mapPath.Get(ConfigPath), configFile);
+            try
+            {
+                var configFile = File.ReadAllText(mapPath.Get(ConfigPath));
+                var configObj = JObject.Parse(configFile);
+                configObj["gridEditors"] = config;
+                configFile = JsonConvert.SerializeObject(configObj, Formatting.Indented);
+                File.WriteAllText(mapPath.Get(ConfigPath), configFile);
+            }
+            catch { }
         }
 
         public class GridConfig

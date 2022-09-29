@@ -23,7 +23,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Grid.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.TestProject", "src\QuickstartExample.TestProject\YuzuDelivery.Umbraco.TestProject.csproj", "{FC6DDAF7-EB33-4308-9F38-74A52BC25749}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build/_build.csproj", "{471F4A9A-40AC-4952-B118-C23B58E3BD69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{471F4A9A-40AC-4952-B118-C23B58E3BD69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Import.Tests.Integration", "..\YuzuDelivery.Umbraco.Import\tests\YuzuDelivery.Umbraco.Import.Tests.Integration\YuzuDelivery.Umbraco.Import.Tests.Integration.csproj", "{C5718FA0-6172-4822-86C7-78EE73806C02}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Import", "..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Import\YuzuDelivery.Import.csproj", "{7B1A6849-718C-454F-AA34-1A0C06587126}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Import", "..\YuzuDelivery.Umbraco.Import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.csproj", "{4E386A8E-C601-4D77-9209-9E74DF0C0717}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +79,18 @@ Global
 		{FC6DDAF7-EB33-4308-9F38-74A52BC25749}.Release|Any CPU.Build.0 = Release|Any CPU
 		{471F4A9A-40AC-4952-B118-C23B58E3BD69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{471F4A9A-40AC-4952-B118-C23B58E3BD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5718FA0-6172-4822-86C7-78EE73806C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5718FA0-6172-4822-86C7-78EE73806C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5718FA0-6172-4822-86C7-78EE73806C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5718FA0-6172-4822-86C7-78EE73806C02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B1A6849-718C-454F-AA34-1A0C06587126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B1A6849-718C-454F-AA34-1A0C06587126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B1A6849-718C-454F-AA34-1A0C06587126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B1A6849-718C-454F-AA34-1A0C06587126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E386A8E-C601-4D77-9209-9E74DF0C0717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E386A8E-C601-4D77-9209-9E74DF0C0717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E386A8E-C601-4D77-9209-9E74DF0C0717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E386A8E-C601-4D77-9209-9E74DF0C0717}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

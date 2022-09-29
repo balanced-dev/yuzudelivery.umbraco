@@ -10,6 +10,8 @@ pool:
 steps:
 
   - task: CmdLine@2
+    env:
+      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
     inputs:
       script: './build.cmd'
 

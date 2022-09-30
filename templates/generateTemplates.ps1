@@ -103,7 +103,7 @@ $properties = @{
     "classifications" = @("Yuzu", "Umbraco", "CMS")
 }
 Update-Template-Meta-Simple -folder 'testproject' -properties $properties
-
+xcopy /s /q '.\Yuzu\TestProject' '.\testproject' | Out-Null
 Write-Host "Created testproject"
 
 Pop-Location

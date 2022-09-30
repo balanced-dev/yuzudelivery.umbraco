@@ -1,0 +1,18 @@
+<div>String: {{string}}</div>
+<div>Enum: {{enumString}}</div>
+<div>String Array: {{#each stringArray}}{{this}} {{/each}}</div>
+<div>Boolean: {{boolean}}</div>
+<div>Integer: {{integer}}</div>
+<div>Number: {{number}}</div>
+<div>Image: <img src="{{image.src}}" alt="{{image.alt}}" /></div>
+<div>Image Array: {{#each imageArray}}<img src="{{this.src}}" alt="{{this.alt}}" />{{/each}}</div>
+<div>Link: <a href="{{link.href}}" title="{{link.title}}">{{link.label}}</a></div>
+<div>Link Array: {{#each linkArray}}<a href="{{this.href}}" title="{{this.title}}">{{this.label}}</a> {{/each}}</div>
+{{#if subBlock}}<div>SubBlock: {{> parSubBlock subBlock}}</div>{{/if}}
+{{#if subBlocks}}<div>SubBlocks: 
+    <ul>
+        {{#each subBlocks}}
+            {{> parSubBlock this}}
+        {{/each}}
+    </ul>
+</div>{{/if}}

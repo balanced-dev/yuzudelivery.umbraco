@@ -1,0 +1,32 @@
+{
+    "id": "/parRecaptcha",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "siteKey": {
+            "type": "string"
+        },
+        "theme": {
+            "type": "string"
+        },
+        "size": {
+            "type": "string"
+        },
+        "config": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {}
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": false
+}

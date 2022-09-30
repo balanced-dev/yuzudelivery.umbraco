@@ -1,0 +1,17 @@
+{
+    "form": {
+        "testForm": {
+            "title": "Register",
+            "isSuccess": true,
+            "successMessage": "Account created successfully!",
+            "actionLinks": [
+                {
+                    "label": "Continue back to site",
+                    "href": "#",
+                    "title": ""
+                }
+            ],
+            "_ref": "/parFormBuilder"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "id": "/parGlobalGrid",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "global": {
+            "$ref": "/parGlobal"
+        },
+        "globalList": {
+            "type": "array",
+            "items": {
+                "$ref": "/parGlobal"
+            }
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

@@ -30,7 +30,7 @@ function Copy-Yuzu-Folder {
         $Folder
     )
 
-    $pathToYuzuDir = ".\$($folder)\Yuzu"
+    $pathToYuzuDir = ".\$($folder)\yuzu"
 
     Copy-Item -Path ".\Yuzu\Startup" -Destination $pathToYuzuDir -Recurse
 }

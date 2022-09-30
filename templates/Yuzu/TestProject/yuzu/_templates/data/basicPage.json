@@ -1,0 +1,63 @@
+{
+    "content": {
+        "string": "string",
+        "enumString": "value1",
+        "stringArray": [
+            "string1",
+            "string2"
+        ],
+        "boolean": true,
+        "integer": 1,
+        "number": 1.5,
+        "image": {
+            "src": "/_client/images/example.png",
+            "alt": "alt"
+        },
+        "imageArray": [
+            {
+                "src": "/_client/images/example.png",
+                "alt": "alt"
+            },
+            {
+                "src": "/_client/images/cat.jfif",
+                "alt": "alt"
+            }
+        ],
+        "link": {
+            "href": "#",
+            "title": "title",
+            "label": "label"
+        },
+        "linkArray": [
+            {
+                "href": "#",
+                "title": "title",
+                "label": "label"
+            },
+            {
+                "href": "#",
+                "title": "title2",
+                "label": "label2"
+            }
+        ],
+        "subBlock": {
+            "title": "SubBlock Title",
+            "_ref": "/parSubBlock",
+            "yuzu-path": "/content/subBlock"
+        },
+        "subBlocks": [
+            {
+                "title": "SubBlock Title",
+                "_ref": "/parSubBlock",
+                "yuzu-path": "/content/subBlocks[0]"
+            },
+            {
+                "title": "SubBlock Title",
+                "_ref": "/parSubBlock",
+                "yuzu-path": "/content/subBlocks[1]"
+            }
+        ],
+        "_ref": "/parContent",
+        "yuzu-path": "/content"
+    }
+}

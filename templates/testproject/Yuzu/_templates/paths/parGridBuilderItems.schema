@@ -1,0 +1,8 @@
+{
+    "refs": {
+        "": [
+            "/parContent",
+            "/parGlobalGrid"
+        ]
+    }
+}

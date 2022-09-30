@@ -1,0 +1,129 @@
+{
+    "content": {
+        "rows": [
+            {
+                "config": {
+                    "string": "string",
+                    "boolean": true,
+                    "number": 1.5,
+                    "enumString": "value1",
+                    "image": {
+                        "src": "/_client/images/example.png",
+                        "alt": "alt"
+                    },
+                    "link": {
+                        "href": "#",
+                        "title": "title",
+                        "label": "label"
+                    }
+                },
+                "items": [
+                    {
+                        "string": "string",
+                        "enumString": "value1",
+                        "stringArray": [
+                            "string1",
+                            "string2"
+                        ],
+                        "boolean": true,
+                        "integer": 1,
+                        "number": 1.5,
+                        "image": {
+                            "src": "/_client/images/example.png",
+                            "alt": "alt"
+                        },
+                        "imageArray": [
+                            {
+                                "src": "/_client/images/example.png",
+                                "alt": "alt"
+                            },
+                            {
+                                "src": "/_client/images/cat.jfif",
+                                "alt": "alt"
+                            }
+                        ],
+                        "link": {
+                            "href": "#",
+                            "title": "title",
+                            "label": "label"
+                        },
+                        "linkArray": [
+                            {
+                                "href": "#",
+                                "title": "title",
+                                "label": "label"
+                            },
+                            {
+                                "href": "#",
+                                "title": "title2",
+                                "label": "label2"
+                            }
+                        ],
+                        "subBlock": {
+                            "title": "SubBlock Title",
+                            "_ref": "/parSubBlock",
+                            "yuzu-path": "/content/rows[0]/items[0]/subBlock"
+                        },
+                        "subBlocks": [
+                            {
+                                "title": "SubBlock Title",
+                                "_ref": "/parSubBlock",
+                                "yuzu-path": "/content/rows[0]/items[0]/subBlocks[0]"
+                            },
+                            {
+                                "title": "SubBlock Title",
+                                "_ref": "/parSubBlock",
+                                "yuzu-path": "/content/rows[0]/items[0]/subBlocks[1]"
+                            }
+                        ],
+                        "_ref": "/parContent",
+                        "yuzu-path": "/content/rows[0]/items[0]"
+                    },
+                    {
+                        "string": "string",
+                        "enumString": "value1",
+                        "stringArray": [
+                            "string1",
+                            "string2"
+                        ],
+                        "boolean": true,
+                        "integer": 1,
+                        "number": 1.5,
+                        "image": {
+                            "src": "/_client/images/example.png",
+                            "alt": "alt"
+                        },
+                        "imageArray": [
+                            {
+                                "src": "/_client/images/example.png",
+                                "alt": "alt"
+                            },
+                            {
+                                "src": "/_client/images/cat.jfif",
+                                "alt": "alt"
+                            }
+                        ],
+                        "link": {
+                            "href": "#",
+                            "title": "title",
+                            "label": "label"
+                        },
+                        "linkArray": [
+                            {
+                                "href": "#",
+                                "title": "title",
+                                "label": "label"
+                            },
+                            {
+                                "href": "#",
+                                "title": "title2",
+                                "label": "label2"
+                            }
+                        ],
+                        "_ref": "/parContent"
+                    }
+                ]
+            }
+        ]
+    }
+}

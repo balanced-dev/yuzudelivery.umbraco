@@ -45,6 +45,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Forms.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Grid.Tests", "tests\Grid.Tests\YuzuDelivery.Umbraco.Grid.Tests.csproj", "{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Templates", "03 - Templates", "{1056854C-D5DD-4268-8C78-E53C298F6CE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Templates", "templates\YuzuDelivery.Umbraco.Templates.csproj", "{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +97,10 @@ Global
 		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,5 +119,6 @@ Global
 		{AD4F72B3-E459-444D-BCCA-D6092294B22C} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
 		{A5670F13-A461-4A77-9AC6-1E1141DDB949} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
 		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
+		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3} = {1056854C-D5DD-4268-8C78-E53C298F6CE8}
 	EndGlobalSection
 EndGlobal

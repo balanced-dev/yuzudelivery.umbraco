@@ -11,6 +11,7 @@
     <PackageReference Include="YuzuDelivery.Umbraco.Core" Version="3.0.0-alpha.*" />
     <PackageReference Include="YuzuDelivery.Umbraco.Forms" Version="3.0.0-alpha.*" />
     <PackageReference Include="YuzuDelivery.Umbraco.Members" Version="3.0.0-alpha.*" />
+    <PackageReference Include="YuzuDelivery.Umbraco.BlockList" Version="3.0.0-alpha.*" />
   </ItemGroup>
   <ItemGroup>
     <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->

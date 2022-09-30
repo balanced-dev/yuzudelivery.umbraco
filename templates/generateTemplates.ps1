@@ -40,7 +40,7 @@ Install-Module Newtonsoft.Json -Scope CurrentUser -Force
 Import-Module Newtonsoft.Json
 
 # Import all the utility functions used below.
-Import-Module ./utils.psm1 -Force 
+Import-Module ./utils.psm1 -Force
 
 # Download Umbraco.Templates nuget package
 mkdir .tmp | Out-Null
@@ -76,6 +76,12 @@ $properties = @{
     "defaultName" = "YuzuDelivery1";
     "classifications" = @("Yuzu", "Umbraco", "CMS")
 }
+$dependencies = [ordered]@{
+    "Umbraco.Forms" = $UmbracoFormsVersion;
+    "YuzuDelivery.Umbraco.Core" = $YuzuDeliveryUmbracoVersion;
+    "YuzuDelivery.Umbraco.Forms" = $YuzuDeliveryUmbracoVersion;
+    "YuzuDelivery.Umbraco.Members" = $YuzuDeliveryUmbracoVersion;
+}
 Update-Template-Meta-Simple 'standalone' -properties $properties
 
 Write-Host "Created standalone"
@@ -91,6 +97,13 @@ Update-ModeslBuilder -folder 'testproject' -isWeb $False
 Add-Yuzu-AppSettings -folder 'testproject' -isWeb $False
 Copy-Forms-Partials -folder 'testproject'
 Copy-Icon -folder 'testproject'
+$dependencies = [ordered]@{
+    "Umbraco.Forms" = $UmbracoFormsVersion;
+    "YuzuDelivery.Umbraco.Core" = $YuzuDeliveryUmbracoVersion;
+    "YuzuDelivery.Umbraco.Forms" = $YuzuDeliveryUmbracoVersion;
+    "YuzuDelivery.Umbraco.Members" = $YuzuDeliveryUmbracoVersion;
+    "YuzuDelivery.Umbraco.BlockList" = $YuzuDeliveryUmbracoVersion;
+}
 Add-Project-Dependencies-Simple -folder 'testproject' -dependencies $dependencies
 $properties = @{
     "author" = "Hi-Fi Ltd";

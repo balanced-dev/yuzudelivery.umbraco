@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<YuzuFormViewModel>
+@using System.Web.Mvc.Html
+@using Umbraco.Web
+
+@{
+    Func<object> getData = () =>
+    {
+        if (Html.ValidationSummary() != null)
+        {
+            Model.Form.Validation = new vmSub_DataFormBuilderValidation() { Message = Html.ValidationSummary().ToString() };
+        }
+
+        return Model.Form;
+    };
+
+    if (Model.Controller != null)
+    {
+        using (Html.BeginUmbracoForm(Model.Action, Model.Controller, null, Model.HtmlFormAttributes, FormMethod.Post))
+        {
+            if (Model.AddAntiForgeryToken)
+            {
+                @Html.AntiForgeryToken()
+            }
+            @Html.RenderYuzu(new RenderSettings() { Template = Model.Template, Data = getData, ShowJson = false })
+        }
+    }
+    else
+    {
+        @Html.RenderYuzu(new RenderSettings() { Template = Model.Template, Data = getData, ShowJson = false })
+    }
+
+}
+

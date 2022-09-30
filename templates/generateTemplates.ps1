@@ -14,6 +14,14 @@ if(-Not $YuzuDeliveryUmbracoVersion)
     $YuzuDeliveryUmbracoVersion = (nbgv get-version -v NuGetPackageVersion)
 }
 
+if($YuzuDeliveryUmbracoVersion -match "(.*)\-(.*?)\.")
+{
+    # Pre-release hack - prevent csproj changing on generate for every single commit (as heigh + sha change every commit)
+    $short = $matches[0]
+    $YuzuDeliveryUmbracoVersion = "$short*"
+}
+
+
 Write-Host "###################################################################"
 Write-Host "# Umbraco Version:       $UmbracoVersion"
 Write-Host "# Forms Version:         $UmbracoFormsVersion"

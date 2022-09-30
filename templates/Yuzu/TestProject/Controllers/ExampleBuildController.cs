@@ -9,8 +9,6 @@ using System.Reflection;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Core.ViewModelBuilder;
-
-#if NETCOREAPP
 using Umbraco.Cms.Web.Common.Attributes;
 using Umbraco.Cms.Web.BackOffice.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -19,14 +17,6 @@ using Microsoft.AspNetCore.Http;
 using Umb = Umbraco.Cms.Core.Services;
 using Mod = Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Web.BackOffice.ModelsBuilder;
-#else
-using Umbraco.Web.WebApi;
-using Umbraco.Web.Mvc;
-using System.Web.Http;
-using Umb = Umbraco.Core.Services;
-using Mod = Umbraco.Core.Models;
-using Umbraco.ModelsBuilder.Embedded.BackOffice;
-#endif
 
 namespace YuzuDelivery.Umbraco.TestProject
 {

@@ -1,5 +1,4 @@
-﻿#if NETCOREAPP
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using Umbraco.Cms.Core;
@@ -25,4 +24,3 @@ namespace Standalone
         }
     }
 }
-#endif

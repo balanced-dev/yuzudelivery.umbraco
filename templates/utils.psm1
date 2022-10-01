@@ -30,7 +30,7 @@ function Copy-Yuzu-Folder {
         $Folder
     )
 
-    $pathToYuzuDir = ".\$($folder)\yuzu"
+    $pathToYuzuDir = ".\$($folder)\Yuzu"
 
     Copy-Item -Path ".\Yuzu\Startup" -Destination $pathToYuzuDir -Recurse
 }
@@ -102,20 +102,20 @@ function Add-Yuzu-AppSettings {
     $yuzu = [PSCustomObject]@{
         Yuzu = [PSCustomObject]@{
             Core = [PSCustomObject]@{ 
-                Pages = "/yuzu/_templates/src/pages"
-                Partials = "/yuzu/_templates/src/blocks"
-                SchemaMeta = "/yuzu/_templates/paths"
+                Pages = "/Yuzu/_templates/src/pages"
+                Partials = "/Yuzu/_templates/src/blocks"
+                SchemaMeta = "/Yuzu/_templates/paths"
             }
             VmGeneration = [PSCustomObject]@{ 
                 IsActive = $True 
                 AcceptUnsafeDirectory = $False 
-                Directory = "~/yuzu/viewmodels"
+                Directory = "~/Yuzu/ViewModels"
             }
             Import = [PSCustomObject]@{ 
                 IsActive = $True 
-                Config = "/yuzu/YuzuConfig.json"
-                ManualMappingDirectory = "~/yuzu/Mappings/"
-                Data = "/yuzu/_templates/data"
+                Config = "/Yuzu/YuzuConfig.json"
+                ManualMappingDirectory = "~/Yuzu/Mappings/"
+                Data = "/Yuzu/_templates/data"
                 ImagesDef = "/_client/images"
                 ImagesDel = "/wwwroot/_client/images"
             }

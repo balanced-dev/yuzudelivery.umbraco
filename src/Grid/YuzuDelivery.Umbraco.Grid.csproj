@@ -40,5 +40,4 @@
           <Analyzer Remove="@(Analyzer)" Condition="%(FileName) == 'Lucene.Net.CodeAnalysis.CSharp'" />
       </ItemGroup>
   </Target>
-
 </Project>

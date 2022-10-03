@@ -7,24 +7,16 @@ using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Core;
 using System.Reflection;
-
-#if NETCOREAPP 
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models.PublishedContent;
-#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
 
-#if NETCOREAPP
     [ComposeAfter(typeof(YuzuUmbracoImportComposer))]
     public class YuzuBlockListStartup : IComposer
     {
@@ -71,6 +63,8 @@ namespace YuzuDelivery.Umbraco.BlockList
             builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(BlockListGridVmBuilderConfig));
             builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(BlockListGridImportConfig));
 
+            builder.ManifestFilters().Append<YuzuBlockListManifestFilter>();
+
         }
 
         public void AddDefaultGridItems(IUmbracoBuilder builder)
@@ -105,89 +99,6 @@ namespace YuzuDelivery.Umbraco.BlockList
             });
         }
     }
-
-#else
-    [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    [ComposeAfter(typeof(YuzuUmbracoImportComposer))]
-    public class YuzuBlockListStartup : IUserComposer
-    {
-
-        public void Compose(Composition composition)
-        {
-            AddDefaultGridItems(composition);
-
-            var assembly = Assembly.GetExecutingAssembly();
-
-            composition.RegisterAll<IContentMapper>(assembly);
-
-            //Global blocklist
-
-            composition.Register<GuidFactory>();
-            composition.Register<BlockListDataTypeFactory>();
-            composition.Register<BlockListDbModelFactory>();
-            composition.Register<BlockListGridRowConfigToContent>();
-
-            //Inline blocklist
-
-            composition.Register<BlockListDataService>();
-
-            composition.Register<BlockListToListOfObjectsTypeConvertor>();
-            composition.Register<BlockListToObjectTypeConvertor>();
-            composition.Register(typeof(BlockListToTypeConvertor<>));
-            composition.Register(typeof(BlockListToListOfTypesConvertor<>));
-
-            composition.RegisterUnique<IInlineBlockCreator, BlockListEditorCreationService>();
-
-            composition.Register(typeof(YuzuMappingConfig), typeof(BlockListAutoMapping));
-
-            //Grid blocklist
-            composition.Register<BlockListRowsConverter>();
-            composition.Register<BlockListGridConverter>();
-            composition.Register<IBlockListGridDataService, BlockListGridDataService>();
-
-            composition.RegisterUnique<IGridSchemaCreationService, BlockListGridCreationService>();
-
-            composition.Register<YuzuMappingConfig, BlockListInlineMapping>();
-            composition.Register(typeof(YuzuMappingConfig), typeof(BlockListGridAutoMapping));
-
-            //MUST be transient lifetime
-            composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(BlockListGridVmBuilderConfig), Lifetime.Transient);
-            composition.Register(typeof(IUpdateableImportConfiguration), typeof(BlockListGridImportConfig), Lifetime.Transient);
-
-        }
-
-        public void AddDefaultGridItems(Composition composition)
-        {
-            composition.Register<IEnumerable<IGridItemInternal>>((factory) =>
-            {
-                var config = factory.GetInstance<IYuzuConfiguration>();
-                var mapper = factory.GetInstance<IMapper>();
-                var typeFactoryRunner = factory.GetInstance<IYuzuTypeFactoryRunner>();
-
-                var baseGridType = typeof(DefaultGridItem<,>);
-                var gridItems = new List<IGridItemInternal>();
-                var viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
-
-                foreach (var viewModelType in viewmodelTypes)
-                {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
-                    var alias = umbracoModelTypeName.FirstCharacterToLower();
-                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
-
-                    if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
-                    {
-                        var makeme = baseGridType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper, typeFactoryRunner }) as IGridItemInternal;
-
-                        gridItems.Add(o);
-                    }
-                }
-
-                return gridItems;
-            }, Lifetime.Singleton);
-        }
-    }
-#endif
 
     public static class StringExtensions
     {

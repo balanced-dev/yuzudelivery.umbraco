@@ -7,12 +7,13 @@ using Umbraco.Cms.Core.Manifest;
 namespace YuzuDelivery.Umbraco.BlockList
 {
 
-    public class DocTypeGridEditorManifestFilter : IManifestFilter
+    public class YuzuBlockListManifestFilter : IManifestFilter
     {
         public void Filter(List<PackageManifest> manifests)
         {
             manifests.Add(new PackageManifest()
             {
+                PackageName = "YuzuBlockList",
                 Scripts = new[]
                 {
                     "/App_Plugins/YuzuBlockList/GridContentColumnsSettingsController.js",

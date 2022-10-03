@@ -23,12 +23,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="App_Plugins\YuzuBlockList\GridContentColumnsSettings.html" />
-    <Content Include="App_Plugins\YuzuBlockList\GridContentItem.html" />
-    <Content Include="App_Plugins\YuzuBlockList\GridContentSection.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
     <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="10.0.0" />

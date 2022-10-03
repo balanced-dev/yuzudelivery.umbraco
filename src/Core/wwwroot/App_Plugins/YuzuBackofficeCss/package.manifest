@@ -1,7 +1,0 @@
-{   
-	"name": "yuzu-backoffice",
-	"bundleOptions": "None",
-	"css": [
-		"~/_client/style/backoffice.css"
-    ]
-}

@@ -39,6 +39,8 @@ namespace YuzuDelivery.Umbraco.Core
                 .Bind(builder.Config.GetSection("Yuzu:VmGeneration"))
                 .ValidateDataAnnotations();
 
+            builder.ManifestFilters().Append<YuzuManifestFilter>();
+
             builder.Services.AddSingleton<IHandlebarsProvider, HandlebarsProvider>();
             builder.Services.AddTransient<IYuzuDefinitionTemplates, YuzuDefinitionTemplates>();
             builder.Services.AddSingleton<IYuzuDefinitionTemplateSetup, YuzuDefinitionTemplateSetup>();

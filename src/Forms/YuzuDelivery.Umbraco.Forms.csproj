@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
 	<ContentTargetFolders>.</ContentTargetFolders>
-	<StaticWebAssetBasePath>App_Plugins/Views</StaticWebAssetBasePath>
+	<StaticWebAssetBasePath>/</StaticWebAssetBasePath>
 	<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 
 	<PackageId>YuzuDelivery.Umbraco.Forms</PackageId>

@@ -1,10 +1,13 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject IMemberManager _memberManager;
 
-@using Umbraco.Web
-@using Umbraco.Web.Controllers
+@using Umbraco.Cms.Core.Security
+@using Umbraco.Cms.Web
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Extensions
 
 @{
-    if (Umbraco.MemberIsLoggedOn())
+    if (_memberManager.IsLoggedIn())
     {
         using (Html.BeginUmbracoForm<UmbLoginStatusController>("HandleLogout", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "" } }))
         {

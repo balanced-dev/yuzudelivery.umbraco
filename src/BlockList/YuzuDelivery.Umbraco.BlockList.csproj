@@ -1,10 +1,39 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+	<TargetFrameworks>net6.0</TargetFrameworks>
+	<ContentTargetFolders>.</ContentTargetFolders>
+	<StaticWebAssetBasePath>App_Plugins/YuzuBlockList</StaticWebAssetBasePath>
+	<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+
+    <PackageId>YuzuDelivery.Umbraco.BlockList</PackageId>
+    <Product>Yuzu</Product>
+    <PackageTags>umbraco plugin package</PackageTags>
+	<Copyright>Copyright 2019-present HiFi Ltd</Copyright>
+	<iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
+
+    <Version>3.0.0</Version>
+    <Authors>Phil Whittaker</Authors>
+    <Company>HiFi</Company>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <AssemblyName>YuzuDelivery.Umbraco.BlockList</AssemblyName>
+    <RootNamespace>YuzuDelivery.Umbraco.BlockList</RootNamespace>
+
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+  <ItemGroup>
+    <None Include="wwwroot\App_Plugins\YuzuBlockList\GridContentColumnsSettings.html" />
+    <None Include="wwwroot\App_Plugins\YuzuBlockList\GridContentColumnsSettingsController.js" />
+    <None Include="wwwroot\App_Plugins\YuzuBlockList\GridContentItem.html" />
+    <None Include="wwwroot\App_Plugins\YuzuBlockList\GridContentItem.js" />
+    <None Include="wwwroot\App_Plugins\YuzuBlockList\GridContentSection.html" />
+    <None Include="wwwroot\App_Plugins\YuzuBlockList\GridContentSection.js" />
+    <None Include="wwwroot\App_Plugins\YuzuBlockList\GridSection.css" />
+    <None Include="wwwroot\App_Plugins\YuzuBlockList\package.manifest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
     <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="10.0.0" />

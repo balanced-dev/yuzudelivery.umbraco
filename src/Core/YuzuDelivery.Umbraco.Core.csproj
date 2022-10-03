@@ -3,7 +3,7 @@
   <PropertyGroup>
 	<TargetFrameworks>net6.0</TargetFrameworks>
 	<ContentTargetFolders>.</ContentTargetFolders>
-	<StaticWebAssetBasePath>App_Plugins</StaticWebAssetBasePath>
+	<StaticWebAssetBasePath>App_Plugins/YuzuDeliveryViewModelsBuilder</StaticWebAssetBasePath>
 	<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 
 	<PackageId>YuzuDelivery.Umbraco.Core</PackageId>
@@ -21,6 +21,10 @@
 	<RootNamespace>YuzuDelivery.Umbraco.Core</RootNamespace>	  
 	
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Tree\YuzuTreeController.cs" />
+  </ItemGroup>
 
   <ItemGroup>
 	<PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />

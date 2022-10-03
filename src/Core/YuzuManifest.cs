@@ -13,11 +13,11 @@ namespace YuzuDelivery.Umbraco.Core
         {
             manifests.Add(new PackageManifest()
             {
-                PackageName = "Yuzu",
+                PackageName = "YuzuDeliveryViewModelsBuilder",
                 BundleOptions = BundleOptions.None, 
                 Scripts = new[]
                 {
-                    "/App_Plugins/YuzuDeliveryViewModelsBuilder/backoffice/YuzuDeliveryViewModelsBuilder/yuzuDashboardController.js",
+                    "/App_Plugins/YuzuDeliveryViewModelsBuilder/yuzuDashboardController.js",
                 },
                 Stylesheets = new[]
                 {

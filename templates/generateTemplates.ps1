@@ -47,13 +47,6 @@ mkdir .tmp | Out-Null
 Invoke-WebRequest -Uri "https://www.nuget.org/api/v2/package/Umbraco.Templates/$($UmbracoVersion)" -OutFile (".tmp\umbraco.templates.$($UmbracoVersion).nupkg.zip")
 Expand-Archive -LiteralPath ".tmp\umbraco.templates.$($UmbracoVersion).nupkg.zip" -DestinationPath (".tmp\umbraco_templates")
 
-$dependencies = [ordered]@{
-    "Umbraco.Forms" = $UmbracoFormsVersion;
-    "YuzuDelivery.Umbraco.Core" = $YuzuDeliveryUmbracoVersion;
-    "YuzuDelivery.Umbraco.Forms" = $YuzuDeliveryUmbracoVersion;
-    "YuzuDelivery.Umbraco.Members" = $YuzuDeliveryUmbracoVersion;
-}
-
 ###########################################################
 ## Generate standalone
 ###########################################################
@@ -64,6 +57,7 @@ Copy-Yuzu-Folder 'standalone'
 Update-ModeslBuilder -folder 'standalone' -isWeb $False
 Add-Yuzu-AppSettings -folder 'Standalone' -isWeb $False
 Copy-Forms-Partials -folder 'standalone'
+Copy-Blocklist-Partials -folder 'standalone'
 Copy-Icon -folder 'standalone'
 
 $dependencies = [ordered]@{
@@ -97,6 +91,7 @@ Copy-Yuzu-Folder 'testproject'
 Update-ModeslBuilder -folder 'testproject' -isWeb $False
 Add-Yuzu-AppSettings -folder 'testproject' -isWeb $False
 Copy-Forms-Partials -folder 'testproject'
+Copy-Blocklist-Partials -folder 'testproject'
 Copy-Icon -folder 'testproject'
 $dependencies = [ordered]@{
     "Umbraco.Forms" = $UmbracoFormsVersion;

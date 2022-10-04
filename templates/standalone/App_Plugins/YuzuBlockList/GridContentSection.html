@@ -1,0 +1,23 @@
+﻿<div class="section-view " ng-controller="GridContentSectionController">
+    <div class="section-view__card blockelement-labelblock-editor">
+        <div class="section-view__section">
+            <button type="button" class="section-reorder-handle btn-reset umb-outline blockelement__draggable-element ui-sortable-handle">
+                <umb-icon icon="icon-navigation" class="icon handle"></umb-icon>
+            </button>
+            <div class="section-view__column flx-g1"
+                 ng-repeat="property in block.content.variants[0].tabs[0].properties"
+                 ng-style="getGridSettings(property)">
+                <div class="section-view__settings">
+                    <umb-property property="block.content.variants[0].tabs[1].properties[$index]">
+                        <umb-property-editor model="block.content.variants[0].tabs[1].properties[$index]"></umb-property-editor>
+                    </umb-property>
+                </div>
+                <div class="section-view__content">
+                    <umb-property property="property">
+                        <umb-property-editor model="property"></umb-property-editor>
+                    </umb-property>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

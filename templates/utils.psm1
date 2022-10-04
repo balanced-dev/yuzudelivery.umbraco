@@ -143,7 +143,7 @@ function Copy-Forms-Partials {
         [bool] $isCore
     )
 
-    Copy-Item -Path "..\src\Forms\Web\UI\Views\Partials\*" -Destination ".\$($folder)\Views\Partials" -Recurse
+    Copy-Item -Path "..\src\Forms\wwwroot\Views\Partials\*" -Destination ".\$($folder)\Views\Partials" -Recurse
 }
 
 function Add-Project-Dependencies {

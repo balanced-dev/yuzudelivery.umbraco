@@ -35,17 +35,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Tests", "02 - Tests", 
 		tests\Directory.Build.props = tests\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.BlockList.Tests", "tests\BlockList.Tests\YuzuDelivery.Umbraco.BlockList.Tests.csproj", "{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.BlockList.Tests", "tests\BlockList.Tests\YuzuDelivery.Umbraco.BlockList.Tests.csproj", "{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Core.Tests", "tests\Core.Tests\YuzuDelivery.Umbraco.Core.Tests.csproj", "{AD4F72B3-E459-444D-BCCA-D6092294B22C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Core.Tests", "tests\Core.Tests\YuzuDelivery.Umbraco.Core.Tests.csproj", "{AD4F72B3-E459-444D-BCCA-D6092294B22C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Forms.Tests", "tests\Forms.Tests\YuzuDelivery.Umbraco.Forms.Tests.csproj", "{A5670F13-A461-4A77-9AC6-1E1141DDB949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Forms.Tests", "tests\Forms.Tests\YuzuDelivery.Umbraco.Forms.Tests.csproj", "{A5670F13-A461-4A77-9AC6-1E1141DDB949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Grid.Tests", "tests\Grid.Tests\YuzuDelivery.Umbraco.Grid.Tests.csproj", "{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Grid.Tests", "tests\Grid.Tests\YuzuDelivery.Umbraco.Grid.Tests.csproj", "{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Templates", "03 - Templates", "{1056854C-D5DD-4268-8C78-E53C298F6CE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco.Templates", "templates\YuzuDelivery.Umbraco.Templates.csproj", "{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuzuDelivery.Umbraco.Templates", "templates\YuzuDelivery.Umbraco.Templates.csproj", "{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuzuDelivery.Umbraco", "YuzuDelivery.Umbraco\YuzuDelivery.Umbraco.csproj", "{D100B6A7-7A04-4683-ACD3-8676F0315820}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,23 +97,28 @@ Global
 		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D100B6A7-7A04-4683-ACD3-8676F0315820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D100B6A7-7A04-4683-ACD3-8676F0315820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D100B6A7-7A04-4683-ACD3-8676F0315820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D100B6A7-7A04-4683-ACD3-8676F0315820}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {226AF1B5-DBE5-4581-8F9A-368634F97D6A}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DAF7A3D3-411C-448B-9489-42306783511F} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
 		{A9B8F2AC-90F9-4219-BCDA-7FF6E8266C19} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
 		{E1B59BAF-A544-4A74-A538-9464182572D8} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
 		{EC27DF56-5A85-4CCA-9720-CF000269BE1F} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
 		{EAAEA3C8-0C65-47DD-839C-BFC6F025D9C7} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
+		{DAF7A3D3-411C-448B-9489-42306783511F} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
 		{89A6E263-4A94-40B3-AFBC-A16BAA7EAC1C} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
 		{AD4F72B3-E459-444D-BCCA-D6092294B22C} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
 		{A5670F13-A461-4A77-9AC6-1E1141DDB949} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
 		{6DC24F91-F8CF-43C4-83E7-EF16B837FB2D} = {A8DC00AE-D608-4E44-8AAD-535908D58898}
 		{0180103B-2916-4F2B-8D9B-A80FDD12D1E3} = {1056854C-D5DD-4268-8C78-E53C298F6CE8}
+		{D100B6A7-7A04-4683-ACD3-8676F0315820} = {23FDB3B2-CCD9-442C-8C77-438764A409B8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {226AF1B5-DBE5-4581-8F9A-368634F97D6A}
 	EndGlobalSection
 EndGlobal

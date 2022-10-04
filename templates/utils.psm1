@@ -146,50 +146,6 @@ function Copy-Forms-Partials {
     Copy-Item -Path "..\src\Forms\wwwroot\Views\Partials\*" -Destination ".\$($folder)\Views\Partials" -Recurse
 }
 
-function Add-Project-Dependencies {
-    param (
-        $Folder,
-        [bool] $isWeb,
-        [bool] $isCore
-    )
-
-    $pathToConfig = (Get-Item ".\$($folder)\UmbracoProject.csproj")
-
-    $csproj = [xml](get-content $pathToConfig)
-
-    if($isCore) {
-        $newNode = [xml]"
-            <ItemGroup>
-                <PackageReference Include='Umbraco.Cms.Core' Version='$($UmbracoVersion)' />    
-                <PackageReference Include='Umbraco.Cms.Web.Common' Version='$($UmbracoVersion)' />    
-                <PackageReference Include='Umbraco.Forms.Core' Version='$($UmbracoFormsVersion)' />      
-                <PackageReference Include='YuzuDelivery.Umbraco.BlockList' Version='$($YuzuDeliveryUmbracoVersion)' />      
-                <PackageReference Include='YuzuDelivery.Umbraco.Quickstart.Core' Version='$($YuzuDeliveryUmbracoVersion)' />
-            </ItemGroup>"
-    }
-    elseif($isWeb) {
-        $newNode = [xml]"
-            <ItemGroup>
-                <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />      
-                <PackageReference Include='YuzuDelivery.Umbraco.BlockList' Version='$($YuzuDeliveryUmbracoVersion)' />        
-                <PackageReference Include='YuzuDelivery.Umbraco.Quickstart.Web' Version='$($YuzuDeliveryUmbracoVersion)' />
-            </ItemGroup>"
-    }
-    else {
-        $newNode = [xml]"
-            <ItemGroup>
-                <PackageReference Include='Umbraco.Forms' Version='$($UmbracoFormsVersion)' />
-                <PackageReference Include='YuzuDelivery.Umbraco.BlockList' Version='$($YuzuDeliveryUmbracoVersion)' />  
-                <PackageReference Include='YuzuDelivery.Umbraco.Quickstart' Version='$($YuzuDeliveryUmbracoVersion)' />
-            </ItemGroup>"
-    }
-
-    $newNode = $csproj.ImportNode($newNode.ItemGroup, $true)
-    $csproj.Project.AppendChild($newNode) | out-null
-
-    $csproj.Save($pathToConfig.FullName)
-}
-
 function Add-Project-Dependencies-Simple {
     param (
         $Folder,

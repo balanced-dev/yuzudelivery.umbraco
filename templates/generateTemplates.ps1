@@ -65,7 +65,12 @@ Update-ModeslBuilder -folder 'standalone' -isWeb $False
 Add-Yuzu-AppSettings -folder 'Standalone' -isWeb $False
 Copy-Forms-Partials -folder 'standalone'
 Copy-Icon -folder 'standalone'
-Add-Project-Dependencies-Simple -folder 'standalone' -dependencies $dependencies
+
+$dependencies = [ordered]@{
+    "Umbraco.Forms" = $UmbracoFormsVersion;
+    "YuzuDelivery.Umbraco" = $YuzuDeliveryUmbracoVersion;
+}
+
 $properties = @{
     "author" = "Hi-Fi Ltd";
     "description" = "Standalone web project for Umbraco Yuzu delivery";
@@ -76,12 +81,8 @@ $properties = @{
     "defaultName" = "YuzuDelivery1";
     "classifications" = @("Yuzu", "Umbraco", "CMS")
 }
-$dependencies = [ordered]@{
-    "Umbraco.Forms" = $UmbracoFormsVersion;
-    "YuzuDelivery.Umbraco.Core" = $YuzuDeliveryUmbracoVersion;
-    "YuzuDelivery.Umbraco.Forms" = $YuzuDeliveryUmbracoVersion;
-    "YuzuDelivery.Umbraco.Members" = $YuzuDeliveryUmbracoVersion;
-}
+
+Add-Project-Dependencies-Simple -folder 'standalone' -dependencies $dependencies
 Update-Template-Meta-Simple 'standalone' -properties $properties
 
 Write-Host "Created standalone"
@@ -99,10 +100,7 @@ Copy-Forms-Partials -folder 'testproject'
 Copy-Icon -folder 'testproject'
 $dependencies = [ordered]@{
     "Umbraco.Forms" = $UmbracoFormsVersion;
-    "YuzuDelivery.Umbraco.Core" = $YuzuDeliveryUmbracoVersion;
-    "YuzuDelivery.Umbraco.Forms" = $YuzuDeliveryUmbracoVersion;
-    "YuzuDelivery.Umbraco.Members" = $YuzuDeliveryUmbracoVersion;
-    "YuzuDelivery.Umbraco.BlockList" = $YuzuDeliveryUmbracoVersion;
+    "YuzuDelivery.Umbraco" = $YuzuDeliveryUmbracoVersion;
 }
 Add-Project-Dependencies-Simple -folder 'testproject' -dependencies $dependencies
 $properties = @{

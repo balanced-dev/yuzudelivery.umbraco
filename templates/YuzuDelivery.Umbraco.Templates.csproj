@@ -17,9 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content 
-      Include="testproject\**\*;standalone\**\*;"
-      Exclude="**\bin\**;**\obj\**" />
+    <Content Include="testproject\**\*;standalone\**\*;" Exclude="**\bin\**;**\obj\**" />
     <Compile Remove="**\*" />
   </ItemGroup>
 

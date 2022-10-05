@@ -122,6 +122,8 @@ class Build : NukeBuild
     }
 
     Target Pack => _ => _
+        .DependsOn(Clean)
+        .DependsOn(Compile)
         .DependsOn(Test)
         .Executes(() =>
         {

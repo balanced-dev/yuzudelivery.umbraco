@@ -174,6 +174,22 @@ function Add-Project-Dependencies-Simple {
     $csproj.Save($pathToConfig.FullName)
 }
 
+function Add-Forced-Restart-Watcher {
+    param (
+        $Folder
+    )
+
+    $pathToConfig = (Get-Item ".\$($folder)\UmbracoProject.csproj")
+
+    $csproj = [xml](get-content $pathToConfig)
+
+    $node = $csproj.CreateElement("Watch")
+    $node.SetAttribute("Include", "restart.txt")
+    $csproj.Project.ItemGroup[0].AppendChild($node) | Out-Null
+
+    $csproj.Save($pathToConfig.FullName)
+}
+
 function Update-Json {
     param (
         $Path,

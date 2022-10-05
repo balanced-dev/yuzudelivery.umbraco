@@ -108,6 +108,7 @@ $properties = @{
     "defaultName" = "YuzuDelivery1";
     "classifications" = @("Yuzu", "Umbraco", "CMS")
 }
+Add-Forced-Restart-Watcher -folder 'testproject'
 Update-Template-Meta-Simple -folder 'testproject' -properties $properties
 xcopy /s /q '.\Yuzu\TestProject' '.\testproject' | Out-Null
 Write-Host "Created testproject"

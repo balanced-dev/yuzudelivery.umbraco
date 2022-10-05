@@ -9,6 +9,7 @@
     <PackageReference Include="Umbraco.Cms" Version="UMBRACO_VERSION_FROM_TEMPLATE" />
     <PackageReference Include="Umbraco.Forms" Version="10.1.2" />
     <PackageReference Include="YuzuDelivery.Umbraco" Version="3.0.0-alpha.*" />
+    <Watch Include="restart.txt" />
   </ItemGroup>
   <ItemGroup>
     <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->

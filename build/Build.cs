@@ -204,7 +204,7 @@ class Build : NukeBuild
             }
             finally
             {
-                AcceptanceTestsDirectory.GlobFiles("*.junit.xml").ForEach(x =>
+                AcceptanceTestsDirectory.GlobFiles("**/*.junit.xml").ForEach(x =>
                     AzurePipelines.Instance?.PublishTestResults(
                         type: AzurePipelinesTestResultsType.JUnit,
                         title: "Acceptance Tests",

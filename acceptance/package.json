@@ -1,0 +1,20 @@
+{
+  "name": "acceptance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "wait": "wait-on --delay 30000 --interval 5000 --timeout 300000 http-get://localhost:8080/ready",
+    "test": "playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@playwright/test": "^1.26.1",
+    "@types/node": "^18.8.3"
+  },
+  "dependencies": {
+    "wait-on": "^6.0.1"
+  }
+}

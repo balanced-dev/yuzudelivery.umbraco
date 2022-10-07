@@ -2,6 +2,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using LittleForker;
+using Microsoft.Extensions.Logging.Abstractions;
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.CI.AzurePipelines;
@@ -11,6 +14,7 @@ using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.NerdbankGitVersioning;
+using Nuke.Common.Tools.Npm;
 using Nuke.Common.Utilities.Collections;
 using Serilog;
 using static Nuke.Common.IO.FileSystemTasks;
@@ -41,10 +45,12 @@ class Build : NukeBuild
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
+    AbsolutePath AcceptanceTestsDirectory => RootDirectory / "acceptance";
     AbsolutePath OutputDirectory => RootDirectory / "output";
     AbsolutePath PackagesDirectory => OutputDirectory / "packages";
     AbsolutePath TestResultsDirectory => OutputDirectory / "test_results";
     AbsolutePath TestServerDirectory => OutputDirectory / ".test_server";
+
 
     public Build()
     {
@@ -146,28 +152,64 @@ class Build : NukeBuild
     Target Acceptance  => _ => _
         .After(Test)
         .DependsOn(Pack)
-        .Executes(() =>
+        .Executes(async () =>
         {
-            var templatesPackage = PackagesDirectory
-                .GlobFiles("*YuzuDelivery.Umbraco.Templates.*")
-                .First();
 
-            Run("dotnet",$"nuget add source {PackagesDirectory} --name yuzu_local", handleExitCode: c => true);
-            Run("dotnet","new --uninstall YuzuDelivery.Umbraco.Templates", handleExitCode: c => true);
-            Run("dotnet",$"new --install {templatesPackage}");
+            try
+            {
+                var templatesPackage = PackagesDirectory
+                                       .GlobFiles("*YuzuDelivery.Umbraco.Templates.*")
+                                       .First();
 
-            Directory.CreateDirectory(TestServerDirectory);
+                Run("dotnet", $"nuget add source {PackagesDirectory} --name yuzu_local", handleExitCode: c => true);
+                Run("dotnet", "new --uninstall YuzuDelivery.Umbraco.Templates", handleExitCode: c => true);
+                Run("dotnet", $"new --install {templatesPackage}");
 
-            var newArgs = new StringBuilder();
-            newArgs.Append(" --name Yuzu.Acceptance");
-            newArgs.Append(" --output .");
-            newArgs.Append(" --no-restore");
-            newArgs.Append(" --development-database-type SQLite");
-            newArgs.Append(" --email e2e@hifi.agency");
-            newArgs.Append(" --friendly-name e2e@hifi.agency");
-            newArgs.Append(" --password TestThis42!");
+                Directory.CreateDirectory(TestServerDirectory);
 
-            Run("dotnet",$"new yuzu-test {newArgs}", workingDirectory: TestServerDirectory);
+                var newArgs = new StringBuilder();
+                newArgs.Append(" --name Yuzu.Acceptance");
+                newArgs.Append(" --output .");
+                newArgs.Append(" --no-restore");
+                newArgs.Append(" --development-database-type SQLite");
+                newArgs.Append(" --email e2e@hifi.agency");
+                newArgs.Append(" --friendly-name e2e@hifi.agency");
+                newArgs.Append(" --password TestThis42!");
+
+                Run("dotnet", $"new yuzu-test {newArgs}", workingDirectory: TestServerDirectory);
+                Run("dotnet", $"restore", workingDirectory: TestServerDirectory);
+
+                var supervisor = new ProcessSupervisor(NullLoggerFactory.Instance, ProcessRunType.NonTerminating,
+                    TestServerDirectory, "dotnet", "watch run -- --urls http://localhost:8080");
+
+                await supervisor.Start();
+
+                try
+                {
+                    NpmTasks.NpmCi(s => s
+                        .SetProcessWorkingDirectory(AcceptanceTestsDirectory));
+
+                    NpmTasks.NpmRun(s => s
+                                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
+                                         .SetCommand("wait"));
+
+                    NpmTasks.NpmRun(s => s
+                                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
+                                         .SetCommand("test"));
+                }
+                finally
+                {
+                    await supervisor.Stop(TimeSpan.FromSeconds(3));
+                }
+            }
+            finally
+            {
+                AcceptanceTestsDirectory.GlobFiles("*.junit.xml").ForEach(x =>
+                    AzurePipelines.Instance?.PublishTestResults(
+                        type: AzurePipelinesTestResultsType.JUnit,
+                        title: "Acceptance Tests",
+                        files: new string[] { x }));
+            }
         });
 
     Target Default => _ => _

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "wait": "wait-on --delay 30000 --interval 5000 --timeout 300000 http-get://localhost:8080/ready",
+    "wait": "wait-on --interval 5000 --timeout 300000 http-get://localhost:8080/ready",
+    "browsers": "playwright install",
     "test": "playwright test"
   },
   "keywords": [],

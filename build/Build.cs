@@ -190,12 +190,16 @@ class Build : NukeBuild
                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory));
 
                     NpmTasks.NpmRun(s => s
-                                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
-                                         .SetCommand("wait"));
+                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
+                         .SetCommand("browsers"));
 
                     NpmTasks.NpmRun(s => s
-                                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
-                                         .SetCommand("test"));
+                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
+                         .SetCommand("wait"));
+
+                    NpmTasks.NpmRun(s => s
+                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
+                         .SetCommand("test"));
                 }
                 finally
                 {

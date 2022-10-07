@@ -72,9 +72,11 @@
           "items": {
             "type": "string",
             "enum": [
+              "Acceptance",
               "AddAzureArtifactsFeed",
               "Clean",
               "Compile",
+              "Default",
               "Pack",
               "Report",
               "Restore",
@@ -92,9 +94,11 @@
           "items": {
             "type": "string",
             "enum": [
+              "Acceptance",
               "AddAzureArtifactsFeed",
               "Clean",
               "Compile",
+              "Default",
               "Pack",
               "Report",
               "Restore",

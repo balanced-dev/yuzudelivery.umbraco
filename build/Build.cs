@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.CI.AzurePipelines;
-using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
@@ -13,10 +13,9 @@ using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.NerdbankGitVersioning;
 using Nuke.Common.Utilities.Collections;
 using Serilog;
-using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
-using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using static SimpleExec.Command;
 
 [ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
@@ -27,7 +26,7 @@ class Build : NukeBuild
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main () => Execute<Build>(x => x.Clean, x => x.Report);
+    public static int Main () => Execute<Build>(x => x.Default);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
@@ -45,6 +44,7 @@ class Build : NukeBuild
     AbsolutePath OutputDirectory => RootDirectory / "output";
     AbsolutePath PackagesDirectory => OutputDirectory / "packages";
     AbsolutePath TestResultsDirectory => OutputDirectory / "test_results";
+    AbsolutePath TestServerDirectory => OutputDirectory / ".test_server";
 
     public Build()
     {
@@ -57,7 +57,9 @@ class Build : NukeBuild
         {
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
             TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            EnsureCleanDirectory(OutputDirectory);
+            EnsureCleanDirectory(PackagesDirectory);
+            EnsureCleanDirectory(TestResultsDirectory);
+            EnsureCleanDirectory(TestServerDirectory);
         });
 
 
@@ -122,22 +124,52 @@ class Build : NukeBuild
     }
 
     Target Pack => _ => _
-        .DependsOn(Clean)
         .DependsOn(Compile)
-        .DependsOn(Test)
         .Executes(() =>
         {
             DotNetPack(s => s
+                .EnableNoRestore()
+                .EnableNoBuild()
                 .SetOutputDirectory(PackagesDirectory)
                 .SetConfiguration(Configuration));
         });
 
     Target Report => _ => _
-        .DependsOn(Pack)
+        .Before(Compile)
         .Executes(() =>
         {
             Log.Information("NuGetPackageVersion:          {Value}", NerdbankVersioning.NuGetPackageVersion);
             Log.Information("AssemblyInformationalVersion: {Value}", NerdbankVersioning.AssemblyInformationalVersion);
         });
 
+
+    Target Acceptance  => _ => _
+        .After(Test)
+        .DependsOn(Pack)
+        .Executes(() =>
+        {
+            var templatesPackage = PackagesDirectory
+                .GlobFiles("*YuzuDelivery.Umbraco.Templates.*")
+                .First();
+
+            Run("dotnet",$"nuget add source {PackagesDirectory} --name yuzu_local", handleExitCode: c => true);
+            Run("dotnet","new --uninstall YuzuDelivery.Umbraco.Templates", handleExitCode: c => true);
+            Run("dotnet",$"new --install {templatesPackage}");
+
+            Directory.CreateDirectory(TestServerDirectory);
+
+            var newArgs = new StringBuilder();
+            newArgs.Append(" --name Yuzu.Acceptance");
+            newArgs.Append(" --output .");
+            newArgs.Append(" --no-restore");
+            newArgs.Append(" --development-database-type SQLite");
+            newArgs.Append(" --email e2e@hifi.agency");
+            newArgs.Append(" --friendly-name e2e@hifi.agency");
+            newArgs.Append(" --password TestThis42!");
+
+            Run("dotnet",$"new yuzu-test {newArgs}", workingDirectory: TestServerDirectory);
+        });
+
+    Target Default => _ => _
+        .DependsOn(Clean, Test, Acceptance, Report);
 }

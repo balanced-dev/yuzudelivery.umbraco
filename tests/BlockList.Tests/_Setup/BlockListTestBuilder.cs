@@ -1,6 +1,7 @@
 ﻿using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
 using Autofac;
+using Umbraco.Cms.Core.Web;
 
 namespace YuzuDelivery.Umbraco.BlockList.Tests
 {
@@ -18,6 +19,8 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests
             builder.RegisterType<BlockListGridRowConfigToContent>();
 
             builder.RegisterType<BlockListContentMapper>();
+
+            builder.RegisterInstance(Substitute.For<IUmbracoContextAccessor>()).As<IUmbracoContextAccessor>();
 
             builder.Register((IComponentContext factory) =>
             {

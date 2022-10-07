@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "wait": "wait-on --interval 5000 --timeout 300000 http-get://localhost:8080/ready",
-    "browsers": "playwright install",
+    "browsers": "playwright install chromium",
     "test": "playwright test"
   },
   "keywords": [],

@@ -28,20 +28,28 @@ namespace YuzuDelivery.Umbraco.Import
             var sizes = config.Grid.Sizes;
             var output = new List<GridRowConfig>();
 
-            foreach (var f in importConfig.GridRowConfigs)
+            if(config.Grid.HasColumns)
             {
-                if (f.IsDefault && !sizes.Any())
+                foreach (var f in importConfig.GridRowConfigs.Where(x => !x.IsRow))
                 {
-                    output.Add(f);
-                }
-                else
-                {
-                    if (sizes.Intersect(f.DefinedSizes).Any())
+                    if (f.IsDefault && !sizes.Any())
                     {
                         output.Add(f);
                     }
+                    else
+                    {
+                        if (sizes.Intersect(f.DefinedSizes).Any())
+                        {
+                            output.Add(f);
+                        }
+                    }
                 }
             }
+            else
+            {
+                output.Add(importConfig.GridRowConfigs.Where(x => x.IsRow).FirstOrDefault());
+            }
+
             return output.ToArray();
         }
 

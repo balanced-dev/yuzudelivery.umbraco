@@ -124,7 +124,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
                 }
             };
 
-            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "100", "12", "12"));
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig( "100", "12", "12", isDefault: true));
         }
 
         #endregion
@@ -198,8 +198,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
                 }
             };
 
-            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "100", "12", "12"));
-            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(false, "50/50", "6", "6,6"));
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("100", "12", "12", isDefault: true));
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("50/50", "6", "6,6"));
         }
 
         #endregion

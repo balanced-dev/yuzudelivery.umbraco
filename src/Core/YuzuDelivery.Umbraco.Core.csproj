@@ -33,6 +33,12 @@
     <PackageReference Include="Inflector.NetStandard" Version="1.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="YuzuDelivery.Core" Version="3.0.0-alpha.*" />
+    <PackageReference Include="YuzuDelivery.Import" Version="3.0.0-alpha.*" />
+    <PackageReference Include="YuzuDelivery.Umbraco.Import" Version="3.0.0-alpha.*" />
+  </ItemGroup>
+
   <Target Name="RemoveLuceneAnalyzer" BeforeTargets="CoreCompile">
       <ItemGroup>
           <Analyzer Remove="@(Analyzer)" Condition="%(FileName) == 'Lucene.Net.CodeAnalysis.CSharp'" />

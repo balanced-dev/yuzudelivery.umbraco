@@ -85,8 +85,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
 
             importConfig.GridRowConfigs.Clear();
-            importConfig.GridRowConfigs.Add(new GridRowConfig(true, "100", "12", "12"));
-            importConfig.GridRowConfigs.Add(new GridRowConfig(false, "50/50", "6", "6,6"));
+            importConfig.GridRowConfigs.Add(new GridRowConfig("100", "12", "12", isDefault: true));
+            importConfig.GridRowConfigs.Add(new GridRowConfig("50/50", "6", "6,6"));
 
             svc = Substitute.ForPartsOf<GridContentMapper>(vmHelperService, dataTypeService, dgteService, contentImportMergedService, importConfig);           
             svc.GetGuid().Returns("testGuid");

@@ -29,6 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="YuzuDelivery.Core" Version="3.0.0-alpha.*" />
+	<PackageReference Include="YuzuDelivery.Import" Version="3.0.0-alpha.*" />
+	<PackageReference Include="YuzuDelivery.Umbraco.Import" Version="3.0.0-alpha.*" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj" />
   </ItemGroup>
 

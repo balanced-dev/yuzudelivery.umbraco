@@ -107,9 +107,9 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
         [Test]
         public void Can_add_row_item()
         {
-            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "RowItem", "100", "100"));
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("RowItem", "100", "100", isRow: true));
 
-            CreateData(defaultGridRows: false, isGrid: false);
+            CreateData(defaultGridRows: false, hasColumns: false);
 
             SectionProperties(properties, assign: true);
 
@@ -126,10 +126,10 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
         [Test]
         public void adding_grid_rows(int rowCount)
         {
-            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "FullWidthSection", "100", "100"));
-            if (rowCount > 1) umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(false, "TwoColumnSection", "50", "50,50"));
-            if (rowCount > 2) umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(false, "ThreeColumnSection", "33", "33,33,33"));
-            if (rowCount > 3) umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(false, "FourColumnSection", "25", "25,25,25,25"));
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("FullWidthSection", "100", "100", isDefault: true));
+            if (rowCount > 1) umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("TwoColumnSection", "50", "50,50"));
+            if (rowCount > 2) umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("ThreeColumnSection", "33", "33,33,33"));
+            if (rowCount > 3) umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("FourColumnSection", "25", "25,25,25,25"));
 
             CreateData(defaultGridRows: false);
 
@@ -207,8 +207,8 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
         {
             umb.ContentType.ForUpdating("FullWidthSection");
 
-            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "FullWidthSection", "100", "100"));
-            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(false, "TwoColumnSection", "50", "50,50"));
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("FullWidthSection", "100", "100", isDefault: true));
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("TwoColumnSection", "50", "50,50"));
 
             CreateData(defaultGridRows: false, dataTypeToUpdate: true);
 
@@ -270,10 +270,11 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             }
         }
 
-        public void CreateData(string rowConfigType = null, string colConfigType = null, bool dataTypeToUpdate = false, bool defaultGridRows = true, bool isGrid = true, params string[] blocks)
+        public void CreateData(string rowConfigType = null, string colConfigType = null, bool dataTypeToUpdate = false, bool defaultGridRows = true, bool hasColumns = true, params string[] blocks)
         {
             var map = new VmToContentPropertyMap();
-            map.Config.IsGrid = isGrid;
+            map.Config.IsGrid = true;
+            map.Config.Grid.HasColumns = hasColumns;
             map.Config.Grid.OfType = "Test";
             map.Config.Grid.Sizes = umb.ImportConfig.GridRowConfigs.SelectMany(x => x.DefinedSizes).ToArray();
 
@@ -298,7 +299,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             }
 
             if (defaultGridRows)
-                umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "FullWidthSection", "100", "100"));
+                umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("FullWidthSection", "100", "100", isDefault: true));
             properties = gridRowConfigToContent.GetProperties(umb.ImportConfig.GridRowConfigs.ToArray());
         }
 

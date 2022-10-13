@@ -187,7 +187,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         [Test]
         public void DataGrid_two_columns_items()
         {
-            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(false, "twoColumnSection", "50", "50,50"));
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("twoColumnSection", "50", "50,50"));
 
             CreateData(defaultGridRows: false);
 
@@ -323,11 +323,12 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
         {
             config.IsGrid = true;
             config.Grid.OfType = "Test";
+            config.Grid.HasColumns = true;
             config.Grid.Sizes = umb.ImportConfig.GridRowConfigs.SelectMany(x => x.DefinedSizes).ToArray();
 
 
             if (defaultGridRows)
-                umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "fullWidthSection", "100", "100"));
+                umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig("fullWidthSection", "100", "100", isDefault: true));
             properties = gridRowConfigToContent.GetProperties(umb.ImportConfig.GridRowConfigs.ToArray());
         }
 

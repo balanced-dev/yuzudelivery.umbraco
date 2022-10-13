@@ -139,6 +139,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             SpecialistProperties.Add("Rows", vmPropertyFinder.GetProperties(typeof(vmBlock_DataRows)));
 
             GridRowConfigs = new List<GridRowConfig>();
+            GridRowConfigs.Add(new GridRowConfig(true, "RowItem", "12", "100"));
             GridRowConfigs.Add(new GridRowConfig(true, "FullWidthSection", "12", "100"));
             GridRowConfigs.Add(new GridRowConfig(false, "TwoColumnSection", "6", "50,50"));
             GridRowConfigs.Add(new GridRowConfig(false, "ThreeColumnSection", "4", "33,33,33"));

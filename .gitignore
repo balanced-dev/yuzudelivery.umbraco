@@ -348,3 +348,4 @@ src/Templates/UmbracoTemplates/
 src/Templates/TestOutput/
 
 output/
+nuget.config

@@ -104,12 +104,27 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             Assert.IsTrue(umb.DataType.Saved.Contains("Test Grid Sections"));
         }
 
-        [TestCase(1, TestName = "Can add full width column")]
-        [TestCase(2, TestName = "Can add full and two column")]
-        [TestCase(3, TestName = "Can add full, two and three column")]
-        [TestCase(3, TestName = "Can add full, two, three and four column")]
         [Test]
-        public void adding_rows(int rowCount)
+        public void Can_add_row_item()
+        {
+            umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "RowItem", "100", "100"));
+
+            CreateData(defaultGridRows: false, isGrid: false);
+
+            SectionProperties(properties, assign: true);
+
+            svc.Create(propertyMapBuilder.CurrentProperty);
+
+            SectionProperties(properties, assert: true);
+
+        }
+
+        [TestCase(1, TestName = "Can add grid full width column")]
+        [TestCase(2, TestName = "Can add grid full and two column")]
+        [TestCase(3, TestName = "Can add grid full, two and three column")]
+        [TestCase(3, TestName = "Can add grid full, two, three and four column")]
+        [Test]
+        public void adding_grid_rows(int rowCount)
         {
             umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(true, "FullWidthSection", "100", "100"));
             if (rowCount > 1) umb.ImportConfig.GridRowConfigs.Add(new GridRowConfig(false, "TwoColumnSection", "50", "50,50"));
@@ -255,10 +270,10 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             }
         }
 
-        public void CreateData(string rowConfigType = null, string colConfigType = null, bool dataTypeToUpdate = false, bool defaultGridRows = true, params string[] blocks)
+        public void CreateData(string rowConfigType = null, string colConfigType = null, bool dataTypeToUpdate = false, bool defaultGridRows = true, bool isGrid = true, params string[] blocks)
         {
             var map = new VmToContentPropertyMap();
-            map.Config.IsGrid = true;
+            map.Config.IsGrid = isGrid;
             map.Config.Grid.OfType = "Test";
             map.Config.Grid.Sizes = umb.ImportConfig.GridRowConfigs.SelectMany(x => x.DefinedSizes).ToArray();
 

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using YuzuDelivery.Core.Settings;
 
 namespace YuzuDelivery.Umbraco.Core
 {

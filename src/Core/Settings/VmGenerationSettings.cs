@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Settings
 {
     public class VmGenerationSettings
     {
         internal const bool StaticIsActive = true;
-        internal const string StaticDirectory = "~/yuzu/viewmodels";
+        internal const string StaticDirectory = "./Yuzu/ViewModels";
 
         [DefaultValue(StaticIsActive)]
         public bool IsActive { get; set; } = StaticIsActive;

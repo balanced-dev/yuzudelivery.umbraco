@@ -90,6 +90,36 @@ function Format-Json([Parameter(Mandatory, ValueFromPipeline)][String] $json) {
 
 function Add-Yuzu-AppSettings {
     param (
+        $Folder
+    )
+
+    $AppSettings = Get-Content -Path ".\$($folder)\appsettings.json" -Raw
+
+    $AppSettings = $AppSettings.Trim()
+    $AppSettings = $AppSettings.Substring(0, $AppSettings.Length-2)
+
+    $yuzu = [PSCustomObject]@{
+        Yuzu = [PSCustomObject]@{
+            Core = [PSCustomObject]@{ 
+                Pages = "./Yuzu/_templates/src/pages"
+                Partials = "./Yuzu/_templates/src/blocks"
+                SchemaMeta = "./Yuzu/_templates/paths"
+                ConfigPath = "./Yuzu/YuzuConfig.json"
+            }
+        }
+    }
+
+    $yuzuString = ConvertTo-Json $yuzu | Format-Json
+    $yuzuString = $yuzuString.Substring(1, $yuzuString.Length-1) 
+
+    $output = "$($AppSettings),", $yuzuString
+
+    Set-Content ".\$($folder)\appsettings.json" $output
+}
+
+
+function Add-Yuzu-Development-AppSettings {
+    param (
         $Folder,
         [bool] $isWeb
     )
@@ -101,23 +131,17 @@ function Add-Yuzu-AppSettings {
 
     $yuzu = [PSCustomObject]@{
         Yuzu = [PSCustomObject]@{
-            Core = [PSCustomObject]@{ 
-                Pages = "/Yuzu/_templates/src/pages"
-                Partials = "/Yuzu/_templates/src/blocks"
-                SchemaMeta = "/Yuzu/_templates/paths"
-            }
             VmGeneration = [PSCustomObject]@{ 
                 IsActive = $True 
                 AcceptUnsafeDirectory = $False 
-                Directory = "~/Yuzu/ViewModels"
+                Directory = "./Yuzu/ViewModels"
             }
             Import = [PSCustomObject]@{ 
                 IsActive = $True 
-                Config = "/Yuzu/YuzuConfig.json"
-                ManualMappingDirectory = "~/Yuzu/Mappings/"
-                Data = "/Yuzu/_templates/data"
+                ManualMappingDirectory = "./Yuzu/Mappings"
+                Data = "./Yuzu/_templates/data"
                 ImagesDef = "/_client/images"
-                ImagesDel = "/wwwroot/_client/images"
+                ImagesDel = "./wwwroot/_client/images"
             }
         }
     }

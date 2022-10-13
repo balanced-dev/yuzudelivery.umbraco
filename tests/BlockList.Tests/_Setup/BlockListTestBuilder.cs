@@ -1,7 +1,9 @@
 ﻿using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
 using Autofac;
+using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Web;
+using YuzuDelivery.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.BlockList.Tests
 {
@@ -25,6 +27,12 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests
             builder.Register((IComponentContext factory) =>
             {
                 return Substitute.For<GuidFactory>();
+            }).SingleInstance();
+
+            // TODO: do something upstream in umbraco.import
+            builder.Register((IComponentContext factory) =>
+            {
+                return Substitute.For<IOptionsMonitor<ImportSettings>>();
             }).SingleInstance();
 
             return builder;

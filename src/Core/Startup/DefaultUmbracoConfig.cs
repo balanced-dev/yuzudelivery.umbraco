@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Web;
 using System.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Umbraco.Cms.Core.Extensions;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.Settings;
+using YuzuDelivery.Umbraco.Core.Settings;
 using YuzuDelivery.Umbraco.Import;
 
 #if NETCOREAPP
@@ -21,14 +26,28 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public class DefaultUmbracoConfig : YuzuConfiguration
     {
-        public DefaultUmbracoConfig(IFactory factory, Assembly localAssembly)
-            : base(factory.GetAllInstances<IUpdateableConfig>())
-        {
-            var mappath = factory.GetInstance<MapPathAbstraction>();
-            var settings = factory.GetInstance<SettingsAbstraction>();
+        private readonly IHostEnvironment _hostEnvironment;
+        private readonly IOptionsMonitor<CoreSettings> _coreSettings;
+        private readonly IAppPolicyCache _appPolicyCache;
+        private readonly Lazy<IYuzuDefinitionTemplateSetup> _templateSetup; // TODO: There's a circular dependency here, YuzuDefinitionTemplateSetup depends on IYuzuConfiguration.
 
-            var pagesLocation = settings.Pages;
-            var partialsLocation = settings.Partials;
+        public DefaultUmbracoConfig(
+            IHostEnvironment hostEnvironment,
+            IOptionsMonitor<CoreSettings> coreSettings,
+            IOptionsMonitor<VmGenerationSettings> vmGenerationSettings,
+            IEnumerable<IUpdateableConfig> updateableConfigs,
+            IAppPolicyCache appPolicyCache,
+            Lazy<IYuzuDefinitionTemplateSetup> templateSetup,
+            Assembly localAssembly)
+            : base(updateableConfigs)
+        {
+            _hostEnvironment = hostEnvironment;
+            _coreSettings = coreSettings;
+            _appPolicyCache = appPolicyCache;
+            _templateSetup = templateSetup;
+
+            var pagesLocation = coreSettings.CurrentValue.Pages;
+            var partialsLocation = coreSettings.CurrentValue.Partials;
 
             ViewModelAssemblies = new Assembly[] { localAssembly };
 
@@ -42,16 +61,16 @@ namespace YuzuDelivery.Umbraco.Core
                     new TemplateLocation()
                     {
                         Name = "Pages",
-                        Path = mappath.Get(pagesLocation),
-                        Schema = mappath.Get(pagesLocation.Replace("src", "schema")),
+                        Path = _hostEnvironment.MapPathContentRoot(pagesLocation),
+                        Schema = _hostEnvironment.MapPathContentRoot(pagesLocation.Replace("src", "schema")),
                         RegisterAllAsPartials = false,
                         SearchSubDirectories = false
                     },
                     new TemplateLocation()
                     {
                         Name = "Partials",
-                        Path = mappath.Get(partialsLocation),
-                        Schema = mappath.Get(partialsLocation.Replace("src", "schema")),
+                        Path = _hostEnvironment.MapPathContentRoot(partialsLocation),
+                        Schema = _hostEnvironment.MapPathContentRoot(partialsLocation.Replace("src", "schema")),
                         RegisterAllAsPartials = true,
                         SearchSubDirectories = true
                     }
@@ -62,29 +81,24 @@ namespace YuzuDelivery.Umbraco.Core
                     new DataLocation()
                     {
                         Name = "Main",
-                        Path = mappath.Get(settings.SchemaMeta)
+                        Path = _hostEnvironment.MapPathContentRoot(_coreSettings.CurrentValue.SchemaMeta)
                     }
                 };
 
             GetTemplatesCache = () => {
-                var cache = factory.GetInstance<IAppPolicyCache>();
-                return cache.Get("feTemplates") as Dictionary<string, Func<object, string>>;
+                return _appPolicyCache.Get("feTemplates") as Dictionary<string, Func<object, string>>;
             };
 
             SetTemplatesCache = () => {
-                var cache = factory.GetInstance<IAppPolicyCache>();
-                var templateService = factory.GetInstance<IYuzuDefinitionTemplateSetup>();
-                return cache.Get("feTemplates", () => templateService.RegisterAll()) as Dictionary<string, Func<object, string>>;
+                return _appPolicyCache.Get("feTemplates", () => _templateSetup.Value.RegisterAll()) as Dictionary<string, Func<object, string>>;
             };
 
             GetRenderedHtmlCache = (IRenderSettings renderSettings) => {
-                var cache = factory.GetInstance<IAppPolicyCache>();
-                return cache.Get(renderSettings.CacheName) as string;
+                return _appPolicyCache.Get(renderSettings.CacheName) as string;
             };
 
             SetRenderedHtmlCache = (IRenderSettings renderSettings, string html) => {
-                var cache = factory.GetInstance<IAppPolicyCache>();
-                cache.Insert(renderSettings.CacheName, () => { return html; }, new TimeSpan(0, 0, renderSettings.CacheExpiry));
+                _appPolicyCache.Insert(renderSettings.CacheName, () => { return html; }, new TimeSpan(0, 0, renderSettings.CacheExpiry));
             };
 
             foreach (var asm in ViewModelAssemblies)

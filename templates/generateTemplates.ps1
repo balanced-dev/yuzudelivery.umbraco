@@ -55,7 +55,8 @@ Copy-Upstream-Template -folder 'standalone'
 Update-ViewImports -folder 'standalone'
 Copy-Yuzu-Folder 'standalone'
 Update-ModeslBuilder -folder 'standalone' -isWeb $False
-Add-Yuzu-AppSettings -folder 'Standalone' -isWeb $False
+Add-Yuzu-AppSettings -folder 'standalone'
+Add-Yuzu-Development-AppSettings -folder 'standalone' -isWeb $False
 Copy-Forms-Partials -folder 'standalone'
 Copy-Blocklist-Partials -folder 'standalone'
 Copy-Icon -folder 'standalone'
@@ -89,7 +90,8 @@ Copy-Upstream-Template -folder 'testproject'
 Update-ViewImports -folder 'testproject'
 Copy-Yuzu-Folder 'testproject'
 Update-ModeslBuilder -folder 'testproject' -isWeb $False
-Add-Yuzu-AppSettings -folder 'testproject' -isWeb $False
+Add-Yuzu-AppSettings -folder 'testproject'
+Add-Yuzu-Development-AppSettings -folder 'testproject' -isWeb $False
 Copy-Forms-Partials -folder 'testproject'
 Copy-Blocklist-Partials -folder 'testproject'
 Copy-Icon -folder 'testproject'

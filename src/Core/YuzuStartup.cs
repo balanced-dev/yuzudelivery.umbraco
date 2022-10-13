@@ -1,28 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Import;
-
-#if NETCOREAPP
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models.PublishedContent;
-#endif
+using YuzuDelivery.Umbraco.Core.Settings;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-
-#if NETCOREAPP
     public class YuzuStartup : IComposer
     {
         public void Compose(IUmbracoBuilder builder)
@@ -97,8 +88,6 @@ namespace YuzuDelivery.Umbraco.Core
 
             builder.Services.AddTransient(typeof(IMapperAddItem), typeof(UmbracoMapperAddItems));
 
-            builder.Services.AddTransient<SettingsAbstraction>();
-
             AddDefaultPublishedElements(builder);
             SetupHbsHelpers();
         }
@@ -137,111 +126,7 @@ namespace YuzuDelivery.Umbraco.Core
                 return items.ToArray();
             });
         }
-#else
-    [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    public class YuzuStartup : IUserComposer
-    {
-        public void Compose(Composition composition)
-        {
-            Inflector.Inflector.SetDefaultCultureFunc = () => System.Threading.Thread.CurrentThread.CurrentUICulture;
 
-            YuzuConstants.Initialize(new YuzuConstantsConfig());
-
-            composition.Register<IHandlebarsProvider, HandlebarsProvider>(Lifetime.Singleton);
-            composition.Register<IYuzuDefinitionTemplates, YuzuDefinitionTemplates>(Lifetime.Singleton);
-            composition.Register<IYuzuDefinitionTemplateSetup, YuzuDefinitionTemplateSetup>(Lifetime.Singleton);
-            composition.Register<ISchemaMetaService, SchemaMetaService>();
-            composition.Register<ISchemaMetaPropertyService, SchemaMetaPropertyService>();
-
-            //Viewmodel Builder
-            composition.Register<BuildViewModelsService>(Lifetime.Singleton);
-            composition.Register<ReferencesService>(Lifetime.Singleton);
-            composition.Register<GenerateViewmodelService>(Lifetime.Singleton);
-            composition.Register(typeof(IViewmodelPostProcessor), typeof(FileRefViewmodelPostProcessor));
-
-            //MUST be transient lifetime
-            composition.Register(typeof(IUpdateableConfig), typeof(CoreUmbracoConfig), Lifetime.Transient);
-            composition.Register(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig), Lifetime.Transient);
-            composition.Register(typeof(IUpdateableImportConfiguration), typeof(CoreImportConfig), Lifetime.Transient);
-
-            composition.Register<DefaultUmbracoMappingFactory>();
-            composition.RegisterAuto<AutoMapper.Profile>();
-
-            composition.Register<LinkIPublishedContentConvertor>();
-            composition.Register<LinkConvertor>();
-            composition.Register<ImageConvertor>();
-            composition.Register<MediWithCropsConvertor>();
-            composition.Register(typeof(SubBlocksObjectResolver<,>));
-
-            composition.Register<DefaultPublishedElementCollectionConvertor>();
-            composition.Register<DefaultPublishedElementCollectionToSingleConvertor>();
-
-            composition.Register<IMappingContextFactory, UmbracoMappingContextFactory>(Lifetime.Request);
-            composition.Register<IYuzuTypeFactoryRunner, UmbracoTypeFactoryRunner>();
-
-            composition.Register<ImageFactory>();
-
-            composition.Register(typeof(YuzuMappingConfig), typeof(DefaultElementMapping));
-            composition.Register(typeof(YuzuMappingConfig), typeof(ImageMappings));
-            composition.Register(typeof(YuzuMappingConfig), typeof(LinkMappings));
-            composition.Register(typeof(YuzuMappingConfig), typeof(SubBlocksMappings));
-            composition.Register(typeof(YuzuMappingConfig), typeof(ManualMappingsMappings));
-            composition.Register(typeof(YuzuMappingConfig), typeof(GroupedConfigMappings));
-            composition.Register(typeof(YuzuMappingConfig), typeof(GlobalConfigMappings));
-
-            composition.RegisterUnique<IYuzuGroupMapper, DefaultGroupMapper>();
-            composition.RegisterUnique<IYuzuGlobalMapper, DefaultGlobalMapper>();
-            composition.RegisterUnique<IYuzuFullPropertyMapper, DefaultFullPropertyMapper>();
-            composition.RegisterUnique<IYuzuPropertyAfterMapper, DefaultPropertyAfterMapper>();
-            composition.RegisterUnique<IYuzuPropertyFactoryMapper, DefaultPropertyFactoryMapper>();
-            composition.RegisterUnique<IYuzuPropertyReplaceMapper, DefaultPropertyReplaceMapper>();
-            composition.RegisterUnique<IYuzuTypeAfterMapper, DefaultTypeAfterMapper>();
-            composition.RegisterUnique<IYuzuTypeConvertorMapper, DefaultTypeConvertorMapper>();
-            composition.RegisterUnique<IYuzuTypeFactoryMapper, DefaultTypeFactoryMapper>();
-
-            composition.Register(typeof(IMapperAddItem), typeof(UmbracoMapperAddItems));
-
-            composition.Register<SettingsAbstraction>();
-
-            AddDefaultPublishedElements(composition);
-            SetupHbsHelpers();
-        }
-
-        public void AddDefaultPublishedElements(Composition composition)
-        {
-            composition.Register<IDefaultPublishedElement[]>((factory) =>
-            {
-                var config = factory.GetInstance<IYuzuConfiguration>();
-                var mapper = factory.GetInstance<IMapper>();
-
-                var viewmodelAssemblies = config.ViewModelAssemblies;
-
-                var baseItemType = typeof(DefaultPublishedElement<,>);
-                var items = new List<IDefaultPublishedElement>();
-
-                var viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
-
-                foreach (var viewModelType in viewmodelTypes)
-                {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
-                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
-
-                    var alias = umbracoModelTypeName.FirstCharacterToLower();
-
-                    if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
-                    {
-                        var makeme = baseItemType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper }) as IDefaultPublishedElement;
-
-                        items.Add(o);
-                    }
-                }
-
-                return items.ToArray();
-            }, Lifetime.Singleton);
-        }
-
-#endif
         public void SetupHbsHelpers()
         {
             new IfCond();

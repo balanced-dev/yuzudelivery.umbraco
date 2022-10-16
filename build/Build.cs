@@ -213,6 +213,9 @@ class Build : NukeBuild
                         type: AzurePipelinesTestResultsType.JUnit,
                         title: "Acceptance Tests",
                         files: new string[] { x }));
+
+                AcceptanceTestsDirectory.GlobFiles("**/*.png").ForEach(x =>
+                    AzurePipelines.Instance?.UploadArtifacts("drop", x.Name, "testImages"));
             }
         });
 

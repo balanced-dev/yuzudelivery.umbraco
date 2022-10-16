@@ -208,14 +208,11 @@ class Build : NukeBuild
             }
             finally
             {
-                AcceptanceTestsDirectory.GlobFiles("**/*.junit.xml").ForEach(x =>
+                AcceptanceTestsDirectory.GlobFiles("**/*.*").ForEach(x =>
                     AzurePipelines.Instance?.PublishTestResults(
                         type: AzurePipelinesTestResultsType.JUnit,
                         title: "Acceptance Tests",
                         files: new string[] { x }));
-
-                AcceptanceTestsDirectory.GlobFiles("**/*.png").ForEach(x =>
-                    AzurePipelines.Instance?.UploadArtifacts("drop", x.Name, "testImages"));
             }
         });
 

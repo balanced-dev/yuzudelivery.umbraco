@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -155,7 +154,6 @@ class Build : NukeBuild
     Target Acceptance  => _ => _
         .After(Test)
         .DependsOn(Pack)
-        .Produces(AcceptanceTestsZip)
         .Executes(async () =>
         {
 
@@ -218,7 +216,7 @@ class Build : NukeBuild
                         title: "Acceptance Tests",
                         files: new string[] { x }));
 
-                ZipFile.CreateFromDirectory(AcceptanceTestResults, AcceptanceTestsZip);
+                AzurePipelines.Instance?.UploadArtifacts(AcceptanceTestResults, TestResultsDirectory, "Drop");
 
             }
         });

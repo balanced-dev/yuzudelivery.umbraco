@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,10 +47,12 @@ class Build : NukeBuild
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
     AbsolutePath AcceptanceTestsDirectory => RootDirectory / "acceptance";
+    AbsolutePath AcceptanceTestResults => AcceptanceTestsDirectory / "test-results";
     AbsolutePath OutputDirectory => RootDirectory / "output";
     AbsolutePath PackagesDirectory => OutputDirectory / "packages";
     AbsolutePath TestResultsDirectory => OutputDirectory / "test_results";
     AbsolutePath TestServerDirectory => OutputDirectory / ".test_server";
+    AbsolutePath AcceptanceTestsZip => OutputDirectory / "acceptance.zip";
 
 
     public Build()
@@ -152,6 +155,7 @@ class Build : NukeBuild
     Target Acceptance  => _ => _
         .After(Test)
         .DependsOn(Pack)
+        .Produces(AcceptanceTestsZip)
         .Executes(async () =>
         {
 
@@ -208,11 +212,14 @@ class Build : NukeBuild
             }
             finally
             {
-                AcceptanceTestsDirectory.GlobFiles("**/*.*").ForEach(x =>
+                AcceptanceTestsDirectory.GlobFiles("**/*.junit.xml").ForEach(x =>
                     AzurePipelines.Instance?.PublishTestResults(
                         type: AzurePipelinesTestResultsType.JUnit,
                         title: "Acceptance Tests",
                         files: new string[] { x }));
+
+                ZipFile.CreateFromDirectory(AcceptanceTestResults, AcceptanceTestsZip);
+
             }
         });
 

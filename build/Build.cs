@@ -53,7 +53,6 @@ class Build : NukeBuild
     AbsolutePath PackagesDirectory => OutputDirectory / "packages";
     AbsolutePath TestResultsDirectory => OutputDirectory / "test_results";
     AbsolutePath TestServerDirectory => OutputDirectory / ".test_server";
-    AbsolutePath AcceptanceTestResultsZip => OutputDirectory / "acceptance.zip";
 
 
     public Build()
@@ -70,7 +69,6 @@ class Build : NukeBuild
             EnsureCleanDirectory(PackagesDirectory);
             EnsureCleanDirectory(TestResultsDirectory);
             EnsureCleanDirectory(TestServerDirectory);
-            DeleteFile(AcceptanceTestResultsZip);
         });
 
 
@@ -225,14 +223,9 @@ class Build : NukeBuild
 
     Target SaveAcceptenceFailedResults => _ => _
         .DependsOn(Acceptance)
-        .Produces(AcceptanceTestResultsZip)
         .Executes(() =>
         {
-            CompressZip(
-                AcceptanceTestResults,
-                AcceptanceTestResultsZip,
-                compressionLevel: CompressionLevel.SmallestSize,
-                fileMode: FileMode.CreateNew);
+            AzurePipelines.Instance?.UploadArtifacts("container", "drop", TestResultsDirectory);
         });
 
     Target Default => _ => _

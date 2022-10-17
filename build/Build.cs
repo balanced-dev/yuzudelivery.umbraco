@@ -225,7 +225,7 @@ class Build : NukeBuild
         .DependsOn(Acceptance)
         .Executes(() =>
         {
-            AzurePipelines.Instance?.UploadArtifacts("container", "drop", TestResultsDirectory);
+            AzurePipelines.Instance?.UploadArtifacts("container", "drop", AcceptanceTestResults);
         });
 
     Target Default => _ => _

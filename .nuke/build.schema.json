@@ -80,6 +80,7 @@
               "Pack",
               "Report",
               "Restore",
+              "SaveAcceptenceFailedResults",
               "Test"
             ]
           }
@@ -102,6 +103,7 @@
               "Pack",
               "Report",
               "Restore",
+              "SaveAcceptenceFailedResults",
               "Test"
             ]
           }

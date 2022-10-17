@@ -20,6 +20,8 @@ using Serilog;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static SimpleExec.Command;
+using static Nuke.Common.IO.CompressionTasks;
+using System.IO.Compression;
 
 [ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
@@ -51,7 +53,7 @@ class Build : NukeBuild
     AbsolutePath PackagesDirectory => OutputDirectory / "packages";
     AbsolutePath TestResultsDirectory => OutputDirectory / "test_results";
     AbsolutePath TestServerDirectory => OutputDirectory / ".test_server";
-    AbsolutePath AcceptanceTestsZip => OutputDirectory / "acceptance.zip";
+    AbsolutePath AcceptanceTestResultsZip => OutputDirectory / "acceptance.zip";
 
 
     public Build()
@@ -154,6 +156,8 @@ class Build : NukeBuild
     Target Acceptance  => _ => _
         .After(Test)
         .DependsOn(Pack)
+        .ProceedAfterFailure()
+        .ProceedAfterFailure()
         .Executes(async () =>
         {
 
@@ -216,9 +220,19 @@ class Build : NukeBuild
                         title: "Acceptance Tests",
                         files: new string[] { x }));
 
-                AzurePipelines.Instance?.UploadArtifacts(AcceptanceTestResults, TestResultsDirectory, "Drop");
-
             }
+        });
+
+    Target SaveAcceptenceFailedResults => _ => _
+        .DependsOn(Acceptance)
+        .Produces(AcceptanceTestResultsZip)
+        .Executes(() =>
+        {
+            CompressZip(
+                AcceptanceTestResults,
+                AcceptanceTestResultsZip,
+                compressionLevel: CompressionLevel.SmallestSize,
+                fileMode: FileMode.CreateNew);
         });
 
     Target Default => _ => _

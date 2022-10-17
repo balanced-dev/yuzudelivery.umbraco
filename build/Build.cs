@@ -70,6 +70,7 @@ class Build : NukeBuild
             EnsureCleanDirectory(PackagesDirectory);
             EnsureCleanDirectory(TestResultsDirectory);
             EnsureCleanDirectory(TestServerDirectory);
+            DeleteFile(AcceptanceTestResultsZip);
         });
 
 
@@ -157,7 +158,6 @@ class Build : NukeBuild
         .After(Test)
         .DependsOn(Pack)
         .ProceedAfterFailure()
-        .ProceedAfterFailure()
         .Executes(async () =>
         {
 
@@ -236,5 +236,5 @@ class Build : NukeBuild
         });
 
     Target Default => _ => _
-        .DependsOn(Clean, Test, Acceptance, Report);
+        .DependsOn(Clean, Test, Acceptance, SaveAcceptenceFailedResults, Report);
 }

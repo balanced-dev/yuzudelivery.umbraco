@@ -1,0 +1,19 @@
+{
+    "id": "/dataForm",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "testForm": {
+            "anyOf": [
+                {
+                    "$ref": "/dataFormBuilder"
+                }
+            ]
+        },
+        "liveForm": {
+            "type": "string"
+        }
+    }
+}

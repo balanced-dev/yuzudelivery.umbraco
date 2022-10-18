@@ -1,0 +1,33 @@
+<div style="padding: 20px; background: #EEE;">
+    {{#each rows}}
+
+        <h2>Row {{@index}}</h2>
+
+        <div style="padding: 20px; background: #CCC;">
+            <h3 style="padding-top: 0;">Row Config</h3>
+            <div style="margin-bottom: 20px;">
+                {{#with config}}
+                <div>String: {{string}}</div>
+                <div>Enum: {{enumString}}</div>
+                <div>Boolean: {{boolean}}</div>
+                <div>Number: {{number}}</div>
+                <div>Image: <img src="{{image.src}}" alt="{{image.alt}}" /></div>
+                <div>Link: <a href="{{link.href}}" title="{{link.title}}">{{link.label}}</a></div>
+                {{/with}}
+            </div>
+
+            {{#each items}}
+                <div style="padding: 20px; background: #BBB; margin-bottom: 20px;">
+                    <h3 style="padding-top: 0;">Row Item {{@index}}</h3>
+                    {{#if this.content}}
+                        {{{ dynPartial _ref this.content }}}
+                    {{else}}
+                        {{{ dynPartial _ref this }}}
+                    {{/if}}
+                </div>
+            {{/each}}
+
+        </div>
+
+    {{/each}}
+</div>

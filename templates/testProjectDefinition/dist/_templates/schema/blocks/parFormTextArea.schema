@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "label": {
+            "type": "string"
+        },
+        "value": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string"
+        },
+        "placeholder": {
+            "type": "string"
+        },
+        "minlength": {
+            "type": "string"
+        },
+        "maxlength": {
+            "type": "string"
+        },
+        "isRequired": {
+            "type": "boolean"
+        },
+        "requiredMessage": {
+            "type": "string"
+        },
+        "isDisabled": {
+            "type": "boolean"
+        },
+        "isReadonly": {
+            "type": "boolean"
+        },
+        "config": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {}
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "id": "/parFormTextArea"
+}

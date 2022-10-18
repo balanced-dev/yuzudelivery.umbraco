@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "id": "/parFormButton",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "label": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "value": {
+            "type": "string"
+        },
+        "config": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {}
+        }
+    }
+}

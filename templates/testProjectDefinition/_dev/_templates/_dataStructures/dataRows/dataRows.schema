@@ -1,0 +1,33 @@
+{
+    "id": "/dataRows",
+    "type": "object",
+    "additionalProperties": false,
+    "anyOfTypes": [
+        "parRowBuilder"
+    ],
+    "properties": {
+        "rows": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "config": {
+                        "anyOf": [
+                            {
+                                "$ref": "/parRowBuilderConfig"
+                            }
+                        ]
+                    },
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "/parRowBuilderItems"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

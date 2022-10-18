@@ -1,0 +1,27 @@
+{
+    "legend": "Radios",
+    "elements": [
+        {
+            "type": "radio",
+            "name": "radio",
+            "label": "radio Label",
+            "value": "radio Value",
+            "id": "",
+            "isRequired": true,
+            "isSelected": false,
+            "isDisabled": false,
+            "isReadonly": false
+        },
+        {
+            "type": "radio",
+            "name": "radio",
+            "label": "radio Label",
+            "value": "radio Value 2",
+            "id": "",
+            "isRequired": true,
+            "isSelected": false,
+            "isDisabled": false,
+            "isReadonly": false
+        }
+    ]
+}

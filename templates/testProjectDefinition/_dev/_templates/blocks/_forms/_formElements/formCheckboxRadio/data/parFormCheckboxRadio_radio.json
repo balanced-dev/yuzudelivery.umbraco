@@ -1,0 +1,11 @@
+{
+    "type": "radio",
+    "name": "radio",
+    "label": "radio Label",
+    "value": "radio Value",
+    "id": "radio",
+    "isRequired": false,
+    "isSelected": false,
+    "isDisabled": false,
+    "isReadonly": false
+}

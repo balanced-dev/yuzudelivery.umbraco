@@ -1,0 +1,66 @@
+{
+    "form": {
+        "testForm": {
+            "title": "Register",
+            "isSuccess": false,            
+            "successMessage": "Account created successfully!",
+            "fieldsets": [
+                {
+                    "fields": [
+                        {
+                            "type": "text",
+                            "name": "name",
+                            "placeholder": "Name ",
+                            "label": "Name ",
+                            "value": "",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "email",
+                            "name": "emailAddress",
+                            "placeholder": "Email address",
+                            "label": "Email address",
+                            "value": "",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "password",
+                            "name": "password",
+                            "placeholder": "Password",
+                            "label": "Password",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "password",
+                            "name": "confirmPassword",
+                            "placeholder": "Confirm Password",
+                            "label": "Confirm Password",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "text",
+                            "name": "companyName",
+                            "placeholder": "Company Name",
+                            "label": "Company Name",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        }
+                    ]
+                }
+            ],
+            "submitButtonText": "Register",
+            "actionLinks": [
+                {
+                    "label": "Cancel",
+                    "href": "#",
+                    "title": ""
+                }
+            ],
+            "_ref": "/parFormBuilder"
+        }
+    }
+}

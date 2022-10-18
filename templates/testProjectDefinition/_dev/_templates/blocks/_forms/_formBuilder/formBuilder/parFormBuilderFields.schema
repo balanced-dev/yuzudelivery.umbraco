@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "array",
+    "items": {
+        "anyOf": [
+            {
+                "$ref": "/parFormButton"
+            },
+            {
+                "$ref": "/parFormCheckboxRadio"
+            },
+            {
+                "$ref": "/parFormCheckboxRadioList"
+            },
+            {
+                "$ref": "/parFormTextArea"
+            },
+            {
+                "$ref": "/parFormTextInput"
+            },
+            {
+                "$ref": "/parFormSelect"
+            },
+            {
+                "$ref": "/parFormHidden"
+            },
+            {
+                "$ref": "/parRecaptcha"
+            },
+            {
+                "$ref": "/parTitleAndDescription"
+            }
+        ]
+    },
+    "additionalProperties": false,
+    "id": "/parFormBuilderFields"
+}

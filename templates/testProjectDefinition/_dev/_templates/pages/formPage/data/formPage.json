@@ -1,0 +1,47 @@
+{
+    "form": {
+        "testForm": {
+            "title": "Login",
+            "isSuccess": false,
+            "successMessage": "Form submitted!",
+            "fieldsets": [
+                {
+                    "legend": "Personal Details",
+                    "fields": [
+                        {
+                            "type": "email",
+                            "name": "emailAddress",
+                            "placeholder": "Email address",
+                            "label": "Email address",
+                            "value": "",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "password",
+                            "name": "password",
+                            "placeholder": "Password",
+                            "label": "Password",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        }
+                    ]
+                }
+            ],
+            "submitButtonText": "Login",
+            "actionLinks": [
+                {
+                    "label": "Forgotten password?",
+                    "href": "#",
+                    "title": ""
+                },
+                {
+                    "label": "Not got an account?",
+                    "href": "#",
+                    "title": ""
+                }
+            ],
+            "_ref": "/parFormBuilder"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{17:function(e,a){e.exports='<div class="yuzu-content-root"> <label class="__textarea"> <textarea class="__textarea__control" name="message" placeholder="Write your message here" required="required"></textarea> <span class="__textarea__label">Message</span> </label> </div>'}}]);

@@ -1,0 +1,47 @@
+{
+    "id": "/dataGrid",
+    "type": "object",
+    "additionalProperties": false,
+    "anyOfTypes": [
+        "parGridBuilder"
+    ],
+    "properties": {
+        "rows": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "config": {
+                        "anyOf": []
+                    },
+                    "columns": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "gridSize": {
+                                    "anyOf": []
+                                },
+                                "config": {
+                                    "anyOf": []
+                                },
+                                "items": {
+                                    "anyOf": []
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "_ref": {
+            "type": "string"
+        },
+        "_modifiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "refs": {
+        "/global": [
+            "/parGlobal"
+        ],
+        "/globalList": [
+            "/parGlobal"
+        ]
+    }
+}

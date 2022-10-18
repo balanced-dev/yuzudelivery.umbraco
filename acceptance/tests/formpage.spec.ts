@@ -51,8 +51,6 @@ test('formpage renders correctly', async ({ page }) => {
     page.locator('text=Contact Us')
   ]);
 
-  //await page1.screenshot();
-
   await expect(page1).toHaveScreenshot();
 
 

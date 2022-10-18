@@ -1,0 +1,9 @@
+{
+    "global": {
+        "$ref": "/parGlobal"
+    },
+    "globalList": [
+        { "$ref": "/parGlobal" },
+        { "$ref": "/parGlobal_1" }
+    ]
+}

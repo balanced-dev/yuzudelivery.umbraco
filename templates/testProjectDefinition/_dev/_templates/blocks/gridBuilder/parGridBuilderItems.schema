@@ -1,0 +1,13 @@
+{
+    "id": "/parGridBuilderItems",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "array",
+    "items": {
+        "anyOf": [
+            { "$ref": "/parContent" },
+            { "$ref": "/parGlobalGrid" }
+        ]
+    },
+    "additionalProperties": false
+}

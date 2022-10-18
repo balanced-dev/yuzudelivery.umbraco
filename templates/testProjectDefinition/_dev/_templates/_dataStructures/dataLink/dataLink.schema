@@ -1,0 +1,28 @@
+{
+	"id": "/dataLink",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"label": {
+			"type": "string"
+		},
+		"href": {
+			"type": "string"
+		},
+		"title": {
+			"type": "string"
+		},
+		"isNewTab": {
+			"type": "boolean"
+		},
+		"isExternalLink": {
+			"type": "boolean"
+		},
+		"iconName": {
+			"type": "string"
+		},
+		"isActive": {
+			"type": "boolean"
+		}
+	}
+}

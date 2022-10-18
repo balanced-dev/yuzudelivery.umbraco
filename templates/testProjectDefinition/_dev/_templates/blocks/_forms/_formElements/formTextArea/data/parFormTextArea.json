@@ -1,0 +1,10 @@
+{
+    "name": "message",
+    "label": "Message",
+    "value": "",
+    "id": "",
+    "placeholder": "Write your message here",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadonly": false
+}

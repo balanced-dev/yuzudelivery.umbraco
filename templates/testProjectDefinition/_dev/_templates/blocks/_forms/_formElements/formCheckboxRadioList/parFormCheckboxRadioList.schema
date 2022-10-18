@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "legend": {
+            "type": "string"
+        },
+        "isRequired": {
+            "type": "boolean"
+        },
+        "requiredMessage": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string"
+        },
+        "elements": {
+            "type": "array",
+            "items": {
+                "$ref": "/parFormCheckboxRadio"
+            }
+        },
+        "config": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {}
+        }
+    },
+    "additionalProperties": false,
+    "id": "/parFormCheckboxRadioList"
+}

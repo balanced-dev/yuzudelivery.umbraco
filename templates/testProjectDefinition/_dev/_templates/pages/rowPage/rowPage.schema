@@ -1,0 +1,13 @@
+{
+    "id": "/rowPage",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "content": {
+            "$ref": "/dataRows",
+            "anyOfType": "parRowBuilder"
+        }
+    }
+}

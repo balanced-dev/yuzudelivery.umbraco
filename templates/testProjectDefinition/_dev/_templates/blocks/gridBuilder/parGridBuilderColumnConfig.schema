@@ -1,0 +1,31 @@
+{
+    "id": "/parGridBuilderColumnConfig",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "string": {
+            "type": "string"
+        },
+        "boolean": {
+            "type": "boolean"
+        },
+        "number": {
+            "type": "number"
+        },
+        "enumString": {
+            "type": "string",
+            "enum": [
+                "value1",
+                "value2"
+            ]
+        },
+        "image": {
+            "$ref": "/dataImage"
+        },
+        "link": {
+            "$ref": "/dataLink"
+        }
+    }
+}

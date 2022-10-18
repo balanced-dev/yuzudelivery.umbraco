@@ -1,0 +1,17 @@
+{
+    "name": "first-name",
+    "label": "First name",
+    "value": "",
+    "type": "text",
+    "id": "",
+    "placeholder": "First name",
+    "pattern": "",
+    "autocomplete": "",
+    "min": "",
+    "max": "",
+    "minlength": "",
+    "maxlength": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadonly": false
+}

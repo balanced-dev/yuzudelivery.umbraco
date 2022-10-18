@@ -1,0 +1,11 @@
+{
+    "type": "checkbox",
+    "name": "checkbox",
+    "label": "Checkbox Label",
+    "value": "Checkbox Value",
+    "id": "checkbox",
+    "isRequired": false,
+    "isSelected": false,
+    "isDisabled": false,
+    "isReadonly": false
+}

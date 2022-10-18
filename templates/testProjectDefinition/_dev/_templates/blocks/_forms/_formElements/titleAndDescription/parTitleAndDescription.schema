@@ -1,0 +1,20 @@
+{
+    "id": "/parTitleAndDescription",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "config": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {}
+        }
+    },
+    "additionalProperties": false
+}

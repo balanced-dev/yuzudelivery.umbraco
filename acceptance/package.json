@@ -6,7 +6,8 @@
   "scripts": {
     "wait": "wait-on --interval 5000 --timeout 300000 http-get://localhost:8080/ready",
     "browsers": "playwright install chromium",
-    "test": "playwright test"
+    "test": "playwright test",
+    "debug": "playwright test --trace on"
   },
   "keywords": [],
   "author": "",

@@ -1,17 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { UmbracoLogin } from '../pages/umbraco-login.page';
 
 test('formpage renders correctly', async ({ page }) => {
 
-  // Go to http://localhost:8080/umbraco
-  await page.goto('http://localhost:8080/umbraco');
-  // Fill text=Email Password Show password Hide password Login Forgotten password? >> [placeholder="Enter your email"]
-  await page.locator('text=Email Password Show password Hide password Login Forgotten password? >> [placeholder="Enter your email"]').fill('e2e@hifi.agency');
+  const login = new UmbracoLogin(page);
 
-  // Fill text=Password Show password Hide password >> [placeholder="Enter your password"]
-  await page.locator('text=Password Show password Hide password >> [placeholder="Enter your password"]').fill('TestThis42!');
-
-  // Click form[name="vm\.loginForm"] button:has-text("Login")
-  await page.locator('form[name="vm\\.loginForm"] button:has-text("Login")').click();
+  login.goto();
+  login.login('e2e@hifi.agency', 'TestThis42!');
 
   const tour = page.locator('text=Don\'t show this tour again');
   if(tour) {

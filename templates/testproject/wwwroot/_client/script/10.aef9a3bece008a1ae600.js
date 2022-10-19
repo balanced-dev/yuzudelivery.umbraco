@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{15:function(n,d){n.exports='<div class="yuzu-content-root"> <input type="hidden" name="Hidden" id="hidden" value="Hidden Value"> </div>'}}]);

@@ -38,3 +38,4 @@ _dist
 /_dev/_client/
 /_dev/yuzu-def-ui/
 /config/default.json
+/dist/

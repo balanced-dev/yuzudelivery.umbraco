@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{23:function(o,n){o.exports='<div class="yuzu-content-root"> <div>String: global Another Property</div> </div>'}}]);

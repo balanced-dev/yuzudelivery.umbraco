@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{26:function(o,s){o.exports='<div class="yuzu-content-root"> <div class="sub-block"> <h5>SubBlock Title</h5> </div> </div>'}}]);

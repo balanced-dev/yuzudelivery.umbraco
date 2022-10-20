@@ -19,6 +19,8 @@ export class UmbracoMarketing {
 
         await this.page.goto(this.url);
 
+        await this.page.waitForTimeout(5000);
+
         if(await this.closeTourButton.count() > 0) {
             await this.closeTourButton.click();
         }

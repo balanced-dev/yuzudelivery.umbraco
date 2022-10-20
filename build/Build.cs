@@ -190,6 +190,11 @@ class Build : NukeBuild
 
                 try
                 {
+                    if(AzurePipelines.Instance != null)
+                    {
+                        NpmTasks.NpmRun(s => s.SetProcessEnvironmentVariable("ci", "true"));
+                    }
+
                     NpmTasks.NpmCi(s => s
                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory));
 

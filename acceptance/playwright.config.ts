@@ -34,7 +34,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['junit', { outputFile: './test-results/results.junit.xml' }], ["list"], ["html"]],
+  reporter: [['junit', { outputFile: './test-results/results.junit.xml' }], ["list"]],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -44,7 +44,7 @@ const config: PlaywrightTestConfig = {
     baseURL: 'http://localhost:8080',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on',
+    trace: 'on-first-retry',
 
     viewport: { width: 1920, height: 1080 }
   },

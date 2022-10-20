@@ -199,6 +199,10 @@ class Build : NukeBuild
 
                     NpmTasks.NpmRun(s => s
                          .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
+                         .SetCommand("config-ci"));
+
+                    NpmTasks.NpmRun(s => s
+                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
                          .SetCommand("wait"));
 
                     NpmTasks.NpmRun(s => s

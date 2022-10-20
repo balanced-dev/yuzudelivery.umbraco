@@ -193,13 +193,6 @@ class Build : NukeBuild
                     NpmTasks.NpmCi(s => s
                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory));
 
-                    if (AzurePipelines.Instance != null)
-                    {
-                        NpmTasks.NpmRun(s => s
-                            .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
-                            .SetProcessEnvironmentVariable("ci", "true"));
-                    }
-
                     NpmTasks.NpmRun(s => s
                          .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
                          .SetCommand("browsers"));
@@ -208,9 +201,20 @@ class Build : NukeBuild
                          .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
                          .SetCommand("wait"));
 
-                    NpmTasks.NpmRun(s => s
-                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
-                         .SetCommand("test"));
+                    NpmTasks.NpmRun(s => {
+
+                        s.SetProcessWorkingDirectory(AcceptanceTestsDirectory);
+
+                        if (AzurePipelines.Instance != null)
+                        {
+                            s.SetProcessEnvironmentVariable("CI", "true");
+                        };
+
+                        s.SetCommand("test");
+
+                        return s;
+
+                    });
                 }
                 finally
                 {

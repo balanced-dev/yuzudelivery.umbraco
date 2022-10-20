@@ -39,7 +39,7 @@ test.describe('Content tests', () => {
       ]);
 
       await expect(page1.locator('.form__title')).toHaveText('Contact Us');
-      await expect(page1).toHaveScreenshot({maxDiffPixelRatio: 1});
+      await expect(page1).toHaveScreenshot({maxDiffPixelRatio: 1, fullPage: true});
 
 
     });

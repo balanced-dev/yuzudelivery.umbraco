@@ -197,9 +197,12 @@ class Build : NukeBuild
                          .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
                          .SetCommand("browsers"));
 
-                    NpmTasks.NpmRun(s => s
-                         .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
-                         .SetCommand("config-ci"));
+                    if(AzurePipelines.Instance != null)
+                    {
+                        NpmTasks.NpmRun(s => s
+                             .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
+                             .SetCommand("config-ci"));
+                    }
 
                     NpmTasks.NpmRun(s => s
                          .SetProcessWorkingDirectory(AcceptanceTestsDirectory)
@@ -211,7 +214,7 @@ class Build : NukeBuild
                 }
                 finally
                 {
-                    await supervisor.Stop(TimeSpan.FromSeconds(3));
+                    await supervisor.Stop(TimeSpan.FromSeconds(5));
                 }
             }
             finally

@@ -1,4 +1,5 @@
 ﻿using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.Configuration.Models;
 using Yuzu.TestProject.SetupSteps;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
@@ -24,5 +25,10 @@ public class YuzuTestProjectComposer : IComposer
         builder.Services.AddTransient<IYuzuTestSetupStep, CreateDocumentTypes>();
         builder.Services.AddTransient<IYuzuTestSetupStep, CreateTemplatesAndPermissions>();
         builder.Services.AddTransient<IYuzuTestSetupStep, CreateContent>();
+
+        builder.Services.Configure<TourSettings>(s =>
+        {
+            s.EnableTours = false;
+        });
     }
 }

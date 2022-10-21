@@ -98,6 +98,7 @@ Copy-Icon -folder 'testproject'
 $dependencies = [ordered]@{
     "Umbraco.Forms" = $UmbracoFormsVersion;
     "YuzuDelivery.Umbraco" = $YuzuDeliveryUmbracoVersion;
+    "Our.Umbraco.TheDashboard" = "10.0.1";
 }
 Add-Project-Dependencies-Simple -folder 'testproject' -dependencies $dependencies
 $properties = @{

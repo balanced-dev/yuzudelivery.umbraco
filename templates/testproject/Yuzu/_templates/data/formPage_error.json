@@ -1,0 +1,50 @@
+{
+    "form": {
+        "testForm": {
+            "title": "Login",
+            "isSuccess": false,
+            "successMessage": "Form submitted!",
+            "fieldsets": [
+                {
+                    "fields": [
+                        {
+                            "type": "email",
+                            "name": "emailAddress",
+                            "placeholder": "Email address",
+                            "label": "Email address",
+                            "value": "",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        },
+                        {
+                            "type": "password",
+                            "name": "password",
+                            "placeholder": "Password",
+                            "label": "Password",
+                            "isRequired": true,
+                            "_ref": "/parFormTextInput"
+                        }
+                    ]
+                }
+            ],
+            "validation": {
+                "title": "An error occured",
+                "message": "<div class=\"validation-summary-errors\"><ul><li>The email address must be valid</li>\r\n</ul></div>"
+            },
+            "submitButtonText": "Login",
+            "actionLinks": [
+                {
+                    "label": "Forgotten password?",
+                    "href": "#",
+                    "title": ""
+                },
+                {
+                    "label": "Not got an account?",
+                    "href": "#",
+                    "title": ""
+                }
+            ],
+            "_ref": "/parFormBuilder"
+        }
+    }
+}

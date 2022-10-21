@@ -7,14 +7,22 @@ import { UmbracoForms } from '../pages/umbraco-forms.page';
 
 test.describe('Content tests', () => {
 
-    test.beforeEach(async ({page, umbracoApi}) => {
-      await page.waitForTimeout(1000);
+    test.beforeEach(async ({page, umbracoApi, umbracoUi}) => {
       await umbracoApi.login(true);
+
+      await page.goto('/umbraco')
+      await umbracoUi.goToSection(ConstantHelper.sections.content);
+      await umbracoUi.clickElement(umbracoUi.getTreeItem('content', ["Home", "FormPage"]));
+
+      await page.waitForTimeout(1000);
+
+      if(await page.locator('button:has-text("Remove")').count() > 0) {
+        await page.locator('button:has-text("Remove")').click();
+        await umbracoUi.clickElement(umbracoUi.getButtonByLabelKey(ConstantHelper.buttons.saveAndPublish));
+      }
     });
 
-
     test('formpage renders correctly', async ({ page, umbracoUi }) => {
-
       const umbracoMarketing = new UmbracoMarketing(page);
       const umbrcoForms = new UmbracoForms(page);
 
@@ -40,8 +48,5 @@ test.describe('Content tests', () => {
 
       await expect(page1.locator('.form__title')).toHaveText('Contact Us');
       await expect(page1).toHaveScreenshot({maxDiffPixelRatio: 1, fullPage: true});
-
-
     });
-
   });

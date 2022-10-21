@@ -1,0 +1,15 @@
+{
+    "refs": {
+        "": [
+            "/parFormButton",
+            "/parFormCheckboxRadio",
+            "/parFormCheckboxRadioList",
+            "/parFormTextArea",
+            "/parFormTextInput",
+            "/parFormSelect",
+            "/parFormHidden",
+            "/parRecaptcha",
+            "/parTitleAndDescription"
+        ]
+    }
+}

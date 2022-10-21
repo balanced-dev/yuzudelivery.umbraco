@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { Url } from 'url';
+
 export class UmbracoMarketing {
 
     readonly page: Page;
@@ -9,7 +9,7 @@ export class UmbracoMarketing {
 
     constructor(page: Page) {
         this.page = page;
-        this.url = `${process.env.URL}/umbraco`;
+        this.url = '/umbraco';
         this.closeTourButton = this.page.locator('text=Don\'t show this tour again');
         this.closeMarketingBannerButton = this.page.locator('role=button[name="No thanks"]');
 

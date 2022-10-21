@@ -2,7 +2,7 @@ import { Locator, Page } from '@playwright/test';
 export class UmbracoForms {
 
     readonly page: Page;
-    readonly createUrl = `${process.env.URL}/umbraco#/forms/Form/edit/-1?create=true&template=contactform`;
+    readonly createUrl = '/umbraco#/forms/Form/edit/-1?create=true&template=contactform';
 
     readonly submitButton :Locator;
 

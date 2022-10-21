@@ -13,7 +13,7 @@ function Update-ViewImports {
         $Folder
     )
 
-    $ViewImports = Get-Content ".\$($folder)\Views\_ViewImports.cshtml", ".\Yuzu\_ViewImports.cshtml"
+    $ViewImports = Get-Content ".\$($folder)\Views\_ViewImports.cshtml", ".\src\common\Views\_ViewImports.cshtml"
     Set-Content ".\$($folder)\Views\_ViewImports.cshtml" $ViewImports
 }
 
@@ -22,7 +22,7 @@ function Copy-Icon {
         $Folder
     )
 
-    Copy-Item -Path ".\Yuzu\Icon\icon.png" -Destination ".\$($folder)\.template.config\icon.png"
+    Copy-Item -Path ".\src\common\.template.config\icon.png" -Destination ".\$($folder)\.template.config\icon.png"
 }
 
 function Copy-Yuzu-Folder {
@@ -32,11 +32,7 @@ function Copy-Yuzu-Folder {
 
     $pathToYuzuDir = ".\$($folder)\Yuzu"
 
-    Copy-Item -Path ".\Yuzu\Startup" -Destination $pathToYuzuDir -Recurse
-}
-
-function Copy-Yuzu-Core {
-    Copy-Item -Path "..\Yuzu\Core\" -Destination ".\Core" -Recurse
+    Copy-Item -Path ".\src\common\Yuzu" -Destination $pathToYuzuDir -Recurse
 }
 
 function Update-ModeslBuilder {
@@ -223,80 +219,6 @@ function Update-Json {
     $output = [Newtonsoft.Json.JsonConvert]::SerializeObject($Obj)
 
     Set-Content $Path $output
-}
-
-function Update-Template-Meta {
-    param (
-        $Folder,
-        [bool] $isCore,
-        [bool] $isWeb
-    )
-
-    $pathToTemplateJson = ".\$($folder)\.template.config\template.json"
-    $pathToCliJson = ".\$($folder)\.template.config\dotnetcli.host.json"
-    $pathToIdeJson = ".\$($folder)\.template.config\ide.host.json"
-
-    $json = get-content $pathToTemplateJson
-    $config = [Newtonsoft.Json.Linq.JObject]::Parse($json)
-
-    $config["author"].Value = $author
-
-    if($isCore) {
-        $config["symbols"]["version"]["defaultValue"].Value = $UmbracoVersion
-
-        $config["groupIdentity"].Value = $groupIdentityCore
-        $config["description"].Value = $descriptionCore
-        $config["identity"].Value = $identityCore
-        $config["name"].Value = $nameCore
-        $config["shortName"].Value = $shortNameCore
-        $config["shortName"].Value = $shortNameCore
-        $config["defaultName"].Value = $defaultNameCore
-    }
-    elseif($isWeb) {
-
-        $json = get-content $pathToCliJson
-        $cli = [Newtonsoft.Json.Linq.JObject]::Parse($json)
-
-        $json = get-content $pathToIdeJson
-        $ide = [Newtonsoft.Json.Linq.JObject]::Parse($json)
-
-        $config["symbols"]["CoreNamespace"] = $config["symbols"]["UmbracoVersion"]
-        $config["symbols"]["CoreNamespace"]["replaces"].Value = "CORE_NAMESPACE"
-        $config["symbols"]["CoreNamespace"]["defaultValue"].Value = "Core"
-        $config["symbols"]["CoreNamespace"]["description"].Value = "The namespace of the core application"
-
-        $cli["symbolInfo"]["CoreNamespace"] = $cli["symbolInfo"]["UseHttpsRedirect"]
-        $cli["symbolInfo"]["CoreNamespace"]["longName"].Value = "core-namespace"
-        $cli["symbolInfo"]["CoreNamespace"]["shortName"].Value = "core"
-
-        $ideElement = $ide["symbolInfo"][0]
-        $ideElement["id"].Value = "CoreNamespace"
-        #this was removed by umbraco for some reason
-        #$ideElement["name"]["text"].Value = "The namespace of the core application"
-        $ide["symbolInfo"].Add($ideElement)
-
-        $config["groupIdentity"].Value = $groupIdentityWeb
-        $config["description"].Value = $descriptionWeb
-        $config["identity"].Value = $identityWeb
-        $config["name"].Value = $nameWeb
-        $config["shortName"].Value = $shortNameWeb
-        $config["shortName"].Value = $shortNameWeb
-        $config["defaultName"].Value = $defaultNameWeb
-
-        Update-Json -Path $pathToCliJson -Obj $cli
-        Update-Json -Path $pathToIdeJson -Obj $ide
-    }
-    else {
-        $config["groupIdentity"].Value = $groupIdentityStandalone
-        $config["description"].Value = $descriptionStandalone
-        $config["identity"].Value = $identityStandalone
-        $config["name"].Value = $nameStandalone
-        $config["shortName"].Value = $shortNameStandalone
-        $config["shortName"].Value = $shortNameStandalone
-        $config["defaultName"].Value = $defaultNameStandalone
-    }
-
-    Update-Json -Path $pathToTemplateJson -Obj $config
 }
 
 function Update-Template-Meta-Simple {

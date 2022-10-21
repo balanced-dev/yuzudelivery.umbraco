@@ -79,7 +79,7 @@ $properties = @{
 
 Add-Project-Dependencies-Simple -folder 'standalone' -dependencies $dependencies
 Update-Template-Meta-Simple 'standalone' -properties $properties
-
+xcopy /s /q '.\src\standalone' '.\standalone' | Out-Null
 Write-Host "Created standalone"
 
 ###########################################################
@@ -112,7 +112,7 @@ $properties = @{
 }
 Add-Forced-Restart-Watcher -folder 'testproject'
 Update-Template-Meta-Simple -folder 'testproject' -properties $properties
-xcopy /s /q '.\Yuzu\TestProject' '.\testproject' | Out-Null
+xcopy /s /q '.\src\testproject' '.\testproject' | Out-Null
 Write-Host "Created testproject"
 
 Pop-Location

@@ -1,6 +1,0 @@
-{{#if siteKey}}
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-	<div class="g-recaptcha" data-sitekey="{{siteKey}}" data-theme="{{theme}}" data-size="{{size}}"></div>
-{{else}}
-	<p>ERROR: ReCaptcha v.2 is missing the Site Key - Please update the web.config to include 'key="RecaptchaSiteKey"'</p>
-{{/if}}

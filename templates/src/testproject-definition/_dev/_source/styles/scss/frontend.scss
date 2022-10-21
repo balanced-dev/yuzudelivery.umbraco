@@ -1,0 +1,14 @@
+$is-backend: false;
+// =======================================
+//
+//           Blocks/Pages
+//
+// ======================================
+@import '../../../_templates/**/*.scss';
+
+.layout {
+    h1 {
+        background: lime;
+        color: white;
+    }
+}

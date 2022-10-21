@@ -1,7 +1,0 @@
-{
-    "refs": {
-        "/content": [
-            "/dataGrid^parGridBuilder"
-        ]
-    }
-}

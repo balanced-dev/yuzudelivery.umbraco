@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./_dev/_templates/_layouts/_block/data/_block.json"],"names":["module","exports"],"mappings":"yEAGAA,EAAOC,QAFI","file":"_client/scripts/4.7ad0d15edefc8beda07b.js","sourcesContent":["// Module\nvar code = \"<div class=\\\"yuzu-content-root\\\"> </div>\";\n// Exports\nmodule.exports = code;"],"sourceRoot":""}

@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - Solution Items", "00 -
 		license.txt = license.txt
 		readme.md = readme.md
 		version.json = version.json
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Libs", "01 - Libs", "{23FDB3B2-CCD9-442C-8C77-438764A409B8}"

@@ -2,6 +2,14 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <!-- Include parent Directory.Build.Props for Nerdbank.GitVersioning -->
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"/>
+
+  <ItemGroup Condition="'$(Configuration)' != 'Internal'">
+    <PackageReference Include="YuzuDelivery.Umbraco.Import" Version="3.0.0-alpha.*"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Internal'">
+    <ProjectReference Include="..\..\..\yuzudelivery.umbraco.import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.csproj"/>
+  </ItemGroup>
 
 </Project>

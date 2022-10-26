@@ -4,7 +4,11 @@
   <!-- Include parent Directory.Build.Props for Nerdbank.GitVersioning -->
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' != 'Internal'">
     <PackageReference Include="YuzuDelivery.Umbraco.Import.Integration.Tests" Version="3.0.0-alpha.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Internal'">
+    <ProjectReference Include="..\..\..\yuzudelivery.umbraco.import\tests\YuzuDelivery.Umbraco.Import.Integration.Tests\YuzuDelivery.Umbraco.Import.Integration.Tests.csproj"/>
   </ItemGroup>
 </Project>

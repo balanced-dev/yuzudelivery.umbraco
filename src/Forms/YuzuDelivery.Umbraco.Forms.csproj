@@ -18,7 +18,6 @@
 
   <PropertyGroup>
     <ContentTargetFolders>.</ContentTargetFolders>
-    <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 
     <PackageId>YuzuDelivery.Umbraco.Forms</PackageId>
@@ -37,21 +36,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0"/>
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0"/>
-    <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="10.0.0"/>
-    <PackageReference Include="Umbraco.Forms.Web" version="10.0.0"/>
-    <PackageReference Include="Skybrud.Umbraco.GridData" Version="4.0.0-alpha001"/>
-    <PackageReference Include="AutoMapper" Version="8.1.1"/>
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
+    <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="10.0.0" />
+    <PackageReference Include="Umbraco.Forms.Web" version="10.0.0" />
+    <PackageReference Include="Skybrud.Umbraco.GridData" Version="4.0.0-alpha001" />
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj"/>
+    <ProjectReference Include="..\Core\YuzuDelivery.Umbraco.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Views\Partials\Forms\YuzuUmbracoFormsV9.cshtml" />
+    <AdditionalFiles Include="Views\Partials\YuzuForms.cshtml" />
   </ItemGroup>
 
   <Target Name="RemoveLuceneAnalyzer" BeforeTargets="CoreCompile">
     <ItemGroup>
-      <Analyzer Remove="@(Analyzer)" Condition="%(FileName) == 'Lucene.Net.CodeAnalysis.CSharp'"/>
+      <Analyzer Remove="@(Analyzer)" Condition="%(FileName) == 'Lucene.Net.CodeAnalysis.CSharp'" />
     </ItemGroup>
   </Target>
 

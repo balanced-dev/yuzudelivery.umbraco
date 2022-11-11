@@ -79,7 +79,7 @@ namespace YuzuDelivery.Umbraco.Forms
             ExcludeViewmodelsAtGeneration.Add<vmBlock_Recaptcha>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_TitleAndDescription>();
 
-            AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.Forms;");
+            AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Forms");
         }
     }
 

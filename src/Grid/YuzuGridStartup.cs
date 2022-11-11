@@ -17,7 +17,7 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 
-namespace YuzuDelivery.Umbraco.Grid 
+namespace YuzuDelivery.Umbraco.Grid
 {
 
     [ComposeAfter(typeof(YuzuUmbracoImportComposer))]
@@ -97,7 +97,7 @@ namespace YuzuDelivery.Umbraco.Grid
             ExcludeViewmodelsAtGeneration.Add<vmBlock_DataRows>();
             ExcludeViewmodelsAtGeneration.Add<vmSub_DataRowsRow>();
 
-            AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.Grid;");
+            AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Grid");
         }
     }
 

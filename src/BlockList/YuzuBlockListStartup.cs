@@ -123,7 +123,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             ExcludeViewmodelsAtGeneration.Add<vmBlock_DataRows>();
             ExcludeViewmodelsAtGeneration.Add<vmSub_DataRowsRow>();
 
-            AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.BlockList;");
+            AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.BlockList");
         }
     }
 

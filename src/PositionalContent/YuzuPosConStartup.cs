@@ -96,7 +96,7 @@ namespace YuzuDelivery.Umbraco.PositionalContent
             ExcludeViewmodelsAtGeneration.Add<vmBlock_DataPositionalContent>();
             ExcludeViewmodelsAtGeneration.Add<vmSub_DataPositionalContentDimension>();
 
-            AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.PositionalContent;");
+            AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.PositionalContent");
         }
     }
 

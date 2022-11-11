@@ -157,7 +157,7 @@ namespace YuzuDelivery.Umbraco.Core
             ExcludeViewmodelsAtGeneration.Add<vmBlock_DataImage>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_DataLink>();
 
-            AddNamespacesAtGeneration.Add("using YuzuDelivery.Umbraco.Core;");
+            AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Core");
         }
     }
 

@@ -42,7 +42,6 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddSingleton<BuildViewModelsService>();
             builder.Services.AddSingleton<ReferencesService>();
             builder.Services.AddSingleton<GenerateViewmodelService>();
-            builder.Services.AddTransient(typeof(IViewmodelPostProcessor), typeof(FileRefViewmodelPostProcessor));
 
             //MUST be transient lifetime
             builder.Services.AddTransient(typeof(IUpdateableConfig), typeof(CoreUmbracoConfig));
@@ -177,5 +176,4 @@ namespace YuzuDelivery.Umbraco.Core
             }
         }
     }
-
 }

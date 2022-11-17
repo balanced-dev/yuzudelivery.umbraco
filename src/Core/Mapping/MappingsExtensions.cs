@@ -7,18 +7,17 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public static class MappingsExtensions
     {
-
-        public static void AddTypeAfterMap<AfterMapType>(this List<YuzuMapperSettings> resolvers)
-            where AfterMapType : IYuzuTypeAfterConvertor
+        public static void AddTypeAfterMap<TConverter>(this List<YuzuMapperSettings> resolvers)
+            where TConverter : IYuzuTypeAfterConvertor
         {
-            resolvers.AddTypeAfterMap(typeof(AfterMapType));
+            resolvers.AddTypeAfterMap(typeof(TConverter));
         }
 
         public static void AddTypeAfterMap(this List<YuzuMapperSettings> resolvers, Type afterMapType)
         {
             resolvers.Add(new YuzuTypeAfterMapperSettings()
             {
-                Mapper = typeof(IYuzuTypeAfterMapper),
+                Mapper = typeof(IYuzuTypeAfterMapper<UmbracoMappingContext>),
                 Action = afterMapType
             });
         }

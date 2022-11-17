@@ -58,7 +58,7 @@ namespace YuzuDelivery.Umbraco.Core
                 {
                     var propertyResolver = factory.GetService(typeof(Resolver)) as Resolver;
                     var sourceValue = ((SourceMember)typeof(Source).GetProperty(settings.SourcePropertyName).GetValue(m));
-                    var yuzuContext = contextFactory.From<UmbracoMappingContext>(context.Items);
+                    var yuzuContext = contextFactory.Create<UmbracoMappingContext>(context.Items);
 
                     return propertyResolver.Resolve(m, v, sourceValue, settings.DestPropertyName, yuzuContext);
                 };

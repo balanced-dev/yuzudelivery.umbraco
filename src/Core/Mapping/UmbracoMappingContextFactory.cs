@@ -1,27 +1,23 @@
 ﻿using System.Collections.Generic;
 using YuzuDelivery.Core;
-
-#if NETCOREAPP
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Microsoft.AspNetCore.Http;
-#else
-using Umbraco.Core.Models.PublishedContent;
-#endif
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace YuzuDelivery.Umbraco.Core
 {
     public class UmbracoMappingContextFactory : MappingContextFactory
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-#if NETCOREAPP
         public UmbracoMappingContextFactory(IHttpContextAccessor httpContextAccessor)
-            :base(httpContextAccessor)
-        {  }
-#endif
-
-        public override T From<T>(IDictionary<string, object> items)
         {
-            var output = new UmbracoMappingContext();
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        public override T Create<T>(IDictionary<string, object> items)
+        {
+            var output = new UmbracoMappingContext(items);
 
             AddDefaults(output, items);
 
@@ -31,6 +27,16 @@ namespace YuzuDelivery.Umbraco.Core
             }
 
             return output as T;
+        }
+
+        protected void AddDefaults(UmbracoMappingContext output, IDictionary<string, object> items)
+        {
+            output.HttpContext = _httpContextAccessor.HttpContext;
+
+            if (items.ContainsKey("HtmlHelper"))
+            {
+                output.Html = items["HtmlHelper"] as IHtmlHelper;
+            }
         }
     }
 }

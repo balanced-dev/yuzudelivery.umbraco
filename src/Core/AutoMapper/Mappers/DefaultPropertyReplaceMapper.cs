@@ -66,7 +66,7 @@ namespace YuzuDelivery.Umbraco.Core
                 Func<Source, Dest, object, ResolutionContext, DestMember> mappingFunction = (Source m, Dest v, object o, ResolutionContext context) =>
                 {
                     var propertyResolver = factory.GetService(typeof(Resolver)) as Resolver;
-                    var yuzuContext = contextFactory.From<UmbracoMappingContext>(context.Items);
+                    var yuzuContext = contextFactory.Create<UmbracoMappingContext>(context.Items);
                     return propertyResolver.Resolve(m, yuzuContext);
                 };
 

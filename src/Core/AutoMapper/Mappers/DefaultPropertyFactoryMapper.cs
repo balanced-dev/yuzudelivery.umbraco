@@ -52,7 +52,7 @@ namespace YuzuDelivery.Umbraco.Core
                 Func<Source, Dest, object, ResolutionContext, DestMember> mappingFunction = (Source m, Dest v, object o, ResolutionContext context) =>
                 {
                     var propertyResolver = factory.GetService(typeof(TService)) as TService;
-                    var yuzuContext = contextFactory.From<UmbracoMappingContext>(context.Items);
+                    var yuzuContext = contextFactory.Create<UmbracoMappingContext>(context.Items);
                     return propertyResolver.Create(yuzuContext);
                 };
 

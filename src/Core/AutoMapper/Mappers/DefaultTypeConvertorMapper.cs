@@ -51,7 +51,7 @@ namespace YuzuDelivery.Umbraco.Core
                 Func<Source, Dest, ResolutionContext, Dest> mappingFunction = (Source source, Dest dest, ResolutionContext context) =>
                 {
                     var typeConvertor = factory.GetService(typeof(TService)) as TService;
-                    var yuzuContext = contextFactory.From<UmbracoMappingContext>(context.Items);
+                    var yuzuContext = contextFactory.Create<UmbracoMappingContext>(context.Items);
 
                     return typeConvertor.Convert(source, yuzuContext);
                 };

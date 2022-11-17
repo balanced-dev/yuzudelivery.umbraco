@@ -27,7 +27,7 @@ namespace YuzuDelivery.Umbraco.Core
                 if (typeFactory != null)
                 {
                     if (items == null) items = new Dictionary<string, object>();
-                    return typeFactory.Create(contextFactory.From<UmbracoMappingContext>(items));
+                    return typeFactory.Create(contextFactory.Create<UmbracoMappingContext>(items));
                 }
             }
 

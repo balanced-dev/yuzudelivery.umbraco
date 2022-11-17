@@ -1,83 +1,48 @@
 ﻿using AutoMapper;
-using AutoMapper.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
-using Umbraco.Cms.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
     public static class AutomapperConfigExtensions
     {
-        public static void AddProfilesForAttributes(this MapperConfigurationExpression cfg, IEnumerable<Assembly> assembliesToScan, AddedMapContext mapContext, IFactory factory)
+        public static void AddProfilesForAttributes(this MapperConfigurationExpression cfg, IYuzuConfiguration config, AddedMapContext mapContext, IServiceProvider serviceProvider)
         {
-            var allTypes = assembliesToScan.Where(a => !a.IsDynamic && a != typeof(NamedProfile).Assembly).SelectMany(a => a.DefinedTypes).ToArray();
-            var autoMapAttributeProfile = new NamedProfile(nameof(YuzuMapAttribute));
-            var config = factory.GetInstance<IYuzuConfiguration>();
-            var importConfig = factory.GetInstance<IYuzuDeliveryImportConfiguration>();
+            var allTypes = config.MappingAssemblies
+                                 .Where(a => a != typeof(YuzuMapAttribute).Assembly)
+                                 .Where(a => !a.IsDynamic)
+                                 .SelectMany(a => a.DefinedTypes);
+
+            var importConfig = serviceProvider.GetRequiredService<IYuzuDeliveryImportConfiguration>();
 
             foreach (var viewModels in allTypes)
             {
                 foreach (var attribute in viewModels.GetCustomAttributes<YuzuMapAttribute>())
                 {
-                    var cmsModel = config.CMSModels.Where(x => x.Name == attribute.SourceTypeName).FirstOrDefault();
-                    if(cmsModel != null && !mapContext.Has(cmsModel, viewModels) && !importConfig.IgnoreUmbracoModelsForAutomap.Contains(cmsModel.Name))
+                    var cmsModel = config.CMSModels.FirstOrDefault(x => x.Name == attribute.SourceTypeName);
+
+                    if (cmsModel == null)
                     {
-                        cfg.CreateMap(cmsModel, viewModels);
+                        continue;
                     }
+
+                    if (importConfig.IgnoreUmbracoModelsForAutomap.Contains(cmsModel.Name))
+                    {
+                        continue;
+                    }
+
+                    if(mapContext.Has(cmsModel, viewModels))
+                    {
+                        continue;
+                    }
+
+                    cfg.CreateMap(cmsModel, viewModels);
                 }
             }
-        }
-
-        public static void AddProfilesFromContainer(this MapperConfigurationExpression cfg, IEnumerable<Assembly> assembliesToScan, IFactory factory)
-        {
-            var loadedProfiles = GetProfiles(assembliesToScan);
-
-            foreach (var profile in loadedProfiles)
-            {
-                var resolvedProfile = factory.GetInstance(profile) as Profile;
-                cfg.AddProfile(resolvedProfile);
-            }
-        }
-
-        public static AddedMapContext AddYuzuMappersFromContainer(this MapperConfigurationExpression cfg, IFactory factory)
-        {
-            var mappingConfigs = factory.GetAllInstances<YuzuMappingConfig>();
-            var config = factory.GetInstance<IYuzuConfiguration>();
-            var mapContext = new AddedMapContext();
-
-            foreach (var mappingConfig in mappingConfigs)
-            {
-                foreach (var item in mappingConfig.ManualMaps)
-                {
-                    var mapper = factory.GetInstance(item.Mapper) as IYuzuBaseMapper;
-                    var generic = mapper.MakeGenericMethod(item);
-                    mapContext = generic.Invoke(mapper, new object[] { cfg, item, factory, mapContext, config }) as AddedMapContext;
-                }
-            }
-
-            return mapContext;
-        }
-
-        private static List<Type> GetProfiles(IEnumerable<Assembly> assemblies)
-        {
-            var profiles = new List<Type>();
-            foreach (var assembly in assemblies)
-            {
-                var assemblyProfiles = assembly.ExportedTypes.Where(type => type.IsSubclassOf(typeof(Profile)));
-                profiles.AddRange(assemblyProfiles);
-            }
-            return profiles;
-        }
-
-        private class NamedProfile : Profile
-        {
-            public NamedProfile(string profileName) : base(profileName) { }
-
-            public NamedProfile(string profileName, Action<IProfileExpression> config) : base(profileName, config) { }
         }
     }
 

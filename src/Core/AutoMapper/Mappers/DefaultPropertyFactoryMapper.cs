@@ -40,7 +40,7 @@ namespace YuzuDelivery.Umbraco.Core
                 throw new Exception("Mapping settings not of type YuzuPropertyFactoryMapperSettings");
         }
 
-        public AddedMapContext CreateMap<DestMember, Source, Dest, TService>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
+        public AddedMapContext CreateMap<DestMember, Source, Dest, TService>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IServiceProvider factory, AddedMapContext mapContext, IYuzuConfiguration config)
             where TService : class, IYuzuTypeFactory<DestMember>
         {
             var settings = baseSettings as YuzuPropertyFactoryMapperSettings;
@@ -51,7 +51,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                 Func<Source, Dest, object, ResolutionContext, DestMember> mappingFunction = (Source m, Dest v, object o, ResolutionContext context) =>
                 {
-                    var propertyResolver = factory.GetInstance(typeof(TService)) as TService;
+                    var propertyResolver = factory.GetService(typeof(TService)) as TService;
                     var yuzuContext = contextFactory.From<UmbracoMappingContext>(context.Items);
                     return propertyResolver.Create(yuzuContext);
                 };

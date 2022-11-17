@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using YuzuDelivery.Core;
+﻿using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public interface IYuzuPropertyReplaceResolver<M, Type> : IYuzuPropertyReplaceResolver, IYuzuMappingResolver
+    public interface IYuzuPropertyReplaceResolver<in TSource, out TDest>
+        : IYuzuPropertyReplaceResolver<TSource, TDest, UmbracoMappingContext>, IYuzuMappingResolver
     {
-        Type Resolve(M source, UmbracoMappingContext context);
     }
 }

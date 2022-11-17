@@ -33,7 +33,7 @@ namespace YuzuDelivery.Umbraco.Core
                 throw new Exception("Mapping settings not of type YuzuGlobalMapperSettings");
         }
 
-        public AddedMapContext CreateMap<Source, Dest>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
+        public AddedMapContext CreateMap<Source, Dest>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IServiceProvider factory, AddedMapContext mapContext, IYuzuConfiguration config)
         {
             var settings = baseSettings as YuzuGlobalMapperSettings;
 

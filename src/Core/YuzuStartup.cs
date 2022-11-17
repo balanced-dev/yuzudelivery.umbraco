@@ -48,7 +48,7 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig));
             builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(CoreImportConfig));
 
-            builder.Services.AddSingleton<DefaultUmbracoMappingFactory>();
+            builder.Services.AddSingleton<DefaultYuzuMapperFactory>();
 
             //ToDo: not sure what this is Umbraco 9
             //composition.RegisterAuto<AutoMapper.Profile>();

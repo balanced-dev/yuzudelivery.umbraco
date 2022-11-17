@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
 using YuzuDelivery.Core;
 using Microsoft.Extensions.DependencyInjection;
-using Umbraco.Cms.Core.Composing;
-using Umbraco.Cms.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -16,18 +11,22 @@ namespace YuzuDelivery.Umbraco.Core
         public static void RegisterAll<T>(this IServiceCollection services, Assembly assembly)
         {
             var types = assembly.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(T)));
+
             foreach (var f in types)
             {
                 services.AddTransient(typeof(T), f);
             }
         }
 
+        // ReSharper disable once UnusedMember.Global - Used by downstream projects (and templates)
         public static void RegisterYuzuAutoMapping(this IServiceCollection services, Assembly profileAssembly)
-            => services.AddSingleton<IMapper>((factory) =>
-            {
-                return factory.GetService<DefaultUmbracoMappingFactory>().Create(profileAssembly, new Umb9Factory(factory));
-            });
-    
+            => services.AddSingleton(sp => sp.GetRequiredService<DefaultYuzuMapperFactory>().Create(
+                (settings, cfg, mapContext) =>
+                {
+                    settings.MappingAssemblies.Add(profileAssembly);
+                    cfg.AddProfilesForAttributes(settings, mapContext, sp);
+                }));
+
         public static void RegisterYuzuManualMapping(this IServiceCollection services, Assembly profileAssembly)
         {
             var types = profileAssembly.GetTypes();

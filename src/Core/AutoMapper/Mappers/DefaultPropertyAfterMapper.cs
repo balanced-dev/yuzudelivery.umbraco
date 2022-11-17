@@ -40,7 +40,7 @@ namespace YuzuDelivery.Umbraco.Core
                 throw new Exception("Mapping settings not of type YuzuPropertyAfterMapperSettings");
         }
 
-        public AddedMapContext CreateMap<Source, DestMember, Dest, Resolver>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
+        public AddedMapContext CreateMap<Source, DestMember, Dest, Resolver>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IServiceProvider factory, AddedMapContext mapContext, IYuzuConfiguration config)
             where Resolver : class, IYuzuPropertyAfterResolver<Source, DestMember>
         {
             var settings = baseSettings as YuzuPropertyAfterMapperSettings;
@@ -55,7 +55,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                 Func<DestMember, DestMember> mappingFunction = (DestMember input) =>
                 {
-                    var propertyResolver = factory.GetInstance(typeof(Resolver)) as Resolver;
+                    var propertyResolver = factory.GetService(typeof(Resolver)) as Resolver;
                     return propertyResolver.Apply(input);
                 };
 

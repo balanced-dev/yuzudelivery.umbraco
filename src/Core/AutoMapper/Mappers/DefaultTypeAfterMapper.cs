@@ -38,7 +38,7 @@ namespace YuzuDelivery.Umbraco.Core
                 throw new Exception("Mapping settings not of type YuzuTypeMappingSettings");
         }
 
-        public AddedMapContext CreateMap<Source, Dest, Resolver>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IFactory factory, AddedMapContext mapContext, IYuzuConfiguration config)
+        public AddedMapContext CreateMap<Source, Dest, Resolver>(MapperConfigurationExpression cfg, YuzuMapperSettings baseSettings, IServiceProvider factory, AddedMapContext mapContext, IYuzuConfiguration config)
             where Resolver : class, IYuzuTypeAfterConvertor<Source, Dest>
         {
             var settings = baseSettings as YuzuTypeAfterMapperSettings;
@@ -51,7 +51,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                 Action<Source, Dest, ResolutionContext> mappingFunction = (Source source, Dest dest, ResolutionContext context) =>
                 {
-                    var typeConvertor = factory.GetInstance(typeof(Resolver)) as Resolver;
+                    var typeConvertor = factory.GetService(typeof(Resolver)) as Resolver;
                     var yuzuContext = contextFactory.From<UmbracoMappingContext>(context.Items);
 
                     typeConvertor.Apply(source, dest, yuzuContext);

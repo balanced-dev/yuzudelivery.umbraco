@@ -1,7 +1,7 @@
-﻿using AutoMapper.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using AutoMapper;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Import;
 

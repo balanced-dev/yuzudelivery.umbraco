@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
+﻿using System.Reflection;
+using AutoMapper;
 using YuzuDelivery.Core;
-using AutoMapper.Configuration;
+using IMapper = YuzuDelivery.Core.IMapper;
 
 namespace YuzuDelivery.Umbraco.Core
 {

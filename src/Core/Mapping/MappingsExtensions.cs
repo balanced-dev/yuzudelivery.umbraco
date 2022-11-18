@@ -39,12 +39,7 @@ namespace YuzuDelivery.Umbraco.Core
 
         public static void AddTypeFactory(this List<YuzuMapperSettings> resolvers, Type factoryType, Type destType)
         {
-            resolvers.Add(new YuzuTypeFactoryMapperSettings()
-            {
-                Mapper = typeof(IYuzuTypeFactoryMapper),
-                Factory = factoryType,
-                Dest = destType,
-            });
+            YuzuCore.AddTypeFactory<UmbracoMappingContext>(resolvers, factoryType, destType);
         }
 
         public static void AddPropertyFactory<ResolverType, Source, Dest>(this List<YuzuMapperSettings> resolvers, Expression<Func<Dest, object>> destMember, string groupName = "", bool ignoreProperty = true, bool ignoreReturnType = true)

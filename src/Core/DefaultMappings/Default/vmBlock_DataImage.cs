@@ -29,6 +29,12 @@ namespace YuzuDelivery.Umbraco.Core
         [Newtonsoft.Json.JsonProperty("fileSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int FileSize { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("focalPointLeft", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FocalPointLeft { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("focalPointTop", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FocalPointTop { get; set; }
+
         [Newtonsoft.Json.JsonProperty("_ref", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string _ref { get; set; }
 

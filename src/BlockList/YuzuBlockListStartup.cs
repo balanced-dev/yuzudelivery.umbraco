@@ -7,6 +7,8 @@ using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Core;
 using System.Reflection;
+using YuzuDelivery.Core.Helpers;
+using YuzuDelivery.Umbraco.Core.Helpers;
 
 #if NETCOREAPP 
 using Umbraco.Extensions;
@@ -88,7 +90,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetModelName();
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
                     var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 
@@ -170,9 +172,9 @@ namespace YuzuDelivery.Umbraco.BlockList
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetBlockName();
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
-                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
+                    var umbracoModelType = config.CMSModels.FirstOrDefault(x => x.Name == umbracoModelTypeName);
 
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {

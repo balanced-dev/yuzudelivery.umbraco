@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
 using System.Reflection;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.AutoMapper.Mappers.Settings;
+using YuzuDelivery.Core.AutoMapper.Mappers;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using Skybrud.Umbraco.GridData.Models;
+using YuzuDelivery.Core.AutoMapper.Mappers.Settings;
+using YuzuDelivery.Core.AutoMapper.Mappers;
 
 namespace YuzuDelivery.Umbraco.Grid
 {

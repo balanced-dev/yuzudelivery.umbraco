@@ -10,6 +10,8 @@ using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using YuzuDelivery.Core.AutoMapper;
+using YuzuDelivery.Core.AutoMapper.Mappers;
 using YuzuDelivery.Umbraco.Core.Settings;
 
 namespace YuzuDelivery.Umbraco.Core

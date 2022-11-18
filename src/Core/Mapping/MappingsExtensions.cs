@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using YuzuDelivery.Core;
-
+using YuzuDelivery.Core.AutoMapper.Mappers.Settings;
+using YuzuDelivery.Core.AutoMapper.Mappers;
 using YuzuCore = YuzuDelivery.Core.Mapping.MappingExtensions;
 
 namespace YuzuDelivery.Umbraco.Core

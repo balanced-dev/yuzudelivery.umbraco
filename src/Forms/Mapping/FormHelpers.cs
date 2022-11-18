@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.AutoMapper.Mappers.Settings;
+using YuzuDelivery.Core.AutoMapper.Mappers;
 using YuzuDelivery.Umbraco.Core;
 
 namespace YuzuDelivery.Umbraco.Forms

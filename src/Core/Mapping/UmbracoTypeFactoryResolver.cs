@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.AutoMapper;
 
 namespace YuzuDelivery.Umbraco.Core
 {

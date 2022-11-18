@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Mapping.Mappers;
 using YuzuDelivery.Core.Mapping.Mappers.Settings;
-using YuzuCore = YuzuDelivery.Core.Mapping.MappingExtensions;
 
 namespace YuzuDelivery.Umbraco.Core.Mapping
 {
@@ -18,7 +17,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
 
         public static void AddTypeAfterMap(this List<YuzuMapperSettings> resolvers, Type afterMapType)
         {
-            YuzuCore.AddTypeAfterMap<UmbracoMappingContext>(resolvers, afterMapType);
+            resolvers.AddTypeAfterMapWithContext<UmbracoMappingContext>(afterMapType);
         }
 
         public static void AddTypeReplace<ConvertorType>(this List<YuzuMapperSettings> resolvers, bool ignoreReturnType = true)
@@ -29,7 +28,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
 
         public static void AddTypeReplace(this List<YuzuMapperSettings> resolvers, Type convertorType, bool ignoreReturnType = true)
         {
-            YuzuCore.AddTypeReplace<UmbracoMappingContext>(resolvers, convertorType, ignoreReturnType);
+            resolvers.AddTypeReplaceWithContext<UmbracoMappingContext>(convertorType, ignoreReturnType);
         }
 
         public static void AddTypeFactory<ResolverType, Dest>(this List<YuzuMapperSettings> resolvers)
@@ -40,7 +39,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
 
         public static void AddTypeFactory(this List<YuzuMapperSettings> resolvers, Type factoryType, Type destType)
         {
-            YuzuCore.AddTypeFactory<UmbracoMappingContext>(resolvers, factoryType, destType);
+            resolvers.AddTypeFactoryWithContext<UmbracoMappingContext>(factoryType, destType);
         }
 
         public static void AddPropertyFactory<ResolverType, Source, Dest>(this List<YuzuMapperSettings> resolvers, Expression<Func<Dest, object>> destMember)
@@ -51,7 +50,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
 
         public static void AddPropertyFactory(this List<YuzuMapperSettings> resolvers, Type factoryType, Type sourceType, Type destType, string destMemberName)
         {
-            YuzuCore.AddPropertyFactory<UmbracoMappingContext>(resolvers, factoryType, sourceType, destType, destMemberName);
+            resolvers.AddPropertyFactoryWithContext<UmbracoMappingContext>(factoryType, sourceType, destType, destMemberName);
         }
 
         public static void AddPropertyAfter<ResolverType, Dest, DestMember>(this List<YuzuMapperSettings> resolvers, Expression<Func<Dest, DestMember>> destMember, string groupName = "")
@@ -82,9 +81,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
             bool ignoreProperty = true,
             bool ignoreReturnType = true)
         {
-            YuzuCore.AddPropertyReplace<UmbracoMappingContext>(
-                resolvers,
-                resolverType,
+            resolvers.AddPropertyReplaceWithContext<UmbracoMappingContext>(resolverType,
                 destType,
                 destMemberName,
                 groupName,
@@ -107,9 +104,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
             bool ignoreProperty = true,
             bool ignoreReturnType = true)
         {
-            YuzuCore.AddFullProperty<UmbracoMappingContext>(
-                resolvers,
-                resolverType,
+            resolvers.AddFullPropertyWithContext<UmbracoMappingContext>(resolverType,
                 sourceMemberName,
                 destMemberName,
                 groupName,

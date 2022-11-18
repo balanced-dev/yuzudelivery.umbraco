@@ -77,7 +77,7 @@ namespace YuzuDelivery.Umbraco.Core
 
             builder.Services.AddUnique<IYuzuGroupMapper, DefaultGroupMapper>();
             builder.Services.AddUnique<IYuzuGlobalMapper, DefaultGlobalMapper>();
-            builder.Services.AddUnique<IYuzuFullPropertyMapper, DefaultFullPropertyMapper>();
+            builder.Services.AddUnique<IYuzuFullPropertyMapper<UmbracoMappingContext>, DefaultFullPropertyMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuPropertyAfterMapper, DefaultPropertyAfterMapper>();
             builder.Services.AddUnique<IYuzuPropertyFactoryMapper<UmbracoMappingContext>, DefaultPropertyFactoryMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuPropertyReplaceMapper<UmbracoMappingContext>, DefaultPropertyReplaceMapper<UmbracoMappingContext>>();

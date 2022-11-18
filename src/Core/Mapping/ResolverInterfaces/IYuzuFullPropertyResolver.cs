@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using YuzuDelivery.Core;
+﻿using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public interface IYuzuFullPropertyResolver<Source, Destination, SourceMember, DestinationMember>
-        : IYuzuPropertyReplaceResolver, IYuzuMappingResolver
+    public interface IYuzuFullPropertyResolver<TSource, TDest, TSourceMember, TDestMember>
+        : IYuzuFullPropertyResolver<TSource, TDest, TSourceMember, TDestMember, UmbracoMappingContext>, IYuzuMappingResolver
     {
-        DestinationMember Resolve(Source source, Destination destination, SourceMember sourceMember, string destPropertyName, UmbracoMappingContext context);
+        TDestMember Resolve(TSource source, TDest destination, TSourceMember sourceMember, string destPropertyName, UmbracoMappingContext context);
     }
 }

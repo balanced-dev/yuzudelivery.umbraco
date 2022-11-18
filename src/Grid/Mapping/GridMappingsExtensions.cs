@@ -46,7 +46,7 @@ namespace YuzuDelivery.Umbraco.Grid
         {
             resolvers.Add(new YuzuFullPropertyMapperSettings()
             {
-                Mapper = typeof(IYuzuFullPropertyMapper),
+                Mapper = typeof(IYuzuFullPropertyMapper<UmbracoMappingContext>),
                 Resolver = typeof(ResolverType),
                 SourcePropertyName = sourceMember.GetMemberName(),
                 DestPropertyName = destMember.GetMemberName()

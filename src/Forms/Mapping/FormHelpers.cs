@@ -15,7 +15,7 @@ namespace YuzuDelivery.Umbraco.Forms
         {
             resolvers.Add(new YuzuFullPropertyMapperSettings()
             {
-                Mapper = typeof(IYuzuFullPropertyMapper),
+                Mapper = typeof(IYuzuFullPropertyMapper<UmbracoMappingContext>),
                 Resolver = typeof(FormValueResolver<TSource, TDest>),
                 SourcePropertyName = sourceMember.GetMemberName(),
                 DestPropertyName = destMember.GetMemberName()

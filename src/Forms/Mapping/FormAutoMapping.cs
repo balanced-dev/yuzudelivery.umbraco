@@ -24,7 +24,7 @@ namespace YuzuDelivery.Umbraco.Forms
 
                     ManualMaps.Add(new YuzuFullPropertyMapperSettings()
                     {
-                        Mapper = typeof(IYuzuFullPropertyMapper),
+                        Mapper = typeof(IYuzuFullPropertyMapper<UmbracoMappingContext>),
                         Resolver = resolverType,
                         SourcePropertyName = i.SourcePropertyName,
                         DestPropertyName = i.DestPropertyName
@@ -34,6 +34,6 @@ namespace YuzuDelivery.Umbraco.Forms
         }
     }
 
-    
+
 
 }

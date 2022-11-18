@@ -98,7 +98,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
                         ManualMaps.Add(new YuzuTypeConvertorMapperSettings()
                         {
-                            Mapper = typeof(IYuzuTypeConvertorMapper),
+                            Mapper = typeof(IYuzuTypeConvertorMapper<UmbracoMappingContext>),
                             Convertor = configResolverType
                         });
 

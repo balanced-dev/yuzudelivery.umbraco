@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using YuzuDelivery.Core;
 
+using YuzuCore = YuzuDelivery.Core.Mapping.MappingExtensions;
+
 namespace YuzuDelivery.Umbraco.Core
 {
     public static class MappingsExtensions
@@ -15,11 +17,7 @@ namespace YuzuDelivery.Umbraco.Core
 
         public static void AddTypeAfterMap(this List<YuzuMapperSettings> resolvers, Type afterMapType)
         {
-            resolvers.Add(new YuzuTypeAfterMapperSettings()
-            {
-                Mapper = typeof(IYuzuTypeAfterMapper<UmbracoMappingContext>),
-                Action = afterMapType
-            });
+            YuzuCore.AddTypeAfterMap<UmbracoMappingContext>(resolvers, afterMapType);
         }
 
         public static void AddTypeReplace<ConvertorType>(this List<YuzuMapperSettings> resolvers, bool ignoreReturnType = true)
@@ -30,12 +28,7 @@ namespace YuzuDelivery.Umbraco.Core
 
         public static void AddTypeReplace(this List<YuzuMapperSettings> resolvers, Type convertorType, bool ignoreReturnType = true)
         {
-            resolvers.Add(new YuzuTypeConvertorMapperSettings()
-            {
-                Mapper = typeof(IYuzuTypeConvertorMapper),
-                Convertor = convertorType,
-                IgnoreReturnType = ignoreReturnType
-            });
+            YuzuCore.AddTypeReplace<UmbracoMappingContext>(resolvers, convertorType, ignoreReturnType);
         }
 
         public static void AddTypeFactory<ResolverType, Dest>(this List<YuzuMapperSettings> resolvers)

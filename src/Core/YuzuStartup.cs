@@ -80,7 +80,7 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddUnique<IYuzuFullPropertyMapper, DefaultFullPropertyMapper>();
             builder.Services.AddUnique<IYuzuPropertyAfterMapper, DefaultPropertyAfterMapper>();
             builder.Services.AddUnique<IYuzuPropertyFactoryMapper, DefaultPropertyFactoryMapper>();
-            builder.Services.AddUnique<IYuzuPropertyReplaceMapper, DefaultPropertyReplaceMapper>();
+            builder.Services.AddUnique<IYuzuPropertyReplaceMapper<UmbracoMappingContext>, DefaultPropertyReplaceMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuTypeAfterMapper<UmbracoMappingContext>, DefaultTypeAfterMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuTypeConvertorMapper<UmbracoMappingContext>, DefaultTypeConvertorMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuTypeFactoryMapper<UmbracoMappingContext>, DefaultTypeFactoryMapper<UmbracoMappingContext>>();

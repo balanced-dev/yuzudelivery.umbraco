@@ -79,18 +79,23 @@ namespace YuzuDelivery.Umbraco.Core
             resolvers.AddPropertyReplace(typeof(ResolverType), typeof(Dest), destMember.GetMemberName(), groupName, ignoreProperty, ignoreReturnType);
         }
 
-        public static void AddPropertyReplace(this List<YuzuMapperSettings> resolvers, Type resolverType, Type destType, string destMemberName, string groupName = "", bool ignoreProperty = true, bool ignoreReturnType = true)
+        public static void AddPropertyReplace(
+            this List<YuzuMapperSettings> resolvers,
+            Type resolverType,
+            Type destType,
+            string destMemberName,
+            string groupName = "",
+            bool ignoreProperty = true,
+            bool ignoreReturnType = true)
         {
-            resolvers.Add(new YuzuPropertyMapperSettings()
-            {
-                Mapper = typeof(IYuzuPropertyReplaceMapper),
-                Resolver = resolverType,
-                Dest = destType,
-                DestPropertyName = destMemberName,
-                GroupName = groupName,
-                IgnoreProperty = ignoreProperty,
-                IgnoreReturnType = ignoreReturnType
-            });
+            YuzuCore.AddPropertyReplace<UmbracoMappingContext>(
+                resolvers,
+                resolverType,
+                destType,
+                destMemberName,
+                groupName,
+                ignoreProperty,
+                ignoreReturnType);
         }
 
         public static void AddFullProperty<ResolverType, Source, Dest>(this List<YuzuMapperSettings> resolvers, Expression<Func<Source, object>> sourceMember, Expression<Func<Dest, object>> destMember, string groupName = "", bool ignoreProperty = true, bool ignoreReturnType = true)

@@ -3,7 +3,8 @@ using System.Linq;
 using System.Reflection;
 using YuzuDelivery.Core;
 using Microsoft.Extensions.DependencyInjection;
-using YuzuDelivery.Core.AutoMapper;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Core
 {

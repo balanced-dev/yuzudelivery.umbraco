@@ -7,6 +7,7 @@ using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Models.Blocks;
+using YuzuDelivery.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {

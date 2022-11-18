@@ -13,6 +13,7 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Forms.Core.Providers;
+using YuzuDelivery.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Forms
 {

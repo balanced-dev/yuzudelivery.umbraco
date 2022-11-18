@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using YuzuDelivery.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {

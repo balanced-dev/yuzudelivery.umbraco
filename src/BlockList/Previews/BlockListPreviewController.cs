@@ -7,6 +7,7 @@ using YuzuDelivery.ViewModels;
 using YuzuDelivery.Umbraco.Core;
 using Our.Umbraco.DocTypeGridEditor.Helpers;
 using System.Reflection;
+using YuzuDelivery.Core.Mapping;
 
 #if NETCOREAPP
 using Umbraco.Cms.Web.Common.Attributes;

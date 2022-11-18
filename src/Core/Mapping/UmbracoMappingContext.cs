@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using YuzuDelivery.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using YuzuDelivery.Core.Mapping;
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public class UmbracoMappingContext : YuzuMappingContext
     {

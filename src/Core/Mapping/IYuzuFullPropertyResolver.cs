@@ -1,6 +1,6 @@
-﻿using YuzuDelivery.Core;
+﻿using YuzuDelivery.Core.Mapping;
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public interface IYuzuFullPropertyResolver<TSource, TDest, TSourceMember, TDestMember>
         : IYuzuFullPropertyResolver<TSource, TDest, TSourceMember, TDestMember, UmbracoMappingContext>, IYuzuMappingResolver

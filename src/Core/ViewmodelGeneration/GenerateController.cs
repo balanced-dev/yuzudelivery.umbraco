@@ -7,6 +7,7 @@ using YuzuDelivery.Core.ViewModelBuilder;
 using IO = System.IO;
 using YuzuDelivery.Core;
 using System.Reflection;
+using YuzuDelivery.Core.Mapping;
 
 #if NETCOREAPP
 using Umbraco.Cms.Web.Common.Attributes;

@@ -1,6 +1,6 @@
-﻿using YuzuDelivery.Core;
+﻿using YuzuDelivery.Core.Mapping;
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public interface IYuzuTypeFactory<out TDest>
         : IYuzuTypeFactory<TDest, UmbracoMappingContext>, IYuzuMappingResolver

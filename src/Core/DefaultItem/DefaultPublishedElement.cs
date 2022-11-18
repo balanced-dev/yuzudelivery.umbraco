@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using YuzuDelivery.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Core
 {

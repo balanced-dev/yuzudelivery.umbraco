@@ -1,12 +1,13 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public static class AutomapperConfigExtensions
     {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using YuzuDelivery.Core;
-using YuzuDelivery.Core.AutoMapper;
+using YuzuDelivery.Core.Mapping;
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public class UmbracoTypeFactoryRunner : IYuzuTypeFactoryRunner
     {

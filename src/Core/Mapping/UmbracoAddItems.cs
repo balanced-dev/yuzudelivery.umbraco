@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YuzuDelivery.Core;
-
-#if NETCOREAPP
+﻿using System.Collections.Generic;
 using Umbraco.Cms.Core.Web;
-using Umbraco.Cms.Web.Common.UmbracoContext;
+using YuzuDelivery.Core;
+#if NETCOREAPP
+
 #else
 using Umbraco.Web;
 #endif
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public class UmbracoMapperAddItems : IMapperAddItem
     {

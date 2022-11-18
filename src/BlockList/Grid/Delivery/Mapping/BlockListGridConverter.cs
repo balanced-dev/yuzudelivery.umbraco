@@ -1,5 +1,6 @@
 ﻿using YuzuDelivery.Umbraco.Core;
 using Umbraco.Cms.Core.Models.Blocks;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {

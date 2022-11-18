@@ -1,4 +1,5 @@
 ﻿using YuzuDelivery.Umbraco.Core;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 #if NETCOREAPP
 using Umbraco.Cms.Core.Models.Blocks;

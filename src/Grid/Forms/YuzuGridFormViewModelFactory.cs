@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Umbraco.Cms.Web.Common.UmbracoContext;
 using Skybrud.Umbraco.GridData.Models;
+using YuzuDelivery.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Grid
 {

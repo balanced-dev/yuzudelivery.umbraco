@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using YuzuDelivery.Core;
-using YuzuDelivery.Core.AutoMapper.Mappers.Settings;
-using YuzuDelivery.Core.AutoMapper.Mappers;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Mapping.Mappers;
+using YuzuDelivery.Core.Mapping.Mappers.Settings;
+using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
 #if NETCOREAPP

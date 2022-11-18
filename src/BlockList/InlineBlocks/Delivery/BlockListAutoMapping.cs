@@ -1,11 +1,13 @@
 using System;
 using System.Linq;
 using YuzuDelivery.Core;
-using YuzuDelivery.Core.AutoMapper.Mappers.Settings;
-using YuzuDelivery.Core.AutoMapper.Mappers;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using Umbraco.Cms.Core.Models.Blocks;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Mapping.Mappers;
+using YuzuDelivery.Core.Mapping.Mappers.Settings;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 
 namespace YuzuDelivery.Umbraco.BlockList

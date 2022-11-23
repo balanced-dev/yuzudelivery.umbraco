@@ -85,7 +85,7 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddUnique<IYuzuPropertyFactoryMapper<UmbracoMappingContext>, DefaultPropertyFactoryMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuPropertyReplaceMapper<UmbracoMappingContext>, DefaultPropertyReplaceMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuTypeAfterMapper<UmbracoMappingContext>, DefaultTypeAfterMapper<UmbracoMappingContext>>();
-            builder.Services.AddUnique<IYuzuTypeConvertorMapper<UmbracoMappingContext>, DefaultTypeConvertorMapper<UmbracoMappingContext>>();
+            builder.Services.AddUnique<IYuzuTypeReplaceMapper<UmbracoMappingContext>, DefaultTypeReplaceMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuTypeFactoryMapper<UmbracoMappingContext>, DefaultTypeFactoryMapper<UmbracoMappingContext>>();
 
             builder.Services.AddTransient(typeof(IMapperAddItem), typeof(UmbracoMapperAddItems));

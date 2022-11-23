@@ -20,10 +20,10 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
             resolvers.AddTypeAfterMapWithContext<UmbracoMappingContext>(afterMapType);
         }
 
-        public static void AddTypeReplace<ConvertorType>(this List<YuzuMapperSettings> resolvers, bool ignoreReturnType = true)
-            where ConvertorType : IYuzuTypeConvertor
+        public static void AddTypeReplace<TConverter>(this List<YuzuMapperSettings> resolvers, bool ignoreReturnType = true)
+            where TConverter : IYuzuTypeConvertor
         {
-            resolvers.AddTypeReplace(typeof(ConvertorType));
+            resolvers.AddTypeReplaceWithContext<UmbracoMappingContext, TConverter>(ignoreReturnType);
         }
 
         public static void AddTypeReplace(this List<YuzuMapperSettings> resolvers, Type convertorType, bool ignoreReturnType = true)
@@ -34,7 +34,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
         public static void AddTypeFactory<ResolverType, Dest>(this List<YuzuMapperSettings> resolvers)
             where ResolverType : IYuzuTypeFactory
         {
-            resolvers.AddTypeFactory(typeof(ResolverType), typeof(Dest));
+            resolvers.AddTypeFactoryWithContext<UmbracoMappingContext>(typeof(ResolverType), typeof(Dest));
         }
 
         public static void AddTypeFactory(this List<YuzuMapperSettings> resolvers, Type factoryType, Type destType)

@@ -33,7 +33,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
                     ManualMaps.Add(new YuzuTypeConvertorMapperSettings()
                     {
-                        Mapper = typeof(IYuzuTypeConvertorMapper<UmbracoMappingContext>),
+                        Mapper = typeof(IYuzuTypeReplaceMapper<UmbracoMappingContext>),
                         Convertor = convertorType
                     });
                 }

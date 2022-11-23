@@ -60,7 +60,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
             resolvers.Add(new YuzuTypeConvertorMapperSettings()
             {
-                Mapper = typeof(IYuzuTypeConvertorMapper<UmbracoMappingContext>),
+                Mapper = typeof(IYuzuTypeReplaceMapper<UmbracoMappingContext>),
                 Convertor = typeof(GridConfigConverter<TConfig>)
             });
         }

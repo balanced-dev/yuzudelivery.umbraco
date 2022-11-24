@@ -90,6 +90,7 @@ namespace YuzuDelivery.Umbraco.Core
                     {
                         mapped.FocalPointLeft = icv.FocalPoint.Left.ToString();
                         mapped.FocalPointTop = icv.FocalPoint.Top.ToString();
+                        mapped.FocalPointLeftTop = $"{icv.FocalPoint.Left},{icv.FocalPoint.Top}";
                     }
                 }
 

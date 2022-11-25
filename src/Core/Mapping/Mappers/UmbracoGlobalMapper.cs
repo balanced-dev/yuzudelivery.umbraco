@@ -17,14 +17,14 @@ public class UmbracoGlobalMapper : DefaultGlobalMapper
     {
         base.CreateMap<TSource, TDest>(cfg, settings, factory, mapContext, config);
 
-        foreach (var t in settings.Source.GetInterfaces())
+        var ignored = new HashSet<Type>
         {
-            // TODO: Do better than this?
-            if(t.FullName == null || t.FullName.StartsWith("Umbraco"))
-            {
-                continue;
-            }
+            typeof(IPublishedContent),
+            typeof(IPublishedElement)
+        };
 
+        foreach (var t in settings.Source.GetInterfaces().Where(x => !ignored.Contains(x)))
+        {
             AddListTypeConverter(cfg, t, settings.Dest);
         }
     }

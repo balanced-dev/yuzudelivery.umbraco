@@ -6,7 +6,7 @@ using YuzuDelivery.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Core.Mapping
 {
-    public class UmbracoMappingContextFactory : MappingContextFactory
+    public class UmbracoMappingContextFactory : IMappingContextFactory<UmbracoMappingContext>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -15,7 +15,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public override T Create<T>(IDictionary<string, object> items)
+        public UmbracoMappingContext Create(IDictionary<string, object> items)
         {
             var output = new UmbracoMappingContext(items);
 
@@ -26,10 +26,10 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
                 output.Model = items["Model"] as IPublishedContent;
             }
 
-            return output as T;
+            return output;
         }
 
-        protected void AddDefaults(UmbracoMappingContext output, IDictionary<string, object> items)
+        private void AddDefaults(UmbracoMappingContext output, IDictionary<string, object> items)
         {
             output.HttpContext = _httpContextAccessor.HttpContext;
 

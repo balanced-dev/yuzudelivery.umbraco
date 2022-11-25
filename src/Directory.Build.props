@@ -5,8 +5,8 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"/>
 
   <ItemGroup Condition="'$(Configuration)' != 'Internal'">
-    <PackageReference Include="YuzuDelivery.Core" Version="3.0.0-rc.*"/>
-    <PackageReference Include="YuzuDelivery.Umbraco.Import" Version="3.0.0-rc.*"/>
+    <PackageReference Include="YuzuDelivery.Core" Version="3.0.1-alpha.*"/>
+    <PackageReference Include="YuzuDelivery.Umbraco.Import" Version="3.0.1-alpha.*"/>
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Internal'">

@@ -19,20 +19,6 @@
   <PropertyGroup>
     <ContentTargetFolders>.</ContentTargetFolders>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-
-    <PackageId>YuzuDelivery.Umbraco.Members</PackageId>
-    <Product>Yuzu</Product>
-    <PackageTags>umbraco plugin package</PackageTags>
-    <Copyright>Copyright 2019-present HiFi Ltd</Copyright>
-    <iconUrl>https://balanced.dev/media/zcpf3zss/yuzu-package-icon.png</iconUrl>
-
-    <Version>3.0.0</Version>
-    <Authors>Phil Whittaker</Authors>
-    <Company>HiFi</Company>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-
-    <AssemblyName>YuzuDelivery.Umbraco.Members</AssemblyName>
-    <RootNamespace>YuzuDelivery.Umbraco.Members</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public class UmbracoTypeFactoryRunner : IYuzuTypeFactoryRunner
     {
         private readonly IYuzuConfiguration config;
-        private readonly IMappingContextFactory contextFactory;
+        private readonly IMappingContextFactory<UmbracoMappingContext> contextFactory;
 
-        public UmbracoTypeFactoryRunner(IYuzuConfiguration config, IMappingContextFactory contextFactory)
+        public UmbracoTypeFactoryRunner(IYuzuConfiguration config, IMappingContextFactory<UmbracoMappingContext> contextFactory)
         {
             this.config = config;
             this.contextFactory = contextFactory;
@@ -27,7 +24,7 @@ namespace YuzuDelivery.Umbraco.Core
                 if (typeFactory != null)
                 {
                     if (items == null) items = new Dictionary<string, object>();
-                    return typeFactory.Create(contextFactory.From<UmbracoMappingContext>(items));
+                    return typeFactory.Create(contextFactory.Create(items));
                 }
             }
 

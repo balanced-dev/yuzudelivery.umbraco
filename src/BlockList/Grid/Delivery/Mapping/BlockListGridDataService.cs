@@ -8,6 +8,8 @@ using Umbraco.Extensions;
 using Umbraco.Cms.Core.Models.Blocks;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Web;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {

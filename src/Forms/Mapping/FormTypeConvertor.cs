@@ -5,6 +5,7 @@ using System.Text;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using Microsoft.AspNetCore.Mvc;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Forms
 {

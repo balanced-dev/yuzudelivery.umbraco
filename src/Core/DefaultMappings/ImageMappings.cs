@@ -1,6 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.Diagnostics;
 using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
-using YuzuDelivery.Core;
+﻿using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 #if NETCOREAPP
 using Umbraco.Extensions;

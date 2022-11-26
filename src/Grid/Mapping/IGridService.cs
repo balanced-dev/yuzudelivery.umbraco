@@ -1,5 +1,6 @@
 ﻿using YuzuDelivery.Umbraco.Core;
 using Skybrud.Umbraco.GridData.Models;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Grid
 {

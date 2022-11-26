@@ -1,5 +1,9 @@
 ﻿using System.Linq;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Mapping.Mappers;
+using YuzuDelivery.Core.Mapping.Mappers.Settings;
+using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
 #if NETCOREAPP
@@ -24,7 +28,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                     ManualMaps.Add(new YuzuFullPropertyMapperSettings()
                     {
-                        Mapper = typeof(IYuzuFullPropertyMapper),
+                        Mapper = typeof(IYuzuFullPropertyMapper<UmbracoMappingContext>),
                         Resolver = resolverType,
                         SourcePropertyName = i.SourcePropertyName,
                         DestPropertyName = i.DestPropertyName

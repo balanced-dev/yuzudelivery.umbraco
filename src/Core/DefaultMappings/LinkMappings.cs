@@ -1,4 +1,6 @@
 ﻿using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
 #if NETCOREAPP

@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using YuzuDelivery.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -71,10 +72,7 @@ namespace YuzuDelivery.Umbraco.BlockList
         {
             builder.Services.AddSingleton<IEnumerable<IGridItemInternal>>((factory) =>
             {
-                var config = factory.GetService<IYuzuConfiguration>();
-                var mapper = factory.GetService<IMapper>();
-                var typeFactoryRunner = factory.GetService<IYuzuTypeFactoryRunner>();
-                var publishedValueFallback = factory.GetService<IPublishedValueFallback>();
+                var config = factory.GetRequiredService<IYuzuConfiguration>();
 
                 var baseGridType = typeof(DefaultGridItem<,>);
                 var gridItems = new List<IGridItemInternal>();
@@ -84,12 +82,12 @@ namespace YuzuDelivery.Umbraco.BlockList
                 {
                     var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
-                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
+                    var umbracoModelType = config.CMSModels.FirstOrDefault(x => x.Name == umbracoModelTypeName);
 
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {
-                        var makeme = baseGridType.MakeGenericType(new Type[] { umbracoModelType, viewModelType });
-                        var o = Activator.CreateInstance(makeme, new object[] { alias, mapper, typeFactoryRunner, publishedValueFallback }) as IGridItemInternal;
+                        var gridItemType = baseGridType.MakeGenericType(umbracoModelType, viewModelType );
+                        var o = ActivatorUtilities.CreateInstance(factory, instanceType: gridItemType, parameters: alias)as IGridItemInternal;
 
                         gridItems.Add(o);
                     }

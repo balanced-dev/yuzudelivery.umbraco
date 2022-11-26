@@ -2,13 +2,15 @@
 using System;
 using System.Collections.Generic;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
 namespace YuzuDelivery.Umbraco.Core
 {
 
     /// <summary>
-    /// Adds manual mapping actions added in Yuzu Delivery import admin 
+    /// Adds manual mapping actions added in Yuzu Delivery import admin
     /// </summary>
     public class ManualMappingsMappings : YuzuMappingConfig
     {
@@ -35,7 +37,7 @@ namespace YuzuDelivery.Umbraco.Core
                         ManualMaps.AddPropertyReplace(manualMap.Concrete, link.Viewmodel, m.DestMember, m.Group);
 
                     if (manualMap.Concrete.HasInterface<IYuzuTypeFactory>() && !string.IsNullOrEmpty(m.DestMember))
-                        ManualMaps.AddPropertyFactory(manualMap.Concrete, link.CMSModel, link.Viewmodel, m.DestMember, m.Group);
+                        ManualMaps.AddPropertyFactory(manualMap.Concrete, link.CMSModel, link.Viewmodel, m.DestMember);
 
                     if (manualMap.Concrete.HasInterface<IYuzuTypeFactory>() && string.IsNullOrEmpty(m.DestMember))
                         ManualMaps.AddTypeFactory(manualMap.Concrete, link.Viewmodel);

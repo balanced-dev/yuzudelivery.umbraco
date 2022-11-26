@@ -16,6 +16,7 @@ using Skybrud.Umbraco.GridData.Composers;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using YuzuDelivery.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Grid
 {

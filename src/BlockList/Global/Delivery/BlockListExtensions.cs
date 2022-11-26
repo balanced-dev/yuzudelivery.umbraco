@@ -2,6 +2,7 @@
 using YuzuDelivery.Umbraco.BlockList;
 using System;
 using Umbraco.Cms.Core.Models.Blocks;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Core
 {

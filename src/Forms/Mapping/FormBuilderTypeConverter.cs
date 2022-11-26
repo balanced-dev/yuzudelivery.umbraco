@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Umbraco.Forms.Web.Controllers;
 using Umbraco.Forms.Web.Models;
 using YuzuDelivery.Umbraco.Core;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Forms
 {

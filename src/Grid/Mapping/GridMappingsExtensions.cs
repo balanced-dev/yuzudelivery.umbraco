@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using Skybrud.Umbraco.GridData.Models;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Mapping.Mappers;
+using YuzuDelivery.Core.Mapping.Mappers.Settings;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Grid
 {
@@ -46,7 +47,7 @@ namespace YuzuDelivery.Umbraco.Grid
         {
             resolvers.Add(new YuzuFullPropertyMapperSettings()
             {
-                Mapper = typeof(IYuzuFullPropertyMapper),
+                Mapper = typeof(IYuzuFullPropertyMapper<UmbracoMappingContext>),
                 Resolver = typeof(ResolverType),
                 SourcePropertyName = sourceMember.GetMemberName(),
                 DestPropertyName = destMember.GetMemberName()
@@ -59,7 +60,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
             resolvers.Add(new YuzuTypeConvertorMapperSettings()
             {
-                Mapper = typeof(IYuzuTypeConvertorMapper),
+                Mapper = typeof(IYuzuTypeReplaceMapper<UmbracoMappingContext>),
                 Convertor = typeof(GridConfigConverter<TConfig>)
             });
         }

@@ -1,15 +1,19 @@
-﻿using YuzuDelivery.Core;
-
-#if NETCOREAPP
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Umbraco.Core.Models.PublishedContent;
-#endif
+using YuzuDelivery.Core.Mapping;
 
-namespace YuzuDelivery.Umbraco.Core
+namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public class UmbracoMappingContext : YuzuMappingContext
     {
         public IPublishedContent Model { get; set; }
+        public IHtmlHelper Html { get; set; }
+        public HttpContext HttpContext { get; set; }
+
+        public UmbracoMappingContext(IDictionary<string, object> items)
+            : base(items)
+        { }
     }
 }

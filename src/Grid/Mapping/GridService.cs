@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using Skybrud.Umbraco.GridData.Models;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Grid
 {

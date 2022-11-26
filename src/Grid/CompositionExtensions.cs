@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
+﻿using System.Reflection;
 using YuzuDelivery.Umbraco.Grid;
 using Microsoft.Extensions.DependencyInjection;
+using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-#if NETCOREAPP
     public static class CompositionExtensions
     {
         public static void RegisterGridStrategies(this IServiceCollection services, Assembly assembly)
@@ -18,14 +13,4 @@ namespace YuzuDelivery.Umbraco.Core
             services.RegisterAll<IAutomaticGridConfig>(assembly);
         }
     }
-#else
-    public static class CompositionExtensions
-    {
-        public static void RegisterGridStrategies(this Composition composition, Assembly assembly)
-        {
-            composition.RegisterAll<IGridItem>(assembly);
-            composition.RegisterAll<IAutomaticGridConfig>(assembly);
-        }
-    }
-#endif
 }

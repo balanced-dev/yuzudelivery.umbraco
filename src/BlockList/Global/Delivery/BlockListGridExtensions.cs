@@ -1,5 +1,6 @@
 ﻿using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.BlockList;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Core
 {

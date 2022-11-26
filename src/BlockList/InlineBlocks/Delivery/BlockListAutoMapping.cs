@@ -1,19 +1,14 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
-using YuzuDelivery.UmbracoModels;
-using YuzuDelivery.ViewModels;
 using YuzuDelivery.Umbraco.Import;
-
-#if NETCOREAPP
 using Umbraco.Cms.Core.Models.Blocks;
-using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Umbraco.Core.Models.Blocks;
-using Umbraco.Core.Models.PublishedContent;
-#endif
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Mapping.Mappers;
+using YuzuDelivery.Core.Mapping.Mappers.Settings;
+using YuzuDelivery.Umbraco.Core.Mapping;
+
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -38,7 +33,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
                     ManualMaps.Add(new YuzuTypeConvertorMapperSettings()
                     {
-                        Mapper = typeof(IYuzuTypeConvertorMapper),
+                        Mapper = typeof(IYuzuTypeReplaceMapper<UmbracoMappingContext>),
                         Convertor = convertorType
                     });
                 }

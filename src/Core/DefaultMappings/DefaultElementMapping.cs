@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 #if NETCOREAPP
 using Umbraco.Cms.Core.Models.PublishedContent;

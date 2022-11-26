@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Extensions;
 using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Umbraco.Core.Settings;
 using YuzuDelivery.Umbraco.Import;

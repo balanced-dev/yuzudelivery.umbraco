@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
-using YuzuDelivery.Core;
+﻿using YuzuDelivery.Core;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Mapping.Mappers;
+using YuzuDelivery.Core.Mapping.Mappers.Settings;
 using YuzuDelivery.Umbraco.Core;
+using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
 namespace YuzuDelivery.Umbraco.Forms
@@ -24,7 +22,7 @@ namespace YuzuDelivery.Umbraco.Forms
 
                     ManualMaps.Add(new YuzuFullPropertyMapperSettings()
                     {
-                        Mapper = typeof(IYuzuFullPropertyMapper),
+                        Mapper = typeof(IYuzuFullPropertyMapper<UmbracoMappingContext>),
                         Resolver = resolverType,
                         SourcePropertyName = i.SourcePropertyName,
                         DestPropertyName = i.DestPropertyName
@@ -34,6 +32,6 @@ namespace YuzuDelivery.Umbraco.Forms
         }
     }
 
-    
+
 
 }

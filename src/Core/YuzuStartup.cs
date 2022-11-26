@@ -10,6 +10,10 @@ using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Mapping.Mappers;
+using YuzuDelivery.Umbraco.Core.Mapping;
+using YuzuDelivery.Umbraco.Core.Mapping.Mappers;
 using YuzuDelivery.Umbraco.Core.Settings;
 
 namespace YuzuDelivery.Umbraco.Core
@@ -48,7 +52,7 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig));
             builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(CoreImportConfig));
 
-            builder.Services.AddSingleton<DefaultUmbracoMappingFactory>();
+            builder.Services.AddSingleton<DefaultYuzuMapperFactory>();
 
             //ToDo: not sure what this is Umbraco 9
             //composition.RegisterAuto<AutoMapper.Profile>();
@@ -62,7 +66,7 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddTransient<DefaultPublishedElementCollectionConvertor>();
             builder.Services.AddTransient<DefaultPublishedElementCollectionToSingleConvertor>();
 
-            builder.Services.AddTransient<IMappingContextFactory, UmbracoMappingContextFactory>();
+            builder.Services.AddTransient<IMappingContextFactory<UmbracoMappingContext>, UmbracoMappingContextFactory>();
             builder.Services.AddTransient<IYuzuTypeFactoryRunner, UmbracoTypeFactoryRunner>();
 
             builder.Services.AddTransient<ImageFactory>();
@@ -76,14 +80,16 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddSingleton(typeof(YuzuMappingConfig), typeof(GlobalConfigMappings));
 
             builder.Services.AddUnique<IYuzuGroupMapper, DefaultGroupMapper>();
-            builder.Services.AddUnique<IYuzuGlobalMapper, DefaultGlobalMapper>();
-            builder.Services.AddUnique<IYuzuFullPropertyMapper, DefaultFullPropertyMapper>();
+            builder.Services.AddUnique<IYuzuGlobalMapper, UmbracoGlobalMapper>();
+            builder.Services.AddUnique<IYuzuFullPropertyMapper<UmbracoMappingContext>, DefaultFullPropertyMapper<UmbracoMappingContext>>();
             builder.Services.AddUnique<IYuzuPropertyAfterMapper, DefaultPropertyAfterMapper>();
-            builder.Services.AddUnique<IYuzuPropertyFactoryMapper, DefaultPropertyFactoryMapper>();
-            builder.Services.AddUnique<IYuzuPropertyReplaceMapper, DefaultPropertyReplaceMapper>();
-            builder.Services.AddUnique<IYuzuTypeAfterMapper, DefaultTypeAfterMapper>();
-            builder.Services.AddUnique<IYuzuTypeConvertorMapper, DefaultTypeConvertorMapper>();
-            builder.Services.AddUnique<IYuzuTypeFactoryMapper, DefaultTypeFactoryMapper>();
+            builder.Services.AddUnique<IYuzuPropertyFactoryMapper<UmbracoMappingContext>, DefaultPropertyFactoryMapper<UmbracoMappingContext>>();
+            builder.Services.AddUnique<IYuzuPropertyReplaceMapper<UmbracoMappingContext>, DefaultPropertyReplaceMapper<UmbracoMappingContext>>();
+            builder.Services.AddUnique<IYuzuTypeAfterMapper<UmbracoMappingContext>, DefaultTypeAfterMapper<UmbracoMappingContext>>();
+            builder.Services.AddUnique<IYuzuTypeReplaceMapper<UmbracoMappingContext>, DefaultTypeReplaceMapper<UmbracoMappingContext>>();
+            builder.Services.AddUnique<IYuzuTypeFactoryMapper<UmbracoMappingContext>, DefaultTypeFactoryMapper<UmbracoMappingContext>>();
+
+            builder.Services.AddTransient(typeof(GlobalMappingEnumerableTypeConverter<,>));
 
             builder.Services.AddTransient(typeof(IMapperAddItem), typeof(UmbracoMapperAddItems));
 

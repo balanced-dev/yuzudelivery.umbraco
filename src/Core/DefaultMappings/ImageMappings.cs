@@ -1,3 +1,5 @@
+﻿using Microsoft.CodeAnalysis.Diagnostics;
+using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 ﻿using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Umbraco.Core.Mapping;
@@ -75,15 +77,26 @@ namespace YuzuDelivery.Umbraco.Core
         {
             if (image != null)
             {
-                return new vmBlock_DataImage
+                var mapped = new vmBlock_DataImage
                 {
                     Src = image.Url(),
                     Alt = image.Value<string>("alt"),
                     Height = image.Value<int>("umbracoHeight"),
                     Width = image.Value<int>("umbracoWidth"),
                     FileSize = image.Value<int>("umbracoBytes"),
-                    Extension = image.Value<string>("umbracoExtension"),
+                    Extension = image.Value<string>("umbracoExtension")
                 };
+                if (image.HasValue("umbracoFile") && image.Value("umbracoFile") is ImageCropperValue icv)
+                {
+                    if (icv.FocalPoint != null)
+                    {
+                        mapped.FocalPointLeft = icv.FocalPoint.Left.ToString();
+                        mapped.FocalPointTop = icv.FocalPoint.Top.ToString();
+                        mapped.FocalPointLeftTop = $"{icv.FocalPoint.Left},{icv.FocalPoint.Top}";
+                    }
+                }
+
+                return mapped;
             }
             return new vmBlock_DataImage();
         }

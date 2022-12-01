@@ -67,7 +67,7 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddTransient<DefaultPublishedElementCollectionToSingleConvertor>();
 
             builder.Services.AddTransient<IMappingContextFactory<UmbracoMappingContext>, UmbracoMappingContextFactory>();
-            builder.Services.AddTransient<IYuzuTypeFactoryRunner, UmbracoTypeFactoryRunner>();
+            builder.Services.AddTransient<IYuzuTypeFactoryRunner, DefaultTypeFactoryRunner<UmbracoMappingContext>>();
 
             builder.Services.AddTransient<ImageFactory>();
 

@@ -12,7 +12,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
         public static void AddTypeAfterMap<TConverter>(this List<YuzuMapperSettings> resolvers)
             where TConverter : IYuzuTypeAfterConvertor
         {
-            resolvers.AddTypeAfterMap(typeof(TConverter));
+            resolvers.AddTypeAfterMapWithContext<UmbracoMappingContext, TConverter>();
         }
 
         public static void AddTypeAfterMap(this List<YuzuMapperSettings> resolvers, Type afterMapType)

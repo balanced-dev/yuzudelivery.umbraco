@@ -9,6 +9,10 @@ public class GlobalMappingEnumerableTypeConverter<TSource, TDest> : AutoMapper.I
 {
     public List<TDest> Convert(IEnumerable<IPublishedContent> source, List<TDest> destination, ResolutionContext context)
     {
-        return source.OfType<TSource>().Select(x => context.Mapper.Map<TDest>(x)).ToList();
+        if(source != null)
+        {
+            return source.OfType<TSource>().Select(x => context.Mapper.Map<TDest>(x)).ToList();
+        }
+        return new List<TDest>();
     }
 }

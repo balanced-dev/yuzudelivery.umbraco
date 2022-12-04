@@ -18,12 +18,12 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
     [UseReporter(typeof(DiffReporter))]
     public class GridChangeTests : BaseTestSetup
     {
-        public class vmBlock_With_Rows
+        public class vmBlock_WithRows
         {
             public vmBlock_DataRows Rows { get; set; }
         }
 
-        public class vmBlock_With_Grid
+        public class vmBlock_WithGrid
         {
             public vmBlock_DataGrid Grid { get; set; }
         }
@@ -46,8 +46,8 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
 
             svc = container.Resolve<SchemaChangeController>();
 
-            umb.ContentType.ForUpdating<vmBlock_With_Rows>();
-            umb.ContentType.ForUpdating<vmBlock_With_Grid>();
+            umb.ContentType.ForUpdating<vmBlock_WithRows>();
+            umb.ContentType.ForUpdating<vmBlock_WithGrid>();
 
             umb.ImportConfig.IgnoreViewmodels.Add("vmBlock_DataGrid");
             umb.ImportConfig.IgnoreViewmodels.Add("vmBlock_DataRows");
@@ -63,7 +63,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             SetupRowBuilder();
 
             umb.DataType.AddAndStubCreate(1, "Row Builder", "Umbraco.Grid")
-                .PropertyType.ForCreating<vmBlock_With_Rows>(x => x.Rows, 1, 1);
+                .PropertyType.ForCreating<vmBlock_WithRows>(x => x.Rows, 1, 1);
 
             svc.ChangeProperty(map);
 
@@ -79,7 +79,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             SetupRowBuilder();
 
             umb.DataType.AddAndStubUpdate(1, "Row Builder", "Umbraco.Grid")
-                .PropertyType.ForCreating<vmBlock_With_Rows>(x => x.Rows, 1, 1);
+                .PropertyType.ForCreating<vmBlock_WithRows>(x => x.Rows, 1, 1);
 
             umb.DataType.Current.Configuration = CreateRowConfig("100");
             map.ContentDataTypeId = 1;
@@ -96,20 +96,20 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             SetupRowBuilder();
 
             umb.DataType.AddAndStubUpdate(1, "Row Builder", "Umbraco.Grid")
-                .PropertyType.ForCreating<vmBlock_With_Rows>(x => x.Rows, 1, 1);
+                .PropertyType.ForCreating<vmBlock_WithRows>(x => x.Rows, 1, 1);
 
             svc.ChangeProperty(map);
 
-            umb.PropertyType.WasCreated<vmBlock_With_Rows>(x => x.Rows);
+            umb.PropertyType.WasCreated<vmBlock_WithRows>(x => x.Rows);
         }
 
         private void SetupRowBuilder()
         {
-            umb.Config.AddViewModel<vmBlock_With_Rows>();
+            umb.Config.AddViewModel<vmBlock_WithRows>();
 
             map = new VmToContentPropertyMap()
             {
-                VmName = "vmBlock_With_Rows",
+                VmName = "vmBlock_WithRows",
                 VmPropertyName = "Rows",
                 Config = new ContentPropertyConfig()
                 {
@@ -137,7 +137,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             SetupGrid();
 
             umb.DataType.AddAndStubCreate(1, "Grid", "Umbraco.Grid")
-                .PropertyType.ForCreating<vmBlock_With_Grid>(x => x.Grid, 1, 1);
+                .PropertyType.ForCreating<vmBlock_WithGrid>(x => x.Grid, 1, 1);
 
             svc.ChangeProperty(map);
 
@@ -153,7 +153,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             SetupGrid();
 
             umb.DataType.AddAndStubUpdate(1, "Grid", "Umbraco.Grid")
-                .PropertyType.ForCreating<vmBlock_With_Grid>(x => x.Grid, 1, 1);
+                .PropertyType.ForCreating<vmBlock_WithGrid>(x => x.Grid, 1, 1);
 
             umb.DataType.Current.Configuration = CreateGridConfig("100");
             map.ContentDataTypeId = 1;
@@ -170,20 +170,20 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             SetupGrid();
 
             umb.DataType.AddAndStubUpdate(1, "Grid", "Umbraco.Grid")
-                .PropertyType.ForCreating<vmBlock_With_Grid>(x => x.Grid, 1, 1);
+                .PropertyType.ForCreating<vmBlock_WithGrid>(x => x.Grid, 1, 1);
 
             svc.ChangeProperty(map);
 
-            umb.PropertyType.WasCreated<vmBlock_With_Grid>(x => x.Grid);
+            umb.PropertyType.WasCreated<vmBlock_WithGrid>(x => x.Grid);
         }
 
         private void SetupGrid()
         {
-            umb.Config.AddViewModel<vmBlock_With_Grid>();
+            umb.Config.AddViewModel<vmBlock_WithGrid>();
 
             map = new VmToContentPropertyMap()
             {
-                VmName = "vmBlock_With_Grid",
+                VmName = "vmBlock_WithGrid",
                 VmPropertyName = "Grid",
                 Config = new ContentPropertyConfig()
                 {
@@ -214,7 +214,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             map.Config.AllowedTypes = new string[] { "vmBlock_Rte", "vmBlock_GridImage" };
 
             umb.DataType.AddAndStubCreate(1, "Grid", "Umbraco.Grid")
-                .PropertyType.ForCreating<vmBlock_With_Grid>(x => x.Grid, 1, 1);
+                .PropertyType.ForCreating<vmBlock_WithGrid>(x => x.Grid, 1, 1);
 
             svc.ChangeProperty(map);
 
@@ -231,7 +231,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             map.Config.AllowedTypes = new string[] { "vmBlock_Rte", "vmBlock_GridImage", "vmBlock_Summary" };
 
             umb.DataType.AddAndStubUpdate(1, "Grid", "Umbraco.Grid")
-                .PropertyType.ForCreating<vmBlock_With_Grid>(x => x.Grid, 1, 1);
+                .PropertyType.ForCreating<vmBlock_WithGrid>(x => x.Grid, 1, 1);
 
             dtgeServiceMocks.Configs.Add(CreateDTGEConfig("Grid", "grid", new string[] { "rte", "gridImage" }));
             map.ContentDataTypeId = 1;

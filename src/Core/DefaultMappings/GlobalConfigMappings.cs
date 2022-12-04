@@ -18,7 +18,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                 var documentTypeAlias = global.Value.DocumentTypeAlias;
                 if (string.IsNullOrEmpty(documentTypeAlias))
-                    documentTypeAlias = vmHelperService.Get(vmName).ContentType.Alias;
+                    documentTypeAlias = vmHelperService.Get(vmName)?.ContentType.Alias;
 
                 var groupName = global.Value.StoreContentAs.GroupName;
 

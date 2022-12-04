@@ -156,10 +156,10 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
 
             svc.Create(propertyMapBuilder.CurrentProperty);
 
-            if (rowConfig != null) umb.ContentType.WasCreated(rowConfig);
+            if (rowConfig != null) umb.ContentType.WasCreated(rowConfig.CamelToSentenceCase());
             if (colConfig != null)
             {
-                umb.ContentType.WasCreated(colConfig);
+                umb.ContentType.WasCreated(colConfig.CamelToSentenceCase());
                 Assert.IsTrue(umb.DataType.Saved.Contains("Test Column Settings"));
 
                 builder.AddBlock("Col Config", "ColConfig", customView: BlockListGridCreationService.ConfigCustomView);

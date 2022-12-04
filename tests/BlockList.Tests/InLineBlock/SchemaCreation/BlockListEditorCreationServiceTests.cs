@@ -12,6 +12,7 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using YuzuDelivery.Umbraco.Import.Tests.Integration;
 using Autofac;
+//using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
 {
@@ -88,7 +89,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
 
             umb.DataType.AddAndStubCreate(1, dataTypeName, BlockListDataTypeFactory.DataEditorName);
 
-            builder.AddBlock(expectedName, assignedName, customView: string.Empty);
+            builder.AddBlock(expectedName, assignedName.CamelToSentenceCase(), customView: string.Empty);
             if (isAnyOf) builder.AddBlock(assignedName2, assignedName2, customView: string.Empty);
 
             builder.Expected.UseInlineEditingAsDefault = true;
@@ -101,8 +102,8 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
 
             Approvals.AssertEquals(builder.Expected.ToJson(), output.ToJson());
 
-            umb.ContentType.WasCreated(assignedName);
-            if (isAnyOf) umb.ContentType.WasCreated(assignedName2);
+            umb.ContentType.WasCreated(assignedName.CamelToSentenceCase());
+            if (isAnyOf) umb.ContentType.WasCreated(assignedName2.CamelToSentenceCase());
         }
 
         public void CreateData(bool isList, bool isAnyOf, params string[] blocks)

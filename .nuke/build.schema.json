@@ -76,10 +76,12 @@
               "AddAzureArtifactsFeed",
               "Clean",
               "Compile",
+              "CreateTestServer",
               "Default",
               "Pack",
               "Report",
               "Restore",
+              "RunTestServer",
               "SaveAcceptenceFailedResults",
               "Test"
             ]
@@ -99,10 +101,12 @@
               "AddAzureArtifactsFeed",
               "Clean",
               "Compile",
+              "CreateTestServer",
               "Default",
               "Pack",
               "Report",
               "Restore",
+              "RunTestServer",
               "SaveAcceptenceFailedResults",
               "Test"
             ]

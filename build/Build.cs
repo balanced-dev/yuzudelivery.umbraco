@@ -32,7 +32,7 @@ class Build : NukeBuild
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main () => Execute<Build>(x => x.Default);
+    public static int Main() => Execute<Build>(x => x.Default);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
@@ -68,7 +68,6 @@ class Build : NukeBuild
             TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
             EnsureCleanDirectory(PackagesDirectory);
             EnsureCleanDirectory(TestResultsDirectory);
-            EnsureCleanDirectory(TestServerDirectory);
         });
 
 
@@ -150,41 +149,58 @@ class Build : NukeBuild
             Log.Information("NuGetPackageVersion:          {Value}", NerdbankVersioning.NuGetPackageVersion);
             Log.Information("AssemblyInformationalVersion: {Value}", NerdbankVersioning.AssemblyInformationalVersion);
         });
+    
+    //this can be run separately
+    Target CreateTestServer => _ => _
+        .After(Pack, Test)
+        .Executes(() =>
+        {
+            EnsureCleanDirectory(TestServerDirectory);
 
+            var templatesPackage = PackagesDirectory
+                                       .GlobFiles("*YuzuDelivery.Umbraco.Templates.*")
+                                       .First();
 
+            Run("dotnet", $"nuget add source {PackagesDirectory} --name yuzu_local", handleExitCode: c => true);
+            Run("dotnet", "new --uninstall YuzuDelivery.Umbraco.Templates", handleExitCode: c => true);
+            Run("dotnet", $"new --install {templatesPackage}");
+
+            Directory.CreateDirectory(TestServerDirectory);
+
+            var newArgs = new StringBuilder();
+            newArgs.Append(" --name Yuzu.Acceptance");
+            newArgs.Append(" --output .");
+            newArgs.Append(" --no-restore");
+            newArgs.Append(" --development-database-type SQLite");
+            newArgs.Append(" --email e2e@hifi.agency");
+            newArgs.Append(" --friendly-name e2e@hifi.agency");
+            newArgs.Append(" --password TestThis42!");
+
+            Run("dotnet", $"new yuzu-test {newArgs}", workingDirectory: TestServerDirectory);
+            Run("dotnet", $"restore", workingDirectory: TestServerDirectory);
+        });
+
+    //this can be run separately
+    Target RunTestServer => _ => _
+        .Executes(() =>
+        {
+            Run("dotnet", "watch run -- --urls http://localhost:8080", TestServerDirectory);
+        });
+
+    //this can be run separately
     Target Acceptance  => _ => _
-        .After(Test)
-        .DependsOn(Pack)
+        .After(Pack, Test)
+        .DependsOn(CreateTestServer)
         .ProceedAfterFailure()
         .Executes(async () =>
         {
 
             try
             {
-                var templatesPackage = PackagesDirectory
-                                       .GlobFiles("*YuzuDelivery.Umbraco.Templates.*")
-                                       .First();
-
-                Run("dotnet", $"nuget add source {PackagesDirectory} --name yuzu_local", handleExitCode: c => true);
-                Run("dotnet", "new --uninstall YuzuDelivery.Umbraco.Templates", handleExitCode: c => true);
-                Run("dotnet", $"new --install {templatesPackage}");
-
-                Directory.CreateDirectory(TestServerDirectory);
-
-                var newArgs = new StringBuilder();
-                newArgs.Append(" --name Yuzu.Acceptance");
-                newArgs.Append(" --output .");
-                newArgs.Append(" --no-restore");
-                newArgs.Append(" --development-database-type SQLite");
-                newArgs.Append(" --email e2e@hifi.agency");
-                newArgs.Append(" --friendly-name e2e@hifi.agency");
-                newArgs.Append(" --password TestThis42!");
-
-                Run("dotnet", $"new yuzu-test {newArgs}", workingDirectory: TestServerDirectory);
-                Run("dotnet", $"restore", workingDirectory: TestServerDirectory);
-
                 var supervisor = new ProcessSupervisor(NullLoggerFactory.Instance, ProcessRunType.NonTerminating,
                     TestServerDirectory, "dotnet", "watch run -- --urls http://localhost:8080");
+
+                supervisor.OutputDataReceived += s => { Log.Information(s); };
 
                 await supervisor.Start();
 
@@ -229,12 +245,12 @@ class Build : NukeBuild
         });
 
     Target SaveAcceptenceFailedResults => _ => _
-        .DependsOn(Acceptance)
+        .After(Acceptance)
         .Executes(() =>
         {
             AzurePipelines.Instance?.UploadArtifacts("container", "drop", AcceptanceTestResults);
         });
 
     Target Default => _ => _
-        .DependsOn(Clean, Test, Acceptance, SaveAcceptenceFailedResults, Report);
+        .DependsOn(Clean, Test, Pack, CreateTestServer, Acceptance, Report, SaveAcceptenceFailedResults);
 }

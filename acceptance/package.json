@@ -8,7 +8,8 @@
     "browsers": "playwright install chromium",
     "config": "node config",
     "config-ci": "node config ci",
-    "test": "playwright test"
+    "test": "playwright test",
+    "debug": "playwright test --debug"
   },
   "keywords": [],
   "author": "",

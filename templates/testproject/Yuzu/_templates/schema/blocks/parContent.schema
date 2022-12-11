@@ -7,6 +7,14 @@
         "string": {
             "type": "string"
         },
+        "longText": {
+            "type": "string",
+            "textType": "large"
+        },
+        "richText": {
+            "type": "string",
+            "textType": "rte"
+        },
         "enumString": {
             "type": "string",
             "enum": [
@@ -54,6 +62,18 @@
             "type": "array",
             "items": {
                 "$ref": "/parSubBlock"
+            }
+        },
+        "dynamicSubBlock1": {
+            "anyOf": []
+        },
+        "dynamicSubBlock2": {
+            "anyOf": []
+        },
+        "dynamicSubBlocks": {
+            "type": "array",
+            "items": {
+                "anyOf": []
             }
         },
         "_ref": {

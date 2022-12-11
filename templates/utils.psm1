@@ -156,24 +156,6 @@ function Add-Yuzu-Development-AppSettings {
     Set-Content ".\$($folder)\appsettings.Development.json" $output
 }
 
-# TODO: No longer required after we have RCL's
-function Copy-Forms-Partials {
-    param (
-        $Folder
-    )
-
-    Copy-Item -Path "..\src\Forms\wwwroot\Views\Partials\*" -Destination ".\$($folder)\Views\Partials" -Recurse
-}
-
-# TODO: No longer required after we have RCL's
-function Copy-Blocklist-Partials {
-    param (
-        $Folder
-    )
-    mkdir ".\$($folder)\App_Plugins\YuzuBlockList"
-    Copy-Item -Path "..\src\BlockList\wwwroot\*.html" -Destination ".\$($folder)\App_Plugins\YuzuBlockList" -Recurse
-}
-
 function Add-Project-Dependencies-Simple {
     param (
         $Folder,

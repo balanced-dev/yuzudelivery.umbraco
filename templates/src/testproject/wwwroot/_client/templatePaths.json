@@ -53,6 +53,9 @@
         "grouped": {
             "/parGrouped": "yuzu.html?type=blocks&name=Grouped"
         },
+        "subBlock2": {
+            "/parSubBlock2": "yuzu.html?type=blocks&name=SubBlock2"
+        },
         "subBlock": {
             "/parSubBlock": "yuzu.html?type=blocks&name=SubBlock"
         }

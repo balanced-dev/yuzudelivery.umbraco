@@ -1,4 +1,8 @@
 {
+    "textType": {
+        "/longText": "large",
+        "/richText": "rte"
+    },
     "enums": {
         "/enumString": [
             "value1",
@@ -31,6 +35,18 @@
         ],
         "/subBlocks": [
             "/parSubBlock"
+        ],
+        "/dynamicSubBlock1": [
+            "/parSubBlock",
+            "/parSubBlock2"
+        ],
+        "/dynamicSubBlock2": [
+            "/parSubBlock",
+            "/parSubBlock2"
+        ],
+        "/dynamicSubBlocks": [
+            "/parSubBlock",
+            "/parSubBlock2"
         ]
     }
 }

@@ -57,8 +57,6 @@ Copy-Yuzu-Folder 'standalone'
 Update-ModeslBuilder -folder 'standalone' -isWeb $False
 Add-Yuzu-AppSettings -folder 'standalone'
 Add-Yuzu-Development-AppSettings -folder 'standalone' -isWeb $False
-Copy-Forms-Partials -folder 'standalone'
-Copy-Blocklist-Partials -folder 'standalone'
 Copy-Icon -folder 'standalone'
 
 $dependencies = [ordered]@{
@@ -92,8 +90,6 @@ Copy-Yuzu-Folder 'testproject'
 Update-ModeslBuilder -folder 'testproject' -isWeb $False
 Add-Yuzu-AppSettings -folder 'testproject'
 Add-Yuzu-Development-AppSettings -folder 'testproject' -isWeb $False
-Copy-Forms-Partials -folder 'testproject'
-Copy-Blocklist-Partials -folder 'testproject'
 Copy-Icon -folder 'testproject'
 $dependencies = [ordered]@{
     "Umbraco.Forms" = $UmbracoFormsVersion;

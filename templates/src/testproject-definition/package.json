@@ -5,10 +5,8 @@
   "scripts": {
     "build": "webpack --config webpack.production.js",
     "dist": "webpack --config webpack.production.js --env.output=../testproject/",
-
     "dev": "webpack-dev-server --config webpack.dev.js",
     "dev:inspect": "node --inspect ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.dev.js",
-
     "serve": "npm run dev"
   },
   "devDependencies": {
@@ -28,6 +26,7 @@
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.11.0",
     "node-sass-glob-importer": "^5.3.2",
+    "postcss": "^8.1.9",
     "postcss-loader": "^4.0.2",
     "sass": "^1.55.0",
     "sass-loader": "^10.0.1",
@@ -39,7 +38,7 @@
     "webpack-import-glob-loader": "^1.6.3",
     "webpack-merge": "^5.8.0",
     "yuzu-definition-api": "2.0.0",
-    "yuzu-definition-core": "^2.0.0",
+    "yuzu-definition-core": "^2.0.1",
     "yuzu-definition-hbs-helpers": "^1.1.16",
     "yuzu-definition-ui": "2.0.0",
     "yuzu-definition-webpack-plugins": "3.0.0",

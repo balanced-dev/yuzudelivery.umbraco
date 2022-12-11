@@ -20,6 +20,8 @@
                 "items": [
                     {
                         "string": "string",
+                        "longText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        "richText": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elite, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua./</p>",
                         "enumString": "value1",
                         "stringArray": [
                             "string1",
@@ -74,6 +76,28 @@
                                 "title": "SubBlock Title",
                                 "_ref": "/parSubBlock",
                                 "yuzu-path": "/content/rows[0]/items[0]/subBlocks[1]"
+                            }
+                        ],
+                        "dynamicSubBlock1": {
+                            "title": "SubBlock Title",
+                            "_ref": "/parSubBlock",
+                            "yuzu-path": "/content/rows[0]/items[0]/dynamicSubBlock1"
+                        },
+                        "dynamicSubBlock2": {
+                            "title": "SubBlock 2 Title",
+                            "_ref": "/parSubBlock2",
+                            "yuzu-path": "/content/rows[0]/items[0]/dynamicSubBlock2"
+                        },
+                        "dynamicSubBlocks": [
+                            {
+                                "title": "SubBlock Title",
+                                "_ref": "/parSubBlock",
+                                "yuzu-path": "/content/rows[0]/items[0]/dynamicSubBlocks[0]"
+                            },
+                            {
+                                "title": "SubBlock 2 Title",
+                                "_ref": "/parSubBlock2",
+                                "yuzu-path": "/content/rows[0]/items[0]/dynamicSubBlocks[1]"
                             }
                         ],
                         "_ref": "/parContent",

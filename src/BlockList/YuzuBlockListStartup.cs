@@ -80,7 +80,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetModelName();
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
                     var umbracoModelType = config.CMSModels.FirstOrDefault(x => x.Name == umbracoModelTypeName);
 

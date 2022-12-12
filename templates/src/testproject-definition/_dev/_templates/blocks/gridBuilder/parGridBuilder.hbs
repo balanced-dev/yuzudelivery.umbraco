@@ -45,8 +45,10 @@
                                     <div style="padding: 20px; background: #AAA; margin-bottom: 20px;">
                                         <h3 style="padding-top: 0;">Column Item {{@index}}</h3>
                                         {{#if this.content}}
-                                            {{{ dynPartial _ref this.content }}}
+                                            context ref : {{content._ref}}
+                                            {{{ dynPartial content._ref this.content }}}
                                         {{else}}
+                                            context ref : {{_ref}}
                                             {{{ dynPartial _ref this }}}
                                         {{/if}}
                                     </div>

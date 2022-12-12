@@ -114,7 +114,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetModelName();
                     var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 
                     var alias = umbracoModelTypeName.FirstCharacterToLower();

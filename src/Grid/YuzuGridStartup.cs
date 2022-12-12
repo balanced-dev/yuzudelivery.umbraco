@@ -69,7 +69,7 @@ namespace YuzuDelivery.Umbraco.Grid
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
-                    var umbracoModelTypeName = viewModelType.Name.Replace(YuzuConstants.Configuration.BlockPrefix, "");
+                    var umbracoModelTypeName = viewModelType.GetModelName();
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
                     var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 

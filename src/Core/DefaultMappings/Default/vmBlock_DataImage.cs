@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -39,7 +40,13 @@ namespace YuzuDelivery.Umbraco.Core
         public string FocalPointLeftTop { get; set; }
 
         [Newtonsoft.Json.JsonProperty("_ref", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string _ref { get; set; }
+        public string _ref
+        {
+            get
+            {
+                return this.GetType().GetBlockName(true);
+            }
+        }
 
         [Newtonsoft.Json.JsonProperty("_modifiers", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.List<string> _modifiers { get; set; }
@@ -53,6 +60,8 @@ namespace YuzuDelivery.Umbraco.Core
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<vmBlock_DataImage>(data);
         }
+
+
 
     }
 }

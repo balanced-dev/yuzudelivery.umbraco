@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Internal'">
+    <ProjectReference Include="..\..\..\yuzudelivery.core\src\YuzuDelivery.Core\YuzuDelivery.Core.csproj"/>
     <ProjectReference Include="..\..\..\yuzudelivery.umbraco.import\src\YuzuDelivery.Umbraco.Import\YuzuDelivery.Umbraco.Import.csproj"/>
   </ItemGroup>
 

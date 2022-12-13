@@ -6,7 +6,6 @@ using Umbraco.Cms.Core.Manifest;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
-
     public class YuzuBlockListManifestFilter : IManifestFilter
     {
         public void Filter(List<PackageManifest> manifests)

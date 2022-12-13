@@ -57,4 +57,5 @@ namespace YuzuDelivery.Umbraco.Core
             return mapper.Map(sourceMember, cmsModel, viewmodel, context.Items);
         }
     }
+
 }

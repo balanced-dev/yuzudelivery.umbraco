@@ -77,15 +77,6 @@ namespace YuzuDelivery.Umbraco.Core
                     }
                 };
 
-            SchemaMetaLocations = new List<IDataLocation>()
-                {
-                    new DataLocation()
-                    {
-                        Name = "Main",
-                        Path = _hostEnvironment.MapPathContentRoot(_coreSettings.CurrentValue.SchemaMeta)
-                    }
-                };
-
             GetTemplatesCache = () => {
                 return _appPolicyCache.Get("feTemplates") as Dictionary<string, Func<object, string>>;
             };

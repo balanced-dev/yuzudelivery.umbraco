@@ -66,6 +66,19 @@ function Update-ModeslBuilder {
     Set-Content ".\$($folder)\appsettings.Development.json" $AppSettings
 }
 
+function  Reduce-Noise {
+    param (
+        $Folder
+    )
+
+    $AppSettings = Get-Content ".\$($folder)\appsettings.Development.json"
+    $toFind = '"Default": "Information"'
+    $replaceWith = '"Default": "Warning"'
+
+    $AppSettings = $AppSettings -replace $toFind, $replaceWith
+    Set-Content ".\$($folder)\appsettings.Development.json" $AppSettings
+}
+
 # Formats JSON in a nicer format than the built-in ConvertTo-Json does.
 function Format-Json([Parameter(Mandatory, ValueFromPipeline)][String] $json) {
   $indent = 0;

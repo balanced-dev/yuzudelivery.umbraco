@@ -88,6 +88,7 @@ Copy-Upstream-Template -folder 'testproject'
 Update-ViewImports -folder 'testproject'
 Copy-Yuzu-Folder 'testproject'
 Update-ModeslBuilder -folder 'testproject' -isWeb $False
+Reduce-Noise -folder 'testproject'
 Add-Yuzu-AppSettings -folder 'testproject'
 Add-Yuzu-Development-AppSettings -folder 'testproject' -isWeb $False
 Copy-Icon -folder 'testproject'

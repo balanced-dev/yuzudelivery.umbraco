@@ -38,10 +38,10 @@
     "webpack-import-glob-loader": "^1.6.3",
     "webpack-merge": "^5.8.0",
     "yuzu-definition-api": "2.0.0",
-    "yuzu-definition-core": "^2.0.1",
+    "yuzu-definition-core": "^2.0.2",
     "yuzu-definition-hbs-helpers": "^1.1.16",
     "yuzu-definition-ui": "2.0.0",
-    "yuzu-definition-webpack-plugins": "3.0.0",
+    "yuzu-definition-webpack-plugins": "3.0.1",
     "yuzu-loader": "2.0.0"
   }
 }

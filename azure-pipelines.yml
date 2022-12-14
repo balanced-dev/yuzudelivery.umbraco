@@ -12,6 +12,7 @@ steps:
   - task: CmdLine@2
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+      DOTNET_USE_POLLING_FILE_WATCHER: 1
     inputs:
       script: './build.cmd'
 

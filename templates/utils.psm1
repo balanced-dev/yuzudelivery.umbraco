@@ -185,6 +185,16 @@ function Add-Forced-Restart-Watcher {
 
     $csproj = [xml](get-content $pathToConfig)
 
+    $node = $csproj.CreateElement("Compile")
+    $node.SetAttribute("Update", "**")
+    $node.SetAttribute("Watch", "false")
+    $csproj.Project.ItemGroup[0].AppendChild($node) | Out-Null
+
+    $node = $csproj.CreateElement("Content")
+    $node.SetAttribute("Update", "**")
+    $node.SetAttribute("Watch", "false")
+    $csproj.Project.ItemGroup[0].AppendChild($node) | Out-Null
+
     $node = $csproj.CreateElement("Watch")
     $node.SetAttribute("Include", "restart.txt")
     $csproj.Project.ItemGroup[0].AppendChild($node) | Out-Null

@@ -10,6 +10,8 @@
     <PackageReference Include="Umbraco.Forms" Version="10.1.2" />
     <PackageReference Include="YuzuDelivery.Umbraco" Version="3.0.1-alpha.*" />
     <PackageReference Include="Our.Umbraco.TheDashboard" Version="10.0.1" />
+    <Compile Update="**" Watch="false" />
+    <Content Update="**" Watch="false" />
     <Watch Include="restart.txt" />
   </ItemGroup>
   <ItemGroup>

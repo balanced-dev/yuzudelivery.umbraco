@@ -73,7 +73,10 @@ function  Reduce-Noise {
 
     $AppSettings = Get-Content ".\$($folder)\appsettings.Development.json"
     $toFind = '"Default": "Information"'
-    $replaceWith = '"Default": "Warning"'
+    $replaceWith = '"Default": "Error",
+        "Override": {
+            "Yuzu.TestProject": "Information"
+        }'
 
     $AppSettings = $AppSettings -replace $toFind, $replaceWith
     Set-Content ".\$($folder)\appsettings.Development.json" $AppSettings

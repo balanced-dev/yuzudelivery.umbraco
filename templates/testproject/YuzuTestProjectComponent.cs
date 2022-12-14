@@ -39,18 +39,18 @@ public class YuzuTestProjectComponent : IComponent
 
         foreach (var step in _steps.Where(x => x.Index >= nextStep).OrderBy(x => x.Index))
         {
-            _logger.LogWarning("[Yuzu] Executing setup step: {description}", step.Description);
+            _logger.LogInformation("[Yuzu] Executing setup step: {description}", step.Description);
             step.Execute();
 
             _yuzuState.MarkStepCompleted(step.Index);
 
-             _logger.LogWarning("[Yuzu] Completed setup step: {description}", step.Description);
+             _logger.LogInformation("[Yuzu] Completed setup step: {description}", step.Description);
             if (!step.RequiresRestart)
             {
                 continue;
             }
 
-            _logger.LogWarning("[Yuzu] Restart required for test project setup step: {description}", step.Description);
+            _logger.LogInformation("[Yuzu] Restart required for test project setup step: {description}", step.Description);
             var restartTrigger = Path.Combine(_env.ContentRootPath, "restart.txt");
             File.WriteAllText(restartTrigger, $"{step.Index}");
             break;
@@ -58,7 +58,7 @@ public class YuzuTestProjectComponent : IComponent
 
         if(_yuzuState.GetNextStep() > _steps.Max(x => x.Index))
         {
-             _logger.LogWarning("[Yuzu] Setup complete");
+             _logger.LogInformation("[Yuzu] Setup complete");
         }
     }
 

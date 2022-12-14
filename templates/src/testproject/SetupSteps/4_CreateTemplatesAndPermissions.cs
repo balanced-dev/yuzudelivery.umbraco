@@ -41,7 +41,7 @@ public class CreateTemplatesAndPermissions : IYuzuTestSetupStep
     private void AddTemplateToContentType(Mod.IContentType contentType)
     {
         var result = _fileService.CreateTemplateForContentType(contentType.Alias, contentType.Name);
-        contentType.AllowedTemplates = new List<Mod.ITemplate>() { result.Result.Entity };
+        contentType.AllowedTemplates = new List<Mod.ITemplate>() { result.Result!.Entity! };
         _umbContentTypeService.Save(contentType);
         contentType.SetDefaultTemplate(result.Result.Entity);
     }
@@ -49,7 +49,7 @@ public class CreateTemplatesAndPermissions : IYuzuTestSetupStep
     private Mod.IContentType GetContentAddTemplate(string alias)
     {
         var contentType = _umbContentTypeService.Get(alias);
-        AddTemplateToContentType(contentType);
-        return contentType;
+        AddTemplateToContentType(contentType!);
+        return contentType!;
     }
 }

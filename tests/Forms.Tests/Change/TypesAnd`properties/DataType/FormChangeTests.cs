@@ -63,7 +63,7 @@ namespace Yuzu.Delivery.Forms.Tests.Integration.ChangeItem
             svc.ChangeProperty(map);
 
             Assert.IsInstanceOf<FormPickerConfiguration>(umb.DataType.Current.Configuration);
-            Assert.AreEqual("Form Picker", umb.DataType.Current.Name);
+            Assert.That(umb.DataType.Current.Name, Is.EqualTo("Form Picker"));
         }
 
         [Test]

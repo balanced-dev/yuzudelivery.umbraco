@@ -57,7 +57,7 @@ namespace YuzuDelivery.Umbraco.Core.Tests
             svc.ChangeProperty(map);
 
             Assert.IsInstanceOf<MultiUrlPickerConfiguration>(umb.DataType.Current.Configuration);
-            Assert.AreEqual("Url Picker", umb.DataType.Current.Name);
+            Assert.That(umb.DataType.Current.Name, Is.EqualTo("Url Picker"));
         }
 
         [Test]

@@ -170,7 +170,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
             var output = svc.GetDataTypeName(data);
 
-            Assert.AreEqual("Course Grid", output);
+            Assert.That(output, Is.EqualTo("Course Grid"));
         }
 
         [Test]
@@ -180,7 +180,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test
 
             var output = svc.GetDataTypeAlias(data);
 
-            Assert.AreEqual(config.Grid.OfType, output);
+            Assert.That(output, Is.EqualTo(config.Grid.OfType));
         }
 
         public object DefaultTemplates()

@@ -231,8 +231,8 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             else if(mode == "thumbnails")
             {
                 var config = umb.DataType.Added["Test Grid Sections"].Configuration as BlockListConfiguration;
-                Assert.AreEqual("thumbnail", config.Blocks[0].Thumbnail);
-                Assert.AreEqual(null, config.Blocks[1].Thumbnail); ;
+                Assert.That(config.Blocks[0].Thumbnail, Is.EqualTo("thumbnail"));
+                Assert.That(config.Blocks[1].Thumbnail, Is.EqualTo(null)); ;
             }
 
         }

@@ -68,7 +68,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             svc.ChangeProperty(map);
 
             Assert.IsInstanceOf<GridConfiguration>(umb.DataType.Current.Configuration);
-            Assert.AreEqual("Row Builder", umb.DataType.Current.Name);
+            Assert.That(umb.DataType.Current.Name, Is.EqualTo("Row Builder"));
 
             Approvals.AssertEquals(CreateRowConfig("100").ToJson(), umb.DataType.Current.Configuration.ToJson());
         }
@@ -142,7 +142,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
             svc.ChangeProperty(map);
 
             Assert.IsInstanceOf<GridConfiguration>(umb.DataType.Current.Configuration);
-            Assert.AreEqual("Grid", umb.DataType.Current.Name);
+            Assert.That(umb.DataType.Current.Name, Is.EqualTo("Grid"));
 
             Approvals.AssertEquals(CreateGridConfig("100").ToJson(), umb.DataType.Current.Configuration.ToJson());
         }

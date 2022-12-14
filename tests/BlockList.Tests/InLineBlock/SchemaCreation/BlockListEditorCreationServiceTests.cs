@@ -71,7 +71,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
 
             var output = svc.Create(propertyMapBuilder.CurrentProperty);
 
-            Assert.AreEqual(expectedName, output.Name);
+            Assert.That(output.Name, Is.EqualTo(expectedName));
         }
 
 

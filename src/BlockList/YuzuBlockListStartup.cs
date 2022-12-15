@@ -14,6 +14,7 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Umbraco.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -65,6 +66,20 @@ namespace YuzuDelivery.Umbraco.BlockList
             builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(BlockListGridImportConfig));
 
             builder.ManifestFilters().Append<YuzuBlockListManifestFilter>();
+
+            builder.Services.AddOptions<DataTypeFolderSettings>("YuzuDelivery.Umbraco.BlockList")
+                    .Configure(x =>
+                    {
+                        x.GetCustomFolderName = (name, editor) =>
+                        {
+                            if (editor == Constants.PropertyEditors.Aliases.BlockList && name.Contains("Builder"))
+                            {
+                                return "Grid";
+                            }
+
+                            return null;
+                        };
+                    });
 
         }
 

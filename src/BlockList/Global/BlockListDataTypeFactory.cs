@@ -37,8 +37,8 @@ namespace YuzuDelivery.Umbraco.Import
             var blocks = new List<BlockListConfiguration.BlockConfiguration>();
 
             var dataTypeDefinition = dataTypeService.GetByName(dataTypeName);
-            if(dataTypeDefinition == null) 
-                dataTypeDefinition = dataTypeService.CreateDataType(dataTypeName, DataEditorName);
+            if(dataTypeDefinition == null)
+                dataTypeDefinition = dataTypeService.CreateDataType(dataTypeName, DataEditorName, "YuzuDelivery.Umbraco.BlockList");
             else
             {
                 var config = dataTypeDefinition.Umb().Configuration as BlockListConfiguration;
@@ -58,7 +58,7 @@ namespace YuzuDelivery.Umbraco.Import
 
         private BlockListConfiguration CreateBlockListConfig(string[] subBlocks, List<BlockListConfiguration.BlockConfiguration> blocks, Options options)
         {
-            options = options == null ? options = new Options() : options; 
+            options = options == null ? options = new Options() : options;
             var blockListConfig = options.Config == null ? new BlockListConfiguration() : options.Config;
 
             blockListConfig.ValidationLimit = new BlockListConfiguration.NumberRange();
@@ -67,7 +67,7 @@ namespace YuzuDelivery.Umbraco.Import
 
             foreach (var subBlock in subBlocks)
             {
-                if(!DoesBlockAlreadyExist(subBlock, blocks, options)) 
+                if(!DoesBlockAlreadyExist(subBlock, blocks, options))
                     blocks.Add(CreateBlockConfig(subBlock, options));
             }
             blockListConfig.Blocks = blocks.ToArray();

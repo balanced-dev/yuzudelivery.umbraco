@@ -1,0 +1,23 @@
+{
+    "parGridBuilder": {
+        "refs": {
+            "/rows/config": [
+                "/parGridBuilderRowConfig"
+            ],
+            "/rows/columns/gridSize": [
+                "/parGridBuilderSizes"
+            ],
+            "/rows/columns/config": [
+                "/parGridBuilderColumnConfig"
+            ],
+            "/rows/columns/items": [
+                "/parContent",
+                "/parGlobalGrid"
+            ]
+        }
+    },
+    "anyOfTypes": [
+        "parGridBuilder"
+    ],
+    "path": "/_dataStructures/dataGrid/dataGrid.schema"
+}

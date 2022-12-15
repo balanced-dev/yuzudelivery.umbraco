@@ -1,0 +1,8 @@
+{
+    "refs": {
+        "/form": [
+            "/dataForm^parFormBuilder"
+        ]
+    },
+    "path": "/pages/formPage/formPage.schema"
+}

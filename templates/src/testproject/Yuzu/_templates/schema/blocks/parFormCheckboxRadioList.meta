@@ -1,0 +1,8 @@
+{
+    "refs": {
+        "/elements": [
+            "/parFormCheckboxRadio"
+        ]
+    },
+    "path": "/blocks/_forms/_formElements/formCheckboxRadioList/parFormCheckboxRadioList.schema"
+}

@@ -1,0 +1,24 @@
+{
+    "parFormBuilder": {
+        "refs": {
+            "/fieldsets/fields": [
+                "/parFormButton",
+                "/parFormCheckboxRadio",
+                "/parFormCheckboxRadioList",
+                "/parFormTextArea",
+                "/parFormTextInput",
+                "/parFormSelect",
+                "/parFormHidden",
+                "/parRecaptcha",
+                "/parTitleAndDescription"
+            ],
+            "/actionLinks": [
+                "/dataLink"
+            ]
+        }
+    },
+    "anyOfTypes": [
+        "parFormBuilder"
+    ],
+    "path": "/_dataStructures/dataFormBuilder/dataFormBuilder.schema"
+}

@@ -1,0 +1,22 @@
+{
+    "numbers": {
+        "/number": {
+            "type": "number"
+        }
+    },
+    "enums": {
+        "/enumString": [
+            "value1",
+            "value2"
+        ]
+    },
+    "refs": {
+        "/image": [
+            "/dataImage"
+        ],
+        "/link": [
+            "/dataLink"
+        ]
+    },
+    "path": "/blocks/gridBuilder/parGridBuilderColumnConfig.schema"
+}

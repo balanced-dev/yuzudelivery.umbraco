@@ -1,0 +1,8 @@
+{
+    "refs": {
+        "/testForm": [
+            "/dataFormBuilder"
+        ]
+    },
+    "path": "/_dataStructures/dataForm/dataForm.schema"
+}

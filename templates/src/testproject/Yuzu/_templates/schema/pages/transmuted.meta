@@ -1,0 +1,14 @@
+{
+    "refs": {
+        "/grouped": [
+            "/parGrouped"
+        ],
+        "/global": [
+            "/parGlobal"
+        ],
+        "/globalList": [
+            "/parGlobal"
+        ]
+    },
+    "path": "/pages/transmuted/transmuted.schema"
+}

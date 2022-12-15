@@ -1,0 +1,8 @@
+{
+    "refs": {
+        "/content": [
+            "/parContent"
+        ]
+    },
+    "path": "/pages/basicPage/basicPage.schema"
+}

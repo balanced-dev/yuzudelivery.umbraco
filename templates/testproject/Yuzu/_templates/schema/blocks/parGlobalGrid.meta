@@ -1,0 +1,11 @@
+{
+    "refs": {
+        "/global": [
+            "/parGlobal"
+        ],
+        "/globalList": [
+            "/parGlobal"
+        ]
+    },
+    "path": "/blocks/globalGrid/parGlobalGrid.schema"
+}

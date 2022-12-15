@@ -1,0 +1,16 @@
+{
+    "refs": {
+        "": [
+            "/parFormButton",
+            "/parFormCheckboxRadio",
+            "/parFormCheckboxRadioList",
+            "/parFormTextArea",
+            "/parFormTextInput",
+            "/parFormSelect",
+            "/parFormHidden",
+            "/parRecaptcha",
+            "/parTitleAndDescription"
+        ]
+    },
+    "path": "/blocks/_forms/_formBuilder/formBuilder/parFormBuilderFields.schema"
+}

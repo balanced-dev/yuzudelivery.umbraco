@@ -1,0 +1,16 @@
+{
+    "parRowBuilder": {
+        "refs": {
+            "/rows/config": [
+                "/parRowBuilderConfig"
+            ],
+            "/rows/items": [
+                "/parContent"
+            ]
+        }
+    },
+    "anyOfTypes": [
+        "parRowBuilder"
+    ],
+    "path": "/_dataStructures/dataRows/dataRows.schema"
+}

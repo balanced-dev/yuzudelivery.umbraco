@@ -1,0 +1,8 @@
+{
+    "refs": {
+        "/content": [
+            "/dataGrid^parGridBuilder"
+        ]
+    },
+    "path": "/pages/gridPage/gridPage.schema"
+}

@@ -1,0 +1,8 @@
+{
+    "refs": {
+        "/content": [
+            "/dataRows^parRowBuilder"
+        ]
+    },
+    "path": "/pages/rowPage/rowPage.schema"
+}

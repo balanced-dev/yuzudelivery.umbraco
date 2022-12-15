@@ -1,0 +1,12 @@
+{
+    "numbers": {
+        "/height": {
+            "type": "integer"
+        },
+        "/width": {
+            "type": "integer"
+        }
+    },
+    "refs": {},
+    "path": "/_dataStructures/dataImage/dataImage.schema"
+}

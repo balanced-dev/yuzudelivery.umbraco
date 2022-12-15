@@ -1,0 +1,9 @@
+{
+    "refs": {
+        "": [
+            "/parContent",
+            "/parGlobalGrid"
+        ]
+    },
+    "path": "/blocks/gridBuilder/parGridBuilderItems.schema"
+}

@@ -94,7 +94,7 @@ namespace YuzuDelivery.Umbraco.Import
 
             options.CreateContentTypeAction = (string name, IContentTypeService contentTypeService) =>
             {
-                return contentTypeService.Create(name, name.AsAlias(), true);
+                return contentTypeService.Create(name, name.AsAlias(), true, new [] {"Grid"});
             };
 
             options.GetContentTypeAction = (string name, IContentTypeService contentTypeService) =>

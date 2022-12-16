@@ -8,8 +8,6 @@ using YuzuDelivery.Umbraco.Core;
 using Our.Umbraco.DocTypeGridEditor.Helpers;
 using System.Reflection;
 using YuzuDelivery.Core.Mapping;
-
-#if NETCOREAPP
 using Umbraco.Cms.Web.Common.Attributes;
 using Umbraco.Cms.Web.BackOffice.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -18,14 +16,6 @@ using Microsoft.AspNetCore.Http;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Models;
-#else
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Core.Models;
-using Umbraco.Core.Services;
-using Umbraco.Web.WebApi;
-using Umbraco.Web.Mvc;
-using System.Web.Http;
-#endif
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -36,31 +26,20 @@ namespace YuzuDelivery.Umbraco.BlockList
         private readonly IMapper mapper;
         private readonly IYuzuConfiguration config;
         private readonly IContentTypeService contentTypeService;
-        #if NETCOREAPP 
         private readonly DocTypeGridEditorHelper docTypeGridEditorHelper; 
-        #endif
 
-        public BlockListPreviewController(IMapper mapper, IYuzuConfiguration config, IYuzuDefinitionTemplates yuzuDefinitionTemplates, IContentTypeService contentTypeService
-#if NETCOREAPP
-            , DocTypeGridEditorHelper docTypeGridEditorHelper
-#endif
+        public BlockListPreviewController(IMapper mapper, IYuzuConfiguration config, IYuzuDefinitionTemplates yuzuDefinitionTemplates, IContentTypeService contentTypeService, DocTypeGridEditorHelper docTypeGridEditorHelper
             )
         {
             this.mapper = mapper;
             this.config = config;
             this.yuzuDefinitionTemplates = yuzuDefinitionTemplates;
             this.contentTypeService = contentTypeService;
-#if NETCOREAPP
             this.docTypeGridEditorHelper = docTypeGridEditorHelper;
-#endif
         }
 
         [HttpPost]
-#if NETCOREAPP
         public PreviewReturn GetPartialData([FromForm] PreviewDTO data)
-#else
-        public PreviewReturn GetPartialData([FromBody] PreviewDTO data)
-#endif
         {
             var output = new PreviewReturn();
 
@@ -68,11 +47,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             {
                 var contentType = contentTypeService.Get(Guid.Parse(data.ContentTypeKey));
 
-#if NETCOREAPP
                 var model = docTypeGridEditorHelper.ConvertValueToContent(Guid.NewGuid().ToString(), contentType.Alias, data.Content);
-#else
-                var model = DocTypeGridEditorHelper.ConvertValueToContent(Guid.NewGuid().ToString(), contentType.Alias, data.Content);
-#endif
 
                 var link = GetCmsToVmLink(contentType);
 
@@ -84,6 +59,10 @@ namespace YuzuDelivery.Umbraco.BlockList
                 if (link.vmType == null)
                 {
                     output.Error = $"Viewmodel for block type {suspectBlockTypeName} not found. Previews of sublocks not supported";
+                }
+                else if(link.cmsType == null)
+                {
+                    output.Error = $"Preview not available, document type for {suspectBlockTypeName} not found";
                 }
                 else
                 {
@@ -106,15 +85,19 @@ namespace YuzuDelivery.Umbraco.BlockList
         public (Type cmsType, Type vmType) GetCmsToVmLink(IContentType contentType)
         {
             var cmsType = config.CMSModels.Where(x => contentType.Alias.FirstCharacterToUpper() == x.Name).FirstOrDefault();
-            var cmsTypeInterfaces = cmsType.GetInterfaces();
 
-            foreach (var vmType in config.ViewModels)
+            if (cmsType != null)
             {
-                foreach (var attribute in vmType.GetCustomAttributes<YuzuMapAttribute>())
+                var cmsTypeInterfaces = cmsType.GetInterfaces();
+
+                foreach (var vmType in config.ViewModels)
                 {
-                    if (attribute.SourceTypeName == cmsType.Name) return (cmsType, vmType);
-                    var cmsTypeInterface = cmsTypeInterfaces.Where(x => x.Name == attribute.SourceTypeName).FirstOrDefault();
-                    if (cmsTypeInterface != null) return (cmsTypeInterface, vmType);
+                    foreach (var attribute in vmType.GetCustomAttributes<YuzuMapAttribute>())
+                    {
+                        if (attribute.SourceTypeName == cmsType.Name) return (cmsType, vmType);
+                        var cmsTypeInterface = cmsTypeInterfaces.Where(x => x.Name == attribute.SourceTypeName).FirstOrDefault();
+                        if (cmsTypeInterface != null) return (cmsTypeInterface, vmType);
+                    }
                 }
             }
 

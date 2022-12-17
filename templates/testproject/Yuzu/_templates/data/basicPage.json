@@ -81,6 +81,17 @@
                 "yuzu-path": "/content/dynamicSubBlocks[1]"
             }
         ],
+        "subBlockInline": {
+            "string": "string"
+        },
+        "subBlocksInline": [
+            {
+                "string": "string1"
+            },
+            {
+                "string": "string2"
+            }
+        ],
         "_ref": "/parContent",
         "yuzu-path": "/content"
     }

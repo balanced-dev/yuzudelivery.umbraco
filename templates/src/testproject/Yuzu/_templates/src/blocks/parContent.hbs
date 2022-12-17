@@ -34,3 +34,16 @@
     </ul>
 </div>
 {{/if}}
+
+{{#if subBlockInline}}<div>Inline SubBlock : {{{ subBlockInline.string }}}</div>{{/if}}
+
+{{#if subBlocksInline}}
+<div>
+    Inline SubBlocks: 
+    <ul>
+        {{#each subBlocksInline}}
+            <li>String: {{string}}</li>
+        {{/each}}
+    </ul>
+</div>
+{{/if}}

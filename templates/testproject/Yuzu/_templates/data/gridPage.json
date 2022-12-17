@@ -118,6 +118,17 @@
                                         "yuzu-path": "/content/rows[0]/columns[0]/items[0]/dynamicSubBlocks[1]"
                                     }
                                 ],
+                                "subBlockInline": {
+                                    "string": "string"
+                                },
+                                "subBlocksInline": [
+                                    {
+                                        "string": "string1"
+                                    },
+                                    {
+                                        "string": "string2"
+                                    }
+                                ],
                                 "_ref": "/parContent",
                                 "yuzu-path": "/content/rows[0]/columns[0]/items[0]"
                             },
@@ -201,6 +212,17 @@
                                         "title": "SubBlock 2 Title",
                                         "_ref": "/parSubBlock2",
                                         "yuzu-path": "/content/rows[0]/columns[0]/items[1]/dynamicSubBlocks[1]"
+                                    }
+                                ],
+                                "subBlockInline": {
+                                    "string": "string"
+                                },
+                                "subBlocksInline": [
+                                    {
+                                        "string": "string1"
+                                    },
+                                    {
+                                        "string": "string2"
                                     }
                                 ],
                                 "_ref": "/parContent",
@@ -306,6 +328,17 @@
                                         "title": "SubBlock 2 Title",
                                         "_ref": "/parSubBlock2",
                                         "yuzu-path": "/content/rows[0]/columns[1]/items[0]/dynamicSubBlocks[1]"
+                                    }
+                                ],
+                                "subBlockInline": {
+                                    "string": "string"
+                                },
+                                "subBlocksInline": [
+                                    {
+                                        "string": "string1"
+                                    },
+                                    {
+                                        "string": "string2"
                                     }
                                 ],
                                 "_ref": "/parContent",

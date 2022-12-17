@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{17:function(e,a){e.exports='<div class="yuzu-content-root"> <label class="__textarea"> <textarea class="__textarea__control" name="message" placeholder="Write your message here" style="width:250px" required="required"></textarea> <span class="__textarea__label">Message</span> </label> </div>'}}]);
-//# sourceMappingURL=12.71e08e7664b423111d62.js.map

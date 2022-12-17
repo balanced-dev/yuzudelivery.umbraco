@@ -76,6 +76,25 @@
                 "anyOf": []
             }
         },
+        "subBlockInline": {
+            "type": "object",
+            "properties": {
+                "string": {
+                    "type": "string"
+                }
+            }
+        },
+        "subBlocksInline": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "string": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "_ref": {
             "type": "string"
         },

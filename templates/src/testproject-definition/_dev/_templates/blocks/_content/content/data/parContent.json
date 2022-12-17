@@ -1,0 +1,62 @@
+{
+    "string": "string",
+    "longText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "richText": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elite, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua./</p>",
+    "enumString": "value1",
+    "stringArray": ["string1", "string2"],
+    "boolean": true,
+    "integer": 1,
+    "number": 1.5,
+    "image": {
+        "src": "/_client/images/example.png",
+        "alt": "alt"
+    },
+    "imageArray": [
+        {
+            "src": "/_client/images/example.png",
+            "alt": "alt"
+        },
+        {
+            "src": "/_client/images/cat.jfif",
+            "alt": "alt"
+        }
+    ],
+    "link": {
+        "href": "#",
+        "title": "title",
+        "label": "label"
+    },
+    "linkArray": [{
+        "href": "#",
+        "title": "title",
+        "label": "label"
+    },{
+        "href": "#",
+        "title": "title2",
+        "label": "label2"
+    }],
+    "subBlock": {
+        "$ref": "/parSubBlock"
+    },
+    "subBlocks": [
+        { "$ref": "/parSubBlock" },
+        { "$ref": "/parSubBlock" }
+    ],
+    "dynamicSubBlock1": {
+        "$ref": "/parSubBlock"
+    },
+    "dynamicSubBlock2": {
+        "$ref": "/parSubBlock2"
+    },
+    "dynamicSubBlocks": [
+        { "$ref": "/parSubBlock" },
+        { "$ref": "/parSubBlock2" }
+    ],
+    "subBlockInline": {
+        "string": "string"
+    },
+    "subBlocksInline": [
+        { "string": "string1" },
+        { "string": "string2" }
+    ]
+}

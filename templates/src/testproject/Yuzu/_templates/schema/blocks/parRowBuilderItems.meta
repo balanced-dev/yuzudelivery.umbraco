@@ -4,5 +4,5 @@
             "/parContent"
         ]
     },
-    "path": "/blocks/rowBuilder/parRowBuilderItems.schema"
+    "path": "/blocks/_grid/rowBuilder/parRowBuilderItems.schema"
 }

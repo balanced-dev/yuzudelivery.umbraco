@@ -8,6 +8,17 @@
         }
     },
     "blocks": {
+        "_content": {
+            "content": {
+                "/parContent": "yuzu.html?type=blocks&area=_content&name=Content"
+            },
+            "subBlock2": {
+                "/parSubBlock2": "yuzu.html?type=blocks&area=_content&name=SubBlock2"
+            },
+            "subBlock": {
+                "/parSubBlock": "yuzu.html?type=blocks&area=_content&name=SubBlock"
+            }
+        },
         "_forms": {
             "_formElements": {
                 "formButton": {
@@ -40,24 +51,17 @@
                 }
             }
         },
-        "content": {
-            "/parContent": "yuzu.html?type=blocks&name=Content"
-        },
-        "globalGrid": {
-            "/parGlobalGrid": "yuzu.html?type=blocks&name=GlobalGrid"
-        },
-        "global": {
-            "/parGlobal": "yuzu.html?type=blocks&name=Global",
-            "/parGlobal_1": "yuzu.html?type=blocks&name=Global&state=1"
-        },
-        "grouped": {
-            "/parGrouped": "yuzu.html?type=blocks&name=Grouped"
-        },
-        "subBlock2": {
-            "/parSubBlock2": "yuzu.html?type=blocks&name=SubBlock2"
-        },
-        "subBlock": {
-            "/parSubBlock": "yuzu.html?type=blocks&name=SubBlock"
+        "_transmuted": {
+            "globalGrid": {
+                "/parGlobalGrid": "yuzu.html?type=blocks&area=_transmuted&name=GlobalGrid"
+            },
+            "global": {
+                "/parGlobal": "yuzu.html?type=blocks&area=_transmuted&name=Global",
+                "/parGlobal_1": "yuzu.html?type=blocks&area=_transmuted&name=Global&state=1"
+            },
+            "grouped": {
+                "/parGrouped": "yuzu.html?type=blocks&area=_transmuted&name=Grouped"
+            }
         }
     },
     "pages": {

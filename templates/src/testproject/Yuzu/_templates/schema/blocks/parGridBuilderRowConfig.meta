@@ -18,5 +18,5 @@
             "/dataLink"
         ]
     },
-    "path": "/blocks/gridBuilder/parGridBuilderRowConfig.schema"
+    "path": "/blocks/_grid/gridBuilder/parGridBuilderRowConfig.schema"
 }

@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./_dev/_templates/blocks/global/data/parGlobal.json"],"names":["module","exports"],"mappings":"2EAGAA,EAAOC,QAFI","file":"_client/scripts/18.1db42f8289214afc3a6b.js","sourcesContent":["// Module\nvar code = \"<div class=\\\"yuzu-content-root\\\"> <div>String: global Property</div> </div>\";\n// Exports\nmodule.exports = code;"],"sourceRoot":""}

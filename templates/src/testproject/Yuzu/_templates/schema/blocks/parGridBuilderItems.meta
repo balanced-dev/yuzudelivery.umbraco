@@ -5,5 +5,5 @@
             "/parGlobalGrid"
         ]
     },
-    "path": "/blocks/gridBuilder/parGridBuilderItems.schema"
+    "path": "/blocks/_grid/gridBuilder/parGridBuilderItems.schema"
 }

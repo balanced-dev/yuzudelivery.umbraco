@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{13:function(a,o){a.exports='<div class="yuzu-content-root"> <label class="__checkbox-radio __checkbox-radio--radio"> <input type="radio" class="__checkbox-radio__control" id="radio" name="radio" value="radio Value"> <span class="__checkbox-radio__label">radio Label</span> <span class="__checkbox-radio__faux"></span> </label> </div>'}}]);
-//# sourceMappingURL=9.3f191a7ffc3911c90cb1.js.map

@@ -1,0 +1,109 @@
+{
+    "id": "/parContent",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "string": {
+            "type": "string"
+        },
+        "longText": {
+            "type": "string",
+            "textType": "large"
+        },
+        "richText": {
+            "type": "string",
+            "textType": "rte"
+        },
+        "enumString": {
+            "type": "string",
+            "enum": [
+                "value1",
+                "value2"
+            ]
+        },
+        "stringArray": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "boolean": {
+            "type": "boolean"
+        },
+        "integer": {
+            "type": "number"
+        },
+        "number": {
+            "type": "number"
+        },
+        "image": {
+            "$ref": "/dataImage"
+        },
+        "imageArray": {
+            "type": "array",
+            "items": {
+                "$ref": "/dataImage"
+            }
+        },
+        "link": {
+            "$ref": "/dataLink"
+        },
+        "linkArray": {
+            "type": "array",
+            "items": {
+                "$ref": "/dataLink"
+            }
+        },
+        "subBlock": {
+            "$ref": "/parSubBlock"
+        },
+        "subBlocks": {
+            "type": "array",
+            "items": {
+                "$ref": "/parSubBlock"
+            }
+        },
+        "dynamicSubBlock1": {
+            "anyOf" : [
+                { "$ref": "/parSubBlock" },
+                { "$ref": "/parSubBlock2" }
+            ]
+        },
+        "dynamicSubBlock2": {
+            "anyOf" : [
+                { "$ref": "/parSubBlock" },
+                { "$ref": "/parSubBlock2" }
+            ]
+        },
+        "dynamicSubBlocks": {
+            "type": "array",
+            "items": {
+                "anyOf": [            
+                    { "$ref": "/parSubBlock" },
+                    { "$ref": "/parSubBlock2" }
+                ]
+            }
+        },
+        "subBlockInline": {
+            "type": "object",
+            "properties": {
+                "string": {
+                    "type": "string"
+                }
+            }
+        },
+        "subBlocksInline": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "string": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

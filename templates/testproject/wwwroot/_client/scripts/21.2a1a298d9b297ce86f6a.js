@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{27:function(o,s){o.exports='<div class="yuzu-content-root"> <div class="sub-block"> <h5>SubBlock 2 Title</h5> </div> </div>'}}]);
-//# sourceMappingURL=21.2a1a298d9b297ce86f6a.js.map

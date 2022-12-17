@@ -71,15 +71,13 @@ class Build : NukeBuild
         });
 
 
-    Target AddAzureArtifactsFeed => _ => _
+    Target AdddMyGetArtifactsFeed => _ => _
         .OnlyWhenStatic(() => IsServerBuild)
         .DependentFor(Restore)
         .Executes(() =>
             DotNetNuGetAddSource(s => s
-              .SetName("Azure Artifacts")
-              .SetSource("https://pkgs.dev.azure.com/hifiagency/Yuzu/_packaging/Yuzu.Delivery/nuget/v3/index.json")
-              .SetUsername("devops")
-              .SetPassword(AzurePipelines.Instance.AccessToken))
+              .SetName("MyGet Artifacts")
+              .SetSource("https://www.myget.org/F/yuzu-pre-releases/api/v2"))
         );
 
     Target Restore => _ => _

@@ -73,7 +73,7 @@
             "type": "string",
             "enum": [
               "Acceptance",
-              "AddAzureArtifactsFeed",
+              "AdddMyGetArtifactsFeed",
               "Clean",
               "Compile",
               "CreateTestServer",
@@ -98,7 +98,7 @@
             "type": "string",
             "enum": [
               "Acceptance",
-              "AddAzureArtifactsFeed",
+              "AdddMyGetArtifactsFeed",
               "Clean",
               "Compile",
               "CreateTestServer",

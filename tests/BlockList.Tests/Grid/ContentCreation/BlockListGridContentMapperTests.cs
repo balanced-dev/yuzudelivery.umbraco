@@ -302,9 +302,9 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             foreach (var p in sectionProperties)
             {
                 if (!p.IsSettings)
-                    umb.PropertyType.ForCreating(section, p.Name, alias: p.Alias);
+                    umb.PropertyType.ForCreating(section, (p.Name, p.Alias));
                 if (p.IsSettings && colConfig != null)
-                    umb.PropertyType.ForCreating(section, p.Name, alias: p.Alias);
+                    umb.PropertyType.ForCreating(section, (p.Name, p.Alias));
             }
         }
 

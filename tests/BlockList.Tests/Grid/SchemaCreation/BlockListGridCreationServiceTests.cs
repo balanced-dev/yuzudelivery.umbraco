@@ -249,9 +249,9 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
                     foreach(var p in sectionProperties)
                     {
                         if (!p.IsSettings)
-                            umb.PropertyType.ForCreating(section, p.Name, alias: p.Alias);
+                            umb.PropertyType.ForCreating(section, (p.Name, p.Alias));
                         if (p.IsSettings && colConfig != null)
-                            umb.PropertyType.ForCreating(section, p.Name, alias: p.Alias);
+                            umb.PropertyType.ForCreating(section, (p.Name, p.Alias));
                     }
                 }
                 else
@@ -261,9 +261,9 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
                     foreach (var p in sectionProperties)
                     {
                         if (!p.IsSettings)
-                            umb.PropertyType.WasCreated(section, p.Name, p.GroupName);
+                            umb.PropertyType.WasCreated(section, p.Alias, p.GroupName);
                         if (p.IsSettings && colConfig != null)
-                            umb.PropertyType.WasCreated(section, p.Name, p.GroupName);
+                            umb.PropertyType.WasCreated(section, p.Alias, p.GroupName);
 
                     }
                 }

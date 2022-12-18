@@ -57,7 +57,7 @@ namespace YuzuDelivery.Umbraco.Core.Tests
 
             svc.ChangeProperty(map);
 
-            umb.PropertyType.WasCreated<vmBlock_Test>(x => x.Image);
+            umb.PropertyType.WasCreated<vmBlock_Test>(x => x.Image, groupName: string.Empty);
         }
 
     }

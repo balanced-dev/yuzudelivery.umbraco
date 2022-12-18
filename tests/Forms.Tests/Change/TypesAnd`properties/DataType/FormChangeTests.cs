@@ -75,7 +75,7 @@ namespace Yuzu.Delivery.Forms.Tests.Integration.ChangeItem
 
             svc.ChangeProperty(map);
 
-            umb.PropertyType.WasCreated<vmBlock_Test>(x => x.Form);
+            umb.PropertyType.WasCreated<vmBlock_Test>(x => x.Form, groupName: string.Empty);
         }
 
     }

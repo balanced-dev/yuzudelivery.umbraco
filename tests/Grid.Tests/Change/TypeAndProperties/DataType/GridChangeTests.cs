@@ -100,7 +100,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
 
             svc.ChangeProperty(map);
 
-            umb.PropertyType.WasCreated<vmBlock_WithRows>(x => x.Rows);
+            umb.PropertyType.WasCreated<vmBlock_WithRows>(x => x.Rows, groupName: string.Empty);
         }
 
         private void SetupRowBuilder()
@@ -174,7 +174,7 @@ namespace YuzuDelivery.Umbraco.Grid.Test.Change.TypeAndProperties.DataType
 
             svc.ChangeProperty(map);
 
-            umb.PropertyType.WasCreated<vmBlock_WithGrid>(x => x.Grid);
+            umb.PropertyType.WasCreated<vmBlock_WithGrid>(x => x.Grid, groupName: string.Empty);
         }
 
         private void SetupGrid()

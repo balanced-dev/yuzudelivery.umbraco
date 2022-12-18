@@ -83,7 +83,7 @@ namespace YuzuDelivery.Umbraco.Members
                     };
 
                 var model = viewmodelFactory.Create(this, formFields, x => x.HasTempData("FormSuccess"));
-                model.AddHandler<MemberHandlerController>(x => x.HandleForgottenPassword(null));
+                model.AddHandler<MemberHandlerController>(x => (Task<IActionResult>)x.HandleForgottenPassword(null));
 
                 return PartialView("YuzuForms", model);
             }

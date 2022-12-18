@@ -54,7 +54,7 @@ namespace YuzuDelivery.Umbraco.Members
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateUmbracoFormRouteString]
-        public async Task<IActionResult> HandleForgottenPassword([Bind(Prefix = "forgottenPasswordVm")]ForgottenPasswordVm model)
+        public IActionResult HandleForgottenPassword([Bind(Prefix = "forgottenPasswordVm")]ForgottenPasswordVm model)
         {
             if (ModelState.IsValid)
             {

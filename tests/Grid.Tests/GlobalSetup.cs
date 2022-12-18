@@ -17,10 +17,10 @@ public class GlobalSetup
     [OneTimeSetUp]
     public void BeforeTests()
     {
-        var container = NSubstituteDefaultFactory.DefaultContainer.Customize();
-        container.RegisterPerScope<IAutoValueProvidersFactory, CustomAutoProvidersFactory>();
+        //var container = NSubstituteDefaultFactory.DefaultContainer.Customize();
+        //container.RegisterPerScope<IAutoValueProvidersFactory, CustomAutoProvidersFactory>();
 
-        SubstitutionContext.Current = container.Resolve<ISubstitutionContext>();
+        //SubstitutionContext.Current = container.Resolve<ISubstitutionContext>();
     }
 }
 

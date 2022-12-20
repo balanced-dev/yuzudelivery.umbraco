@@ -39,7 +39,8 @@ namespace YuzuDelivery.Umbraco.Core
             IEnumerable<IUpdateableConfig> updateableConfigs,
             IAppPolicyCache appPolicyCache,
             Lazy<IYuzuDefinitionTemplateSetup> templateSetup,
-            Assembly localAssembly)
+            IEnumerable<IChildSiteConfig> childSiteConfigs = null,
+            Assembly assembly = null)  
             : base(updateableConfigs)
         {
             _hostEnvironment = hostEnvironment;
@@ -50,12 +51,8 @@ namespace YuzuDelivery.Umbraco.Core
             var pagesLocation = coreSettings.CurrentValue.Pages;
             var partialsLocation = coreSettings.CurrentValue.Partials;
 
-            ViewModelAssemblies = new Assembly[] { localAssembly };
-
-            CMSModels = localAssembly.GetTypes().Where(x => x.GetCustomAttribute<PublishedModelAttribute>() != null).ToList();
-
-            //add compositions;
-            CMSModels = CMSModels.Union(CMSModels.SelectMany(x => x.GetInterfaces()).ToList());
+            AddToModelRegistry(assembly);
+            AddInstalledManualMaps(assembly);
 
             TemplateLocations = new List<ITemplateLocation>()
                 {
@@ -65,7 +62,8 @@ namespace YuzuDelivery.Umbraco.Core
                         Path = _hostEnvironment.MapPathContentRoot(pagesLocation),
                         Schema = _hostEnvironment.MapPathContentRoot(pagesLocation.Replace("src", "schema")),
                         RegisterAllAsPartials = false,
-                        SearchSubDirectories = false
+                        SearchSubDirectories = false,
+                        TemplateType = TemplateType.Page
                     },
                     new TemplateLocation()
                     {
@@ -73,7 +71,8 @@ namespace YuzuDelivery.Umbraco.Core
                         Path = _hostEnvironment.MapPathContentRoot(partialsLocation),
                         Schema = _hostEnvironment.MapPathContentRoot(partialsLocation.Replace("src", "schema")),
                         RegisterAllAsPartials = true,
-                        SearchSubDirectories = true
+                        SearchSubDirectories = true,
+                        TemplateType = TemplateType.Partial
                     }
                 };
 
@@ -93,18 +92,37 @@ namespace YuzuDelivery.Umbraco.Core
                 _appPolicyCache.Insert(renderSettings.CacheName, () => { return html; }, new TimeSpan(0, 0, renderSettings.CacheExpiry));
             };
 
-            foreach (var asm in ViewModelAssemblies)
+            foreach(var childSiteConfig in childSiteConfigs)
             {
-                AddInstalledManualMap<IYuzuTypeAfterConvertor>(asm, false, false);
-                AddInstalledManualMap<IYuzuTypeConvertor>(asm, false, false);
-                //Can't do this yet, automapper AddTransofrm bug
-                //AddInstalledManualMap<IYuzuPropertyAfterResolver>(asm, true);
-                AddInstalledManualMap<IYuzuPropertyReplaceResolver>(asm, true, false);
-                AddInstalledManualMap<IYuzuTypeFactory>(asm, false, true);
+                childSiteConfig.Setup(this);
             }
         }
 
-        public void AddInstalledManualMap<I>(Assembly asm, bool isMember, bool isFactory)
+        public void AddToModelRegistry(Assembly assemby)
+        {
+            ViewModelAssemblies.Add(assemby);
+
+            var concreteModels = assemby.GetTypes().Where(x => x.GetCustomAttribute<PublishedModelAttribute>() != null);
+            CMSModels.AddRange(concreteModels);
+            //add compositions;
+            CMSModels.AddRange(concreteModels.SelectMany(x => x.GetInterfaces()));
+
+            ViewModels.AddRange(assemby.GetTypes().Where(y => y.Name.IsVm()));
+
+            MappingAssemblies.Add(assemby);
+        }
+
+        public void AddInstalledManualMaps(Assembly assembly)
+        {
+            AddInstalledManualMap<IYuzuTypeAfterConvertor>(assembly, false, false);
+            AddInstalledManualMap<IYuzuTypeConvertor>(assembly, false, false);
+            //Can't do this yet, automapper AddTransofrm bug
+            //AddInstalledManualMap<IYuzuPropertyAfterResolver>(asm, true);
+            AddInstalledManualMap<IYuzuPropertyReplaceResolver>(assembly, true, false);
+            AddInstalledManualMap<IYuzuTypeFactory>(assembly, false, true);
+        }
+
+        private void AddInstalledManualMap<I>(Assembly asm, bool isMember, bool isFactory)
         {
             var propertyResolvers = asm.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(I)));
             foreach (var p in propertyResolvers)

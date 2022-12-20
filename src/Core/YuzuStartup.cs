@@ -93,6 +93,8 @@ namespace YuzuDelivery.Umbraco.Core
 
             builder.Services.AddTransient(typeof(IMapperAddItem), typeof(UmbracoMapperAddItems));
 
+            builder.Services.RegisterYuzuAutoMapping();
+
             AddDefaultPublishedElements(builder);
             SetupHbsHelpers();
         }

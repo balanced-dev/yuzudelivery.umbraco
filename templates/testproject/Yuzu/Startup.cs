@@ -18,7 +18,6 @@ namespace Umbraco.Cms.Web.UI
             builder.Services.AddSingleton<IYuzuConfiguration>(sp =>  ActivatorUtilities.CreateInstance<DefaultUmbracoConfig>(sp, assembly));
             builder.Services.AddSingleton<IYuzuDeliveryImportConfiguration>(sp => ActivatorUtilities.CreateInstance<DefaultUmbracoImportConfig>(sp, assembly));
 
-            builder.Services.RegisterYuzuAutoMapping(assembly);
             builder.Services.RegisterYuzuManualMapping(assembly);
 
             builder.Services.RegisterFormStrategies(assembly);

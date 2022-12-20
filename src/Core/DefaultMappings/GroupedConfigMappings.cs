@@ -30,7 +30,7 @@ namespace YuzuDelivery.Umbraco.Core
                 var destChild = config.ViewModels.Where(x => x.Name == vmName).FirstOrDefault();
 
                 if(sourceType != null && destParent != null && destChild != null)
-                    ManualMaps.AddGroup(sourceType, destParent, destChild, parentPropertyName, groupName, group.Value.Properties.Select(x => x.Value.ToString()));
+                    ManualMaps.AddGroup(sourceType, destParent, destChild, parentPropertyName, groupName);
             }
         }
     }

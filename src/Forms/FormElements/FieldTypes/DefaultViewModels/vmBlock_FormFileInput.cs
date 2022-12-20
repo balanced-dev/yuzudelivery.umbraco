@@ -4,7 +4,7 @@
 // </auto-generated>
 //----------------------
 
-namespace YuzuDelivery.ViewModels
+namespace YuzuDelivery.Umbraco.Forms
 {
 #pragma warning disable // Disable all warnings
 

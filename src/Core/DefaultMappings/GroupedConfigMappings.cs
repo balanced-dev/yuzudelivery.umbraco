@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Umbraco.Core.Mapping;
@@ -29,7 +30,7 @@ namespace YuzuDelivery.Umbraco.Core
                 var destChild = config.ViewModels.Where(x => x.Name == vmName).FirstOrDefault();
 
                 if(sourceType != null && destParent != null && destChild != null)
-                    ManualMaps.AddGroup(sourceType, destParent, destChild, parentPropertyName, groupName);
+                    ManualMaps.AddGroup(sourceType, destParent, destChild, parentPropertyName, groupName, group.Value.Properties.Select(x => x.Value.ToString()));
             }
         }
     }

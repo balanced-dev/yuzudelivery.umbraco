@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Mapping.Mappers;
@@ -112,12 +113,12 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
                 ignoreReturnType);
         }
 
-        public static void AddGroup<Source, DestParent, DestChild>(this List<YuzuMapperSettings> resolvers, Expression<Func<DestParent, object>> destParentMember, string groupName)
+        public static void AddGroup<Source, DestParent, DestChild>(this List<YuzuMapperSettings> resolvers, Expression<Func<DestParent, object>> destParentMember, string groupName, params Expression<Func<Source, object>>[] properties)
         {
-            resolvers.AddGroup(typeof(Source), typeof(DestParent), typeof(DestChild), destParentMember.GetMemberName(), groupName);
+            resolvers.AddGroup(typeof(Source), typeof(DestParent), typeof(DestChild), destParentMember.GetMemberName(), groupName, properties.Select(x => x.GetMemberName()));
         }
 
-        public static void AddGroup(this List<YuzuMapperSettings> resolvers, Type source, Type destParent, Type destChild, string destParentPropertyName, string groupName)
+        public static void AddGroup(this List<YuzuMapperSettings> resolvers, Type source, Type destParent, Type destChild, string destParentPropertyName, string groupName, IEnumerable<string> sourceProperties)
         {
             resolvers.Add(new YuzuGroupMapperSettings()
             {
@@ -126,7 +127,8 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
                 DestParent = destParent,
                 DestChild = destChild,
                 PropertyName = destParentPropertyName,
-                GroupName = groupName
+                GroupName = groupName,
+                SourceProperties = sourceProperties
             });
         }
 

@@ -73,11 +73,13 @@ namespace YuzuDelivery.Umbraco.Forms
             ExcludeViewmodelsAtGeneration.Add<vmSub_FormCheckboxRadioDataValue>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormCheckboxRadioList>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormHidden>();
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormFileInput>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormSelect>();
             ExcludeViewmodelsAtGeneration.Add<vmSub_FormSelectOption>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormTextArea>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_FormTextInput>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_Recaptcha>();
+            ExcludeViewmodelsAtGeneration.Add<vmBlock_Recaptcha3>();
             ExcludeViewmodelsAtGeneration.Add<vmBlock_TitleAndDescription>();
 
             AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Forms");
@@ -96,10 +98,12 @@ namespace YuzuDelivery.Umbraco.Forms
             IgnoreViewmodels.Add<vmBlock_FormCheckboxRadio>();
             IgnoreViewmodels.Add<vmBlock_FormCheckboxRadioList>();
             IgnoreViewmodels.Add<vmBlock_FormHidden>();
+            IgnoreViewmodels.Add<vmBlock_FormFileInput>();
             IgnoreViewmodels.Add<vmBlock_FormSelect>();
             IgnoreViewmodels.Add<vmBlock_FormTextArea>();
             IgnoreViewmodels.Add<vmBlock_FormTextInput>();
             IgnoreViewmodels.Add<vmBlock_Recaptcha>();
+            IgnoreViewmodels.Add<vmBlock_Recaptcha3>();
             IgnoreViewmodels.Add<vmBlock_TitleAndDescription>();
 
             SpecialistProperties.Add("Forms", vmPropertyFinder.GetProperties(typeof(vmBlock_DataForm)));

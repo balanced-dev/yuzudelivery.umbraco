@@ -39,7 +39,7 @@ namespace YuzuDelivery.Umbraco.Core
             IEnumerable<IUpdateableConfig> updateableConfigs,
             IAppPolicyCache appPolicyCache,
             Lazy<IYuzuDefinitionTemplateSetup> templateSetup,
-            IEnumerable<IChildSiteConfig> childSiteConfigs = null,
+            IEnumerable<IBaseSiteConfig> baseSiteConfigs = null,
             Assembly assembly = null)  
             : base(updateableConfigs)
         {
@@ -92,7 +92,7 @@ namespace YuzuDelivery.Umbraco.Core
                 _appPolicyCache.Insert(renderSettings.CacheName, () => { return html; }, new TimeSpan(0, 0, renderSettings.CacheExpiry));
             };
 
-            foreach(var childSiteConfig in childSiteConfigs)
+            foreach(var childSiteConfig in baseSiteConfigs)
             {
                 childSiteConfig.Setup(this);
             }

@@ -19,26 +19,36 @@ namespace YuzuDelivery.Umbraco.Import
         private readonly IDataTypeService dataTypeService;
         private readonly IContentTypeService contentTypeService;
         private readonly IContentTypeForVmService contentTypeForVmTypeService;
+        private readonly IVmGetterService _vmGetterService;
+        private readonly ISchemaMetaService _schemaMetaService;
         private readonly IDocumentTypePropertyService documentTypePropertyService;
         public const string DataEditorName = "Umbraco.BlockList";
 
         public const string DefaultCustomView = "~/App_Plugins/YuzuBlockList/GridContentItem.html";
 
-        public BlockListDataTypeFactory(IDataTypeService dataTypeService, IDocumentTypePropertyService documentTypePropertyService, IContentTypeService contentTypeService, IContentTypeForVmService contentTypeForVmTypeService)
+        public BlockListDataTypeFactory(
+            IDataTypeService dataTypeService,
+            IDocumentTypePropertyService documentTypePropertyService,
+            IContentTypeService contentTypeService,
+            IContentTypeForVmService contentTypeForVmTypeService,
+            ISchemaMetaService schemaMetaService)
         {
             this.dataTypeService = dataTypeService;
             this.documentTypePropertyService = documentTypePropertyService;
             this.contentTypeService = contentTypeService;
             this.contentTypeForVmTypeService = contentTypeForVmTypeService;
+            _schemaMetaService = schemaMetaService;
         }
 
-        public IDataType CreateOrUpdate(string dataTypeName, string[] subBlocks, Options options = null)
+        public IDataType CreateOrUpdate(string viewModelName, string dataTypeName, string[] subBlocks, Options options = null)
         {
             var blocks = new List<BlockListConfiguration.BlockConfiguration>();
 
             var dataTypeDefinition = dataTypeService.GetByName(dataTypeName);
-            if(dataTypeDefinition == null)
+            if (dataTypeDefinition == null)
+            {
                 dataTypeDefinition = dataTypeService.CreateDataType(dataTypeName, DataEditorName, "YuzuDelivery.Umbraco.BlockList");
+            }
             else
             {
                 var config = dataTypeDefinition.Umb().Configuration as BlockListConfiguration;
@@ -48,7 +58,8 @@ namespace YuzuDelivery.Umbraco.Import
                 }
             }
 
-            var blockListConfig = CreateBlockListConfig(subBlocks, blocks, options);
+            var pathSegments = _schemaMetaService.GetPathSegments(viewModelName);
+            var blockListConfig = CreateBlockListConfig(subBlocks, blocks, options, pathSegments);
 
             dataTypeDefinition.Umb().Name = dataTypeName;
             dataTypeDefinition.Umb().Configuration = blockListConfig;
@@ -56,7 +67,7 @@ namespace YuzuDelivery.Umbraco.Import
             return dataTypeService.Save(dataTypeDefinition);
         }
 
-        private BlockListConfiguration CreateBlockListConfig(string[] subBlocks, List<BlockListConfiguration.BlockConfiguration> blocks, Options options)
+        private BlockListConfiguration CreateBlockListConfig(string[] subBlocks, List<BlockListConfiguration.BlockConfiguration> blocks, Options options, string[] pathSegments)
         {
             options = options == null ? options = new Options() : options;
             var blockListConfig = options.Config == null ? new BlockListConfiguration() : options.Config;
@@ -68,7 +79,7 @@ namespace YuzuDelivery.Umbraco.Import
             foreach (var subBlock in subBlocks)
             {
                 if(!DoesBlockAlreadyExist(subBlock, blocks, options))
-                    blocks.Add(CreateBlockConfig(subBlock, options));
+                    blocks.Add(CreateBlockConfig(subBlock, options, pathSegments));
             }
             blockListConfig.Blocks = blocks.ToArray();
 
@@ -82,9 +93,9 @@ namespace YuzuDelivery.Umbraco.Import
             return contentType != null && blocks.Any(x => x.ContentElementTypeKey == contentType.Umb().Key);
         }
 
-        private BlockListConfiguration.BlockConfiguration CreateBlockConfig(string blockName, Options options)
+        private BlockListConfiguration.BlockConfiguration CreateBlockConfig(string blockName, Options options, string[] pathSegments)
         {
-            var contentType = CreateContentType(blockName, options);
+            var contentType = CreateContentType(blockName, options, pathSegments);
             var settingsType = CreateSettingsType(options);
 
             return new BlockListConfiguration.BlockConfiguration()
@@ -98,12 +109,12 @@ namespace YuzuDelivery.Umbraco.Import
             };
         }
 
-        private IContentType CreateContentType(string blockName, Options options)
+        private IContentType CreateContentType(string blockName, Options options, string[] pathSegments)
         {
             var contentType = options.CreateContentTypeAction != null ?
                 options.CreateContentTypeAction(blockName, contentTypeService)
                 :
-                contentTypeForVmTypeService.CreateOrUpdate(blockName, null, true);
+                contentTypeForVmTypeService.CreateOrUpdate(blockName, null, true, pathSegments);
 
             if (options.CreatePropertiesAction != null) options.CreatePropertiesAction(contentType, documentTypePropertyService);
 

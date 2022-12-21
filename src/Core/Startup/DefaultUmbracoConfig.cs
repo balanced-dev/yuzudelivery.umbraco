@@ -40,7 +40,7 @@ namespace YuzuDelivery.Umbraco.Core
             IAppPolicyCache appPolicyCache,
             Lazy<IYuzuDefinitionTemplateSetup> templateSetup,
             IEnumerable<IBaseSiteConfig> baseSiteConfigs = null,
-            Assembly assembly = null)  
+            Assembly assembly = null)
             : base(updateableConfigs)
         {
             _hostEnvironment = hostEnvironment;

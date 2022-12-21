@@ -49,7 +49,7 @@ namespace YuzuDelivery.Umbraco.Import
 
             var subBlocks = data.Config.AllowedTypes.Any() ? data.Config.AllowedTypes : new string[] { data.Config.TypeName };
 
-            return blockListDataTypeFactory.CreateOrUpdate(dataTypeName, subBlocks, buildOptions);
+            return blockListDataTypeFactory.CreateOrUpdate(data.VmName, dataTypeName, subBlocks, buildOptions);
         }
 
         public virtual string GetDataTypeName(VmToContentPropertyMap data)

@@ -53,7 +53,7 @@ namespace YuzuDelivery.Umbraco.Import
                 options.Min = 0;
                 options.Max = 1;
 
-                return blockListDataTypeFactory.CreateOrUpdate(name, subBlocks, options);
+                return blockListDataTypeFactory.CreateOrUpdate(data.VmName, name, subBlocks, options);
             }
             else
                 return null;
@@ -71,7 +71,7 @@ namespace YuzuDelivery.Umbraco.Import
                 MaxPropertyWidth = "100%"
             };
 
-            return blockListDataTypeFactory.CreateOrUpdate(name, subBlocks, options);
+            return blockListDataTypeFactory.CreateOrUpdate(data.VmName, name, subBlocks, options);
         }
 
         private IDataType CreatOrUpdateSectionEditor(VmToContentPropertyMap data, int contentDataTypeId, int? settingsDataType)
@@ -114,7 +114,7 @@ namespace YuzuDelivery.Umbraco.Import
                 }
             };
 
-            return blockListDataTypeFactory.CreateOrUpdate(dataTypeName, sectionNames, options);
+            return blockListDataTypeFactory.CreateOrUpdate(data.VmName, dataTypeName, sectionNames, options);
         }
 
         public string GetDataTypeAlias(VmToContentPropertyMap data)

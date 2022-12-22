@@ -8,12 +8,8 @@
     {
         var gridItem = Html.GridPartial(Model.Item);
         var htmlDoc = new HtmlDocument();
-        var output = Html.RenderYuzu(new RenderSettings()
-        {
-            Template = string.Format("par{0}", Model.Item.GetType().Name),
-            Data = () => { return gridItem.CreateVm(Model.Item, new Dictionary<string, object>() { { "HtmlHelper", Html }, { "Model", Model.Page } }); },
-            ShowJson = false
-        });
+        var model = gridItem.CreateVm(Model.Item, new Dictionary<string, object>() {{"HtmlHelper", Html}, {"Model", Model.Page}});
+        var output = Html.RenderYuzu($"par{Model.Item.GetType().Name}", model);
 
         htmlDoc.LoadHtml(output.ToString());
         var imageNodes = htmlDoc.DocumentNode.SelectNodes("//img");

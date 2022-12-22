@@ -5,6 +5,7 @@ using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
 using YuzuDelivery.Umbraco.Core.Startup;
+using YuzuDelivery.TemplateEngines.Handlebars;
 
 namespace Umbraco.Cms.Web.UI
 {
@@ -17,6 +18,7 @@ namespace Umbraco.Cms.Web.UI
             builder.Services.AddSingleton<IYuzuViewmodelsBuilderConfig, DefaultUmbracoVmBuilderConfig>();
             builder.Services.AddSingleton<IYuzuConfiguration>(sp =>  ActivatorUtilities.CreateInstance<DefaultUmbracoConfig>(sp, assembly));
             builder.Services.AddSingleton<IYuzuDeliveryImportConfiguration>(sp => ActivatorUtilities.CreateInstance<DefaultUmbracoImportConfig>(sp, assembly));
+            builder.Services.AddSingleton<IYuzuTemplateEngine,YuzuHandlebarsTemplateEngine>();
 
             builder.Services.RegisterYuzuManualMapping(assembly);
 

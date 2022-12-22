@@ -22,7 +22,7 @@
 
     using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "data-app", "Forms" }, { "novalidate", "novalidate" } }))
     {
-        @Html.RenderYuzu(new RenderSettings() { Template = formBuilderTemplate, Data = getFormData, ShowJson = false })
+        @Html.RenderYuzu(formBuilderTemplate, getFormData());
     }
 }
 else
@@ -50,7 +50,7 @@ else
 
     using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
     {
-        @Html.RenderYuzu(new RenderSettings() { Template = formBuilderTemplate, Data = getFormData, ShowJson = false })
+        @Html.RenderYuzu(formBuilderTemplate, getFormData());
 
         @Html.HiddenFor(x => Model.FormId, new { id = (string)null })
         @Html.HiddenFor(x => Model.FormName, new { id = (string)null })

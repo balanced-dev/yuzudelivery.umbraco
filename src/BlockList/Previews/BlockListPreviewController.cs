@@ -22,18 +22,18 @@ namespace YuzuDelivery.Umbraco.BlockList
     [PluginController("YuzuDeliveryUmbracoImport")]
     public class BlockListPreviewController : UmbracoAuthorizedApiController
     {
-        private readonly IYuzuDefinitionTemplates yuzuDefinitionTemplates;
+        private readonly IYuzuTemplateEngine _yuzuTemplateEngine;
         private readonly IMapper mapper;
         private readonly IYuzuConfiguration config;
         private readonly IContentTypeService contentTypeService;
-        private readonly DocTypeGridEditorHelper docTypeGridEditorHelper; 
+        private readonly DocTypeGridEditorHelper docTypeGridEditorHelper;
 
-        public BlockListPreviewController(IMapper mapper, IYuzuConfiguration config, IYuzuDefinitionTemplates yuzuDefinitionTemplates, IContentTypeService contentTypeService, DocTypeGridEditorHelper docTypeGridEditorHelper
+        public BlockListPreviewController(IMapper mapper, IYuzuConfiguration config, IYuzuTemplateEngine yuzuTemplateEngine, IContentTypeService contentTypeService, DocTypeGridEditorHelper docTypeGridEditorHelper
             )
         {
             this.mapper = mapper;
             this.config = config;
-            this.yuzuDefinitionTemplates = yuzuDefinitionTemplates;
+            this._yuzuTemplateEngine = yuzuTemplateEngine;
             this.contentTypeService = contentTypeService;
             this.docTypeGridEditorHelper = docTypeGridEditorHelper;
         }
@@ -66,11 +66,13 @@ namespace YuzuDelivery.Umbraco.BlockList
                 }
                 else
                 {
-                    output.Preview = yuzuDefinitionTemplates.Render(new RenderSettings()
+                    var template = link.vmType.GetTemplateName();
+                    var mapped = mapper.Map(model, link.cmsType, link.vmType, new Dictionary<string, object>()
                     {
-                        Data = () => { return mapper.Map(model, link.cmsType, link.vmType, new Dictionary<string, object>() { { "Model", model }, { _BlockList_Constants.IsInPreview, true } }); },
-                        Template = yuzuDefinitionTemplates.GetSuspectTemplateNameFromVm(link.vmType)
+                        { "Model", model },
+                        { _BlockList_Constants.IsInPreview, true }
                     });
+                    output.Preview = _yuzuTemplateEngine.Render(template, mapped);
                 }
             }
             catch (Exception ex)

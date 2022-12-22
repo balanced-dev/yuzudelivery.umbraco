@@ -1,7 +1,8 @@
 param(
     [string] $UmbracoVersion = "10.2.0",
     [string] $UmbracoFormsVersion = "10.1.2",
-    [string] $YuzuDeliveryUmbracoVersion = $null
+    [string] $YuzuDeliveryUmbracoVersion = $null,
+    [string] $YuzuDeliveryHandlebarsVersion = "3.*-*"
 )
 
 if ($null -eq (Get-Command "nbgv" -ErrorAction SilentlyContinue))
@@ -62,6 +63,7 @@ Copy-Icon -folder 'standalone'
 $dependencies = [ordered]@{
     "Umbraco.Forms" = $UmbracoFormsVersion;
     "YuzuDelivery.Umbraco" = $YuzuDeliveryUmbracoVersion;
+    "YuzuDelivery.TemplateEngines.Handlebars" = $YuzuDeliveryHandlebarsVersion;
 }
 
 $properties = @{
@@ -95,6 +97,7 @@ Copy-Icon -folder 'testproject'
 $dependencies = [ordered]@{
     "Umbraco.Forms" = $UmbracoFormsVersion;
     "YuzuDelivery.Umbraco" = $YuzuDeliveryUmbracoVersion;
+    "YuzuDelivery.TemplateEngines.Handlebars" = $YuzuDeliveryHandlebarsVersion;
     "Our.Umbraco.TheDashboard" = "10.0.1";
 }
 Add-Project-Dependencies-Simple -folder 'testproject' -dependencies $dependencies

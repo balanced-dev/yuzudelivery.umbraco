@@ -33,16 +33,18 @@ namespace YuzuDelivery.Umbraco.Forms
 
                 if (formValue != null && formValue.ToString() != string.Empty)
                 {
+                    var markup = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
+                    {
+                        formId = formValue,
+                        partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
+                        template = formBuilderTemplate,
+                        mappingItems = context.Items
+                    }, context.Html.ViewContext, context.HttpContext).Result;
+
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
-                        LiveForm = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
-                        {
-                            formId = formValue,
-                            partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
-                            template = formBuilderTemplate,
-                            mappingItems = context.Items
-                        }, context.Html.ViewContext, context.HttpContext).Result
+                        LiveForm = markup
                     };
                 }
             }

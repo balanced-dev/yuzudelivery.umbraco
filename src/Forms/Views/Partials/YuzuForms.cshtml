@@ -23,12 +23,12 @@
             {
                 @Html.AntiForgeryToken()
             }
-            @Html.RenderYuzu(new RenderSettings() { Template = Model.Template, Data = getData, ShowJson = false })
+            @Html.RenderYuzu(Model.Template, getData());
         }
     }
     else
     {
-        @Html.RenderYuzu(new RenderSettings() { Template = Model.Template, Data = getData, ShowJson = false })
+        @Html.RenderYuzu(Model.Template, getData());
     }
 
 }

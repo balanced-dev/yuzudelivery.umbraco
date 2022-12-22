@@ -36,9 +36,6 @@ namespace YuzuDelivery.Umbraco.Core
 
             builder.ManifestFilters().Append<YuzuManifestFilter>();
 
-            builder.Services.AddSingleton<IHandlebarsProvider, HandlebarsProvider>();
-            builder.Services.AddTransient<IYuzuDefinitionTemplates, YuzuDefinitionTemplates>();
-            builder.Services.AddSingleton<IYuzuDefinitionTemplateSetup, YuzuDefinitionTemplateSetup>();
             builder.Services.AddTransient<ISchemaMetaService, SchemaMetaService>();
             builder.Services.AddTransient<ISchemaMetaPropertyService, SchemaMetaPropertyService>();
 
@@ -96,7 +93,6 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.RegisterYuzuAutoMapping();
 
             AddDefaultPublishedElements(builder);
-            SetupHbsHelpers();
         }
 
         public void AddDefaultPublishedElements(IUmbracoBuilder builder)
@@ -132,18 +128,6 @@ namespace YuzuDelivery.Umbraco.Core
 
                 return items.ToArray();
             });
-        }
-
-        public void SetupHbsHelpers()
-        {
-            new IfCond();
-            new YuzuDelivery.Core.Array();
-            new YuzuDelivery.Core.Enum();
-            new DynPartial();
-            new ModPartial();
-            new ToString();
-            new ToLowerCase();
-            new PictureSource();
         }
     }
 

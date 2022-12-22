@@ -9,6 +9,7 @@
     <PackageReference Include="Umbraco.Cms" Version="UMBRACO_VERSION_FROM_TEMPLATE" />
     <PackageReference Include="Umbraco.Forms" Version="10.1.2" />
     <PackageReference Include="YuzuDelivery.Umbraco" Version="3.1.0-alpha.*" />
+    <PackageReference Include="YuzuDelivery.TemplateEngines.Handlebars" Version="3.*-*" />
     <PackageReference Include="Our.Umbraco.TheDashboard" Version="10.0.1" />
     <Compile Update="**" Watch="false" />
     <Content Update="**" Watch="false" />

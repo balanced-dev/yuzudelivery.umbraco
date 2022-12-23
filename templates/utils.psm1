@@ -118,6 +118,11 @@ function Add-Yuzu-AppSettings {
                 SchemaMeta = "./Yuzu/_templates/paths"
                 ConfigPath = "./Yuzu/YuzuConfig.json"
             }
+            TemplateEngine = [PSCustomObject]@{ 
+                TemplatesPath = "./Yuzu/_templates"
+                PartialPrefix = "par"
+                HandlebarsFileExtension = ".hbs"
+            }
         }
     }
 

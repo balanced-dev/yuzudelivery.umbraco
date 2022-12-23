@@ -18,7 +18,8 @@ namespace Umbraco.Cms.Web.UI
             builder.Services.AddSingleton<IYuzuViewmodelsBuilderConfig, DefaultUmbracoVmBuilderConfig>();
             builder.Services.AddSingleton<IYuzuConfiguration>(sp =>  ActivatorUtilities.CreateInstance<DefaultUmbracoConfig>(sp, assembly));
             builder.Services.AddSingleton<IYuzuDeliveryImportConfiguration>(sp => ActivatorUtilities.CreateInstance<DefaultUmbracoImportConfig>(sp, assembly));
-            builder.Services.AddSingleton<IYuzuTemplateEngine,YuzuHandlebarsTemplateEngine>();
+
+            builder.Services.AddYuzuHandlebars();
 
             builder.Services.RegisterYuzuManualMapping(assembly);
 

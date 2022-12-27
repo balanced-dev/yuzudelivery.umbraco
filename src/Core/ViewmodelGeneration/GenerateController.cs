@@ -27,13 +27,11 @@ namespace YuzuDelivery.Umbraco.Core
     public class GenerateController : UmbracoAuthorizedApiController
     {
         private readonly BuildViewModelsService buildViewModelsSvc;
-        private readonly ReferencesService referencesService;
         private readonly IYuzuViewmodelsBuilderConfig builderConfig;
         private readonly IMapper mapper;
 
         public GenerateController(ReferencesService referencesService, BuildViewModelsService buildViewModelsSvc, IYuzuViewmodelsBuilderConfig builderConfig, IMapper mapper)
         {
-            this.referencesService = referencesService;
             this.buildViewModelsSvc = buildViewModelsSvc;
             this.builderConfig = builderConfig;
 
@@ -50,10 +48,7 @@ namespace YuzuDelivery.Umbraco.Core
 
             try
             {
-                referencesService.FixMultiple(ViewModelType.block);
                 buildViewModelsSvc.RunAll(ViewModelType.block, genFiles);
-
-                referencesService.FixMultiple(ViewModelType.page);
                 buildViewModelsSvc.RunAll(ViewModelType.page, genFiles);
             }
             catch (Exception ex)

@@ -113,8 +113,7 @@ function Add-Yuzu-AppSettings {
     $yuzu = [PSCustomObject]@{
         Yuzu = [PSCustomObject]@{
             Core = [PSCustomObject]@{ 
-                Pages = "./Yuzu/_templates/src/pages"
-                Partials = "./Yuzu/_templates/src/blocks"
+                Schema = "./Yuzu/_templates/schema"
                 SchemaMeta = "./Yuzu/_templates/paths"
                 ConfigPath = "./Yuzu/YuzuConfig.json"
             }

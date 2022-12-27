@@ -26,33 +26,8 @@ namespace YuzuDelivery.Umbraco.Core
         {
             _hostEnvironment = hostEnvironment;
 
-            var pagesLocation = coreSettings.CurrentValue.Pages;
-            var partialsLocation = coreSettings.CurrentValue.Partials;
-
             AddToModelRegistry(assembly);
             AddInstalledManualMaps(assembly);
-
-            TemplateLocations = new List<ITemplateLocation>()
-                {
-                    new TemplateLocation()
-                    {
-                        Name = "Pages",
-                        Path = _hostEnvironment.MapPathContentRoot(pagesLocation),
-                        Schema = _hostEnvironment.MapPathContentRoot(pagesLocation.Replace("src", "schema")),
-                        RegisterAllAsPartials = false,
-                        SearchSubDirectories = false,
-                        TemplateType = TemplateType.Page
-                    },
-                    new TemplateLocation()
-                    {
-                        Name = "Partials",
-                        Path = _hostEnvironment.MapPathContentRoot(partialsLocation),
-                        Schema = _hostEnvironment.MapPathContentRoot(partialsLocation.Replace("src", "schema")),
-                        RegisterAllAsPartials = true,
-                        SearchSubDirectories = true,
-                        TemplateType = TemplateType.Partial
-                    }
-                };
 
             foreach(var childSiteConfig in baseSiteConfigs)
             {

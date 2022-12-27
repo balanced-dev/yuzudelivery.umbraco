@@ -36,9 +36,6 @@ namespace YuzuDelivery.Umbraco.Core
 
             builder.ManifestFilters().Append<YuzuManifestFilter>();
 
-            builder.Services.AddTransient<ISchemaMetaService, SchemaMetaService>();
-            builder.Services.AddTransient<ISchemaMetaPropertyService, SchemaMetaPropertyService>();
-
             //Viewmodel Builder
             builder.Services.AddSingleton<BuildViewModelsService>();
             builder.Services.AddSingleton<ReferencesService>();

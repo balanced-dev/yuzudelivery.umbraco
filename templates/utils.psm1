@@ -113,13 +113,14 @@ function Add-Yuzu-AppSettings {
     $yuzu = [PSCustomObject]@{
         Yuzu = [PSCustomObject]@{
             Core = [PSCustomObject]@{ 
-                Schema = "./Yuzu/_templates/schema"
-                SchemaMeta = "./Yuzu/_templates/paths"
+                SchemaPath = "./Yuzu/_templates/schema"
                 ConfigPath = "./Yuzu/YuzuConfig.json"
+                PartialPrefix = "par"
+                DataStructurePrefix = "data"
+                LayoutPrefix = "_"
             }
             TemplateEngine = [PSCustomObject]@{ 
-                TemplatesPath = "./Yuzu/_templates"
-                PartialPrefix = "par"
+                TemplatesPath = "./Yuzu/_templates/src"
                 HandlebarsFileExtension = ".hbs"
             }
         }

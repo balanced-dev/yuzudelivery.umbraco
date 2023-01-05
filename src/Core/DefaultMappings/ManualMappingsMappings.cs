@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Umbraco.Core.Mapping;
@@ -14,11 +15,11 @@ namespace YuzuDelivery.Umbraco.Core
     /// </summary>
     public class ManualMappingsMappings : YuzuMappingConfig
     {
-        public ManualMappingsMappings(ICustomManualMappersService manualMappersConfigService, YuzuConfiguration config, IVmHelperService vmHelper)
+        public ManualMappingsMappings(ICustomManualMappersService manualMappersConfigService, IOptions<YuzuConfiguration> config, IVmHelperService vmHelper)
         {
             foreach(var m in manualMappersConfigService.Mappers)
             {
-                var manualMap = config.InstalledManualMaps.Where(x => x.Concrete.Name == m.Mapper).FirstOrDefault();
+                var manualMap = config.Value.InstalledManualMaps.Where(x => x.Concrete.Name == m.Mapper).FirstOrDefault();
                 var link = vmHelper.Get(m.Dest);
 
                 if(manualMap != null)

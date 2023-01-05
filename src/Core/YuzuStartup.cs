@@ -94,6 +94,8 @@ namespace YuzuDelivery.Umbraco.Core
 
             builder.Services.RegisterYuzuAutoMapping();
 
+            builder.Services.AddSingleton<IYuzuMappingIndex, YuzuUmbracoMappingIndex>();
+
             AddDefaultPublishedElements(builder);
         }
 

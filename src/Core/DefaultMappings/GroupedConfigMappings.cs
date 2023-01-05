@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Umbraco.Core.Mapping;
@@ -9,7 +10,7 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public class GroupedConfigMappings : YuzuMappingConfig
     {
-        public GroupedConfigMappings(IStoredConfigAsService storedConfigAsService, YuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IVmGetterService vmGetterService)
+        public GroupedConfigMappings(IStoredConfigAsService storedConfigAsService, IOptions<YuzuConfiguration> config, IYuzuDeliveryImportConfiguration importConfig, IVmGetterService vmGetterService)
         {
             var groupedConfigs = storedConfigAsService.GetAll<GroupStoreContentAs>();
 
@@ -25,9 +26,9 @@ namespace YuzuDelivery.Umbraco.Core
 
                 var parentPropertyName = groupSettings.ParentPropertyName;
 
-                var sourceType = config.CMSModels.Where(x => x.Name.ToLower() == documentTypeAlias.ToLower()).FirstOrDefault();
-                var destParent = config.ViewModels.Where(x => x.Name == groupSettings.ParentPropertyType).FirstOrDefault();
-                var destChild = config.ViewModels.Where(x => x.Name == vmName).FirstOrDefault();
+                var sourceType = config.Value.CMSModels.Where(x => x.Name.ToLower() == documentTypeAlias.ToLower()).FirstOrDefault();
+                var destParent = config.Value.ViewModels.Where(x => x.Name == groupSettings.ParentPropertyType).FirstOrDefault();
+                var destChild = config.Value.ViewModels.Where(x => x.Name == vmName).FirstOrDefault();
 
                 if(sourceType != null && destParent != null && destChild != null)
                     ManualMaps.AddGroup(sourceType, destParent, destChild, parentPropertyName, groupName);

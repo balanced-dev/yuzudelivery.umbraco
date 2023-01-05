@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Mapping.Mappers;
@@ -14,10 +15,10 @@ namespace YuzuDelivery.Umbraco.Grid
     public class GridAutoMapping : YuzuMappingConfig
     {
         private readonly ISchemaMetaService schemaMetaService;
-        private readonly IYuzuConfiguration config;
+        private readonly IOptions<YuzuConfiguration> config;
         private readonly IYuzuDeliveryImportConfiguration importConfig;
 
-        public GridAutoMapping(IVmPropertyMappingsFinder vmPropertyMappingsFinder, ISchemaMetaService schemaMetaService, IYuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig)
+        public GridAutoMapping(IVmPropertyMappingsFinder vmPropertyMappingsFinder, ISchemaMetaService schemaMetaService, IOptions<YuzuConfiguration> config, IYuzuDeliveryImportConfiguration importConfig)
         {
             this.schemaMetaService = schemaMetaService;
             this.config = config;
@@ -89,7 +90,7 @@ namespace YuzuDelivery.Umbraco.Grid
                 if(!string.IsNullOrEmpty(configTypeName))
                 {
 
-                    var configType = config.ViewModels.Where(x => x.Name == configTypeName).FirstOrDefault();
+                    var configType = config.Value.ViewModels.Where(x => x.Name == configTypeName).FirstOrDefault();
 
                     if(configType != null)
                     {

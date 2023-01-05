@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Mapping.Mappers;
@@ -41,9 +42,9 @@ namespace YuzuDelivery.Umbraco.Core
     public class SubBlocksObjectResolver<Source, Dest> : IYuzuFullPropertyResolver<Source, Dest, IPublishedContent, object>
     {
         private readonly IMapper mapper;
-        private readonly IYuzuConfiguration config;
+        private readonly IOptions<YuzuConfiguration> config;
 
-        public SubBlocksObjectResolver(IMapper mapper, IYuzuConfiguration config)
+        public SubBlocksObjectResolver(IMapper mapper, IOptions<YuzuConfiguration> config)
         {
             this.mapper = mapper;
             this.config = config;
@@ -51,8 +52,8 @@ namespace YuzuDelivery.Umbraco.Core
 
         public object Resolve(Source source, Dest destination, IPublishedContent sourceMember, string destPropertyName, UmbracoMappingContext context)
         {
-            var cmsModel = config.CMSModels.Where(c => c.Name == sourceMember.ContentType.Alias.FirstCharacterToUpper()).FirstOrDefault();
-            var viewmodel = config.ViewModels.Where(x => x.Name == $"{YuzuConstants.Configuration.BlockPrefix}{cmsModel.Name}" || x.Name == $"{YuzuConstants.Configuration.PagePrefix}{cmsModel.Name}").FirstOrDefault();
+            var cmsModel = config.Value.CMSModels.FirstOrDefault(c => c.Name == sourceMember.ContentType.Alias.FirstCharacterToUpper());
+            var viewmodel = config.Value.ViewModels.FirstOrDefault(x => x.Name == $"{YuzuConstants.Configuration.BlockPrefix}{cmsModel.Name}" || x.Name == $"{YuzuConstants.Configuration.PagePrefix}{cmsModel.Name}");
 
             return mapper.Map(sourceMember, cmsModel, viewmodel, context.Items);
         }

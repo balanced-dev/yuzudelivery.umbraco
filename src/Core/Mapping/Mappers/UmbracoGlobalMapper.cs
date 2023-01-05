@@ -13,7 +13,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping.Mappers;
 public class UmbracoGlobalMapper : DefaultGlobalMapper
 {
     public override void CreateMap<TSource, TDest>(MapperConfigurationExpression cfg, YuzuGlobalMapperSettings settings,
-        IServiceProvider factory, AddedMapContext mapContext, IYuzuConfiguration config)
+        IServiceProvider factory, AddedMapContext mapContext, YuzuConfiguration config)
     {
         base.CreateMap<TSource, TDest>(cfg, settings, factory, mapContext, config);
 

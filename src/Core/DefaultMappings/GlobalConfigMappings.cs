@@ -8,7 +8,7 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public class GlobalConfigMappings : YuzuMappingConfig
     {
-        public GlobalConfigMappings(IStoredConfigAsService storedConfigAsService, IYuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IVmHelperService vmHelperService)
+        public GlobalConfigMappings(IStoredConfigAsService storedConfigAsService, YuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IVmHelperService vmHelperService)
         {
             var globalConfigs = storedConfigAsService.GetAll<GlobalStoreContentAs>();
 

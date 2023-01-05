@@ -31,8 +31,12 @@ namespace YuzuDelivery.Umbraco.Forms
 
             builder.Services.AddTransient<ViewComponentHelper>();
 
+            builder.Services.Configure<YuzuConfiguration>(cfg =>
+            {
+                cfg.MappingAssemblies.Add(GetType().Assembly);
+            });
+
             //MUST be transient lifetimes
-            builder.Services.AddTransient(typeof(IUpdateableConfig), typeof(FormUmbracoConfig));
             builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(FormVmBuilderConfig));
             builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(FormImportConfig));
 
@@ -44,15 +48,6 @@ namespace YuzuDelivery.Umbraco.Forms
             // Register custom FieldTypes
             builder.WithCollectionBuilder<FieldCollectionBuilder>()
                 .Add<ColumnBlank>();
-        }
-    }
-
-    public class FormUmbracoConfig : UpdateableConfig
-    {
-        public FormUmbracoConfig()
-            : base()
-        {
-            MappingAssemblies.Add(typeof(YuzuFormsStartup).Assembly);
         }
     }
 

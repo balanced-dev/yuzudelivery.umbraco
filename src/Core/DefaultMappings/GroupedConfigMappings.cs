@@ -9,7 +9,7 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public class GroupedConfigMappings : YuzuMappingConfig
     {
-        public GroupedConfigMappings(IStoredConfigAsService storedConfigAsService, IYuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IVmGetterService vmGetterService)
+        public GroupedConfigMappings(IStoredConfigAsService storedConfigAsService, YuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IVmGetterService vmGetterService)
         {
             var groupedConfigs = storedConfigAsService.GetAll<GroupStoreContentAs>();
 

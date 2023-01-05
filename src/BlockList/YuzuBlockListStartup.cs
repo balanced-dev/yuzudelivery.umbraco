@@ -8,6 +8,7 @@ using System.Reflection;
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -85,17 +86,17 @@ namespace YuzuDelivery.Umbraco.BlockList
         {
             builder.Services.AddSingleton<IEnumerable<IGridItemInternal>>((factory) =>
             {
-                var config = factory.GetRequiredService<IYuzuConfiguration>();
+                var config = factory.GetRequiredService<IOptions<YuzuConfiguration>>();
 
                 var baseGridType = typeof(DefaultGridItem<,>);
                 var gridItems = new List<IGridItemInternal>();
-                var viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
+                var viewmodelTypes = config.Value.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
                     var umbracoModelTypeName = viewModelType.GetModelName();
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
-                    var umbracoModelType = config.CMSModels.FirstOrDefault(x => x.Name == umbracoModelTypeName);
+                    var umbracoModelType = config.Value.CMSModels.FirstOrDefault(x => x.Name == umbracoModelTypeName);
 
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {

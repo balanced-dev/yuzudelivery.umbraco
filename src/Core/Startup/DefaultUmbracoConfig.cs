@@ -12,54 +12,48 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public class DefaultUmbracoConfig : YuzuConfiguration
+    public static class YuzuConfigurationExtensions
     {
-        private readonly IHostEnvironment _hostEnvironment;
-
-        public DefaultUmbracoConfig(
-            IHostEnvironment hostEnvironment,
-            IOptionsMonitor<CoreSettings> coreSettings,
-            IEnumerable<IUpdateableConfig> updateableConfigs,
-            IEnumerable<IBaseSiteConfig> baseSiteConfigs = null,
-            Assembly assembly = null)
-            : base(updateableConfigs)
+        private static void AddRange<T>(this IList<T> t, IEnumerable<T> items)
         {
-            _hostEnvironment = hostEnvironment;
-
-            AddToModelRegistry(assembly);
-            AddInstalledManualMaps(assembly);
-
-            foreach(var childSiteConfig in baseSiteConfigs)
+            if (t is List<T> c)
             {
-                childSiteConfig.Setup(this);
+                c.AddRange(items);
+            }
+            else
+            {
+                foreach (var item in items)
+                {
+                    t.Add(item);
+                }
             }
         }
 
-        public void AddToModelRegistry(Assembly assemby)
+        public static void AddToModelRegistry(this YuzuConfiguration cfg, Assembly assemby)
         {
-            ViewModelAssemblies.Add(assemby);
+            cfg.ViewModelAssemblies.Add(assemby);
 
             var concreteModels = assemby.GetTypes().Where(x => x.GetCustomAttribute<PublishedModelAttribute>() != null);
-            CMSModels.AddRange(concreteModels);
+            cfg.CMSModels.AddRange(concreteModels);
             //add compositions;
-            CMSModels.AddRange(concreteModels.SelectMany(x => x.GetInterfaces()));
+            cfg.CMSModels.AddRange(concreteModels.SelectMany(x => x.GetInterfaces()));
 
-            ViewModels.AddRange(assemby.GetTypes().Where(y => y.Name.IsVm()));
+            cfg.ViewModels.AddRange(assemby.GetTypes().Where(y => y.Name.IsVm()));
 
-            MappingAssemblies.Add(assemby);
+            cfg.MappingAssemblies.Add(assemby);
         }
 
-        public void AddInstalledManualMaps(Assembly assembly)
+        public static void AddInstalledManualMaps(this YuzuConfiguration cfg, Assembly assembly)
         {
-            AddInstalledManualMap<IYuzuTypeAfterConvertor>(assembly, false, false);
-            AddInstalledManualMap<IYuzuTypeConvertor>(assembly, false, false);
+            cfg.AddInstalledManualMap<IYuzuTypeAfterConvertor>(assembly, false, false);
+            cfg.AddInstalledManualMap<IYuzuTypeConvertor>(assembly, false, false);
             //Can't do this yet, automapper AddTransofrm bug
             //AddInstalledManualMap<IYuzuPropertyAfterResolver>(asm, true);
-            AddInstalledManualMap<IYuzuPropertyReplaceResolver>(assembly, true, false);
-            AddInstalledManualMap<IYuzuTypeFactory>(assembly, false, true);
+            cfg.AddInstalledManualMap<IYuzuPropertyReplaceResolver>(assembly, true, false);
+            cfg.AddInstalledManualMap<IYuzuTypeFactory>(assembly, false, true);
         }
 
-        private void AddInstalledManualMap<I>(Assembly asm, bool isMember, bool isFactory)
+        private static void AddInstalledManualMap<I>(this YuzuConfiguration cfg, Assembly asm, bool isMember, bool isFactory)
         {
             var propertyResolvers = asm.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(I)));
             foreach (var p in propertyResolvers)
@@ -67,11 +61,11 @@ namespace YuzuDelivery.Umbraco.Core
                 var d = p.GetInterfaces().FirstOrDefault().GetGenericArguments();
 
                 if(isMember)
-                    InstalledManualMaps.Add(new ManualMapInstalledType() { Interface = typeof(I), Concrete = p, SourceType = d[0], DestMemberType = d[1] });
+                    cfg.InstalledManualMaps.Add(new ManualMapInstalledType() { Interface = typeof(I), Concrete = p, SourceType = d[0], DestMemberType = d[1] });
                 if (isFactory)
-                    InstalledManualMaps.Add(new ManualMapInstalledType() { Interface = typeof(I), Concrete = p, DestType = d[0] });
+                    cfg.InstalledManualMaps.Add(new ManualMapInstalledType() { Interface = typeof(I), Concrete = p, DestType = d[0] });
                 else
-                    InstalledManualMaps.Add(new ManualMapInstalledType() { Interface = typeof(I), Concrete = p, SourceType = d[0], DestType = d[1] });
+                    cfg.InstalledManualMaps.Add(new ManualMapInstalledType() { Interface = typeof(I), Concrete = p, SourceType = d[0], DestType = d[1] });
             }
         }
 

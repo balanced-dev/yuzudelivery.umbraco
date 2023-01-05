@@ -8,6 +8,7 @@ using YuzuDelivery.Umbraco.Import;
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using YuzuDelivery.Core.Mapping;
@@ -41,8 +42,12 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddSingleton<ReferencesService>();
             builder.Services.AddSingleton<GenerateViewmodelService>();
 
+            builder.Services.Configure<YuzuConfiguration>(cfg => {
+                cfg.MappingAssemblies.Add(GetType().Assembly);
+            });
+
             //MUST be transient lifetime
-            builder.Services.AddTransient(typeof(IUpdateableConfig), typeof(CoreUmbracoConfig));
+
             builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig));
             builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(CoreImportConfig));
 
@@ -96,21 +101,21 @@ namespace YuzuDelivery.Umbraco.Core
         {
             builder.Services.AddSingleton<IDefaultPublishedElement[]>((factory) =>
             {
-                var config = factory.GetService<IYuzuConfiguration>();
+                var config = factory.GetRequiredService<IOptions<YuzuConfiguration>>();
                 var mapper = factory.GetService<IMapper>();
                 var fallback = factory.GetService<IPublishedValueFallback>();
 
-                var viewmodelAssemblies = config.ViewModelAssemblies;
+                var viewmodelAssemblies = config.Value.ViewModelAssemblies;
 
                 var baseItemType = typeof(DefaultPublishedElement<,>);
                 var items = new List<IDefaultPublishedElement>();
 
-                var viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
+                var viewmodelTypes = config.Value.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
                     var umbracoModelTypeName = viewModelType.GetModelName();
-                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
+                    var umbracoModelType = config.Value.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
 
@@ -125,16 +130,6 @@ namespace YuzuDelivery.Umbraco.Core
 
                 return items.ToArray();
             });
-        }
-    }
-
-
-    public class CoreUmbracoConfig : UpdateableConfig
-    {
-        public CoreUmbracoConfig()
-            : base()
-        {
-            MappingAssemblies.Add(typeof(YuzuStartup).Assembly);
         }
     }
 

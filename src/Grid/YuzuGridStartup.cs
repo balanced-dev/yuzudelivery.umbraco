@@ -12,6 +12,7 @@ using System.Reflection;
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Skybrud.Umbraco.GridData.Composers;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
@@ -58,20 +59,20 @@ namespace YuzuDelivery.Umbraco.Grid
         {
             builder.Services.AddSingleton<IEnumerable<IGridItemInternal>>((factory) =>
             {
-                var config = factory.GetService<IYuzuConfiguration>();
+                var config = factory.GetService<IOptions<YuzuConfiguration>>();
                 var mapper = factory.GetService<IMapper>();
 
                 var baseGridType = typeof(DefaultGridItem<,>);
                 var gridItems = new List<IGridItemInternal>();
                 var typeFactoryRunner = factory.GetService<IYuzuTypeFactoryRunner>();
                 var publishedValueFallback = factory.GetService<IPublishedValueFallback>();
-                var viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
+                var viewmodelTypes = config.Value.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix));
 
                 foreach (var viewModelType in viewmodelTypes)
                 {
                     var umbracoModelTypeName = viewModelType.GetModelName();
                     var alias = umbracoModelTypeName.FirstCharacterToLower();
-                    var umbracoModelType = config.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
+                    var umbracoModelType = config.Value.CMSModels.Where(x => x.Name == umbracoModelTypeName).FirstOrDefault();
 
                     if (umbracoModelType != null && umbracoModelType.BaseType == typeof(PublishedElementModel))
                     {

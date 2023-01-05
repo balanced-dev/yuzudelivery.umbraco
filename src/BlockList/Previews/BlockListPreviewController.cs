@@ -13,6 +13,7 @@ using Umbraco.Cms.Web.BackOffice.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Models;
@@ -24,11 +25,11 @@ namespace YuzuDelivery.Umbraco.BlockList
     {
         private readonly IYuzuTemplateEngine _yuzuTemplateEngine;
         private readonly IMapper mapper;
-        private readonly IYuzuConfiguration config;
+        private readonly IOptions<YuzuConfiguration> config;
         private readonly IContentTypeService contentTypeService;
         private readonly DocTypeGridEditorHelper docTypeGridEditorHelper;
 
-        public BlockListPreviewController(IMapper mapper, IYuzuConfiguration config, IYuzuTemplateEngine yuzuTemplateEngine, IContentTypeService contentTypeService, DocTypeGridEditorHelper docTypeGridEditorHelper
+        public BlockListPreviewController(IMapper mapper, IOptions<YuzuConfiguration> config, IYuzuTemplateEngine yuzuTemplateEngine, IContentTypeService contentTypeService, DocTypeGridEditorHelper docTypeGridEditorHelper
             )
         {
             this.mapper = mapper;
@@ -54,7 +55,7 @@ namespace YuzuDelivery.Umbraco.BlockList
                 var suspectBlockTypeName = $"{YuzuConstants.Configuration.BlockPrefix}{model.ContentType.Alias.FirstCharacterToUpper()}";
 
                 if(link.vmType == null)
-                    link.vmType = config.ViewModels.Where(x => x.Name == suspectBlockTypeName).FirstOrDefault();
+                    link.vmType = config.Value.ViewModels.Where(x => x.Name == suspectBlockTypeName).FirstOrDefault();
 
                 if (link.vmType == null)
                 {
@@ -86,13 +87,13 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         public (Type cmsType, Type vmType) GetCmsToVmLink(IContentType contentType)
         {
-            var cmsType = config.CMSModels.Where(x => contentType.Alias.FirstCharacterToUpper() == x.Name).FirstOrDefault();
+            var cmsType = config.Value.CMSModels.Where(x => contentType.Alias.FirstCharacterToUpper() == x.Name).FirstOrDefault();
 
             if (cmsType != null)
             {
                 var cmsTypeInterfaces = cmsType.GetInterfaces();
 
-                foreach (var vmType in config.ViewModels)
+                foreach (var vmType in config.Value.ViewModels)
                 {
                     foreach (var attribute in vmType.GetCustomAttributes<YuzuMapAttribute>())
                     {

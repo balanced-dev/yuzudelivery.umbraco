@@ -11,7 +11,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public static class AutomapperConfigExtensions
     {
-        public static void AddProfilesForAttributes(this MapperConfigurationExpression cfg, IYuzuConfiguration config, AddedMapContext mapContext, IServiceProvider serviceProvider)
+        public static void AddProfilesForAttributes(this MapperConfigurationExpression cfg, YuzuConfiguration config, AddedMapContext mapContext, IServiceProvider serviceProvider)
         {
             var allTypes = config.MappingAssemblies
                                  .Where(a => a != typeof(YuzuMapAttribute).Assembly)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
@@ -16,7 +17,7 @@ namespace YuzuDelivery.Umbraco.BlockList
     public class BlockListGridDataService : IBlockListGridDataService
     {
         private readonly IMapper mapper;
-        private readonly IYuzuConfiguration config;
+        private readonly IOptions<YuzuConfiguration> config;
         private readonly string[] sectionAliases;
 
         private readonly IEnumerable<IGridItem> gridItems;
@@ -25,7 +26,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         private IEnumerable<Type> viewmodelTypes;
 
-        public BlockListGridDataService(IMapper mapper, IYuzuConfiguration config, IYuzuDeliveryImportConfiguration importConfig, IEnumerable<IGridItem> gridItems, IEnumerable<IGridItemInternal> gridItemsInternal, IPublishedValueFallback publishedValueFallback)
+        public BlockListGridDataService(IMapper mapper, IOptions<YuzuConfiguration> config, IYuzuDeliveryImportConfiguration importConfig, IEnumerable<IGridItem> gridItems, IEnumerable<IGridItemInternal> gridItemsInternal, IPublishedValueFallback publishedValueFallback)
         {
             this.mapper = mapper;
             this.config = config;
@@ -35,7 +36,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             this.gridItemsInternal = gridItemsInternal;
             this.publishedValueFallback = publishedValueFallback;
 
-            this.viewmodelTypes = config.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix) || x.Name.StartsWith(YuzuConstants.Configuration.SubPrefix));
+            this.viewmodelTypes = config.Value.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix) || x.Name.StartsWith(YuzuConstants.Configuration.SubPrefix));
         }
 
         public vmBlock_DataRows CreateRows(BlockListModel grid, UmbracoMappingContext context)
@@ -193,7 +194,7 @@ namespace YuzuDelivery.Umbraco.BlockList
     public class GridContext
     {
         public List<vmSub_DataGridRow> Rows { get; set; }
-        
+
         public vmSub_DataGridRow CurrentRow { get; set; }
 
         public vmSub_DataGridColumn CurrentColumns {  get; set; }

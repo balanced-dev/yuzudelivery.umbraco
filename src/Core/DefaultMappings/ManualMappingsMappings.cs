@@ -14,7 +14,7 @@ namespace YuzuDelivery.Umbraco.Core
     /// </summary>
     public class ManualMappingsMappings : YuzuMappingConfig
     {
-        public ManualMappingsMappings(ICustomManualMappersService manualMappersConfigService, IYuzuConfiguration config, IVmHelperService vmHelper)
+        public ManualMappingsMappings(ICustomManualMappersService manualMappersConfigService, YuzuConfiguration config, IVmHelperService vmHelper)
         {
             foreach(var m in manualMappersConfigService.Mappers)
             {

@@ -1,13 +1,7 @@
 ﻿using System.Linq;
 using YuzuDelivery.Core;
-
-#if NETCOREAPP
-using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.PropertyEditors;
-#else
-using Umbraco.Core.Logging;
-using Umbraco.Web.PropertyEditors;
-#endif
+
 
 namespace YuzuDelivery.Umbraco.Import
 {
@@ -19,7 +13,7 @@ namespace YuzuDelivery.Umbraco.Import
         public const string SectionCustomView = "~/App_Plugins/YuzuBlockList/GridContentSection.html";
         public const string ConfigCustomView = "~/App_Plugins/YuzuBlockList/GridContentColumnsSettings.html";
 
-        public BlockListGridCreationService(BlockListGridRowConfigToContent gridRowConfigToContent, BlockListDataTypeFactory blockListDataTypeFactory, IYuzuDeliveryImportConfiguration importConfig)
+        public BlockListGridCreationService(BlockListGridRowConfigToContent gridRowConfigToContent, BlockListDataTypeFactory blockListDataTypeFactory)
         {
             this.gridRowConfigToContent = gridRowConfigToContent;
             this.blockListDataTypeFactory = blockListDataTypeFactory;

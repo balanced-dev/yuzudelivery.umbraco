@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
@@ -10,7 +11,7 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public class GroupedConfigMappings : YuzuMappingConfig
     {
-        public GroupedConfigMappings(IStoredConfigAsService storedConfigAsService, IOptions<YuzuConfiguration> config, IYuzuDeliveryImportConfiguration importConfig, IVmGetterService vmGetterService)
+        public GroupedConfigMappings(IStoredConfigAsService storedConfigAsService, IOptions<YuzuConfiguration> config, IOptions<ImportSettings> importConfig, IVmGetterService vmGetterService)
         {
             var groupedConfigs = storedConfigAsService.GetAll<GroupStoreContentAs>();
 
@@ -22,7 +23,7 @@ namespace YuzuDelivery.Umbraco.Core
 
                 var groupName = group.Value.StoreContentAs.GroupName;
                 if (string.IsNullOrEmpty(groupName))
-                    groupName = importConfig.DefaultPropertyGroup;
+                    groupName = importConfig.Value.DefaultPropertyGroup;
 
                 var parentPropertyName = groupSettings.ParentPropertyName;
 

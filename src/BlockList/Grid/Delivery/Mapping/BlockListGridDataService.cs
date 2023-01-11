@@ -10,6 +10,7 @@ using Umbraco.Cms.Core.Models.Blocks;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Web;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.BlockList
@@ -26,11 +27,11 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         private IEnumerable<Type> viewmodelTypes;
 
-        public BlockListGridDataService(IMapper mapper, IOptions<YuzuConfiguration> config, IYuzuDeliveryImportConfiguration importConfig, IEnumerable<IGridItem> gridItems, IEnumerable<IGridItemInternal> gridItemsInternal, IPublishedValueFallback publishedValueFallback)
+        public BlockListGridDataService(IMapper mapper, IOptions<YuzuConfiguration> config, IOptions<ImportSettings> importConfig, IEnumerable<IGridItem> gridItems, IEnumerable<IGridItemInternal> gridItemsInternal, IPublishedValueFallback publishedValueFallback)
         {
             this.mapper = mapper;
             this.config = config;
-            this.sectionAliases = importConfig.GridRowConfigs.Select(x => x.Name.FirstCharacterToLower()).ToArray();
+            this.sectionAliases = importConfig.Value.GridRowConfigs.Select(x => x.Name.FirstCharacterToLower()).ToArray();
 
             this.gridItems = gridItems;
             this.gridItemsInternal = gridItemsInternal;

@@ -3,8 +3,10 @@ using System.Linq;
 using System.Reflection;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Import;
 
 namespace YuzuDelivery.Umbraco.Core.Mapping
@@ -18,7 +20,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
                                  .Where(a => !a.IsDynamic)
                                  .SelectMany(a => a.DefinedTypes);
 
-            var importConfig = serviceProvider.GetRequiredService<IYuzuDeliveryImportConfiguration>();
+            var importConfig = serviceProvider.GetRequiredService<IOptions<ImportSettings>>();
 
             foreach (var viewModels in allTypes)
             {
@@ -31,7 +33,7 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
                         continue;
                     }
 
-                    if (importConfig.IgnoreUmbracoModelsForAutomap.Contains(cmsModel.Name))
+                    if (importConfig.Value.IgnoreUmbracoModelsForAutomap.Contains(cmsModel.Name))
                     {
                         continue;
                     }

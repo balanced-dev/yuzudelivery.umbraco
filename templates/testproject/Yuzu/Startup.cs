@@ -21,7 +21,6 @@ namespace Umbraco.Cms.Web.UI
                 cfg.AddToModelRegistry(assembly);
                 cfg.AddInstalledManualMaps(assembly);
             });
-            builder.Services.AddSingleton<IYuzuDeliveryImportConfiguration>(sp => ActivatorUtilities.CreateInstance<DefaultUmbracoImportConfig>(sp, assembly));
 
             builder.Services.AddYuzuHandlebars();
             builder.Services.AddYuzuCore();

@@ -13,6 +13,7 @@ using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Mapping.Mappers;
+using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Core.Mapping.Mappers;
 using YuzuDelivery.Umbraco.Core.Settings;
@@ -46,10 +47,20 @@ namespace YuzuDelivery.Umbraco.Core
                 cfg.MappingAssemblies.Add(GetType().Assembly);
             });
 
+            builder.Services.AddOptions<ImportSettings>()
+                   .Configure<IVmPropertyFinder>((settings, propertyFinder) =>
+                   {
+                       settings.IgnoreViewmodels.Add<vmBlock_DataImage>();
+                       settings.IgnoreViewmodels.Add<vmBlock_DataLink>();
+
+                       settings.DataStructureProperties["Images"] = propertyFinder.GetProperties(typeof(vmBlock_DataImage));
+                       settings.DataStructureProperties["Links"] = propertyFinder.GetProperties(typeof(vmBlock_DataLink));
+                   });
+
+
             //MUST be transient lifetime
 
             builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig));
-            builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(CoreImportConfig));
 
             builder.Services.AddSingleton<DefaultYuzuMapperFactory>();
 
@@ -144,22 +155,6 @@ namespace YuzuDelivery.Umbraco.Core
             ExcludeViewmodelsAtGeneration.Add<vmBlock_DataLink>();
 
             AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Core");
-        }
-    }
-
-    public class CoreImportConfig : UpdateableImportConfiguration
-    {
-        public CoreImportConfig(IVmPropertyFinder vmPropertyFinder)
-            : base()
-        {
-            IgnoreViewmodels.Add<vmBlock_DataImage>();
-            IgnoreViewmodels.Add<vmBlock_DataLink>();
-
-            if(vmPropertyFinder != null)
-            {
-                SpecialistProperties.Add("Images", vmPropertyFinder.GetProperties(typeof(vmBlock_DataImage)));
-                SpecialistProperties.Add("Links", vmPropertyFinder.GetProperties(typeof(vmBlock_DataLink)));
-            }
         }
     }
 }

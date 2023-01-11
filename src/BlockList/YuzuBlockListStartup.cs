@@ -13,6 +13,7 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.BlockList
@@ -62,7 +63,25 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             //MUST be transient lifetime
             builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(BlockListGridVmBuilderConfig));
-            builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(BlockListGridImportConfig));
+            builder.Services.AddOptions<ImportSettings>()
+                   .Configure<IVmPropertyFinder>((settings, propertyFinder) =>
+                   {
+                       settings.IgnoreViewmodels.Add<vmBlock_DataRows>();
+                       settings.IgnoreViewmodels.Add<vmBlock_DataGrid>();
+
+                       settings.DataStructureProperties.Add("Grids", propertyFinder.GetProperties(typeof(vmBlock_DataGrid)));
+                       settings.DataStructureProperties.Add("Rows", propertyFinder.GetProperties(typeof(vmBlock_DataRows)));
+
+                       settings.GridRowConfigs.Clear();
+                       //rowBuilder
+                       settings.GridRowConfigs.Add(new GridRowConfig("RowItem", "12", "100", isRow: true));
+
+                       //gridBuilder
+                       settings.GridRowConfigs.Add(new GridRowConfig("FullWidthSection", "12", "100", isDefault: true));
+                       settings.GridRowConfigs.Add(new GridRowConfig("TwoColumnSection", "6", "50,50"));
+                       settings.GridRowConfigs.Add(new GridRowConfig("ThreeColumnSection", "4", "33,33,33"));
+                       settings.GridRowConfigs.Add(new GridRowConfig("FourColumnSection", "3", "25,25,25,25"));
+                   });
 
             builder.ManifestFilters().Append<YuzuBlockListManifestFilter>();
 
@@ -136,29 +155,6 @@ namespace YuzuDelivery.Umbraco.BlockList
             ExcludeViewmodelsAtGeneration.Add<vmSub_DataRowsRow>();
 
             AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.BlockList");
-        }
-    }
-
-    public class BlockListGridImportConfig : UpdateableImportConfiguration
-    {
-        public BlockListGridImportConfig(IVmPropertyFinder vmPropertyFinder)
-            : base()
-        {
-            IgnoreViewmodels.Add<vmBlock_DataRows>();
-            IgnoreViewmodels.Add<vmBlock_DataGrid>();
-
-            SpecialistProperties.Add("Grids", vmPropertyFinder.GetProperties(typeof(vmBlock_DataGrid)));
-            SpecialistProperties.Add("Rows", vmPropertyFinder.GetProperties(typeof(vmBlock_DataRows)));
-
-            GridRowConfigs = new List<GridRowConfig>();
-            //rowBuilder
-            GridRowConfigs.Add(new GridRowConfig("RowItem", "12", "100", isRow: true));
-
-            //gridBuilder
-            GridRowConfigs.Add(new GridRowConfig("FullWidthSection", "12", "100", isDefault: true));
-            GridRowConfigs.Add(new GridRowConfig("TwoColumnSection", "6", "50,50"));
-            GridRowConfigs.Add(new GridRowConfig("ThreeColumnSection", "4", "33,33,33"));
-            GridRowConfigs.Add(new GridRowConfig("FourColumnSection", "3", "25,25,25,25"));
         }
     }
 }

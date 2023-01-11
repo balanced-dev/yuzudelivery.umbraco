@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
@@ -9,7 +10,7 @@ namespace YuzuDelivery.Umbraco.Core
 {
     public class GlobalConfigMappings : YuzuMappingConfig
     {
-        public GlobalConfigMappings(IStoredConfigAsService storedConfigAsService, IOptions<YuzuConfiguration> config, IYuzuDeliveryImportConfiguration importConfig, IVmHelperService vmHelperService)
+        public GlobalConfigMappings(IStoredConfigAsService storedConfigAsService, IOptions<YuzuConfiguration> config, IVmHelperService vmHelperService)
         {
             var globalConfigs = storedConfigAsService.GetAll<GlobalStoreContentAs>();
 

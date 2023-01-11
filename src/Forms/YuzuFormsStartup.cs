@@ -14,6 +14,7 @@ using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Forms.Core.Providers;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
@@ -38,7 +39,26 @@ namespace YuzuDelivery.Umbraco.Forms
 
             //MUST be transient lifetimes
             builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(FormVmBuilderConfig));
-            builder.Services.AddTransient(typeof(IUpdateableImportConfiguration), typeof(FormImportConfig));
+            builder.Services.AddOptions<ImportSettings>()
+                   .Configure<IVmPropertyFinder>((settings, propertyFinder) =>
+                   {
+                       settings.IgnoreViewmodels.Add<vmBlock_DataForm>();
+                       settings.IgnoreViewmodels.Add<vmBlock_DataFormBuilder>();
+                       settings.IgnoreViewmodels.Add<vmBlock_Form>();
+                       settings.IgnoreViewmodels.Add<vmBlock_FormButton>();
+                       settings.IgnoreViewmodels.Add<vmBlock_FormCheckboxRadio>();
+                       settings.IgnoreViewmodels.Add<vmBlock_FormCheckboxRadioList>();
+                       settings.IgnoreViewmodels.Add<vmBlock_FormHidden>();
+                       settings.IgnoreViewmodels.Add<vmBlock_FormFileInput>();
+                       settings.IgnoreViewmodels.Add<vmBlock_FormSelect>();
+                       settings.IgnoreViewmodels.Add<vmBlock_FormTextArea>();
+                       settings.IgnoreViewmodels.Add<vmBlock_FormTextInput>();
+                       settings.IgnoreViewmodels.Add<vmBlock_Recaptcha>();
+                       settings.IgnoreViewmodels.Add<vmBlock_Recaptcha3>();
+                       settings.IgnoreViewmodels.Add<vmBlock_TitleAndDescription>();
+
+                       settings.DataStructureProperties.Add("Forms", propertyFinder.GetProperties(typeof(vmBlock_DataForm)));
+                   });
 
             builder.Services.AddTransient<YuzuMappingConfig, FormMappingConfig>();
 
@@ -78,30 +98,6 @@ namespace YuzuDelivery.Umbraco.Forms
             ExcludeViewmodelsAtGeneration.Add<vmBlock_TitleAndDescription>();
 
             AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Forms");
-        }
-    }
-
-    public class FormImportConfig : UpdateableImportConfiguration
-    {
-        public FormImportConfig(IVmPropertyFinder vmPropertyFinder)
-            : base()
-        {
-            IgnoreViewmodels.Add<vmBlock_DataForm>();
-            IgnoreViewmodels.Add<vmBlock_DataFormBuilder>();
-            IgnoreViewmodels.Add<vmBlock_Form>();
-            IgnoreViewmodels.Add<vmBlock_FormButton>();
-            IgnoreViewmodels.Add<vmBlock_FormCheckboxRadio>();
-            IgnoreViewmodels.Add<vmBlock_FormCheckboxRadioList>();
-            IgnoreViewmodels.Add<vmBlock_FormHidden>();
-            IgnoreViewmodels.Add<vmBlock_FormFileInput>();
-            IgnoreViewmodels.Add<vmBlock_FormSelect>();
-            IgnoreViewmodels.Add<vmBlock_FormTextArea>();
-            IgnoreViewmodels.Add<vmBlock_FormTextInput>();
-            IgnoreViewmodels.Add<vmBlock_Recaptcha>();
-            IgnoreViewmodels.Add<vmBlock_Recaptcha3>();
-            IgnoreViewmodels.Add<vmBlock_TitleAndDescription>();
-
-            SpecialistProperties.Add("Forms", vmPropertyFinder.GetProperties(typeof(vmBlock_DataForm)));
         }
     }
 

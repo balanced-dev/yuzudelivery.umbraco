@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Options;
+using YuzuDelivery.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.Import
 {
     public class BlockListGridRowConfigToContent
     {
-        private readonly IYuzuDeliveryImportConfiguration importConfig;
+        private readonly IOptions<ImportSettings> importConfig;
 
         protected static string ColumnSettingsName { get; private set; }
 
@@ -13,7 +15,7 @@ namespace YuzuDelivery.Umbraco.Import
         protected static string SettingsGroup { get; private set; }
 
 
-        public BlockListGridRowConfigToContent(IYuzuDeliveryImportConfiguration importConfig)
+        public BlockListGridRowConfigToContent(IOptions<ImportSettings> importConfig)
         {
             this.importConfig = importConfig;
 
@@ -30,7 +32,7 @@ namespace YuzuDelivery.Umbraco.Import
 
             if(config.Grid.HasColumns)
             {
-                foreach (var f in importConfig.GridRowConfigs.Where(x => !x.IsRow))
+                foreach (var f in importConfig.Value.GridRowConfigs.Where(x => !x.IsRow))
                 {
                     if (f.IsDefault && !sizes.Any())
                     {
@@ -47,7 +49,7 @@ namespace YuzuDelivery.Umbraco.Import
             }
             else
             {
-                output.Add(importConfig.GridRowConfigs.Where(x => x.IsRow).FirstOrDefault());
+                output.Add(importConfig.Value.GridRowConfigs.Where(x => x.IsRow).FirstOrDefault());
             }
 
             return output.ToArray();

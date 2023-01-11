@@ -1,11 +1,7 @@
-﻿using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using Umbraco.Cms.Core.Exceptions;
-using YuzuDelivery.Core.ViewModelBuilder;
-using YuzuDelivery.Umbraco.Core.Settings;
-using YuzuDelivery.Umbraco.Core.Startup;
+using YuzuDelivery.Core.Settings;
+using YuzuDelivery.Core.Settings.Validators;
 
 namespace YuzuDelivery.Umbraco.Core.Tests.Startup;
 
@@ -30,32 +26,22 @@ public class DefaultUmbracoVmBuilderConfigTests
         var hostEnvironment = Substitute.For<IHostEnvironment>();
         hostEnvironment.ContentRootPath.Returns(contentRoot);
 
-        var settings = Substitute.For<IOptionsMonitor<VmGenerationSettings>>();
-        settings.CurrentValue.Returns(new VmGenerationSettings
+        var settings = new ViewModelGenerationSettings
         {
             Directory = viewModelsDirectory,
             AcceptUnsafeDirectory = allowUnsafe
-        });
+        };
 
-        if (shouldThrow)
+        var validator = new ViewModelGenerationUnsafeDirectoryValidator(hostEnvironment);
+
+        if (!shouldThrow)
         {
-            Assert.Throws<ConfigurationException>(() =>
-            {
-                _ = new DefaultUmbracoVmBuilderConfig(
-                    Enumerable.Empty<IUpdateableVmBuilderConfig>(),
-                    hostEnvironment,
-                    settings);
-            });
+            Assert.That(validator.Validate("", settings).Succeeded, Is.True);
         }
+
         else
         {
-            Assert.DoesNotThrow(() =>
-            {
-                _ = new DefaultUmbracoVmBuilderConfig(
-                    Enumerable.Empty<IUpdateableVmBuilderConfig>(),
-                    hostEnvironment,
-                    settings);
-            });
+            Assert.That(validator.Validate("", settings).Succeeded, Is.False);
         }
     }
 
@@ -77,32 +63,22 @@ public class DefaultUmbracoVmBuilderConfigTests
         var hostEnvironment = Substitute.For<IHostEnvironment>();
         hostEnvironment.ContentRootPath.Returns(contentRoot);
 
-        var settings = Substitute.For<IOptionsMonitor<VmGenerationSettings>>();
-        settings.CurrentValue.Returns(new VmGenerationSettings
+        var settings = new ViewModelGenerationSettings
         {
             Directory = viewModelsDirectory,
             AcceptUnsafeDirectory = allowUnsafe
-        });
+        };
 
-        if (shouldThrow)
+        var validator = new ViewModelGenerationUnsafeDirectoryValidator(hostEnvironment);
+
+        if (!shouldThrow)
         {
-            Assert.Throws<ConfigurationException>(() =>
-            {
-                _ = new DefaultUmbracoVmBuilderConfig(
-                    Enumerable.Empty<IUpdateableVmBuilderConfig>(),
-                    hostEnvironment,
-                    settings);
-            });
+            Assert.That(validator.Validate("", settings).Succeeded, Is.True);
         }
+
         else
         {
-            Assert.DoesNotThrow(() =>
-            {
-                _ = new DefaultUmbracoVmBuilderConfig(
-                    Enumerable.Empty<IUpdateableVmBuilderConfig>(),
-                    hostEnvironment,
-                    settings);
-            });
+            Assert.That(validator.Validate("", settings).Succeeded, Is.False);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Settings;
@@ -8,6 +9,7 @@ using YuzuDelivery.Umbraco.Import;
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -16,7 +18,6 @@ using YuzuDelivery.Core.Mapping.Mappers;
 using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Core.Mapping.Mappers;
-using YuzuDelivery.Umbraco.Core.Settings;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -32,9 +33,17 @@ namespace YuzuDelivery.Umbraco.Core
                 .Bind(builder.Config.GetSection("Yuzu:Core"))
                 .ValidateDataAnnotations();
 
-            builder.Services.AddOptions<VmGenerationSettings>()
-                .Bind(builder.Config.GetSection("Yuzu:VmGeneration"))
-                .ValidateDataAnnotations();
+            builder.Services.AddOptions<ViewModelGenerationSettings>()
+                   .Bind(builder.Config.GetSection("Yuzu:VmGeneration"))
+                   .Configure<IHostEnvironment>((settings, env) =>
+                   {
+                       if (!Path.IsPathFullyQualified(settings.Directory))
+                       {
+                           settings.Directory = Path.GetFullPath(Path.Combine(env.ContentRootPath, settings.Directory));
+                       }
+                   })
+                   .ValidateDataAnnotations()
+                   .ValidateOnStart();
 
             builder.ManifestFilters().Append<YuzuManifestFilter>();
 
@@ -58,9 +67,13 @@ namespace YuzuDelivery.Umbraco.Core
                    });
 
 
-            //MUST be transient lifetime
+            builder.Services.Configure<ViewModelGenerationSettings>(settings =>
+            {
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataImage>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataLink>();
 
-            builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(CoreVmBuilderConfig));
+                settings.AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Core");
+            });
 
             builder.Services.AddSingleton<DefaultYuzuMapperFactory>();
 
@@ -143,18 +156,6 @@ namespace YuzuDelivery.Umbraco.Core
 
                 return items.ToArray();
             });
-        }
-    }
-
-    public class CoreVmBuilderConfig : UpdateableVmBuilderConfig
-    {
-        public CoreVmBuilderConfig()
-            : base()
-        {
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataImage>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataLink>();
-
-            AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Core");
         }
     }
 }

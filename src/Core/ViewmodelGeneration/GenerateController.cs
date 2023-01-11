@@ -7,7 +7,9 @@ using YuzuDelivery.Core.ViewModelBuilder;
 using IO = System.IO;
 using YuzuDelivery.Core;
 using System.Reflection;
+using Microsoft.Extensions.Options;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Settings;
 
 #if NETCOREAPP
 using Umbraco.Cms.Web.Common.Attributes;
@@ -27,10 +29,10 @@ namespace YuzuDelivery.Umbraco.Core
     public class GenerateController : UmbracoAuthorizedApiController
     {
         private readonly BuildViewModelsService buildViewModelsSvc;
-        private readonly IYuzuViewmodelsBuilderConfig builderConfig;
+        private readonly IOptions<ViewModelGenerationSettings> builderConfig;
         private readonly IMapper mapper;
 
-        public GenerateController(ReferencesService referencesService, BuildViewModelsService buildViewModelsSvc, IYuzuViewmodelsBuilderConfig builderConfig, IMapper mapper)
+        public GenerateController(ReferencesService referencesService, BuildViewModelsService buildViewModelsSvc, IOptions<ViewModelGenerationSettings> builderConfig, IMapper mapper)
         {
             this.buildViewModelsSvc = buildViewModelsSvc;
             this.builderConfig = builderConfig;
@@ -42,7 +44,7 @@ namespace YuzuDelivery.Umbraco.Core
         [HttpGet]
         public string Build()
         {
-            var generatedFolder = builderConfig.GeneratedViewmodelsOutputFolder;
+            var generatedFolder = builderConfig.Value.Directory;
 
             var genFiles = new Dictionary<string, string>();
 
@@ -75,14 +77,14 @@ namespace YuzuDelivery.Umbraco.Core
         public (bool Enabled, string Dashboard) GetDashboard()
         {
             var sb = new StringBuilder();
-            if (builderConfig.EnableViewmodelsBuilder)
+            if (builderConfig.Value.IsActive)
             {
                 sb.AppendFormat("Version {0}", GetVersion());
                 sb.Append("<br />&nbsp;<br />");
                 sb.Append("Yuzu ViewmodelsBuilder is enabled, with the following configuration:");
 
                 sb.Append("<ul>");
-                sb.Append($"<li>Models namespace is {builderConfig.GeneratedViewmodelsNamespace}.</li>");
+                sb.Append($"<li>Models namespace is {builderConfig.Value.GeneratedViewModelsNamespace}.</li>");
                 sb.Append("</ul>");
 
                 return (true, sb.ToString());

@@ -1,13 +1,10 @@
 ﻿using System.Reflection;
 using Umbraco.Cms.Core.Composing;
 using YuzuDelivery.Core;
-using YuzuDelivery.Core.ViewModelBuilder;
 using YuzuDelivery.Umbraco.Core;
-using YuzuDelivery.Umbraco.Import;
-using YuzuDelivery.Umbraco.Core.Startup;
 using YuzuDelivery.TemplateEngines.Handlebars;
 
-namespace Umbraco.Cms.Web.UI
+namespace Yuzu.Acceptance
 {
     public class YuzuComposer : IComposer
     {
@@ -15,7 +12,6 @@ namespace Umbraco.Cms.Web.UI
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            builder.Services.AddSingleton<IYuzuViewmodelsBuilderConfig, DefaultUmbracoVmBuilderConfig>();
             builder.Services.Configure<YuzuConfiguration>(cfg =>
             {
                 cfg.AddToModelRegistry(assembly);
@@ -24,7 +20,7 @@ namespace Umbraco.Cms.Web.UI
 
             builder.Services.AddYuzuHandlebars();
             builder.Services.AddYuzuCore();
-    
+
             builder.Services.RegisterYuzuManualMapping(assembly);
 
             builder.Services.RegisterFormStrategies(assembly);

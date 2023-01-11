@@ -13,7 +13,9 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Import.Settings;
+using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.BlockList
@@ -61,8 +63,19 @@ namespace YuzuDelivery.Umbraco.BlockList
             builder.Services.AddTransient<YuzuMappingConfig, BlockListInlineMapping>();
             builder.Services.AddTransient(typeof(YuzuMappingConfig), typeof(BlockListGridAutoMapping));
 
+            builder.Services.Configure<ViewModelGenerationSettings>(settings =>
+            {
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataGrid>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataGridRow>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataGridColumn>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataRows>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataRowsRow>();
+
+                settings.AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.BlockList");
+            });
+
             //MUST be transient lifetime
-            builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(BlockListGridVmBuilderConfig));
+
             builder.Services.AddOptions<ImportSettings>()
                    .Configure<IVmPropertyFinder>((settings, propertyFinder) =>
                    {
@@ -139,22 +152,6 @@ namespace YuzuDelivery.Umbraco.BlockList
                 return str;
 
             return Char.ToLowerInvariant(str[0]) + str.Substring(1);
-        }
-
-    }
-
-    public class BlockListGridVmBuilderConfig : UpdateableVmBuilderConfig
-    {
-        public BlockListGridVmBuilderConfig()
-            : base()
-        {
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataGrid>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridRow>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_DataGridColumn>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataRows>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_DataRowsRow>();
-
-            AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.BlockList");
         }
     }
 }

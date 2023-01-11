@@ -14,6 +14,7 @@ using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Forms.Core.Providers;
 using YuzuDelivery.Core.Mapping;
+using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.Forms
@@ -37,8 +38,32 @@ namespace YuzuDelivery.Umbraco.Forms
                 cfg.MappingAssemblies.Add(GetType().Assembly);
             });
 
+            builder.Services.Configure<ViewModelGenerationSettings>(settings =>
+            {
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_Form>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataForm>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataFormBuilder>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataFormBuilderFieldset>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataFormBuilderValidation>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormButton>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormBlank>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormCheckboxRadio>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_FormCheckboxRadioDataValue>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormCheckboxRadioList>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormHidden>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormFileInput>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormSelect>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_FormSelectOption>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormTextArea>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormTextInput>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_Recaptcha>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_Recaptcha3>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmBlock_TitleAndDescription>();
+
+                settings.AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Forms");
+            });
+
             //MUST be transient lifetimes
-            builder.Services.AddTransient(typeof(IUpdateableVmBuilderConfig), typeof(FormVmBuilderConfig));
             builder.Services.AddOptions<ImportSettings>()
                    .Configure<IVmPropertyFinder>((settings, propertyFinder) =>
                    {
@@ -70,35 +95,4 @@ namespace YuzuDelivery.Umbraco.Forms
                 .Add<ColumnBlank>();
         }
     }
-
-    public class FormVmBuilderConfig : UpdateableVmBuilderConfig
-    {
-        public FormVmBuilderConfig()
-            : base()
-        {
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_Form>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataForm>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_DataFormBuilder>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_DataFormBuilderFieldset>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_DataFormBuilderValidation>();
-
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormButton>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormBlank>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormCheckboxRadio>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_FormCheckboxRadioDataValue>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormCheckboxRadioList>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormHidden>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormFileInput>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormSelect>();
-            ExcludeViewmodelsAtGeneration.Add<vmSub_FormSelectOption>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormTextArea>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_FormTextInput>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_Recaptcha>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_Recaptcha3>();
-            ExcludeViewmodelsAtGeneration.Add<vmBlock_TitleAndDescription>();
-
-            AddNamespacesAtGeneration.Add("YuzuDelivery.Umbraco.Forms");
-        }
-    }
-
 }

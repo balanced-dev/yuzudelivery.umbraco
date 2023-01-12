@@ -33,6 +33,8 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             builder.Services.RegisterAll<IContentMapper>(assembly);
 
+            builder.Services.RegisterBlockListStrategies(Assembly.GetEntryAssembly());
+
             //Global blocklist
 
             builder.Services.AddTransient<GuidFactory>();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
 using YuzuDelivery.Umbraco.Import;
@@ -37,6 +38,8 @@ namespace YuzuDelivery.Umbraco.Forms
             {
                 cfg.MappingAssemblies.Add(GetType().Assembly);
             });
+
+            builder.Services.RegisterFormStrategies(Assembly.GetEntryAssembly());
 
             builder.Services.Configure<ViewModelGenerationSettings>(settings =>
             {

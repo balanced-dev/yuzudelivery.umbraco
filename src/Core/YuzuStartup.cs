@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using YuzuDelivery.Core;
 using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Core.ViewModelBuilder;
@@ -119,6 +120,13 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.RegisterYuzuAutoMapping();
 
             builder.Services.AddSingleton<IYuzuMappingIndex, YuzuUmbracoMappingIndex>();
+
+            builder.Services.Configure<YuzuConfiguration>(cfg =>
+            {
+                var assembly = Assembly.GetEntryAssembly();
+                cfg.AddToModelRegistry(assembly);
+                cfg.AddInstalledManualMaps(assembly);
+            });
 
             AddDefaultPublishedElements(builder);
         }

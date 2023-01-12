@@ -1,16 +1,22 @@
-﻿using YuzuDelivery.Core;
-using YuzuDelivery.Core.Mapping;
+﻿using Microsoft.Extensions.Options;
 using YuzuDelivery.Core.Mapping.Mappers;
 using YuzuDelivery.Core.Mapping.Mappers.Settings;
-using YuzuDelivery.Umbraco.Core;
+using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
-    public class FormAutoMapping : YuzuMappingConfig
+    public class FormAutoMapping : IConfigureOptions<ManualMapping>
     {
+        private readonly IVmPropertyMappingsFinder vmPropertyMappingsFinder;
+
         public FormAutoMapping(IVmPropertyMappingsFinder vmPropertyMappingsFinder)
+        {
+            this.vmPropertyMappingsFinder = vmPropertyMappingsFinder;
+        }
+
+        public void Configure(ManualMapping options)
         {
             var formMappings = vmPropertyMappingsFinder.GetMappings<vmBlock_DataForm>();
 
@@ -20,7 +26,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 {
                     var resolverType = typeof(FormValueResolver<,>).MakeGenericType(i.SourceType, i.DestType);
 
-                    ManualMaps.Add(new YuzuFullPropertyMapperSettings()
+                    options.ManualMaps.Add(new YuzuFullPropertyMapperSettings()
                     {
                         Mapper = typeof(IYuzuFullPropertyMapper<UmbracoMappingContext>),
                         Resolver = resolverType,

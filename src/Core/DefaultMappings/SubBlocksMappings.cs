@@ -4,20 +4,24 @@ using YuzuDelivery.Core;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Mapping.Mappers;
 using YuzuDelivery.Core.Mapping.Mappers.Settings;
+using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import;
-
-#if NETCOREAPP
 using Umbraco.Cms.Core.Models.PublishedContent;
-#else
-using Umbraco.Core.Models.PublishedContent;
-#endif
+
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public class SubBlocksMappings : YuzuMappingConfig
+    public class SubBlocksMappings : IConfigureOptions<ManualMapping>
     {
+        private readonly IVmPropertyMappingsFinder vmPropertyMappingsFinder;
+
         public SubBlocksMappings(IVmPropertyMappingsFinder vmPropertyMappingsFinder)
+        {
+            this.vmPropertyMappingsFinder = vmPropertyMappingsFinder;
+        }
+
+        public void Configure(ManualMapping options)
         {
             var listOfObjectsMappings = vmPropertyMappingsFinder.GetMappings<object>();
 
@@ -27,7 +31,7 @@ namespace YuzuDelivery.Umbraco.Core
                 {
                     var resolverType = typeof(SubBlocksObjectResolver<,>).MakeGenericType(i.SourceType, i.DestType);
 
-                    ManualMaps.Add(new YuzuFullPropertyMapperSettings()
+                    options.ManualMaps.Add(new YuzuFullPropertyMapperSettings()
                     {
                         Mapper = typeof(IYuzuFullPropertyMapper<UmbracoMappingContext>),
                         Resolver = resolverType,

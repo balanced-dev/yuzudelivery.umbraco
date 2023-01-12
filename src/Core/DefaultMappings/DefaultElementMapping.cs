@@ -12,16 +12,6 @@ using Umbraco.Core.Models.PublishedContent;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-
-    public class DefaultElementMapping : YuzuMappingConfig
-    {
-        public DefaultElementMapping()
-        {
-            ManualMaps.AddTypeReplace<DefaultPublishedElementCollectionConvertor>(false);
-            ManualMaps.AddTypeReplace<DefaultPublishedElementCollectionToSingleConvertor>(false);
-        }
-    }
-
     public class DefaultPublishedElementCollectionConvertor : IYuzuTypeConvertor<IEnumerable<IPublishedElement>, IEnumerable<object>>
     {
         private readonly IMapper mapper;

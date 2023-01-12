@@ -16,6 +16,7 @@ using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Core;
+using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.BlockList
@@ -53,7 +54,18 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             builder.Services.AddUnique<IInlineBlockCreator, BlockListEditorCreationService>();
 
-            builder.Services.AddTransient(typeof(YuzuMappingConfig), typeof(BlockListAutoMapping));
+            builder.Services.AddTransient<IConfigureOptions<ManualMapping>, BlockListAutoMapping>();
+
+            builder.Services.Configure<ManualMapping>(settings =>
+            {
+                // BlockListGridAutoMapping
+                settings.ManualMaps.AddTypeReplace<BlockListRowsConverter>();
+                settings.ManualMaps.AddTypeReplace<BlockListGridConverter>();
+
+                // BlockListInlineMapping
+                settings.ManualMaps.AddTypeReplace<BlockListToObjectTypeConvertor>();
+                settings.ManualMaps.AddTypeReplace<BlockListToListOfObjectsTypeConvertor>();
+            });
 
             //Grid blocklist
             builder.Services.AddTransient<BlockListRowsConverter>();
@@ -62,8 +74,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             builder.Services.AddUnique<IGridSchemaCreationService, BlockListGridCreationService>();
 
-            builder.Services.AddTransient<YuzuMappingConfig, BlockListInlineMapping>();
-            builder.Services.AddTransient(typeof(YuzuMappingConfig), typeof(BlockListGridAutoMapping));
+
 
             builder.Services.Configure<ViewModelGenerationSettings>(settings =>
             {

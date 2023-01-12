@@ -1,20 +1,26 @@
 using System;
 using System.Linq;
-using YuzuDelivery.Core;
-using YuzuDelivery.Umbraco.Core;
+using Microsoft.Extensions.Options;
 using YuzuDelivery.Umbraco.Import;
 using Umbraco.Cms.Core.Models.Blocks;
-using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Mapping.Mappers;
 using YuzuDelivery.Core.Mapping.Mappers.Settings;
+using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
-    public class BlockListAutoMapping : YuzuMappingConfig
+    public class BlockListAutoMapping : IConfigureOptions<ManualMapping>
     {
+        private readonly IVmPropertyMappingsFinder vmPropertyMappingsFinder;
+
         public BlockListAutoMapping(IVmPropertyMappingsFinder vmPropertyMappingsFinder)
+        {
+            this.vmPropertyMappingsFinder = vmPropertyMappingsFinder;
+        }
+
+        public void Configure(ManualMapping options)
         {
             var mappings = vmPropertyMappingsFinder.GetBlockMappings(typeof(BlockListModel));
 
@@ -31,7 +37,7 @@ namespace YuzuDelivery.Umbraco.BlockList
                     else
                         convertorType = typeof(BlockListToTypeConvertor<>).MakeGenericType(destPropertyType);
 
-                    ManualMaps.Add(new YuzuTypeConvertorMapperSettings()
+                    options.ManualMaps.Add(new YuzuTypeConvertorMapperSettings()
                     {
                         Mapper = typeof(IYuzuTypeReplaceMapper<UmbracoMappingContext>),
                         Convertor = convertorType

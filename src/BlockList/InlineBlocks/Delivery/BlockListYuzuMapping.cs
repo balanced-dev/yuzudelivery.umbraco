@@ -19,16 +19,6 @@ using Umbraco.Core.Models.Blocks;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
-
-    public class BlockListInlineMapping : YuzuMappingConfig
-    {
-        public BlockListInlineMapping()
-        {
-            ManualMaps.AddTypeReplace<BlockListToObjectTypeConvertor>();
-            ManualMaps.AddTypeReplace<BlockListToListOfObjectsTypeConvertor>();
-        }
-    }
-
     public class BlockListToListOfObjectsTypeConvertor : IYuzuTypeConvertor<BlockListModel, List<object>>
     {
         private readonly BlockListDataService service;

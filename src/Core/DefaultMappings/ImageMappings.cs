@@ -17,16 +17,6 @@ using Umbraco.Web;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-
-    public class ImageMappings : YuzuMappingConfig
-    {
-        public ImageMappings()
-        {
-            ManualMaps.AddTypeReplace<ImageConvertor>(false);
-            ManualMaps.AddTypeReplace<MediWithCropsConvertor>(false);
-        }
-    }
-
     public class MediWithCropsConvertor : IYuzuTypeConvertor<MediaWithCrops, vmBlock_DataImage>
     {
         private ImageFactory imageFactory;

@@ -20,16 +20,6 @@ using Umbraco.Web.Models;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-
-    public class LinkMappings : YuzuMappingConfig
-    {
-        public LinkMappings()
-        {
-            ManualMaps.AddTypeReplace<LinkIPublishedContentConvertor>(false);
-            ManualMaps.AddTypeReplace<LinkConvertor>(false);
-        }
-    }
-
     public class LinkIPublishedContentConvertor : IYuzuTypeConvertor<IPublishedContent, vmBlock_DataLink>
     {
         public vmBlock_DataLink Convert(IPublishedContent link, UmbracoMappingContext context)

@@ -10,51 +10,51 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
 {
     public static class MappingsExtensions
     {
-        public static void AddTypeAfterMap<TConverter>(this List<YuzuMapperSettings> resolvers)
+        public static void AddTypeAfterMap<TConverter>(this IList<YuzuMapperSettings> resolvers)
             where TConverter : IYuzuTypeAfterConvertor
         {
             resolvers.AddTypeAfterMap(typeof(TConverter));
         }
 
-        public static void AddTypeAfterMap(this List<YuzuMapperSettings> resolvers, Type afterMapType)
+        public static void AddTypeAfterMap(this IList<YuzuMapperSettings> resolvers, Type afterMapType)
         {
             resolvers.AddTypeAfterMapWithContext<UmbracoMappingContext>(afterMapType);
         }
 
-        public static void AddTypeReplace<TConverter>(this List<YuzuMapperSettings> resolvers, bool ignoreReturnType = true)
+        public static void AddTypeReplace<TConverter>(this IList<YuzuMapperSettings> resolvers, bool ignoreReturnType = true)
             where TConverter : IYuzuTypeConvertor
         {
             resolvers.AddTypeReplaceWithContext<UmbracoMappingContext, TConverter>(ignoreReturnType);
         }
 
-        public static void AddTypeReplace(this List<YuzuMapperSettings> resolvers, Type convertorType, bool ignoreReturnType = true)
+        public static void AddTypeReplace(this IList<YuzuMapperSettings> resolvers, Type convertorType, bool ignoreReturnType = true)
         {
             resolvers.AddTypeReplaceWithContext<UmbracoMappingContext>(convertorType, ignoreReturnType);
         }
 
-        public static void AddTypeFactory<ResolverType, Dest>(this List<YuzuMapperSettings> resolvers)
+        public static void AddTypeFactory<ResolverType, Dest>(this IList<YuzuMapperSettings> resolvers)
             where ResolverType : IYuzuTypeFactory
         {
             resolvers.AddTypeFactoryWithContext<UmbracoMappingContext>(typeof(ResolverType), typeof(Dest));
         }
 
-        public static void AddTypeFactory(this List<YuzuMapperSettings> resolvers, Type factoryType, Type destType)
+        public static void AddTypeFactory(this IList<YuzuMapperSettings> resolvers, Type factoryType, Type destType)
         {
             resolvers.AddTypeFactoryWithContext<UmbracoMappingContext>(factoryType, destType);
         }
 
-        public static void AddPropertyFactory<ResolverType, Source, Dest>(this List<YuzuMapperSettings> resolvers, Expression<Func<Dest, object>> destMember)
+        public static void AddPropertyFactory<ResolverType, Source, Dest>(this IList<YuzuMapperSettings> resolvers, Expression<Func<Dest, object>> destMember)
             where ResolverType : IYuzuTypeFactory
         {
             resolvers.AddPropertyFactory(typeof(ResolverType), typeof(Source), typeof(Dest), destMember.GetMemberName());
         }
 
-        public static void AddPropertyFactory(this List<YuzuMapperSettings> resolvers, Type factoryType, Type sourceType, Type destType, string destMemberName)
+        public static void AddPropertyFactory(this IList<YuzuMapperSettings> resolvers, Type factoryType, Type sourceType, Type destType, string destMemberName)
         {
             resolvers.AddPropertyFactoryWithContext<UmbracoMappingContext>(factoryType, sourceType, destType, destMemberName);
         }
 
-        public static void AddPropertyAfter<ResolverType, Dest, DestMember>(this List<YuzuMapperSettings> resolvers, Expression<Func<Dest, DestMember>> destMember, string groupName = "")
+        public static void AddPropertyAfter<ResolverType, Dest, DestMember>(this IList<YuzuMapperSettings> resolvers, Expression<Func<Dest, DestMember>> destMember, string groupName = "")
             where ResolverType : IYuzuPropertyAfterResolver
         {
             resolvers.Add(new YuzuPropertyAfterMapperSettings()
@@ -67,14 +67,14 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
             });
         }
 
-        public static void AddPropertyReplace<ResolverType, Dest>(this List<YuzuMapperSettings> resolvers, Expression<Func<Dest, object>> destMember, string groupName = "", bool ignoreProperty = true, bool ignoreReturnType = true)
+        public static void AddPropertyReplace<ResolverType, Dest>(this IList<YuzuMapperSettings> resolvers, Expression<Func<Dest, object>> destMember, string groupName = "", bool ignoreProperty = true, bool ignoreReturnType = true)
             where ResolverType : IYuzuPropertyReplaceResolver
         {
             resolvers.AddPropertyReplace(typeof(ResolverType), typeof(Dest), destMember.GetMemberName(), groupName, ignoreProperty, ignoreReturnType);
         }
 
         public static void AddPropertyReplace(
-            this List<YuzuMapperSettings> resolvers,
+            this IList<YuzuMapperSettings> resolvers,
             Type resolverType,
             Type destType,
             string destMemberName,
@@ -90,14 +90,14 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
                 ignoreReturnType);
         }
 
-        public static void AddFullProperty<ResolverType, Source, Dest>(this List<YuzuMapperSettings> resolvers, Expression<Func<Source, object>> sourceMember, Expression<Func<Dest, object>> destMember, string groupName = "", bool ignoreProperty = true, bool ignoreReturnType = true)
+        public static void AddFullProperty<ResolverType, Source, Dest>(this IList<YuzuMapperSettings> resolvers, Expression<Func<Source, object>> sourceMember, Expression<Func<Dest, object>> destMember, string groupName = "", bool ignoreProperty = true, bool ignoreReturnType = true)
             where ResolverType : IYuzuPropertyReplaceResolver
         {
             resolvers.AddFullProperty(typeof(ResolverType), sourceMember.GetMemberName(), destMember.GetMemberName(), groupName, ignoreProperty, ignoreReturnType);
         }
 
         public static void AddFullProperty(
-            this List<YuzuMapperSettings> resolvers,
+            this IList<YuzuMapperSettings> resolvers,
             Type resolverType,
             string sourceMemberName,
             string destMemberName,
@@ -113,12 +113,12 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
                 ignoreReturnType);
         }
 
-        public static void AddGroup<Source, DestParent, DestChild>(this List<YuzuMapperSettings> resolvers, Expression<Func<DestParent, object>> destParentMember, string groupName)
+        public static void AddGroup<Source, DestParent, DestChild>(this IList<YuzuMapperSettings> resolvers, Expression<Func<DestParent, object>> destParentMember, string groupName)
         {
             resolvers.AddGroup(typeof(Source), typeof(DestParent), typeof(DestChild), destParentMember.GetMemberName(), groupName);
         }
 
-        public static void AddGroup(this List<YuzuMapperSettings> resolvers, Type source, Type destParent, Type destChild, string destParentPropertyName, string groupName)
+        public static void AddGroup(this IList<YuzuMapperSettings> resolvers, Type source, Type destParent, Type destChild, string destParentPropertyName, string groupName)
         {
             resolvers.Add(new YuzuGroupMapperSettings()
             {
@@ -131,12 +131,12 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
             });
         }
 
-        public static void AddGlobal<Source, Dest>(this List<YuzuMapperSettings> resolvers, string groupName)
+        public static void AddGlobal<Source, Dest>(this IList<YuzuMapperSettings> resolvers, string groupName)
         {
             resolvers.AddGlobal(typeof(Source), typeof(Dest), groupName);
         }
 
-        public static void AddGlobal(this List<YuzuMapperSettings> resolvers, Type source, Type dest, string groupName)
+        public static void AddGlobal(this IList<YuzuMapperSettings> resolvers, Type source, Type dest, string groupName)
         {
             resolvers.Add(new YuzuGlobalMapperSettings()
             {

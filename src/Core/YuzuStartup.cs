@@ -95,13 +95,25 @@ namespace YuzuDelivery.Umbraco.Core
 
             builder.Services.AddTransient<ImageFactory>();
 
-            builder.Services.AddSingleton(typeof(YuzuMappingConfig), typeof(DefaultElementMapping));
-            builder.Services.AddSingleton(typeof(YuzuMappingConfig), typeof(ImageMappings));
-            builder.Services.AddSingleton(typeof(YuzuMappingConfig), typeof(LinkMappings));
-            builder.Services.AddSingleton(typeof(YuzuMappingConfig), typeof(SubBlocksMappings));
-            builder.Services.AddSingleton(typeof(YuzuMappingConfig), typeof(ManualMappingsMappings));
-            builder.Services.AddSingleton(typeof(YuzuMappingConfig), typeof(GroupedConfigMappings));
-            builder.Services.AddSingleton(typeof(YuzuMappingConfig), typeof(GlobalConfigMappings));
+            builder.Services.Configure<ManualMapping>(settings =>
+            {
+                // Default
+                settings.ManualMaps.AddTypeReplace<DefaultPublishedElementCollectionConvertor>(false);
+                settings.ManualMaps.AddTypeReplace<DefaultPublishedElementCollectionToSingleConvertor>(false);
+
+                // Images
+                settings.ManualMaps.AddTypeReplace<ImageConvertor>(false);
+                settings.ManualMaps.AddTypeReplace<MediWithCropsConvertor>(false);
+
+                // Links
+                settings.ManualMaps.AddTypeReplace<LinkIPublishedContentConvertor>(false);
+                settings.ManualMaps.AddTypeReplace<LinkConvertor>(false);
+            });
+
+            builder.Services.AddTransient<IConfigureOptions<ManualMapping>, SubBlocksMappings>();
+            builder.Services.AddTransient<IConfigureOptions<ManualMapping>, ManualMappingsMappings>();
+            builder.Services.AddTransient<IConfigureOptions<ManualMapping>, GroupedConfigMappings>();
+            builder.Services.AddTransient<IConfigureOptions<ManualMapping>, GlobalConfigMappings>();
 
             builder.Services.AddUnique<IYuzuGroupMapper, DefaultGroupMapper>();
             builder.Services.AddUnique<IYuzuGlobalMapper, UmbracoGlobalMapper>();

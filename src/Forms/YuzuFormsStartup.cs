@@ -10,6 +10,7 @@ using YuzuDelivery.Core.ViewModelBuilder;
 using Umbraco.Extensions;
 using Umbraco.Cms.Core.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -17,6 +18,7 @@ using Umbraco.Forms.Core.Providers;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Settings;
 using YuzuDelivery.Import.Settings;
+using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
@@ -88,10 +90,13 @@ namespace YuzuDelivery.Umbraco.Forms
                        settings.DataStructureProperties.Add("Forms", propertyFinder.GetProperties(typeof(vmBlock_DataForm)));
                    });
 
-            builder.Services.AddTransient<YuzuMappingConfig, FormMappingConfig>();
+            builder.Services.Configure<ManualMapping>(settings =>
+            {
+                settings.ManualMaps.AddTypeReplace<FormTypeConvertor>();
+                settings.ManualMaps.AddTypeReplace<FormBuilderTypeConverter>();
+            });
 
-            builder.Services.AddTransient(typeof(YuzuMappingConfig), typeof(FormAutoMapping));
-
+            builder.Services.AddTransient<IConfigureOptions<ManualMapping>, FormAutoMapping>();
 
             // Register custom FieldTypes
             builder.WithCollectionBuilder<FieldCollectionBuilder>()

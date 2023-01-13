@@ -1,5 +1,5 @@
 param(
-    [string] $UmbracoVersion = "10.2.0",
+    [string] $UmbracoVersion = "10.4.0",
     [string] $UmbracoFormsVersion = "10.1.2",
     [string] $YuzuDeliveryUmbracoVersion = $null,
     [string] $YuzuDeliveryHandlebarsVersion = "3.*-*"

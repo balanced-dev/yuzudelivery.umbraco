@@ -58,8 +58,7 @@ namespace YuzuDelivery.Umbraco.Import
                 }
             }
 
-            var pathSegments = _schemaMetaService.GetPathSegments(viewModelName);
-            var blockListConfig = CreateBlockListConfig(subBlocks, blocks, options, pathSegments);
+            var blockListConfig = CreateBlockListConfig(subBlocks, blocks, options, viewModelName);
 
             dataTypeDefinition.Umb().Name = dataTypeName;
             dataTypeDefinition.Umb().Configuration = blockListConfig;
@@ -67,7 +66,7 @@ namespace YuzuDelivery.Umbraco.Import
             return dataTypeService.Save(dataTypeDefinition);
         }
 
-        private BlockListConfiguration CreateBlockListConfig(string[] subBlocks, List<BlockListConfiguration.BlockConfiguration> blocks, Options options, string[] pathSegments)
+        private BlockListConfiguration CreateBlockListConfig(string[] subBlocks, List<BlockListConfiguration.BlockConfiguration> blocks, Options options, string vmName)
         {
             options = options == null ? options = new Options() : options;
             var blockListConfig = options.Config == null ? new BlockListConfiguration() : options.Config;
@@ -78,6 +77,11 @@ namespace YuzuDelivery.Umbraco.Import
 
             foreach (var subBlock in subBlocks)
             {
+                if (!_schemaMetaService.TryGetPathSegments(subBlock, out var pathSegments))
+                {
+                    pathSegments = _schemaMetaService.GetPathSegments(vmName);
+                }
+
                 if(!DoesBlockAlreadyExist(subBlock, blocks, options))
                     blocks.Add(CreateBlockConfig(subBlock, options, pathSegments));
             }
@@ -111,22 +115,15 @@ namespace YuzuDelivery.Umbraco.Import
 
         private IContentType CreateContentType(string blockName, Options options, string[] pathSegments)
         {
-            var contentType = options.CreateContentTypeAction != null ?
-                options.CreateContentTypeAction(blockName, contentTypeService)
-                :
-                contentTypeForVmTypeService.CreateOrUpdate(blockName, null, true, pathSegments);
+            var contentType = contentTypeForVmTypeService.CreateOrUpdate(blockName, null, true, pathSegments);
 
-            if (options.CreatePropertiesAction != null) options.CreatePropertiesAction(contentType, documentTypePropertyService);
 
             return contentType;
         }
 
         private IContentType GetContentType(string blockName, Options options)
         {
-            return options.GetContentTypeAction != null ?
-                options.GetContentTypeAction(blockName, contentTypeService)
-                :
-                contentTypeForVmTypeService.Get(blockName);
+            return contentTypeForVmTypeService.Get(blockName);
         }
 
         private IContentType CreateSettingsType(Options options)
@@ -143,9 +140,6 @@ namespace YuzuDelivery.Umbraco.Import
             public string SettingsSubBlock { get; set; }
             public bool ForceHideContentEditor { get; set; }
 
-            public Func<string, IContentTypeService, IContentType> GetContentTypeAction { get; set; }
-            public Func<string, IContentTypeService, IContentType> CreateContentTypeAction { get; set; }
-            public Action<IContentType, IDocumentTypePropertyService> CreatePropertiesAction { get; set; }
         }
 
     }

@@ -14,7 +14,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests
             builder.RegisterType<BlockListDataTypeFactory>();
             builder.RegisterType<BlockListDbModelFactory>();
 
-            builder.RegisterType<BlockListGridCreationService>();
+            builder.RegisterType<BlockGridCreationService>();
             builder.RegisterType<BlockListGridContentMapper>();
             builder.RegisterType<BlockListEditorCreationService>();
 

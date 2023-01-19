@@ -22,7 +22,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
     public class BlockListGridCreationServiceTests : BaseTestSetup
     {
         public BlockListGridRowConfigToContent gridRowConfigToContent;
-        public BlockListGridCreationService svc;
+        public BlockGridCreationService svc;
 
         public BlockListConfigurationBuilder builder;
         public VmToContentPropertyMapBuilder propertyMapBuilder;
@@ -43,7 +43,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             BaseSetup(new BlockListTestBuilder());
 
             gridRowConfigToContent = container.Resolve<BlockListGridRowConfigToContent>();
-            svc = container.Resolve<BlockListGridCreationService>();
+            svc = container.Resolve<BlockGridCreationService>();
 
             builder = new BlockListConfigurationBuilder(umb);
             propertyMapBuilder = new VmToContentPropertyMapBuilder(umb, names);
@@ -147,28 +147,30 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
         [Test]
         public void adding_configs(int rowCount, string rowConfig, string colConfig)
         {
-            CreateData(rowConfig, colConfig);
-
-            if (rowConfig != null) umb.ContentType.ForCreating(rowConfig);
-            if (colConfig != null) umb.ContentType.ForCreating(colConfig);
-
-            SectionProperties(properties, rowConfig, colConfig, assign: true);
-
-            svc.Create(propertyMapBuilder.CurrentProperty);
-
-            if (rowConfig != null) umb.ContentType.WasCreated(rowConfig.CamelToSentenceCase());
-            if (colConfig != null)
-            {
-                umb.ContentType.WasCreated(colConfig.CamelToSentenceCase());
-                Assert.IsTrue(umb.DataType.Saved.Contains("Test Column Settings"));
-
-                builder.AddBlock("Col Config", "ColConfig", customView: BlockListGridCreationService.ConfigCustomView);
-                builder.Expected.ValidationLimit.Min = 0;
-                builder.Expected.ValidationLimit.Max = 1;
-
-                var config = umb.DataType.Added["Test Column Settings"].Configuration;
-                Approvals.AssertEquals(builder.Expected.ToJson(), config.ToJson());
-            }
+            // TODO: Fix
+            Assert.Fail();
+            // CreateData(rowConfig, colConfig);
+            //
+            // if (rowConfig != null) umb.ContentType.ForCreating(rowConfig);
+            // if (colConfig != null) umb.ContentType.ForCreating(colConfig);
+            //
+            // SectionProperties(properties, rowConfig, colConfig, assign: true);
+            //
+            // svc.Create(propertyMapBuilder.CurrentProperty);
+            //
+            // if (rowConfig != null) umb.ContentType.WasCreated(rowConfig.CamelToSentenceCase());
+            // if (colConfig != null)
+            // {
+            //     umb.ContentType.WasCreated(colConfig.CamelToSentenceCase());
+            //     Assert.IsTrue(umb.DataType.Saved.Contains("Test Column Settings"));
+            //
+            //     builder.AddBlock("Col Config", "ColConfig", customView: BlockGridCreationService.ConfigCustomView);
+            //     builder.Expected.ValidationLimit.Min = 0;
+            //     builder.Expected.ValidationLimit.Max = 1;
+            //
+            //     var config = umb.DataType.Added["Test Column Settings"].Configuration;
+            //     Approvals.AssertEquals(builder.Expected.ToJson(), config.ToJson());
+            // }
         }
 
         [Test]
@@ -256,16 +258,18 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
                 }
                 else
                 {
-                    builder.AddBlock(section.CamelToSentenceCase(), section, rowConfig, true, customView: BlockListGridCreationService.SectionCustomView);
-                    umb.ContentType.WasCreated(section);
-                    foreach (var p in sectionProperties)
-                    {
-                        if (!p.IsSettings)
-                            umb.PropertyType.WasCreated(section, p.Alias, p.GroupName);
-                        if (p.IsSettings && colConfig != null)
-                            umb.PropertyType.WasCreated(section, p.Alias, p.GroupName);
-
-                    }
+                    // TODO: Fix
+                    Assert.Fail();
+                    // builder.AddBlock(section.CamelToSentenceCase(), section, rowConfig, true, customView: BlockGridCreationService.SectionCustomView);
+                    // umb.ContentType.WasCreated(section);
+                    // foreach (var p in sectionProperties)
+                    // {
+                    //     if (!p.IsSettings)
+                    //         umb.PropertyType.WasCreated(section, p.Alias, p.GroupName);
+                    //     if (p.IsSettings && colConfig != null)
+                    //         umb.PropertyType.WasCreated(section, p.Alias, p.GroupName);
+                    //
+                    // }
                 }
             }
         }

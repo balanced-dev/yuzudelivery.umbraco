@@ -27,7 +27,13 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         private IEnumerable<Type> viewmodelTypes;
 
-        public BlockListGridDataService(IMapper mapper, IOptions<YuzuConfiguration> config, IOptions<ImportSettings> importConfig, IEnumerable<IGridItem> gridItems, IEnumerable<IGridItemInternal> gridItemsInternal, IPublishedValueFallback publishedValueFallback)
+        public BlockListGridDataService(
+            IMapper mapper,
+            IOptions<YuzuConfiguration> config,
+            IOptions<ImportSettings> importConfig,
+            IEnumerable<IGridItem> gridItems,
+            IEnumerable<IGridItemInternal> gridItemsInternal,
+            IPublishedValueFallback publishedValueFallback)
         {
             this.mapper = mapper;
             this.config = config;

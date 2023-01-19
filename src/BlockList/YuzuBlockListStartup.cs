@@ -72,7 +72,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             builder.Services.AddTransient<BlockListGridConverter>();
             builder.Services.AddTransient<IBlockListGridDataService, BlockListGridDataService>();
 
-            builder.Services.AddUnique<IGridSchemaCreationService, BlockListGridCreationService>();
+            builder.Services.AddUnique<IGridSchemaCreationService, BlockGridCreationService>();
 
 
 

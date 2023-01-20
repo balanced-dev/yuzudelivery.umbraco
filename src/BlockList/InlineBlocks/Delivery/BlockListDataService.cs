@@ -63,6 +63,8 @@ namespace YuzuDelivery.Umbraco.BlockList
         public List<V> CreateList<V>(BlockListModel model, UmbracoMappingContext context)
         {
             var output = new List<V>();
+            if (model == null)
+                return output;
 
             foreach (var i in model)
             {

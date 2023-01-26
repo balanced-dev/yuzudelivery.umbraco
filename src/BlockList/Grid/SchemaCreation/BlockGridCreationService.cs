@@ -77,7 +77,8 @@ namespace YuzuDelivery.Umbraco.Import
                         Key = ContentGroup,
                     }
                 },
-                Blocks = defaultBlocks.Concat(contentBlocks).ToArray()
+                Blocks = defaultBlocks.Concat(contentBlocks).ToArray(),
+                MaxPropertyWidth = "100%"
             };
         }
 
@@ -99,6 +100,7 @@ namespace YuzuDelivery.Umbraco.Import
             var rowSettingsType = string.IsNullOrEmpty(data.Config.Grid.ColumnConfigOfType)
                 ? null
                 : _contentTypeForVmService.CreateOrUpdate(data.Config.Grid.RowConfigOfType, null, true, new []{"Grid"});
+
             var rowContentType = _contentTypeService.Create("Grid Row", "gridRow", true, new[] { "Grid" });
             var rowConfig = CreateLayoutBlockConfiguration("Row", rowContentType.Umb().Key, rowSettingsType?.Umb()?.Key);
             rowConfig.AllowAtRoot = true;
@@ -182,6 +184,7 @@ namespace YuzuDelivery.Umbraco.Import
                 AllowInAreas = true,
                 RowMinSpan = 1,
                 RowMaxSpan = 1,
+                View = "~/App_Plugins/YuzuBlockList/GridContentItem.html",
                 GroupKey = ContentGroup.ToString(),
                 EditorSize = "medium",
                 ColumnSpanOptions = new []

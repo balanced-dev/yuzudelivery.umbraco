@@ -15,15 +15,9 @@ namespace YuzuDelivery.Umbraco.BlockList
                 PackageName = "YuzuBlockList",
                 Scripts = new[]
                 {
-                    "/App_Plugins/YuzuBlockList/GridContentColumnsSettingsController.js",
-                    "/App_Plugins/YuzuBlockList/GridContentItem.js",
-                    "/App_Plugins/YuzuBlockList/GridContentSection.js"
+                    "/App_Plugins/YuzuBlockList/GridContentItem.js"
                 },
-                Stylesheets = new[]
-                {
-                    "/App_Plugins/YuzuBlockList/GridSection.css"
-                }
-
+                Stylesheets = new string [] {}
             });
         }
     }

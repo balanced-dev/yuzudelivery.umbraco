@@ -131,13 +131,18 @@ namespace YuzuDelivery.Umbraco.BlockList
 
     }
 
-    
+
 
     public class GuidFactory
     {
+        public virtual Guid CreateNew()
+        {
+            return System.Guid.NewGuid();
+        }
+
         public virtual Guid CreateNew(Guid key)
         {
             return System.Guid.NewGuid();
         }
-    } 
+    }
 }

@@ -87,6 +87,7 @@ namespace YuzuDelivery.Umbraco.Import
             var columnSettingsType = string.IsNullOrEmpty(data.Config.Grid.ColumnConfigOfType)
                 ? null
                 : _contentTypeForVmService.CreateOrUpdate(data.Config.Grid.ColumnConfigOfType, null, true, new []{"Grid"});
+
             var columnContentType = _contentTypeService.Create("Grid Column", "gridColumn", true, new[] { "Grid" });
             var columnConfig = CreateLayoutBlockConfiguration("Column", columnContentType.Umb().Key, columnSettingsType?.Umb()?.Key);
 
@@ -97,7 +98,7 @@ namespace YuzuDelivery.Umbraco.Import
                     .ToArray();
             }
 
-            var rowSettingsType = string.IsNullOrEmpty(data.Config.Grid.ColumnConfigOfType)
+            var rowSettingsType = string.IsNullOrEmpty(data.Config.Grid.RowConfigOfType)
                 ? null
                 : _contentTypeForVmService.CreateOrUpdate(data.Config.Grid.RowConfigOfType, null, true, new []{"Grid"});
 

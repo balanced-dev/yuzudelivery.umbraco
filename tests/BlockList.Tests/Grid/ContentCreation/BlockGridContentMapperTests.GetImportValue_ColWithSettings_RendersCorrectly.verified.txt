@@ -1,0 +1,47 @@
+﻿{
+  "layout": {
+    "Umbraco.BlockGrid": [
+      {
+        "contentUdi": "umb://element/18d4ace4344b4350ae913caf92723971",
+        "rowSpan": 1,
+        "columnSpan": 12,
+        "areas": [
+          {
+            "key": "de569061-d4c8-441c-8d99-9c87d052c10f",
+            "items": [
+              {
+                "contentUdi": "umb://element/a8bd981e090c4a1a8b772f27625bcf6f",
+                "settingsUdi": "umb://element/c26616389d734bfd8592d6d0180623a8",
+                "rowSpan": 1,
+                "columnSpan": 12,
+                "areas": [
+                  {
+                    "key": "c31e2d25-7c67-4eb1-95b9-d48781859b25",
+                    "items": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "contentData": [
+    {
+      "contentTypeKey": "187280bc-8dbb-4e99-b603-53eb20f8dad6",
+      "udi": "umb://element/18d4ace4344b4350ae913caf92723971"
+    },
+    {
+      "contentTypeKey": "b6ba415a-765a-4770-a7e9-66fd180c994b",
+      "udi": "umb://element/a8bd981e090c4a1a8b772f27625bcf6f"
+    }
+  ],
+  "settingsData": [
+    {
+      "contentTypeKey": "6ca50244-4a18-4116-aa75-2ba20f8eaa61",
+      "udi": "umb://element/c26616389d734bfd8592d6d0180623a8",
+      "id": "219"
+    }
+  ]
+}

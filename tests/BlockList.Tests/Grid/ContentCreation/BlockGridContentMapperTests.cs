@@ -81,13 +81,15 @@ public class BlockGridContentMapperTests : BaseTestSetup
     }
 
     [Test]
-    [TestCase(Constants.PropertyEditors.Aliases.BlockGrid, true, true)]
-    [TestCase(Constants.PropertyEditors.Aliases.BlockGrid, false, false)]
-    [TestCase(Constants.PropertyEditors.Aliases.Label, true, false)]
-    public void IsValid_VariousInputs_ReturnsExpectedValue(string editor, bool isGrid, bool expected)
+    [TestCase(Constants.PropertyEditors.Aliases.BlockGrid, true, true, true)]
+    [TestCase(Constants.PropertyEditors.Aliases.BlockGrid, true, false, false)] // Is a rowbuilder
+    [TestCase(Constants.PropertyEditors.Aliases.BlockGrid, false, false, false)]
+    [TestCase(Constants.PropertyEditors.Aliases.BlockGrid, true, true, true)]
+    [TestCase(Constants.PropertyEditors.Aliases.Label, true, true, false)]
+    public void IsValid_VariousInputs_ReturnsExpectedValue(string editor, bool isGrid, bool hasColumns, bool expected)
     {
         var sut = container.Resolve<BlockGridContentMapper>();
-        var config = new ContentPropertyConfig { IsGrid = isGrid };
+        var config = new ContentPropertyConfig { IsGrid = isGrid, Grid = new ContentPropertyConfigGrid{ HasColumns = hasColumns }};
 
         sut.IsValid(editor, config).Should().Be(expected);
     }

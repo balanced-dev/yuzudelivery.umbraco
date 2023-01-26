@@ -8,6 +8,8 @@
 
         public const string RowSettings = "BL_RowSettings";
 
+        public const string ContainerSettings = "BL_ContainerSettings";
+
         public const string ContextColumn = "BL_ContextColumn";
 
         public const string ColumnSettings = "BL_ColumnSettings";

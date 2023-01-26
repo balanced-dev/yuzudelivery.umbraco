@@ -18,8 +18,8 @@ namespace YuzuDelivery.Umbraco.BlockList
     public interface IBlockListGridDataService
     {
         vmBlock_DataGridRowItem CreateContentAndConfig(GridItemData data);
-        vmBlock_DataRows CreateRows(BlockListModel grid, UmbracoMappingContext context);
-        vmBlock_DataGrid CreateRowsColumns(BlockListModel grid, UmbracoMappingContext context);
+        vmBlock_DataRows CreateRows(BlockGridModel grid, UmbracoMappingContext context);
+        vmBlock_DataGrid CreateRowsColumns(BlockGridModel grid, UmbracoMappingContext context);
         object CreateVm(IPublishedElement model, IDictionary<string, object> context);
         object GetContentSettingsVm(GridItemData data);
     }

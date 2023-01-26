@@ -46,111 +46,90 @@ namespace YuzuDelivery.Umbraco.BlockList
             this.viewmodelTypes = config.Value.ViewModels.Where(x => x.Name.StartsWith(YuzuConstants.Configuration.BlockPrefix) || x.Name.StartsWith(YuzuConstants.Configuration.SubPrefix));
         }
 
-        public vmBlock_DataRows CreateRows(BlockListModel grid, UmbracoMappingContext context)
+        public vmBlock_DataRows CreateRows(BlockGridModel grid, UmbracoMappingContext context)
         {
-            if (grid != null)
+            if (grid == null)
             {
-                return new vmBlock_DataRows()
-                {
-                    Rows = grid.Any() ? grid.Where(x => sectionAliases.Contains(x.Content.ContentType.Alias)).Select(rowBlockList =>
-                    {
-                        var rowContent = rowBlockList.Content;
-                        var rowSettingsVm = GetRowSettingsVm(rowBlockList, context);
-
-                        var columnProperty = rowContent.Properties.FirstOrDefault();
-                        var columnContent = rowContent.Value<BlockListModel>(columnProperty.Alias);
-
-                        var row = new vmSub_DataRowsRow()
-                        {
-                            Config = rowSettingsVm,
-                            Items = columnContent?
-                                .Select(cell => CreateContentAndConfig(new GridItemData(cell, context.Items)))
-                                .Where(x => x != null).ToList()
-                        };
-
-                        context.Items[_BlockList_Constants.ContextRow] = row;
-
-                        return row;
-
-                    }).ToList() : new List<vmSub_DataRowsRow>()
-                };
-            }
-            else
                 return null;
-        }
+            }
 
-        public vmBlock_DataGrid CreateRowsColumns(BlockListModel grid, UmbracoMappingContext context)
-        {
-            if (grid != null)
+            var result = new vmBlock_DataRows
             {
-                return new vmBlock_DataGrid()
-                {
-                    Rows = grid.Any() ? grid.Where(x => sectionAliases.Contains(x.Content.ContentType.Alias)).Select(rowBlockList =>
-                    {
-                        var row = new vmSub_DataGridRow();
-                        context.Items[_BlockList_Constants.ContextRow] = row;
+                Rows = grid.Select(x => MapRowRow(x, context)).ToList()
+            };
 
-                        var rowContent = rowBlockList.Content;
-                        var columns = rowContent.Properties.Where(y => !y.Alias.EndsWith("Settings"));
+            return result;
+        }
 
-                        row.Config = GetRowSettingsVm(rowBlockList, context);
-                        row.ColumnCount = columns.Count();
-
-                        int index = 0;
-                        row.Columns = columns.Select(columnProperty =>
-                        {
-                            var column = new vmSub_DataGridColumn()
-                            {
-                                GridSize = 12 / columns.Count(),
-                            };
-
-                            context.Items[_BlockList_Constants.ContextColumn] = column;
-                            var columnContent = columnProperty.Value<BlockListModel>(publishedValueFallback);
-
-                            column.Index = index;
-                            column.Config = GetColumnSettingsVm(rowContent, columnProperty, context);
-                            column.Items = columnContent?
-                                    .Select(cell => CreateContentAndConfig(new GridItemData(cell, context.Items)))
-                                    .Where(x => x != null).ToList();
-
-                            index++;
-
-                            return column;
-
-                        }).ToList();
-
-                        return row;
-
-                    }).ToList() : new List<vmSub_DataGridRow>()
-                };
-            }
-            else
+        public vmBlock_DataGrid CreateRowsColumns(BlockGridModel grid, UmbracoMappingContext context)
+        {
+            if (grid == null)
+            {
                 return null;
+            }
+
+            var result = new vmBlock_DataGrid()
+            {
+                Rows = grid.Select(x => MapRow(x, context)).ToList()
+            };
+
+            return result;
         }
 
-        private object GetRowSettingsVm(BlockListItem rowBlockList, UmbracoMappingContext context)
+        private vmSub_DataRowsRow MapRowRow(BlockGridItem input, UmbracoMappingContext context)
         {
-            context.Items.Remove(_BlockList_Constants.RowSettings);
+            var row = new vmSub_DataRowsRow
+            {
+                Config = GetContainerSettings(input, context),
+                Items = input.Areas.First().Select(x => MapItem(x, context)).ToList()
+            };
+            context.Items[_BlockList_Constants.ContextRow] = row;
 
-            var rowConfig = rowBlockList.Settings;
+            return row;
+        }
+        private vmSub_DataGridRow MapRow(BlockGridItem input, UmbracoMappingContext context)
+        {
+            var row = new vmSub_DataGridRow
+            {
+                Config = GetContainerSettings(input, context),
+                ColumnCount = input.Areas.First().Count,
+                Columns = input.Areas.First().Select(x => MapColumn(x, context)).ToList()
+            };
+            context.Items[_BlockList_Constants.ContextRow] = row;
 
-            var vm = CreateVm(rowConfig, context.Items);
-            if (vm != null)
-                context.Items[_BlockList_Constants.RowSettings] = vm;
-
-            return vm;
+            return row;
         }
 
-        private object GetColumnSettingsVm(IPublishedElement rowContent, IPublishedProperty columnProperty, UmbracoMappingContext context)
+        private vmSub_DataGridColumn MapColumn(BlockGridItem input, UmbracoMappingContext context)
         {
-            context.Items.Remove(_BlockList_Constants.ColumnSettings);
+            var col = new vmSub_DataGridColumn
+            {
+                Config = GetContainerSettings(input, context),
+                Items = input.Areas.First().Select(x => MapItem(x, context)).ToList(),
+                GridSize = input.ColumnSpan
+            };
+            context.Items[_BlockList_Constants.ContextColumn] = col;
 
-            var columnConfig = rowContent.Value<BlockListModel>(columnProperty.Alias + "Settings")
-           .Select(x => x.Content).FirstOrDefault();
+            return col;
+        }
 
-            var vm = CreateVm(columnConfig, context.Items);
+        private vmBlock_DataGridRowItem MapItem(BlockGridItem input, UmbracoMappingContext context)
+        {
+            var item = new vmBlock_DataGridRowItem
+            {
+                Content = CreateVm(input.Content, context.Items)
+            };
+
+            return item;
+        }
+
+        private object GetContainerSettings(BlockGridItem container, UmbracoMappingContext context)
+        {
+            context.Items.Remove(_BlockList_Constants.ContainerSettings);
+
+            var vm = CreateVm(container.Settings, context.Items);
             if (vm != null)
-                context.Items[_BlockList_Constants.ColumnSettings] = vm;
+                context.Items[_BlockList_Constants.ContainerSettings] = vm;
 
             return vm;
         }
@@ -194,17 +173,6 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             return null;
         }
-
-
-    }
-
-    public class GridContext
-    {
-        public List<vmSub_DataGridRow> Rows { get; set; }
-
-        public vmSub_DataGridRow CurrentRow { get; set; }
-
-        public vmSub_DataGridColumn CurrentColumns {  get; set; }
     }
 
 }

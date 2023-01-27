@@ -1,0 +1,31 @@
+﻿{
+  "layout": {
+    "Umbraco.BlockGrid": [
+      {
+        "contentUdi": "umb://element/18d4ace4344b4350ae913caf92723971",
+        "settingsUdi": "umb://element/a8bd981e090c4a1a8b772f27625bcf6f",
+        "rowSpan": 1,
+        "columnSpan": 12,
+        "areas": [
+          {
+            "key": "de569061-d4c8-441c-8d99-9c87d052c10f",
+            "items": []
+          }
+        ]
+      }
+    ]
+  },
+  "contentData": [
+    {
+      "contentTypeKey": "187280bc-8dbb-4e99-b603-53eb20f8dad6",
+      "udi": "umb://element/18d4ace4344b4350ae913caf92723971"
+    }
+  ],
+  "settingsData": [
+    {
+      "contentTypeKey": "6ca50244-4a18-4116-aa75-2ba20f8eaa61",
+      "udi": "umb://element/a8bd981e090c4a1a8b772f27625bcf6f",
+      "id": "219"
+    }
+  ]
+}

@@ -350,3 +350,5 @@ src/Templates/TestOutput/
 output/
 nuget.config
 acceptance/.env
+
+*.received.txt

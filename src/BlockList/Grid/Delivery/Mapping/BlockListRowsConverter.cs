@@ -9,7 +9,7 @@ using Umbraco.Core.Models.Blocks;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
-    public class BlockListRowsConverter : IYuzuTypeConvertor<BlockListModel, vmBlock_DataRows>
+    public class BlockListRowsConverter : IYuzuTypeConvertor<BlockGridModel, vmBlock_DataRows>
     {
         private readonly IBlockListGridDataService gridService;
 
@@ -18,7 +18,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             this.gridService = gridService;
         }
 
-        public vmBlock_DataRows Convert(BlockListModel source, UmbracoMappingContext context)
+        public vmBlock_DataRows Convert(BlockGridModel source, UmbracoMappingContext context)
         {
             return gridService.CreateRows(source, context);
         }

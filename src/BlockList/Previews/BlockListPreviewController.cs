@@ -67,7 +67,7 @@ namespace YuzuDelivery.Umbraco.BlockList
                 }
                 else
                 {
-                    var template = link.vmType.GetTemplateName();
+                    var template = link.vmType.GetTemplateName(includeBaseTypes: false);
                     var mapped = mapper.Map(model, link.cmsType, link.vmType, new Dictionary<string, object>()
                     {
                         { "Model", model },

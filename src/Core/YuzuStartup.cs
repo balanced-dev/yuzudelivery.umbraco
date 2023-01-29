@@ -83,6 +83,7 @@ namespace YuzuDelivery.Umbraco.Core
 
             builder.Services.AddTransient<LinkIPublishedContentConvertor>();
             builder.Services.AddSingleton<LinkConvertor>();
+            builder.Services.AddTransient<ILinkFactory, LinkFactory>();
             builder.Services.AddTransient<ImageConvertor>();
             builder.Services.AddTransient<MediWithCropsConvertor>();
             builder.Services.AddTransient(typeof(SubBlocksObjectResolver<,>));

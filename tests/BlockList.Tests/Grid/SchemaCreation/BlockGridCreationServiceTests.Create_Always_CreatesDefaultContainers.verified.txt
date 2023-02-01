@@ -1,0 +1,72 @@
+﻿{
+  Blocks: [
+    {
+      columnSpanOptions: [
+        {
+          columnSpan: 12
+        }
+      ],
+      rowMinSpan: 1,
+      rowMaxSpan: 1,
+      allowAtRoot: true,
+      allowInAreas: false,
+      areas: [
+        {
+          key: Guid_1,
+          alias: content,
+          columnSpan: 12,
+          rowSpan: 1,
+          specifiedAllowance: [
+            {
+              elementTypeKey: Guid_2
+            }
+          ]
+        }
+      ],
+      contentElementTypeKey: Guid_3,
+      label: Row,
+      editorSize: medium,
+      inlineEditing: false,
+      forceHideContentEditorInOverlay: false,
+      groupKey: Guid_4
+    },
+    {
+      columnSpanOptions: [
+        {
+          columnSpan: 12
+        }
+      ],
+      rowMinSpan: 1,
+      rowMaxSpan: 1,
+      allowAtRoot: false,
+      allowInAreas: false,
+      areas: [
+        {
+          key: Guid_5,
+          alias: content,
+          columnSpan: 12,
+          rowSpan: 1
+        }
+      ],
+      contentElementTypeKey: Guid_2,
+      label: Column,
+      editorSize: medium,
+      inlineEditing: false,
+      forceHideContentEditorInOverlay: false,
+      groupKey: Guid_4
+    }
+  ],
+  BlockGroups: [
+    {
+      key: Guid_4,
+      name: Layouts
+    },
+    {
+      key: Guid_6,
+      name: Content
+    }
+  ],
+  ValidationLimit: {},
+  UseLiveEditing: false,
+  MaxPropertyWidth: 100%
+}

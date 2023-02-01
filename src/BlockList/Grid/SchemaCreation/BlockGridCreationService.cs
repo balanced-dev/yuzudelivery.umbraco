@@ -37,6 +37,11 @@ namespace YuzuDelivery.Umbraco.Import
 
         public IDataType Create(VmToContentPropertyMap data)
         {
+            if (data.Config?.Grid == null)
+            {
+                throw new ArgumentException($"Grid configuration missing from {nameof(VmToContentPropertyMap)}");
+            }
+
             var dataTypeName = GetDataTypeName(data);
 
             var dataType = _dataTypeService.CreateDataType(dataTypeName, Constants.PropertyEditors.Aliases.BlockGrid);
@@ -47,6 +52,11 @@ namespace YuzuDelivery.Umbraco.Import
 
         public IDataType Update(VmToContentPropertyMap data, IDataType dataTypeDefinition)
         {
+            if (data.Config?.Grid == null)
+            {
+                throw new ArgumentException($"Grid configuration missing from {nameof(VmToContentPropertyMap)}");
+            }
+
             dataTypeDefinition.Umb().Configuration = GetConfig(data);
             _dataTypeService.Save(dataTypeDefinition);
             return dataTypeDefinition;

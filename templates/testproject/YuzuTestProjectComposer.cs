@@ -25,6 +25,7 @@ public class YuzuTestProjectComposer : IComposer
         builder.Services.AddTransient<IYuzuTestSetupStep, CreateDocumentTypes>();
         builder.Services.AddTransient<IYuzuTestSetupStep, CreateTemplatesAndPermissions>();
         builder.Services.AddTransient<IYuzuTestSetupStep, CreateContent>();
+        builder.Services.AddTransient<IYuzuTestSetupStep, CreateAndAssignForm>();
 
         builder.Services.Configure<TourSettings>(s =>
         {

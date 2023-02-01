@@ -33,7 +33,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests
 
             builder.RegisterType<BlockListEditorCreationService>();
 
-            builder.RegisterType<BlockListGridRowConfigToContent>();
+            builder.RegisterType<BlockGridRowConfigToContent>();
 
             builder.RegisterType<BlockListContentMapper>();
 

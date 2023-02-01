@@ -4,11 +4,11 @@ using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
-    public class BlockListGridConverter : IYuzuTypeConvertor<BlockGridModel, vmBlock_DataGrid>
+    public class BlockGridConverter : IYuzuTypeConvertor<BlockGridModel, vmBlock_DataGrid>
     {
-        private readonly IBlockListGridDataService gridService;
+        private readonly IBlockGridDataService gridService;
 
-        public BlockListGridConverter(IBlockListGridDataService gridService)
+        public BlockGridConverter(IBlockGridDataService gridService)
         {
             this.gridService = gridService;
         }

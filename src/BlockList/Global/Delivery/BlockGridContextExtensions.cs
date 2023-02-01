@@ -4,9 +4,9 @@ using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Core
 {
-    public static class BlockListGridContextExtensions
+    public static class BlockGridContextExtensions
     {
-        
+
         public static bool IsInPreview(this UmbracoMappingContext context)
         {
             return context.Items.ContainsKey(_BlockList_Constants.IsInPreview) && context.Items[_BlockList_Constants.IsInPreview].ToBool();

@@ -5,7 +5,7 @@ using YuzuDelivery.Import.Settings;
 
 namespace YuzuDelivery.Umbraco.Import
 {
-    public class BlockListGridRowConfigToContent
+    public class BlockGridRowConfigToContent
     {
         private readonly IOptions<ImportSettings> importConfig;
 
@@ -15,7 +15,7 @@ namespace YuzuDelivery.Umbraco.Import
         protected static string SettingsGroup { get; private set; }
 
 
-        public BlockListGridRowConfigToContent(IOptions<ImportSettings> importConfig)
+        public BlockGridRowConfigToContent(IOptions<ImportSettings> importConfig)
         {
             this.importConfig = importConfig;
 

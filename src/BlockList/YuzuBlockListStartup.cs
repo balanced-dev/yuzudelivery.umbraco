@@ -41,7 +41,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             builder.Services.AddTransient<GuidFactory>();
             builder.Services.AddTransient<BlockListDataTypeFactory>();
             builder.Services.AddTransient<BlockListDbModelFactory>();
-            builder.Services.AddTransient<BlockListGridRowConfigToContent>();
+            builder.Services.AddTransient<BlockGridRowConfigToContent>();
 
             //Inline blocklist
 
@@ -60,7 +60,7 @@ namespace YuzuDelivery.Umbraco.BlockList
             {
                 // BlockListGridAutoMapping
                 settings.ManualMaps.AddTypeReplace<BlockListRowsConverter>();
-                settings.ManualMaps.AddTypeReplace<BlockListGridConverter>();
+                settings.ManualMaps.AddTypeReplace<BlockGridConverter>();
 
                 // BlockListInlineMapping
                 settings.ManualMaps.AddTypeReplace<BlockListToObjectTypeConvertor>();
@@ -69,8 +69,8 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             //Grid blocklist
             builder.Services.AddTransient<BlockListRowsConverter>();
-            builder.Services.AddTransient<BlockListGridConverter>();
-            builder.Services.AddTransient<IBlockListGridDataService, BlockListGridDataService>();
+            builder.Services.AddTransient<BlockGridConverter>();
+            builder.Services.AddTransient<IBlockGridDataService, BlockGridDataService>();
 
             builder.Services.AddUnique<IGridSchemaCreationService, BlockGridCreationService>();
 

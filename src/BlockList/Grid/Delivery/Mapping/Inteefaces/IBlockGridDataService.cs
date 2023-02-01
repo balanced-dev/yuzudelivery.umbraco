@@ -15,7 +15,7 @@ using Umbraco.Web;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
-    public interface IBlockListGridDataService
+    public interface IBlockGridDataService
     {
         vmBlock_DataGridRowItem CreateContentAndConfig(GridItemData data);
         vmBlock_DataRows CreateRows(BlockGridModel grid, UmbracoMappingContext context);

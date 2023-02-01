@@ -4,18 +4,15 @@ using System.Linq;
 using Microsoft.Extensions.Options;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
-using YuzuDelivery.Umbraco.Import;
-using Umbraco.Extensions;
 using Umbraco.Cms.Core.Models.Blocks;
 using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Web;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
-    public class BlockListGridDataService : IBlockListGridDataService
+    public class BlockGridDataService : IBlockGridDataService
     {
         private readonly IMapper mapper;
         private readonly IOptions<YuzuConfiguration> config;
@@ -27,7 +24,7 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         private IEnumerable<Type> viewmodelTypes;
 
-        public BlockListGridDataService(
+        public BlockGridDataService(
             IMapper mapper,
             IOptions<YuzuConfiguration> config,
             IOptions<ImportSettings> importConfig,

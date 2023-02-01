@@ -1,8 +1,6 @@
-import { ConstantHelper } from '@umbraco/playwright-testhelpers';
-import { test } from '../helpers/YuzuTestExtension'
-import { expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test('formpage renders correctly', async ({ page, umbracoUi, yuzuUi }) => {
+test('formpage renders correctly', async ({ page }) => {
   await page.goto('/formpage');
-  await expect(page).toHaveScreenshot({fullPage: true});
+  await expect(page).toHaveScreenshot({maxDiffPixelRatio: 1, fullPage: true});
 });

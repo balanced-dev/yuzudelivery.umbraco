@@ -14,11 +14,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Web.Common.ApplicationBuilder;
 using YuzuDelivery.Core.Mapping;
 using YuzuDelivery.Core.Mapping.Mappers;
 using YuzuDelivery.Import.Settings;
 using YuzuDelivery.Umbraco.Core.Mapping;
 using YuzuDelivery.Umbraco.Core.Mapping.Mappers;
+using YuzuDelivery.Umbraco.Core.Middleware;
 
 namespace YuzuDelivery.Umbraco.Core
 {
@@ -33,6 +35,15 @@ namespace YuzuDelivery.Umbraco.Core
             builder.Services.AddOptions<CoreSettings>()
                 .Bind(builder.Config.GetSection("Yuzu:Core"))
                 .ValidateDataAnnotations();
+
+            builder.Services.AddSingleton<YuzuRenderJsonMiddleware>();
+            builder.Services.Configure<UmbracoPipelineOptions>(opt =>
+            {
+                opt.AddFilter(new UmbracoPipelineFilter("YuzuMiddleware")
+                {
+                    PostPipeline = app => app.UseYuzuJsonMiddleware()
+                });
+            });
 
             builder.Services.AddOptions<ViewModelGenerationSettings>()
                    .Bind(builder.Config.GetSection("Yuzu:VmGeneration"))

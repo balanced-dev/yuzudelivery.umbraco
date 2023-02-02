@@ -35,7 +35,7 @@ public class YuzuRenderJsonMiddleware : IMiddleware
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         // ReSharper disable once StringLiteralTypo
-        if (!context.Request.Query.ContainsKey("showjson"))
+        if (!ShouldHandle(context))
         {
             await next(context);
             return;
@@ -61,6 +61,24 @@ public class YuzuRenderJsonMiddleware : IMiddleware
             viewModel.GetType(),
             new JsonSerializerOptions(),
             MediaTypeNames.Application.Json);
+    }
+
+    private bool ShouldHandle(HttpContext context)
+    {
+        if (context.Request.Query.ContainsKey("showjson"))
+        {
+            return true;
+        }
+
+        if (context.Request.Headers.TryGetValue("Accept", out var accept))
+        {
+            if (accept.ToString().Contains(MediaTypeNames.Application.Json))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private IHtmlHelper GetHtmlHelper(HttpContext httpContext)

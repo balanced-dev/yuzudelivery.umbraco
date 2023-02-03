@@ -9,7 +9,6 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
     public class UmbracoMappingContext : YuzuMappingContext
     {
         public IPublishedContent Model { get; set; }
-        public IHtmlHelper Html { get; set; }
         public HttpContext HttpContext { get; set; }
 
         public UmbracoMappingContext(IDictionary<string, object> items)

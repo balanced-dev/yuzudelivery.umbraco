@@ -35,6 +35,7 @@ namespace YuzuDelivery.Umbraco.Forms
             builder.Services.AddTransient(typeof(FormValueResolver<,>));
 
             builder.Services.AddTransient<ViewComponentHelper>();
+            builder.Services.AddTransient<ViewContextFactory>();
 
             builder.Services.Configure<YuzuConfiguration>(cfg =>
             {

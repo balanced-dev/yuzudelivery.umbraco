@@ -51,10 +51,7 @@ public class YuzuRenderJsonMiddleware : IMiddleware
         }
 
         var viewModelType = _mappingIndex.GetViewModelType(currentPage.GetType());
-        var viewModel = _mapper.Map(currentPage, viewModelType, new Dictionary<string, object>
-        {
-            ["HtmlHelper"] = GetHtmlHelper(context) // Required for yuzu forms (ViewComponent -> string)
-        });
+        var viewModel = _mapper.Map(currentPage, viewModelType);
 
         await context.Response.WriteAsJsonAsync(
             viewModel,
@@ -79,38 +76,6 @@ public class YuzuRenderJsonMiddleware : IMiddleware
         }
 
         return false;
-    }
-
-    private IHtmlHelper GetHtmlHelper(HttpContext httpContext)
-    {
-        using var scope = _scopeFactory.CreateScope();
-
-        var mmp = scope.ServiceProvider.GetRequiredService<IModelMetadataProvider>();
-        var viewData = new ViewDataDictionary(mmp, new ModelStateDictionary());
-
-        var tdp = scope.ServiceProvider.GetRequiredService<ITempDataProvider>();
-        var tempData = new TempDataDictionary(httpContext, tdp);
-
-        var viewContext = new ViewContext(
-            new ControllerContext(new ActionContext(httpContext, new RouteData(), new ControllerActionDescriptor())),
-            NullView.Instance,
-            viewData,
-            tempData,
-            new StringWriter(),
-            new HtmlHelperOptions());
-
-        var html = scope.ServiceProvider.GetRequiredService<IHtmlHelper>();
-        ((IViewContextAware)html).Contextualize(viewContext);
-        return html;
-    }
-
-    private class NullView : IView
-    {
-        public static readonly NullView Instance = new();
-
-        public string Path => string.Empty;
-
-        public Task RenderAsync(ViewContext context) => Task.CompletedTask;
     }
 }
 

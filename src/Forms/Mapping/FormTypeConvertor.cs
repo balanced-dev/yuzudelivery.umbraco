@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using YuzuDelivery.Core;
 using YuzuDelivery.Umbraco.Core;
-using Microsoft.AspNetCore.Mvc;
 using YuzuDelivery.Umbraco.Core.Mapping;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
     public class FormTypeConvertor : IYuzuTypeConvertor<Guid, vmBlock_DataForm>
     {
-        private readonly ViewComponentHelper viewComponentHelper;
+        private readonly ViewComponentHelper _viewComponentHelper;
+        private readonly ViewContextFactory _viewContextFactory;
 
-        public FormTypeConvertor(ViewComponentHelper viewComponentHelper)
+        public FormTypeConvertor(ViewComponentHelper viewComponentHelper, ViewContextFactory viewContextFactory)
         {
-            this.viewComponentHelper = viewComponentHelper;
+            _viewComponentHelper = viewComponentHelper;
+            _viewContextFactory = viewContextFactory;
         }
 
         public vmBlock_DataForm Convert(Guid formValue, UmbracoMappingContext context)
@@ -30,13 +31,13 @@ namespace YuzuDelivery.Umbraco.Forms
                     return new vmBlock_DataForm()
                     {
                         TestForm = null,
-                        LiveForm = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
+                        LiveForm = _viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
                         {
                             formId = formValue,
                             partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
                             template = context.Items["FormBuilderTemplate"].ToString(),
                             mappingItems = context.Items
-                        }, context.Html.ViewContext, context.HttpContext).Result
+                        }, _viewContextFactory.Create(context.HttpContext), context.HttpContext).Result
                     };
                 }
             }

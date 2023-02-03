@@ -32,11 +32,6 @@ namespace YuzuDelivery.Umbraco.Core.Mapping
         private void AddDefaults(UmbracoMappingContext output, IDictionary<string, object> items)
         {
             output.HttpContext = _httpContextAccessor.HttpContext;
-
-            if (items.ContainsKey("HtmlHelper"))
-            {
-                output.Html = items["HtmlHelper"] as IHtmlHelper;
-            }
         }
     }
 }

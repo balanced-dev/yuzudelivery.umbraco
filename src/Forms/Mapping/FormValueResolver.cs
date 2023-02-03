@@ -11,13 +11,15 @@ namespace YuzuDelivery.Umbraco.Forms
 {
     public class FormValueResolver<Source, Destination> : IYuzuFullPropertyResolver<Source, Destination, object, vmBlock_DataForm>
     {
-        private readonly ISchemaMetaService schemaMetaService;
-        private readonly ViewComponentHelper viewComponentHelper;
+        private readonly ISchemaMetaService _schemaMetaService;
+        private readonly ViewComponentHelper _viewComponentHelper;
+        private readonly ViewContextFactory _viewContextFactory;
 
-        public FormValueResolver(ISchemaMetaService schemaMetaService, ViewComponentHelper viewComponentHelper)
+        public FormValueResolver(ISchemaMetaService schemaMetaService, ViewComponentHelper viewComponentHelper, ViewContextFactory viewContextFactory)
         {
-            this.schemaMetaService = schemaMetaService;
-            this.viewComponentHelper = viewComponentHelper;
+            _schemaMetaService = schemaMetaService;
+            _viewComponentHelper = viewComponentHelper;
+            _viewContextFactory = viewContextFactory;
         }
 
         public vmBlock_DataForm Resolve(Source source, Destination destination, object formValue, string propertyName, UmbracoMappingContext context)
@@ -26,20 +28,20 @@ namespace YuzuDelivery.Umbraco.Forms
             {
                 var property = destination.GetType().GetProperties().FirstOrDefault(x => x.PropertyType == typeof(vmBlock_DataForm));
 
-                var formBuilderTemplate = schemaMetaService.GetOfType(property, "refs");
+                var formBuilderTemplate = _schemaMetaService.GetOfType(property, "refs");
 
                 if (string.IsNullOrEmpty(formBuilderTemplate))
                     throw new Exception("Form Type not set in definition e.g \"anyOfType\": \"parFormBuilder\" below the ref");
 
                 if (formValue != null && formValue.ToString() != string.Empty)
                 {
-                    var markup = viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
+                    var markup = _viewComponentHelper.RenderToString("RenderYuzuUmbracoForms", new
                     {
                         formId = formValue,
                         partial = "/Views/Partials/Forms/YuzuUmbracoFormsV9.cshtml",
                         template = formBuilderTemplate,
                         mappingItems = context.Items
-                    }, context.Html.ViewContext, context.HttpContext).Result;
+                    }, _viewContextFactory.Create(context.HttpContext), context.HttpContext).Result;
 
                     return new vmBlock_DataForm()
                     {

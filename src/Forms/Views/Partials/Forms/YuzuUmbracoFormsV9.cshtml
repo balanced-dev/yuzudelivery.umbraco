@@ -16,7 +16,11 @@
         return new vmBlock_DataFormBuilder()
         {
             IsSuccess = true,
-            SuccessMessage = Model.MessageOnSubmit
+            SuccessMessage = new vmSub_DataFormSuccessMessage() 
+            {
+                Title = "Form submitted sucessfully",
+                Message = Model.MessageOnSubmit
+            }
         };
     };
 
@@ -48,7 +52,7 @@ else
         return output;
     };
 
-    using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
+    using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.YuzuUmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
     {
         @Html.RenderYuzu(formBuilderTemplate, getFormData());
 

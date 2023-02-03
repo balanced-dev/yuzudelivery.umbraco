@@ -35,7 +35,7 @@ namespace YuzuDelivery.Umbraco.Forms
             builder.Services.AddTransient(typeof(FormValueResolver<,>));
 
             builder.Services.AddTransient<ViewComponentHelper>();
-            builder.Services.AddTransient<ViewContextFactory>();
+            builder.Services.AddSingleton<ViewContextFactory>();
 
             builder.Services.Configure<YuzuConfiguration>(cfg =>
             {
@@ -50,6 +50,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataForm>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataFormBuilder>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataFormBuilderFieldset>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataFormSuccessMessage>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataFormBuilderValidation>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormButton>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormBlank>();

@@ -14,22 +14,13 @@ namespace YuzuDelivery.Umbraco.Forms
 {
     public class ViewContextFactory
     {
-        private readonly IServiceScopeFactory _scopeFactory;
-
-        public ViewContextFactory(IServiceScopeFactory scopeFactory)
-        {
-            _scopeFactory = scopeFactory;
-        }
-
         public ViewContext Create(HttpContext httpContext)
         {
-            using var scope = _scopeFactory.CreateScope();
-
-            var mmp = scope.ServiceProvider.GetRequiredService<IModelMetadataProvider>();
+            var mmp = httpContext.RequestServices.GetRequiredService<IModelMetadataProvider>();
             var viewData = new ViewDataDictionary(mmp, new ModelStateDictionary());
 
-            var tdp = scope.ServiceProvider.GetRequiredService<ITempDataProvider>();
-            var tempData = new TempDataDictionary(httpContext, tdp);
+            var factory = httpContext.RequestServices.GetRequiredService<ITempDataDictionaryFactory>();
+            var tempData = factory.GetTempData(httpContext);
 
             return new ViewContext(
                 new ControllerContext(new ActionContext(httpContext, new RouteData(), new ControllerActionDescriptor())),

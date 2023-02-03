@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YuzuDelivery.Core;
 
 namespace YuzuDelivery.Umbraco.Forms
 {
@@ -10,7 +11,7 @@ namespace YuzuDelivery.Umbraco.Forms
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.35.0 (Newtonsoft.Json v9.0.0.1)")]
 
-    public partial class vmBlock_DataForm
+    public partial class vmBlock_DataForm : IYuzuViewModel
     {
         [Newtonsoft.Json.JsonProperty("testForm", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object TestForm { get; set; }

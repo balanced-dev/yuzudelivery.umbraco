@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="Our.Umbraco.DocTypeGridEditor" Version="10.0.0" />
-    <PackageReference Include="Umbraco.Forms.Web" version="10.0.0" />
+    <PackageReference Include="Umbraco.Forms.Web" version="10.1.2" />
     <PackageReference Include="Skybrud.Umbraco.GridData" Version="4.0.0-alpha001" />
   </ItemGroup>
 

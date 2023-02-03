@@ -50,6 +50,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataForm>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmBlock_DataFormBuilder>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataFormBuilderFieldset>();
+                settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataFormSuccessMessage>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmSub_DataFormBuilderValidation>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormButton>();
                 settings.ExcludeViewModelsAtGeneration.Add<vmBlock_FormBlank>();

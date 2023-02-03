@@ -39,7 +39,11 @@ namespace YuzuDelivery.Umbraco.Forms
             {
                 Title = title,
                 IsSuccess = true,
-                SuccessMessage = message
+                SuccessMessage = new vmSub_DataFormSuccessMessage()
+                {
+                    Title = "Form successfuly submitted",
+                    Message = message
+                }
             };
         }
 

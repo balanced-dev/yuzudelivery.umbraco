@@ -77,13 +77,10 @@ namespace YuzuDelivery.Umbraco.Import
 
             foreach (var subBlock in subBlocks)
             {
-                //This just doesn't make sense
-                /*if (!_schemaMetaService.TryGetPathSegments(subBlock, out var pathSegments))
+                if (!_schemaMetaService.TryGetPathSegments(subBlock, out var pathSegments))
                 {
-                    pathSegments = _schemaMetaService.GetPathSegments(vmName);
-                }*/
-
-                _schemaMetaService.TryGetPathSegments(subBlock, out var pathSegments);
+                    _schemaMetaService.TryGetPathSegments(vmName, out pathSegments);
+                }
 
                 if (!DoesBlockAlreadyExist(subBlock, blocks, options))
                     blocks.Add(CreateBlockConfig(subBlock, options, pathSegments));

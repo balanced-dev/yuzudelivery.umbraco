@@ -53,11 +53,6 @@ namespace YuzuDelivery.Umbraco.Forms
 
                 Guid guid = (Guid) TempData["UmbracoFormSubmitted"];
                 formModelAsync.SubmitHandled = guid == formId;
-                TempData.Remove("UmbracoFormSubmitted");
-                TempData.Clear();
-
-                var tdp = scope.ServiceProvider.GetRequiredService<ITempDataProvider>();
-                tdp.SaveTempData(HttpContext, TempData);
             }
 
             ViewData["template"] = template;

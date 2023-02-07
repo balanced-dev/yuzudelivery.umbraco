@@ -29,6 +29,7 @@ namespace YuzuDelivery.Umbraco.Forms
                 return null;
 
             if (TempData["UmbracoFormSubmitted"] != null)
+            
             {
                 Guid guid = (Guid) TempData["UmbracoFormSubmitted"];
                 formModelAsync.SubmitHandled = guid == formId;

@@ -52,7 +52,7 @@ else
         return output;
     };
 
-    using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.YuzuUmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
+    using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "novalidate" } }))
     {
         @Html.RenderYuzu(formBuilderTemplate, getFormData());
 

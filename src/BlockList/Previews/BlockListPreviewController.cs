@@ -14,9 +14,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Linq;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Models;
+using NPoco.fastJSON;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Strings;
+using Umbraco.Cms.Core.Web;
+using Umbraco.Extensions;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -28,15 +34,19 @@ namespace YuzuDelivery.Umbraco.BlockList
         private readonly IOptions<YuzuConfiguration> config;
         private readonly IContentTypeService contentTypeService;
         private readonly DocTypeGridEditorHelper docTypeGridEditorHelper;
+        private readonly IUmbracoContextAccessor _contextAccessor;
+        private readonly IShortStringHelper _shortStringHelper;
 
-        public BlockListPreviewController(IMapper mapper, IOptions<YuzuConfiguration> config, IYuzuTemplateEngine yuzuTemplateEngine, IContentTypeService contentTypeService, DocTypeGridEditorHelper docTypeGridEditorHelper
-            )
+        public BlockListPreviewController(IMapper mapper, IOptions<YuzuConfiguration> config, IYuzuTemplateEngine yuzuTemplateEngine, IContentTypeService contentTypeService, 
+            DocTypeGridEditorHelper docTypeGridEditorHelper, IUmbracoContextAccessor contextAccessor, IShortStringHelper shortStringHelper)
         {
             this.mapper = mapper;
             this.config = config;
             this._yuzuTemplateEngine = yuzuTemplateEngine;
             this.contentTypeService = contentTypeService;
             this.docTypeGridEditorHelper = docTypeGridEditorHelper;
+            _contextAccessor = contextAccessor;
+            _shortStringHelper = shortStringHelper;
         }
 
         [HttpPost]
@@ -74,6 +84,20 @@ namespace YuzuDelivery.Umbraco.BlockList
                         { _BlockList_Constants.IsInPreview, true }
                     });
                     output.Preview = _yuzuTemplateEngine.Render(template, mapped);
+                }
+
+                // Work out the settings
+                if (!string.IsNullOrWhiteSpace(data.ColSettings))
+                {
+                    var settings = JsonConvert.DeserializeObject<SettingsDto>(data.ColSettings);
+                    if (settings?.ColourTheme != null && _contextAccessor.TryGetUmbracoContext(out IUmbracoContext ctx))
+                    {
+                        var theme = ctx.Content.GetById(settings.ColourTheme);
+                        if (theme != null)
+                        {
+                            output.Theme = $"theme-{theme.Name?.ToUrlSegment(_shortStringHelper)}";
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -115,6 +139,9 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         [JsonProperty("error")]
         public string Error { get; set; }
+
+        [JsonProperty("theme")]
+        public string Theme { get; set; }
     }
 
     public class PreviewDTO
@@ -124,5 +151,15 @@ namespace YuzuDelivery.Umbraco.BlockList
 
         [JsonProperty("contentTypeKey")]
         public string ContentTypeKey { get; set; }
+
+        [JsonProperty("colSettings")]
+        public string ColSettings { get; set; }
+    }
+
+    public class SettingsDto
+    {
+        [JsonProperty("colourTheme")]
+        public Udi ColourTheme { get; set; }
+        
     }
 }

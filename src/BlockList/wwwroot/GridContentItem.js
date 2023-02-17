@@ -3,7 +3,10 @@
 
         var loadPreview = function () {
 
-            yuzuDeliveryBlockListResources.getPreview($scope.block.data)
+            console.log($scope.block.data);
+            console.log('settings', $scope.$parent.$parent.$parent.vm.parentBlock.settingsData);
+
+            yuzuDeliveryBlockListResources.getPreview($scope.block.data, $scope.$parent.$parent.$parent.vm.parentBlock.settingsData)
                 .then(function (response) {
                     var data = response.data;
                     if (data.error) {
@@ -11,8 +14,15 @@
                         errorContainer.html(data.error);
                     }
                     else if (data.preview) {
+                        //Add Markup
                         var previewContainer = $element.find('.preview-container');
                         previewContainer.html(data.preview);
+                        
+                        //Add Theme
+                        var previewWrapper = $element.find('.preview-wrapper');
+                        previewWrapper[0].className = "";
+                        previewWrapper[0].classList.add('preview-wrapper');
+                        previewWrapper[0].classList.add(data.theme);
                     }
                 });
         }
@@ -45,11 +55,12 @@ function getCircularReplacer() {
 angular.module('umbraco.resources').factory('yuzuDeliveryBlockListResources',
     function ($q, $http, $routeParams, umbRequestHelper) {
         return {
-            getPreview: function (blockData) {
+            getPreview: function (blockData, settingsData) {
 
                 var url = "/umbraco/backoffice/YuzuDeliveryUmbracoImport/BlockListPreview/GetPartialData";
-                var json = JSON.stringify(blockData, getCircularReplacer())
-                var resultParameters = { content: json, contentTypeKey: blockData.contentTypeKey };
+                var json = JSON.stringify(blockData, getCircularReplacer());
+                var settingsJson = JSON.stringify(settingsData);
+                var resultParameters = { content: json, contentTypeKey: blockData.contentTypeKey, colSettings:  settingsJson};
 
                 return $http.post(url, resultParameters, {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },

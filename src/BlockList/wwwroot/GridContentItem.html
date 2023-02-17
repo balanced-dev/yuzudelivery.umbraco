@@ -1,7 +1,10 @@
 ﻿<article ng-controller="GridContentItem" ng-click="block.edit()">
     <style>
         @import '/_client/style/backoffice.css';
+        @import '/theme-css?nodeId=0';
     </style>
-    <span class="preview-container yuzu-back-office" style="all: initial; pointer-events: none;"></span>
-    <span class="preview-error" style="line-height: 48px; font-weight: bold;"></span>
+    <span class="preview-wrapper">
+        <span class="preview-container yuzu-back-office" style="all: initial; pointer-events: none;"></span>
+        <span class="preview-error" style="line-height: 48px; font-weight: bold;"></span>
+    </span>
 </article>

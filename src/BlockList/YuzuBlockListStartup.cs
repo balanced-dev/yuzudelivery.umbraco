@@ -51,10 +51,12 @@ namespace YuzuDelivery.Umbraco.BlockList
             builder.Services.AddTransient<BlockListToObjectTypeConvertor>();
             builder.Services.AddTransient(typeof(BlockListToTypeConvertor<>));
             builder.Services.AddTransient(typeof(BlockListToListOfTypesConvertor<>));
+            builder.Services.AddTransient(typeof(BlockListItemToTypeConvertor<,>));
 
             builder.Services.AddUnique<IInlineBlockCreator, BlockListEditorCreationService>();
 
             builder.Services.AddTransient<IConfigureOptions<ManualMapping>, BlockListAutoMapping>();
+            builder.Services.AddTransient<IConfigureOptions<ManualMapping>, BlockListItemAutoMapping>();
 
             builder.Services.Configure<ManualMapping>(settings =>
             {

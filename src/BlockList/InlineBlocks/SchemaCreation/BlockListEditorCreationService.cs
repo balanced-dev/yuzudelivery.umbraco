@@ -43,8 +43,17 @@ namespace YuzuDelivery.Umbraco.Import
             }
             else
             {
-                buildOptions.Min = 0;
-                buildOptions.Max = 1;
+                if(data.SubBlocks.Count > 1)
+                {
+                    buildOptions.Min = 0;
+                    buildOptions.Max = 1;
+                }
+                else
+                {
+                    buildOptions.Config.UseSingleBlockMode = true;
+                    buildOptions.Min = 1;
+                    buildOptions.Max = 1;
+                }
             }
 
             var subBlocks = data.Config.AllowedTypes.Any() ? data.Config.AllowedTypes : new string[] { data.Config.TypeName };

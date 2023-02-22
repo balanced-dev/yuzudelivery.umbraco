@@ -98,11 +98,6 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Inline
             if (!isList)
             {
                 builder.Expected.ValidationLimit.Max = 1;
-                if(!isAnyOf)
-                {
-                    builder.Expected.ValidationLimit.Min = 1;
-                    builder.Expected.UseSingleBlockMode = true;
-                }
             }
 
             var output = svc.Create(propertyMapBuilder.CurrentProperty).Umb().Configuration as BlockListConfiguration;

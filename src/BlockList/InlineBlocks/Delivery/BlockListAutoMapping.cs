@@ -46,4 +46,5 @@ namespace YuzuDelivery.Umbraco.BlockList
             }
         }
     }
+
 }

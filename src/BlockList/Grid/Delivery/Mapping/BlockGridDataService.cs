@@ -77,6 +77,7 @@ namespace YuzuDelivery.Umbraco.BlockList
         {
             var row = new vmSub_DataRowsRow();
             context.Items[_BlockList_Constants.ContextRow] = row;
+            context.Items[_BlockList_Constants.ContextRowSource] = input;
 
             row.Config = GetContainerSettings(input, context);
             row.Items = input.Areas.First().Select(x => MapItem(x, context)).ToList();
@@ -88,18 +89,30 @@ namespace YuzuDelivery.Umbraco.BlockList
         {
             var row = new vmSub_DataGridRow();
             context.Items[_BlockList_Constants.ContextRow] = row;
+            context.Items[_BlockList_Constants.ContextRowSource] = input;
 
             row.ColumnCount = input.Areas.First().Count;
             row.Config = GetContainerSettings(input, context);
-            row.Columns = input.Areas.First().Select((x, index) => MapColumn(index, x, context)).ToList();
+
+            int columnStart = 1;
+            row.Columns = input.Areas.First().Select((area, index) => {
+
+                var output = MapColumn(index, columnStart, area.ColumnSpan, area, context);
+                columnStart = columnStart + area.ColumnSpan;
+                return output;
+
+            }).ToList();
 
             return row;
         }
 
-        private vmSub_DataGridColumn MapColumn(int index, BlockGridItem input, UmbracoMappingContext context)
+        private vmSub_DataGridColumn MapColumn(int index, int columnStart, int columnSpan, BlockGridItem input, UmbracoMappingContext context)
         {
             var col = new vmSub_DataGridColumn();
             context.Items[_BlockList_Constants.ContextColumn] = col;
+            context.Items[_BlockList_Constants.ContextColumnSource] = input;
+            context.Items[_BlockList_Constants.ContextColumnStart] = columnStart;
+            context.Items[_BlockList_Constants.ContextColumnSpan] = columnSpan;
 
             col.GridSize = input.ColumnSpan;
             col.Index = index;

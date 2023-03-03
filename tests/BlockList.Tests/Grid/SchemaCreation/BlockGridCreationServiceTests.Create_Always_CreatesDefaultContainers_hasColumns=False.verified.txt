@@ -1,0 +1,42 @@
+﻿{
+  Blocks: [
+    {
+      columnSpanOptions: [
+        {
+          columnSpan: 12
+        }
+      ],
+      rowMinSpan: 1,
+      rowMaxSpan: 1,
+      allowAtRoot: true,
+      allowInAreas: false,
+      areas: [
+        {
+          key: Guid_1,
+          alias: content,
+          columnSpan: 12,
+          rowSpan: 1
+        }
+      ],
+      contentElementTypeKey: Guid_2,
+      label: Row,
+      editorSize: medium,
+      inlineEditing: false,
+      forceHideContentEditorInOverlay: false,
+      groupKey: Guid_3
+    }
+  ],
+  BlockGroups: [
+    {
+      key: Guid_3,
+      name: Layouts
+    },
+    {
+      key: Guid_4,
+      name: Content
+    }
+  ],
+  ValidationLimit: {},
+  UseLiveEditing: false,
+  MaxPropertyWidth: 100%
+}

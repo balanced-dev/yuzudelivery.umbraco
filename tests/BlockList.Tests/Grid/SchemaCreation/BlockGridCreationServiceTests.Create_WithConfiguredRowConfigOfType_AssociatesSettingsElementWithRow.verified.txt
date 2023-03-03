@@ -34,6 +34,18 @@
     {
       columnSpanOptions: [
         {
+          columnSpan: 3
+        },
+        {
+          columnSpan: 4
+        },
+        {
+          columnSpan: 6
+        },
+        {
+          columnSpan: 8
+        },
+        {
           columnSpan: 12
         }
       ],

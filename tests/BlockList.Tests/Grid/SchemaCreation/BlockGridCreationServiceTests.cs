@@ -96,10 +96,14 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             result.Name.Should().Be("Foo Bar Baz");
         }
 
-        [Test]
-        public Task Create_Always_CreatesDefaultContainers()
+        [TestCase(false)]
+        [TestCase(true)]
+        public Task Create_Always_CreatesDefaultContainers(bool hasColumns)
         {
-            umb.ContentType.ForCreating("Grid Column");
+            if(hasColumns)
+            {
+                umb.ContentType.ForCreating("Grid Column");
+            }
             umb.ContentType.ForCreating("Grid Row");
             umb.DataType.AddAndStubCreate(1, "Grid Builder", Constants.PropertyEditors.Aliases.BlockGrid);
 
@@ -109,7 +113,8 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
                 {
                     Grid = new ContentPropertyConfigGrid
                     {
-                        OfType = "gridBuilder"
+                        OfType = "gridBuilder",
+                        HasColumns = hasColumns
                     }
                 }
             };
@@ -117,6 +122,14 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             var sut = container.Resolve<BlockGridCreationService>();
 
             var result = sut.Create(map);
+
+            if(hasColumns)
+            {
+                umb.ContentType.WasCreated("Grid Column");
+                result.GridConfig().Blocks[1].ContentElementTypeKey.Should().Be(umb.ContentType.Current.TypesByAlias["gridColumn"].Key);
+            }
+            umb.ContentType.WasCreated("Grid Row");
+            result.GridConfig().Blocks[0].ContentElementTypeKey.Should().Be(umb.ContentType.Current.TypesByAlias["gridRow"].Key);
 
             return Verifier.Verify(result.Umb().Configuration);
         }
@@ -137,7 +150,8 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
                     Grid = new ContentPropertyConfigGrid
                     {
                         OfType = "gridBuilder",
-                        RowConfigOfType = "myRowSettings"
+                        RowConfigOfType = "myRowSettings",
+                        HasColumns = true
                     }
                 }
             };
@@ -145,6 +159,10 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             var sut = container.Resolve<BlockGridCreationService>();
 
             var result = sut.Create(map);
+
+            umb.ContentType.WasCreated("My Row Settings");
+
+            result.GridConfig().Blocks[0].SettingsElementTypeKey.Should().Be(umb.ContentType.Current.TypesByAlias["myRowSettings"].Key);
 
             return Verifier.Verify(result.Umb().Configuration);
         }
@@ -165,7 +183,8 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
                     Grid = new ContentPropertyConfigGrid
                     {
                         OfType = "gridBuilder",
-                        ColumnConfigOfType = "myColumnSettings"
+                        ColumnConfigOfType = "myColumnSettings",
+                        HasColumns = true
                     }
                 }
             };
@@ -173,6 +192,10 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             var sut = container.Resolve<BlockGridCreationService>();
 
             var result = sut.Create(map);
+
+            umb.ContentType.WasCreated("My Column Settings");
+
+            result.GridConfig().Blocks[1].SettingsElementTypeKey.Should().Be(umb.ContentType.Current.TypesByAlias["myColumnSettings"].Key);
 
             return Verifier.Verify(result.Umb().Configuration);
         }
@@ -194,7 +217,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
                     Grid = new ContentPropertyConfigGrid
                     {
                         OfType = "gridBuilder",
-
+                        HasColumns = true,
                     },
                     AllowedTypes = new []
                     {
@@ -229,7 +252,7 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
                     Grid = new ContentPropertyConfigGrid
                     {
                         OfType = "gridBuilder",
-
+                        HasColumns= true,
                     },
                     AllowedTypes = new []
                     {
@@ -251,6 +274,14 @@ namespace YuzuDelivery.Umbraco.BlockList.Tests.Grid
             var updated = sut.Update(map, original);
 
             return Verifier.Verify(updated.Umb().Configuration);
+        }
+    }
+
+    public static class Extensions
+    {
+        public static BlockGridConfiguration GridConfig(this IDataType dataType)
+        {
+            return dataType.Umb().ConfigurationAs<BlockGridConfiguration>();
         }
     }
 }

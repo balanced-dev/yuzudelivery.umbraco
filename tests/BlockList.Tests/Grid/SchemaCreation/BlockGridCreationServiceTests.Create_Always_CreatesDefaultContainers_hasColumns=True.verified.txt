@@ -61,7 +61,6 @@
         }
       ],
       contentElementTypeKey: Guid_2,
-      settingsElementTypeKey: Guid_6,
       label: Column,
       editorSize: medium,
       inlineEditing: false,
@@ -75,7 +74,7 @@
       name: Layouts
     },
     {
-      key: Guid_7,
+      key: Guid_6,
       name: Content
     }
   ],

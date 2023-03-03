@@ -98,16 +98,6 @@ namespace YuzuDelivery.Umbraco.Import
                 ? null
                 : _contentTypeForVmService.CreateOrUpdate(data.Config.Grid.ColumnConfigOfType, null, true, new []{"Grid"});
 
-            var columnContentType = _contentTypeService.Create("Grid Column", "gridColumn", true, new[] { "Grid" });
-            var columnConfig = CreateLayoutBlockConfiguration("Column", columnContentType.Umb().Key, columnSettingsType?.Umb()?.Key);
-
-            if (data.Config.Grid.HasColumns)
-            {
-                columnConfig.ColumnSpanOptions = _importSettings.CurrentValue.GridColumnSpanSizes
-                    .Select(x => new BlockGridConfiguration.BlockGridColumnSpanOption { ColumnSpan = x })
-                    .ToArray();
-            }
-
             var rowSettingsType = string.IsNullOrEmpty(data.Config.Grid.RowConfigOfType)
                 ? null
                 : _contentTypeForVmService.CreateOrUpdate(data.Config.Grid.RowConfigOfType, null, true, new []{"Grid"});
@@ -115,16 +105,28 @@ namespace YuzuDelivery.Umbraco.Import
             var rowContentType = _contentTypeService.Create("Grid Row", "gridRow", true, new[] { "Grid" });
             var rowConfig = CreateLayoutBlockConfiguration("Row", rowContentType.Umb().Key, rowSettingsType?.Umb()?.Key);
             rowConfig.AllowAtRoot = true;
-            rowConfig.Areas.First().SpecifiedAllowance = new[]
-            {
-                new BlockGridConfiguration.BlockGridAreaConfigurationSpecifiedAllowance
-                {
-                    ElementTypeKey = columnContentType.Umb().Key
-                }
-            };
 
             yield return rowConfig;
-            yield return columnConfig;
+
+            if (data.Config.Grid.HasColumns)
+            {
+                var columnContentType = _contentTypeService.Create("Grid Column", "gridColumn", true, new[] { "Grid" });
+                var columnConfig = CreateLayoutBlockConfiguration("Column", columnContentType.Umb().Key, columnSettingsType?.Umb()?.Key);
+
+                columnConfig.ColumnSpanOptions = _importSettings.CurrentValue.GridColumnSpanSizes
+                    .Select(x => new BlockGridConfiguration.BlockGridColumnSpanOption { ColumnSpan = x })
+                    .ToArray();
+
+                rowConfig.Areas.First().SpecifiedAllowance = new[]
+                {
+                    new BlockGridConfiguration.BlockGridAreaConfigurationSpecifiedAllowance
+                    {
+                        ElementTypeKey = columnContentType.Umb().Key
+                    }
+                };
+
+                yield return columnConfig;
+            }
         }
 
         private IEnumerable<BlockConfiguration> GetContentBlocks(VmToContentPropertyMap data)

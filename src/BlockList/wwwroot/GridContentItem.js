@@ -1,10 +1,12 @@
 ﻿angular.module('umbraco')
-    .controller('GridContentItem', function ($scope, $element, $window, yuzuDeliveryBlockListResources) {
+    .controller('GridContentItem', function ($scope, $element, $window, yuzuDeliveryBlockListResources, editorState) {
 
         var loadPreview = function () {
 
             console.log($scope.block.data);
             console.log('settings', $scope.$parent.$parent.$parent.vm.parentBlock.settingsData);
+
+            $scope.nodeId = editorState.getCurrent().parentId;
 
             yuzuDeliveryBlockListResources.getPreview($scope.block.data, $scope.$parent.$parent.$parent.vm.parentBlock.settingsData)
                 .then(function (response) {

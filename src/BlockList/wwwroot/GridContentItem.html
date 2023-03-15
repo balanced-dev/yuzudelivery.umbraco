@@ -2,7 +2,9 @@
     <style>
         @import '/_client/style/backoffice.css';
     </style>
-    <link rel="stylesheet" href="#" class="style-tag" />
+    <style ng-if="nodeId">
+        @import '/theme-css?nodeId={{nodeId}}';
+    </style>
     <span class="preview-wrapper">
         <span class="preview-container yuzu-back-office" style="all: initial; pointer-events: none;"></span>
         <span class="preview-error" style="line-height: 48px; font-weight: bold;"></span>

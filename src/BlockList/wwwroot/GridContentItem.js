@@ -7,6 +7,8 @@
             $scope.parentId = editorState.getCurrent().parentId;
             console.log('settings', $scope.$parent.$parent.$parent.vm.parentBlock.settingsData);
 
+            $scope.nodeId = editorState.getCurrent().parentId;
+
             yuzuDeliveryBlockListResources.getPreview($scope.block.data, $scope.$parent.$parent.$parent.vm.parentBlock.settingsData)
                 .then(function (response) {
                     var data = response.data;

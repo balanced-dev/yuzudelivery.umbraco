@@ -126,6 +126,7 @@ namespace YuzuDelivery.Umbraco.BlockList
         {
             var item = new vmBlock_DataGridRowItem
             {
+                Config = GetContentSettingsVm(input, context),
                 Content = CreateVm(input.Content, context.Items)
             };
 
@@ -143,28 +144,15 @@ namespace YuzuDelivery.Umbraco.BlockList
             return vm;
         }
 
-        public object GetContentSettingsVm(GridItemData data)
+        public object GetContentSettingsVm(BlockGridItem data, UmbracoMappingContext context)
         {
-            data.ContextItems.Remove(_BlockList_Constants.ContentSettings);
+            context.Items.Remove(_BlockList_Constants.ContentSettings);
 
-            var vm = CreateVm(data.Config, data.ContextItems);
+            var vm = CreateVm(data.Settings, context.Items);
             if (vm != null)
-                data.ContextItems[_BlockList_Constants.ContentSettings] = vm;
+                context.Items[_BlockList_Constants.ContentSettings] = vm;
             return vm;
         }
-
-        public virtual vmBlock_DataGridRowItem CreateContentAndConfig(GridItemData data)
-        {
-            var settingsVm = GetContentSettingsVm(data);
-            var contentVm = CreateVm(data.Content, data.ContextItems);
-
-            return new vmBlock_DataGridRowItem()
-            {
-                Content = contentVm,
-                Config = settingsVm
-            };
-        }
-
 
         public virtual object CreateVm(IPublishedElement model, IDictionary<string, object> context)
         {

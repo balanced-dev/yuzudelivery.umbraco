@@ -1,14 +1,17 @@
 ﻿angular.module('umbraco')
     .controller('GridContentItem', function ($scope, $element, $window, $http, yuzuDeliveryBlockListResources, editorState) {
 
+        var vm = this;
+
+        if (editorState.getCurrent().parentId > 0) {
+            //console.log('DEMO:', $scope.block.data, 'parent id', editorState.getCurrent().parentId, vm);
+            vm.nodeId = editorState.getCurrent().parentId;
+        } else {
+            vm.nodeId = editorState.getCurrent().id;
+        }
+
         var loadPreview = function () {
 
-            //console.log($scope.block.data, 'parent id', editorState.getCurrent().parentId);
-            if (editorState.getCurrent().parentId > 0) {
-                $scope.nodeId = editorState.getCurrent().parentId;
-            } else {
-                $scope.nodeId = editorState.getCurrent().id;
-            }
             //console.log('settings', $scope.$parent.$parent.$parent.vm.parentBlock.settingsData);
 
             yuzuDeliveryBlockListResources.getPreview($scope.block.data, $scope.$parent.$parent.$parent.vm.parentBlock.settingsData)

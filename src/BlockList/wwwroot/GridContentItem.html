@@ -1,9 +1,9 @@
-﻿<article ng-controller="GridContentItem" ng-click="block.edit()">
+﻿<article ng-controller="GridContentItem as vm" ng-click="block.edit()">
     <style>
         @import '/_client/style/backoffice.css';
     </style>
-    <style ng-if="nodeId">
-        @import '/theme-css?nodeId={{nodeId}}';
+    <style ng-if="vm.nodeId">
+        @import '/theme-css?nodeId={{vm.nodeId}}';
     </style>
     <span class="preview-wrapper">
         <span class="preview-container yuzu-back-office" style="all: initial; pointer-events: none;"></span>

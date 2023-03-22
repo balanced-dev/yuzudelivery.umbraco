@@ -1,21 +1,10 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Net.Mime;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Web.Common.Routing;
 using YuzuDelivery.Core.Mapping;
-// ReSharper disable IdentifierTypo
-// ReSharper disable CommentTypo
 
 namespace YuzuDelivery.Umbraco.Core.Middleware;
 

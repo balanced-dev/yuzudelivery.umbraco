@@ -37,6 +37,7 @@ namespace YuzuDelivery.Umbraco.Core
                 .ValidateDataAnnotations();
 
             builder.Services.AddSingleton<YuzuRenderJsonMiddleware>();
+            builder.Services.AddSingleton<YuzuLoadedSchemaMiddleware>();
             builder.Services.Configure<UmbracoPipelineOptions>(opt =>
             {
                 opt.AddFilter(new UmbracoPipelineFilter("YuzuMiddleware")

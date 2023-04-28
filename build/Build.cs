@@ -252,3 +252,4 @@ class Build : NukeBuild
     Target Default => _ => _
         .DependsOn(Clean, Test, Pack, CreateTestServer, Acceptance, Report, SaveAcceptenceFailedResults);
 }
+

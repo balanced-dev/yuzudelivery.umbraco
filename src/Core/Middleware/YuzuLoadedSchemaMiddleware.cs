@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
 using System.Text.Json;
@@ -29,14 +31,11 @@ public class YuzuLoadedSchemaMiddleware : IMiddleware
             return;
         }
 
-        var fileProvider = _coreSettings.Value.SchemaFileProvider;
-
-        var files = fileProvider.GetDirectoryContents(string.Empty)
-            .Cast<IFileInfo>();
+        var report = new FileProviderMiddleWareReport(_coreSettings.Value.SchemaFileProvider);
 
         await context.Response.WriteAsJsonAsync(
-            files, 
-            files.GetType(),
+            report, 
+            report.GetType(),
             new JsonSerializerOptions(),
             MediaTypeNames.Application.Json);
     }
@@ -49,6 +48,58 @@ public class YuzuLoadedSchemaMiddleware : IMiddleware
         }
 
         return false;
+    }
+
+    public class FileProviderMiddleWareReport
+    {
+        public FileProviderMiddleWareReport(IFileProvider rootFileProvider)
+        {
+            FileProviders = new List<string>();
+            Files = new List<IFileInfo>();
+
+            if (rootFileProvider is CompositeFileProvider)
+            {
+                var compositeFileProvider = (CompositeFileProvider)rootFileProvider;
+                foreach (var f in compositeFileProvider.FileProviders)
+                {
+                    AddFileProviderToReport(f, this);
+                }
+            }
+            else
+            {
+                AddFileProviderToReport(rootFileProvider, this);
+            }
+
+            try
+            {
+                Files = rootFileProvider.GetDirectoryContents(string.Empty)
+                .Cast<IFileInfo>();
+            }
+            catch (Exception ex)
+            {
+                Exception = ex;
+            }
+
+        }
+
+        public List<string> FileProviders { get; set; }
+        public IEnumerable<IFileInfo> Files { get; set; }
+        public Exception? Exception { get; set; }
+
+        private void AddFileProviderToReport(IFileProvider f, FileProviderMiddleWareReport report)
+        {
+            if (f is EmbeddedFileProvider)
+            {
+                var embeddedFileProvider = (EmbeddedFileProvider)f;
+                report.FileProviders.Add("embedded");
+            }
+
+            if (f is PhysicalFileProvider)
+            {
+                var physicalFileProvider = (PhysicalFileProvider)f;
+                report.FileProviders.Add($"physical {physicalFileProvider.Root}");
+            }
+        }
     }
 }
 

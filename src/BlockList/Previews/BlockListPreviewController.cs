@@ -5,7 +5,6 @@ using System.Linq;
 using YuzuDelivery.Core;
 using YuzuDelivery.ViewModels;
 using YuzuDelivery.Umbraco.Core;
-using Our.Umbraco.DocTypeGridEditor.Helpers;
 using System.Reflection;
 using YuzuDelivery.Core.Mapping;
 using Umbraco.Cms.Web.Common.Attributes;
@@ -23,6 +22,11 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Strings;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Extensions;
+using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+using Umbraco.Cms.Core.Models.Blocks;
+using Umbraco.Cms.Core.PropertyEditors;
+using Our.Umbraco.DocTypeGridEditor.Helpers;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 
 namespace YuzuDelivery.Umbraco.BlockList
 {
@@ -30,23 +34,26 @@ namespace YuzuDelivery.Umbraco.BlockList
     public class BlockListPreviewController : UmbracoAuthorizedApiController
     {
         private readonly IYuzuTemplateEngine _yuzuTemplateEngine;
-        private readonly IMapper mapper;
-        private readonly IOptions<YuzuConfiguration> config;
-        private readonly IContentTypeService contentTypeService;
-        private readonly DocTypeGridEditorHelper docTypeGridEditorHelper;
-        private readonly IUmbracoContextAccessor _contextAccessor;
-        private readonly IShortStringHelper _shortStringHelper;
+        private readonly IMapper _mapper;
+        private readonly IOptions<YuzuConfiguration> _config;
+        private readonly BlockEditorConverter _blockEditorConverter;
+        private readonly IYuzuMappingIndex _mappingIndex;
+        private readonly IContentTypeService _contentTypeService;
+        private readonly DocTypeGridEditorHelper _docTypeGridEditorHelper;
+        private readonly IEnumerable<IBlockPreviewOutputOverride> _previewOverrides;
 
-        public BlockListPreviewController(IMapper mapper, IOptions<YuzuConfiguration> config, IYuzuTemplateEngine yuzuTemplateEngine, IContentTypeService contentTypeService, 
-            DocTypeGridEditorHelper docTypeGridEditorHelper, IUmbracoContextAccessor contextAccessor, IShortStringHelper shortStringHelper)
+        public BlockListPreviewController(IMapper mapper, IOptions<YuzuConfiguration> config, IYuzuTemplateEngine yuzuTemplateEngine, IContentTypeService contentTypeService,
+            BlockEditorConverter blockEditorConverter, IYuzuMappingIndex mappingIndex, 
+            DocTypeGridEditorHelper docTypeGridEditorHelper, IEnumerable<IBlockPreviewOutputOverride> previewOverrides)
         {
-            this.mapper = mapper;
-            this.config = config;
-            this._yuzuTemplateEngine = yuzuTemplateEngine;
-            this.contentTypeService = contentTypeService;
-            this.docTypeGridEditorHelper = docTypeGridEditorHelper;
-            _contextAccessor = contextAccessor;
-            _shortStringHelper = shortStringHelper;
+            _mapper = mapper;
+            _config = config;
+            _yuzuTemplateEngine = yuzuTemplateEngine;
+            _contentTypeService = contentTypeService;
+            _blockEditorConverter = blockEditorConverter;
+            _mappingIndex = mappingIndex;
+            _docTypeGridEditorHelper = docTypeGridEditorHelper;
+            _previewOverrides = previewOverrides;
         }
 
         [HttpPost]
@@ -56,29 +63,32 @@ namespace YuzuDelivery.Umbraco.BlockList
 
             try
             {
-                var contentType = contentTypeService.Get(Guid.Parse(data.ContentTypeKey));
+                var contentType = _contentTypeService.Get(Guid.Parse(data.ContentTypeKey));
 
-                var model = docTypeGridEditorHelper.ConvertValueToContent(Guid.NewGuid().ToString(), contentType.Alias, data.Content);
+                var blockData = JsonConvert.DeserializeObject<BlockItemData>(data.Content);
 
-                var link = GetCmsToVmLink(contentType);
+                var model = _docTypeGridEditorHelper.ConvertValueToContent(Guid.NewGuid().ToString(), contentType.Alias, data.Content);
+
+                var cmsType = model.GetType();
+                var vmType = _mappingIndex.GetViewModelType(cmsType);
 
                 var suspectBlockTypeName = $"{YuzuConstants.Configuration.BlockPrefix}{model.ContentType.Alias.FirstCharacterToUpper()}";
 
-                if(link.vmType == null)
-                    link.vmType = config.Value.ViewModels.Where(x => x.Name == suspectBlockTypeName).FirstOrDefault();
+                if(vmType == null)
+                    vmType = _config.Value.ViewModels.Where(x => x.Name == suspectBlockTypeName).FirstOrDefault();
 
-                if (link.vmType == null)
+                if (vmType == null)
                 {
                     output.Error = $"Viewmodel for block type {suspectBlockTypeName} not found. Previews of sublocks not supported";
                 }
-                else if(link.cmsType == null)
+                else if(cmsType == null)
                 {
                     output.Error = $"Preview not available, document type for {suspectBlockTypeName} not found";
                 }
                 else
                 {
-                    var template = link.vmType.GetTemplateName(includeBaseTypes: false);
-                    var mapped = mapper.Map(model, link.cmsType, link.vmType, new Dictionary<string, object>()
+                    var template = vmType.GetTemplateName(includeBaseTypes: false);
+                    var mapped = _mapper.Map(model, cmsType, vmType, new Dictionary<string, object>()
                     {
                         { "Model", model },
                         { _BlockList_Constants.IsInPreview, true }
@@ -87,16 +97,15 @@ namespace YuzuDelivery.Umbraco.BlockList
                 }
 
                 // Work out the settings
-                if (!string.IsNullOrWhiteSpace(data.ColSettings))
+                if (data.ColSettings != null)
                 {
-                    var settings = JsonConvert.DeserializeObject<SettingsDto>(data.ColSettings);
-                    if (settings?.ColourTheme != null && _contextAccessor.TryGetUmbracoContext(out IUmbracoContext ctx))
+                    var rowSettings = _blockEditorConverter.ConvertToElement(JsonConvert.DeserializeObject<BlockItemData>(data.RowSettings), PropertyCacheLevel.None, true);
+                    var colSettings = _blockEditorConverter.ConvertToElement(JsonConvert.DeserializeObject<BlockItemData>(data.ColSettings), PropertyCacheLevel.None, true);
+                    var itemSettings = _blockEditorConverter.ConvertToElement(JsonConvert.DeserializeObject<BlockItemData>(data.ItemSettings), PropertyCacheLevel.None, true);
+
+                    foreach(var item in _previewOverrides)
                     {
-                        var theme = ctx.Content.GetById(settings.ColourTheme);
-                        if (theme != null)
-                        {
-                            output.Theme = $"theme-{theme.Name?.ToUrlSegment(_shortStringHelper)}";
-                        }
+                        item.Update(output, data.NodeId, model, itemSettings, colSettings, rowSettings);
                     }
                 }
             }
@@ -108,58 +117,48 @@ namespace YuzuDelivery.Umbraco.BlockList
             return output;
 
         }
+    }
 
-        public (Type cmsType, Type vmType) GetCmsToVmLink(IContentType contentType)
-        {
-            var cmsType = config.Value.CMSModels.Where(x => contentType.Alias.FirstCharacterToUpper() == x.Name).FirstOrDefault();
-
-            if (cmsType != null)
-            {
-                var cmsTypeInterfaces = cmsType.GetInterfaces();
-
-                foreach (var vmType in config.Value.ViewModels)
-                {
-                    foreach (var attribute in vmType.GetCustomAttributes<YuzuMapAttribute>())
-                    {
-                        if (attribute.SourceTypeName == cmsType.Name) return (cmsType, vmType);
-                        var cmsTypeInterface = cmsTypeInterfaces.Where(x => x.Name == attribute.SourceTypeName).FirstOrDefault();
-                        if (cmsTypeInterface != null) return (cmsTypeInterface, vmType);
-                    }
-                }
-            }
-
-            return (cmsType, null);
-        }
+    public interface IBlockPreviewOutputOverride
+    {
+        public void Update(PreviewReturn output, int nodeId, IPublishedElement content, IPublishedElement itemSettings, IPublishedElement colSettings, IPublishedElement rowSettings);
     }
 
     public class PreviewReturn
     {
+        public PreviewReturn()
+        {
+            Classes = new List<string>();
+        }
+
         [JsonProperty("preview")]
         public string Preview { get; set; }
 
         [JsonProperty("error")]
         public string Error { get; set; }
 
-        [JsonProperty("theme")]
-        public string Theme { get; set; }
+        [JsonProperty("classes")]
+        public List<string> Classes { get; set; }
     }
 
     public class PreviewDTO
     {
+        [JsonProperty("nodeId")]
+        public int NodeId { get; set; }
+
         [JsonProperty("content")]
         public string Content { get; set; }
 
         [JsonProperty("contentTypeKey")]
         public string ContentTypeKey { get; set; }
 
+        [JsonProperty("itemSettings")]
+        public string ItemSettings { get; set; }
+
         [JsonProperty("colSettings")]
         public string ColSettings { get; set; }
-    }
 
-    public class SettingsDto
-    {
-        [JsonProperty("colourTheme")]
-        public Udi ColourTheme { get; set; }
-        
+        [JsonProperty("rowSettings")]
+        public string RowSettings { get; set; }
     }
 }

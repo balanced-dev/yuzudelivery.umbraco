@@ -4,17 +4,17 @@
         var vm = this;
 
         if (editorState.getCurrent().parentId > 0) {
-            //console.log('DEMO:', $scope.block.data, 'parent id', editorState.getCurrent().parentId, vm);
-            vm.nodeId = editorState.getCurrent().parentId;
+             vm.nodeId = editorState.getCurrent().parentId;
         } else {
             vm.nodeId = editorState.getCurrent().id;
         }
 
         var loadPreview = function () {
 
-            //console.log('settings', $scope.$parent.$parent.$parent.vm.parentBlock.settingsData);
+            var colSettings = $scope.$parent.$parent.$parent.vm.parentBlock.settingsData;
+            var rowSettings = $scope.$parent.$parent.$parent.$parent.$parent.$parent.vm.parentBlock.settingsData;
 
-            yuzuDeliveryBlockListResources.getPreview($scope.block.data, $scope.$parent.$parent.$parent.vm.parentBlock.settingsData)
+            yuzuDeliveryBlockListResources.getPreview(vm.nodeId, $scope.block.data, $scope.block.settingsData, colSettings, rowSettings)
                 .then(function (response) {
                     var data = response.data;
                     if (data.error) {
@@ -30,22 +30,28 @@
                         var previewWrapper = $element.find('.preview-wrapper');
                         previewWrapper[0].className = "";
                         previewWrapper[0].classList.add('preview-wrapper');
-                        previewWrapper[0].classList.add(data.theme);
-
-                        //var styleUrl = '/theme-css?nodeId=' + editorState.getCurrent().parentId;;
-                        //$http.get(styleUrl).then(function(response) {
-                        //    var style = document.createElement('link');
-                        //    style.rel = 'stylesheet';
-                        //    style.type = 'text/css';
-                        //    style.href = styleUrl;
-                        //    $element.appendChild(style);
-                        //});
-
+                        data.classes.forEach(function (className) {
+                            previewWrapper[0].classList.add(className);
+                        });
                     }
                 });
         }
 
         $scope.$watch('block.data', function (newValue, oldValue) {
+            if (newValue != oldValue) {
+                loadPreview();
+            }
+        }, true);
+
+        //watch for column settings change
+        $scope.$parent.$parent.$parent.$watch('vm.parentBlock.settingsData', function (newValue, oldValue) {
+            if (newValue != oldValue) {
+                loadPreview();
+            }
+        }, true);
+
+        //watch for row settings change
+        $scope.$parent.$parent.$parent.$parent.$parent.$parent.$watch('vm.parentBlock.settingsData', function (newValue, oldValue) {
             if (newValue != oldValue) {
                 loadPreview();
             }
@@ -73,12 +79,19 @@ function getCircularReplacer() {
 angular.module('umbraco.resources').factory('yuzuDeliveryBlockListResources',
     function ($q, $http, $routeParams, umbRequestHelper) {
         return {
-            getPreview: function (blockData, settingsData) {
+            getPreview: function (nodeId, blockData, itemSettingsData, colSettingsData, rowSettingsData) {
 
                 var url = "/umbraco/backoffice/YuzuDeliveryUmbracoImport/BlockListPreview/GetPartialData";
                 var json = JSON.stringify(blockData, getCircularReplacer());
-                var settingsJson = JSON.stringify(settingsData);
-                var resultParameters = { content: json, contentTypeKey: blockData.contentTypeKey, colSettings:  settingsJson};
+
+                var resultParameters = {
+                    nodeId: nodeId,
+                    content: json,
+                    contentTypeKey: blockData.contentTypeKey,
+                    itemSettings: JSON.stringify(itemSettingsData),
+                    colSettings: JSON.stringify(colSettingsData),
+                    rowSettings: JSON.stringify(rowSettingsData)
+                };
 
                 return $http.post(url, resultParameters, {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
